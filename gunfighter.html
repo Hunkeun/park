@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gunfighter Process State Simulator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-deep: #050b14;
+            --panel-bg: rgba(10, 25, 47, 0.7);
+            --accent-primary: #00ffcc;
+            --accent-danger: #ff0055;
+            --accent-warning: #ffcc00;
+            --text-main: #e6f1ff;
+            --text-muted: #8892b0;
+            --border-col: rgba(0, 255, 204, 0.3);
+            --glass-blur: blur(12px);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: radial-gradient(circle at center, #112240 0%, var(--bg-deep) 100%);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+        }
+
+        /* Tactical Grid Background */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: 
+                linear-gradient(rgba(0, 255, 204, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 204, 0.05) 1px, transparent 1px);
+            background-size: 30px 30px;
+            z-index: -1;
+            opacity: 0.5;
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            color: var(--accent-primary);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-top: 40px;
+            text-align: center;
+            text-shadow: 0 0 10px rgba(0, 255, 204, 0.5);
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            letter-spacing: 1px;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            width: 100%;
+            max-width: 1200px;
+            padding: 0 20px;
+        }
+
+        /* Glassmorphism Panels */
+        .panel {
+            background: var(--panel-bg);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            border: 1px solid var(--border-col);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(0, 255, 204, 0.05);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .panel-header {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            color: var(--accent-primary);
+            border-bottom: 1px solid var(--border-col);
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+        }
+
+        .panel-header::before {
+            content: '■';
+            margin-right: 10px;
+            font-size: 1rem;
+            animation: blink 2s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; text-shadow: 0 0 10px var(--accent-primary); }
+            50% { opacity: 0.3; text-shadow: none; }
+        }
+
+        /* State Display */
+        .state-display {
+            background: rgba(0, 0, 0, 0.5);
+            border: 2px solid var(--accent-primary);
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .state-display::after {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%; width: 50%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 204, 0.2), transparent);
+            transform: skewX(-20deg);
+            animation: scanline 3s infinite;
+        }
+
+        @keyframes scanline {
+            0% { left: -100%; }
+            100% { left: 200%; }
+        }
+
+        .state-label {
+            font-size: 1rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+
+        .current-state {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.2rem;
+            color: #fff;
+            text-shadow: 0 0 15px var(--accent-primary);
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+        }
+        
+        /* Action Buttons */
+        .actions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        button.action-btn {
+            background: rgba(0, 255, 204, 0.1);
+            border: 1px solid var(--accent-primary);
+            color: var(--accent-primary);
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            padding: 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        button.action-btn:hover {
+            background: var(--accent-primary);
+            color: var(--bg-deep);
+            box-shadow: 0 0 20px rgba(0, 255, 204, 0.6);
+            transform: translateY(-2px);
+        }
+
+        button.action-btn:active {
+            transform: translateY(1px);
+        }
+
+        /* Log Panel */
+        .log-container {
+            flex-grow: 1;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(136, 146, 176, 0.3);
+            border-radius: 8px;
+            padding: 15px;
+            height: 400px;
+            overflow-y: auto;
+            font-family: 'Consolas', monospace;
+            font-size: 0.95rem;
+        }
+
+        /* Scrollbar styling */
+        .log-container::-webkit-scrollbar {
+            width: 8px;
+        }
+        .log-container::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.2);
+        }
+        .log-container::-webkit-scrollbar-thumb {
+            background: var(--accent-primary);
+            border-radius: 4px;
+        }
+
+        .log-entry {
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px dotted rgba(136, 146, 176, 0.2);
+            animation: fadeIn 0.4s ease-out;
+            line-height: 1.4;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateX(-10px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .log-time {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            margin-right: 10px;
+        }
+
+        .log-action { color: var(--accent-warning); font-weight: bold; }
+        .log-target { color: var(--accent-primary); font-weight: bold; }
+
+        @media (max-width: 900px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Gunfighter HUD</h1>
+    <div class="subtitle">TACTICAL PROCESS STATE SIMULATION</div>
+
+    <div class="container">
+        <!-- Control Panel -->
+        <div class="panel">
+            <div class="panel-header">TACTICAL STATUS</div>
+            
+            <div class="state-display">
+                <div class="state-label">Current Active State</div>
+                <div id="current-state-text" class="current-state">INITIALIZING...</div>
+            </div>
+
+            <div class="panel-header" style="margin-top: 20px;">AVAILABLE ACTIONS</div>
+            <div id="controls" class="actions-grid">
+                <!-- Action buttons injected here -->
+            </div>
+        </div>
+
+        <!-- System Log Panel -->
+        <div class="panel">
+            <div class="panel-header">SYSTEM LOG</div>
+            <div id="log-container" class="log-container">
+                <!-- Logs injected here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // State Machine Definition matching Gunfighter Process
+        const stateMachine = {
+            "WAITING FOR TARGET": {
+                "UNIT DETECTS ENEMY (IN COMBAT)": "SELECTING TARGET TYPE"
+            },
+            "SELECTING TARGET TYPE": {
+                "TARGET TYPE CHOSEN": "GETTING TARGET",
+                "OUT OF TARGETS": "OUT OF COMBAT"
+            },
+            "GETTING TARGET": {
+                "TARGET CHOSEN": "ACQUIRING TARGET",
+                "TIRED OF TRYING": "OUT OF COMBAT"
+            },
+            "ACQUIRING TARGET": {
+                "TARGET ACQUIRED": "SHOOTING A BURST",
+                "LOST ACQUISITION": "OUT OF COMBAT",
+                "BEYOND SHOOT-FIRST RANGE": "OUT OF COMBAT"
+            },
+            "SHOOTING A BURST": {
+                "TARGET SERVICED": "GETTING TARGET",
+                "MISSED": "REACQUIRING TARGET",
+                "CLIP EMPTY": "RELOADING"
+            },
+            "REACQUIRING TARGET": {
+                "REACQUIRED": "SHOOTING A BURST",
+                "LOST REACQUISITION": "OUT OF COMBAT"
+            },
+            "RELOADING": {
+                "RELOADED": "GETTING TARGET",
+                "OUT OF AMMO": "WAITING FOR AMMO"
+            },
+            "WAITING FOR AMMO": {
+                "GOT AMMO": "RELOADING"
+            },
+            "OUT OF COMBAT": {
+                "RETURN TO WAITING": "WAITING FOR TARGET"
+            }
+        };
+
+        let currentState = "WAITING FOR TARGET";
+
+        function getTimestamp() {
+            const now = new Date();
+            return now.toISOString().split('T')[1].substring(0, 8);
+        }
+
+        function logMessage(oldState, action, newState) {
+            const container = document.getElementById('log-container');
+            const entry = document.createElement('div');
+            entry.className = 'log-entry';
+            
+            entry.innerHTML = `<span class="log-time">[${getTimestamp()}]</span> 
+                               State transition from <span class="log-target">${oldState}</span> 
+                               via <span class="log-action">${action}</span> 
+                               → <span class="log-target">${newState}</span>`;
+            
+            container.appendChild(entry);
+            container.scrollTop = container.scrollHeight;
+        }
+
+        function playTransitionEffect() {
+            const stateText = document.getElementById('current-state-text');
+            stateText.style.opacity = 0;
+            stateText.style.transform = 'scale(0.95)';
+            
+            setTimeout(() => {
+                stateText.innerText = currentState;
+                stateText.style.opacity = 1;
+                stateText.style.transform = 'scale(1)';
+                
+                // Color coding based on state danger level
+                if(currentState.includes("SHOOTING") || currentState.includes("ACQUIRING")) {
+                    stateText.style.color = 'var(--accent-danger)';
+                    stateText.style.textShadow = '0 0 15px var(--accent-danger)';
+                } else if(currentState.includes("OUT OF") || currentState.includes("EMPTY")) {
+                    stateText.style.color = 'var(--accent-warning)';
+                    stateText.style.textShadow = '0 0 15px var(--accent-warning)';
+                } else {
+                    stateText.style.color = '#fff';
+                    stateText.style.textShadow = '0 0 15px var(--accent-primary)';
+                }
+            }, 150);
+        }
+
+        function updateUI() {
+            playTransitionEffect();
+            
+            const controls = document.getElementById('controls');
+            controls.innerHTML = ''; 
+
+            const actions = stateMachine[currentState];
+            
+            if (actions) {
+                for (let [action, nextState] of Object.entries(actions)) {
+                    const btn = document.createElement('button');
+                    btn.className = 'action-btn';
+                    btn.innerText = action;
+                    
+                    // Add specific styling subclasses based on action text
+                    if(action.includes("LOST") || action.includes("OUT OF") || action.includes("MISSED")) {
+                        btn.style.borderColor = "var(--accent-warning)";
+                        btn.style.color = "var(--accent-warning)";
+                    }
+                    if(action.includes("SHOOTING") || action.includes("ACQUIRED")) {
+                        btn.style.borderColor = "var(--accent-danger)";
+                        btn.style.color = "var(--accent-danger)";
+                    }
+
+                    btn.onmouseenter = function() {
+                        this.style.background = this.style.color;
+                        this.style.color = "var(--bg-deep)";
+                    }
+                    btn.onmouseleave = function() {
+                        this.style.color = this.style.borderColor;
+                        this.style.background = "transparent";
+                    }
+                    
+                    btn.onclick = () => {
+                        logMessage(currentState, action, nextState);
+                        currentState = nextState;
+                        updateUI();
+                    };
+                    controls.appendChild(btn);
+                }
+            } else {
+                controls.innerHTML = '<div style="color: var(--accent-warning); text-align: center; width:100%;">NO ACTIONS AVAILABLE - REACHED DEAD END</div>';
+            }
+        }
+
+        // Initialize
+        setTimeout(() => {
+            const sysLog = document.createElement('div');
+            sysLog.className = 'log-entry';
+            sysLog.innerHTML = `<span class="log-time">[${getTimestamp()}]</span> SYSTEM BOOT SEQUENCE COMPLETE. GUNFIGHTER HUD ONLINE.`;
+            document.getElementById('log-container').appendChild(sysLog);
+            
+            updateUI();
+        }, 500);
+
+    </script>
+</body>
+</html>

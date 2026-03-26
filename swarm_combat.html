@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>30 vs 30 Swarm Combat Simulation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-deep: #050b14;
+            --panel-bg: rgba(10, 25, 47, 0.85);
+            --accent-ally: #00ffcc;
+            --accent-enemy: #ff0055;
+            --text-main: #e6f1ff;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background-color: var(--bg-deep);
+            color: var(--text-main);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            background-image: 
+                linear-gradient(rgba(0, 255, 204, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 204, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+            background-position: center;
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.2rem;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin-top: 15px;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+
+        .hud-container {
+            display: flex;
+            justify-content: space-between;
+            width: 90%;
+            max-width: 1400px;
+            margin: 15px 0;
+            z-index: 10;
+        }
+
+        .team-stats {
+            background: var(--panel-bg);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            backdrop-filter: blur(10px);
+        }
+
+        .team-ally {
+            border-bottom: 4px solid var(--accent-ally);
+            color: var(--accent-ally);
+            text-shadow: 0 0 10px var(--accent-ally);
+        }
+
+        .team-enemy {
+            border-bottom: 4px solid var(--accent-enemy);
+            color: var(--accent-enemy);
+            text-shadow: 0 0 10px var(--accent-enemy);
+        }
+
+        #battle-canvas {
+            background: rgba(0, 5, 15, 0.8);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            box-shadow: 0 0 40px rgba(0, 255, 204, 0.1), inset 0 0 50px rgba(0,0,0,0.8);
+            cursor: crosshair;
+        }
+
+        .controls {
+            margin-top: 15px;
+            display: flex;
+            gap: 20px;
+        }
+
+        button {
+            background: transparent;
+            border: 1px solid #fff;
+            color: #fff;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.1rem;
+            padding: 10px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+        }
+
+        button:hover {
+            background: #fff;
+            color: var(--bg-deep);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
+        }
+    </style>
+</head>
+<body>
+
+    <h1>SWARM AI GUIDED COMBAT SIMULATION</h1>
+    
+    <div class="hud-container">
+        <div class="team-stats team-ally">
+            ALLIES (BLUE) : <span id="ally-count">30</span>
+        </div>
+        <div class="team-stats team-enemy">
+            ENEMIES (RED) : <span id="enemy-count">30</span>
+        </div>
+    </div>
+
+    <!-- The Battlefield -->
+    <canvas id="battle-canvas" width="1200" height="700"></canvas>
+
+    <div class="controls">
+        <button id="btn-restart">RESTART SIMULATION</button>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('battle-canvas');
+        const ctx = canvas.getContext('2d');
+        const allyCountEl = document.getElementById('ally-count');
+        const enemyCountEl = document.getElementById('enemy-count');
+        
+        const WIDTH = canvas.width;
+        const HEIGHT = canvas.height;
+
+        // Simulation parameters
+        const TEAM_SIZE = 30;
+        const DETECTION_RANGE = 200;
+        const SHOOT_RANGE = 180;
+        
+        let agents = [];
+        let particles = [];
+        
+        // Agent Class that precisely follows the Gunfighter GUI logic
+        class Agent {
+            constructor(team, id) {
+                this.id = id;
+                this.team = team; // "ALLY" or "ENEMY"
+                this.x = team === "ALLY" ? Math.random() * (WIDTH/2 - 100) + 50 : Math.random() * (WIDTH/2 - 100) + (WIDTH/2 + 50);
+                this.y = Math.random() * (HEIGHT - 100) + 50;
+                
+                // Physics
+                this.vx = (Math.random() - 0.5) * 2;
+                this.vy = (Math.random() - 0.5) * 2;
+                this.speed = 1.0 + Math.random() * 0.5;
+                
+                // Stats
+                this.hp = 100;
+                this.maxHp = 100;
+                this.ammo = 10; 
+                this.isDead = false;
+                
+                // Gunfighter State Machine
+                this.state = "WAITING FOR TARGET";
+                this.target = null;
+                this.stateTimer = 0; // ms timer for state transitions
+                
+                // Aesthetics
+                this.color = team === "ALLY" ? "#00ffcc" : "#ff0055";
+                this.radius = 5;
+            }
+
+            changeState(newState, delay = 0) {
+                this.state = newState;
+                this.stateTimer = delay;
+            }
+
+            distanceTo(other) {
+                return Math.hypot(this.x - other.x, this.y - other.y);
+            }
+
+            update(dt, allAgents) {
+                if (this.isDead) return;
+
+                if (this.stateTimer > 0) {
+                    this.stateTimer -= dt;
+                }
+
+                // Normal movement if wait timer is active (except when shooting or reloading)
+                if(!this.state.includes("SHOOTING") && !this.state.includes("RELOADING")) {
+                    this.x += this.vx * this.speed;
+                    this.y += this.vy * this.speed;
+                }
+
+                // Bounce off walls
+                if (this.x < 10 || this.x > WIDTH - 10) this.vx *= -1;
+                if (this.y < 10 || this.y > HEIGHT - 10) this.vy *= -1;
+
+                // --- STATE MACHINE LOGIC ---
+                switch (this.state) {
+                    case "WAITING FOR TARGET":
+                        // Move randomly, try to find an enemy
+                        if(Math.random() < 0.05) {
+                            // Slight random turning
+                            let angle = Math.atan2(this.vy, this.vx) + (Math.random() - 0.5) * 0.5;
+                            this.vx = Math.cos(angle);
+                            this.vy = Math.sin(angle);
+                        }
+
+                        // UNIT DETECTS ENEMY (IN COMBAT)
+                        if (this.stateTimer <= 0) {
+                            let closest = null;
+                            let minDist = DETECTION_RANGE;
+                            
+                            for (let other of allAgents) {
+                                if (!other.isDead && other.team !== this.team) {
+                                    let dist = this.distanceTo(other);
+                                    if (dist < minDist) {
+                                        minDist = dist;
+                                        closest = other;
+                                    }
+                                }
+                            }
+                            
+                            if (closest) {
+                                this.target = closest;
+                                this.changeState("SELECTING TARGET TYPE", 200); // 0.2s think time
+                            }
+                        }
+                        break;
+
+                    case "SELECTING TARGET TYPE":
+                        if (this.stateTimer <= 0) {
+                            // TARGET TYPE CHOSEN
+                            this.changeState("GETTING TARGET", 200);
+                        }
+                        break;
+
+                    case "GETTING TARGET":
+                        if (this.stateTimer <= 0) {
+                            // TARGET CHOSEN
+                            // Face the target
+                            if (this.target && !this.target.isDead) {
+                                let angle = Math.atan2(this.target.y - this.y, this.target.x - this.x);
+                                this.vx = Math.cos(angle);
+                                this.vy = Math.sin(angle);
+                                this.changeState("ACQUIRING TARGET", 300);
+                            } else {
+                                this.changeState("OUT OF COMBAT");
+                            }
+                        }
+                        break;
+
+                    case "ACQUIRING TARGET":
+                        if (this.stateTimer <= 0) {
+                            if (!this.target || this.target.isDead) {
+                                this.changeState("LOST ACQUISITION");
+                            } else if (this.distanceTo(this.target) > SHOOT_RANGE) {
+                                this.changeState("BEYOND SHOOT-FIRST RANGE");
+                            } else {
+                                // TARGET ACQUIRED
+                                this.changeState("SHOOTING A BURST", 100); 
+                            }
+                        }
+                        break;
+
+                    case "SHOOTING A BURST":
+                        // Fire a bullet
+                        if (this.stateTimer <= 0) {
+                            if (this.ammo <= 0) {
+                                this.changeState("RELOADING", 2000); // 2 seconds to reload
+                            } else {
+                                if (this.target && !this.target.isDead && this.distanceTo(this.target) <= SHOOT_RANGE) {
+                                    // SHOOT!
+                                    this.ammo--;
+                                    
+                                    // Visual effect
+                                    particles.push({
+                                        x1: this.x, y1: this.y,
+                                        x2: this.target.x, y2: this.target.y,
+                                        alpha: 1.0,
+                                        color: '#ffff00'
+                                    });
+
+                                    // Apply damage (Accuracy randomness)
+                                    if(Math.random() > 0.3) {
+                                        this.target.hp -= 20;
+                                        if (this.target.hp <= 0) {
+                                            this.target.isDead = true;
+                                            // TARGET SERVICED -> GETTING TARGET
+                                            this.changeState("GETTING TARGET", 500); 
+                                        } else {
+                                            this.changeState("SHOOTING A BURST", 200); // Fire rate delay
+                                        }
+                                    } else {
+                                        // MISSED
+                                        this.changeState("REACQUIRING TARGET", 300);
+                                    }
+                                } else {
+                                    this.changeState("OUT OF COMBAT");
+                                }
+                            }
+                        }
+                        break;
+
+                    case "REACQUIRING TARGET":
+                        if (this.stateTimer <= 0) {
+                            if (this.target && !this.target.isDead && this.distanceTo(this.target) <= SHOOT_RANGE) {
+                                this.changeState("SHOOTING A BURST", 100);
+                            } else {
+                                this.changeState("LOST REACQUISITION");
+                            }
+                        }
+                        break;
+
+                    case "RELOADING":
+                        // Stop moving while reloading
+                        this.x += 0; 
+                        if (this.stateTimer <= 0) {
+                            this.ammo = 10;
+                            // RELOADED -> GETTING TARGET
+                            this.changeState("GETTING TARGET", 200);
+                        }
+                        break;
+
+                    case "LOST ACQUISITION":
+                    case "BEYOND SHOOT-FIRST RANGE":
+                    case "LOST REACQUISITION":
+                    case "OUT OF COMBAT":
+                        this.target = null;
+                        this.changeState("WAITING FOR TARGET", 100); // Small cooldown before seeking again
+                        break;
+                }
+            }
+
+            draw(ctx) {
+                if (this.isDead) return;
+
+                // Glowing aura
+                ctx.shadowBlur = 10;
+                ctx.shadowColor = this.color;
+
+                // Draw agent body
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = this.color;
+                ctx.fill();
+
+                // Clear shadow for UI
+                ctx.shadowBlur = 0;
+
+                // State indicator ring (Outer ring means aiming/reloading)
+                if (this.state.includes("ACQUIRING") || this.state.includes("SELECTING")) {
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.radius + 4, 0, Math.PI * 2);
+                    ctx.strokeStyle = "yellow";
+                    ctx.lineWidth = 1;
+                    ctx.stroke();
+                }
+
+                if (this.state === "RELOADING") {
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.radius + 6, Math.PI * 1.5, Math.PI * 1.5 + (this.stateTimer/2000) * Math.PI*2);
+                    ctx.strokeStyle = "white";
+                    ctx.lineWidth = 2;
+                    ctx.stroke();
+                }
+
+                // Health Bar
+                const hpRatio = this.hp / this.maxHp;
+                ctx.fillStyle = "rgba(255, 0, 0, 0.8)";
+                ctx.fillRect(this.x - 10, this.y - 12, 20, 3);
+                ctx.fillStyle = "rgba(0, 255, 0, 0.8)";
+                ctx.fillRect(this.x - 10, this.y - 12, 20 * hpRatio, 3);
+            }
+        }
+
+        function initSimulation() {
+            agents = [];
+            particles = [];
+            
+            // Spawn Alies and Enemies
+            for (let i = 0; i < TEAM_SIZE; i++) {
+                agents.push(new Agent("ALLY", i));
+                agents.push(new Agent("ENEMY", i + 100));
+            }
+            updateScore();
+        }
+
+        function updateScore() {
+            let allies = agents.filter(a => !a.isDead && a.team === "ALLY").length;
+            let enemies = agents.filter(a => !a.isDead && a.team === "ENEMY").length;
+            allyCountEl.innerText = allies;
+            enemyCountEl.innerText = enemies;
+        }
+
+        let lastTime = performance.now();
+
+        function gameLoop(time) {
+            let dt = time - lastTime;
+            lastTime = time;
+
+            // Clear Background with a slight fail to create motion blur trails
+            ctx.fillStyle = 'rgba(0, 5, 15, 0.4)';
+            ctx.fillRect(0, 0, WIDTH, HEIGHT);
+
+            // Update & Draw Agents
+            for (let agent of agents) {
+                agent.update(dt, agents);
+                agent.draw(ctx);
+            }
+
+            // Update & Draw Particles (Laser Beams)
+            for (let i = particles.length - 1; i >= 0; i--) {
+                let p = particles[i];
+                ctx.beginPath();
+                ctx.moveTo(p.x1, p.y1);
+                ctx.lineTo(p.x2, p.y2);
+                ctx.strokeStyle = `rgba(255, 255, 100, ${p.alpha})`;
+                ctx.lineWidth = 2;
+                ctx.stroke();
+
+                p.alpha -= 0.1; // Fade out fast
+                if (p.alpha <= 0) {
+                    particles.splice(i, 1);
+                }
+            }
+
+            // Every 60 frames, update the scoreboard roughly
+            if (Math.random() < 0.05) updateScore();
+
+            requestAnimationFrame(gameLoop);
+        }
+
+        // Setup Buttons
+        document.getElementById('btn-restart').onclick = initSimulation;
+
+        // Start!
+        initSimulation();
+        requestAnimationFrame(gameLoop);
+    </script>
+</body>
+</html>
