@@ -11,26 +11,70 @@
     <link rel="stylesheet" href="style.css">
     <style>
         /* CSS to ensure content doesn't flash before styles load */
-        body { margin: 0; background: #0a0a0c; font-family: 'Outfit', 'Noto Sans KR', sans-serif; overflow: hidden; }
+        body { margin: 0; font-family: 'Outfit', 'Noto Sans KR', sans-serif; overflow: hidden; }
     </style>
 </head>
 <body>
     <div class="background-animation"></div>
     <main class="container">
         <div class="card" id="mainCard">
-            <h1 class="gradient-text">내 첫번째 아이디어</h1>
+            <h1 class="gradient-text">오늘도 힘내세요!</h1>
+            <button class="btn-next">다음 문장 보기</button>
             <div class="shine"></div>
         </div>
     </main>
     <script>
-        document.getElementById('mainCard').addEventListener('mousemove', (e) => {
-            const card = e.currentTarget;
-            const rect = card.getBoundingClientRect();
+        const sentences = [
+            "오늘도 힘내세요!",
+            "당신의 노력이 결실을 맺을 거예요.",
+            "이대로 계속 가봅시다.",
+            "조금씩 나아지고 있어요."
+        ];
+        const buttonColors = [
+            "linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)", // Blue
+            "linear-gradient(135deg, #10b981 0%, #059669 100%)", // Teal
+            "linear-gradient(135deg, #f59e0b 0%, #d97706 100%)", // Amber
+            "linear-gradient(135deg, #6366f1 0%, #4f46e5 100%)"  // Indigo
+        ];
+        const shadowColors = [
+            "0 10px 20px -5px rgba(37, 99, 235, 0.4)",
+            "0 10px 20px -5px rgba(5, 150, 105, 0.4)",
+            "0 10px 20px -5px rgba(217, 119, 6, 0.4)",
+            "0 10px 20px -5px rgba(79, 70, 229, 0.4)"
+        ];
+
+        let currentIndex = 0;
+
+        const mainCard = document.getElementById('mainCard');
+        const textElement = mainCard.querySelector('h1');
+        const nextBtn = mainCard.querySelector('.btn-next');
+
+        // Mouse move effect
+        mainCard.addEventListener('mousemove', (e) => {
+            const rect = mainCard.getBoundingClientRect();
             const x = e.clientX - rect.left;
             const y = e.clientY - rect.top;
+            mainCard.style.setProperty('--mouse-x', `${x}px`);
+            mainCard.style.setProperty('--mouse-y', `${y}px`);
+        });
+
+        // Next sentence logic
+        nextBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % sentences.length;
             
-            card.style.setProperty('--mouse-x', `${x}px`);
-            card.style.setProperty('--mouse-y', `${y}px`);
+            // Text Animation
+            textElement.style.opacity = '0';
+            textElement.style.transform = 'translateY(10px)';
+            
+            // Button Style Update
+            nextBtn.style.background = buttonColors[currentIndex];
+            nextBtn.style.boxShadow = shadowColors[currentIndex];
+
+            setTimeout(() => {
+                textElement.textContent = sentences[currentIndex];
+                textElement.style.opacity = '1';
+                textElement.style.transform = 'translateY(0)';
+            }, 300);
         });
     </script>
 </body>

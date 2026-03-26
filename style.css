@@ -1,9 +1,10 @@
 :root {
-    --primary-bg: #0a0e1a;
-    --accent-glow: rgba(0, 102, 255, 0.4);
-    --card-bg: rgba(255, 255, 255, 0.04);
-    --card-border: rgba(0, 153, 255, 0.2);
-    --text-gradient: linear-gradient(135deg, #e0f2fe 0%, #3b82f6 50%, #1e40af 100%);
+    --primary-bg: linear-gradient(135deg, #f9fafb 0%, #d1d5db 100%);
+    --accent-glow: rgba(255, 255, 255, 0.8);
+    --card-bg: rgba(255, 255, 255, 0.85);
+    --card-border: rgba(255, 255, 255, 0.5);
+    --text-main: #1e293b;
+    --accent-color: #6366f1;
 }
 
 * {
@@ -13,8 +14,8 @@
 }
 
 body {
-    background-color: var(--primary-bg);
-    color: white;
+    background: var(--primary-bg);
+    color: var(--text-main);
     font-family: 'Outfit', 'Noto Sans KR', sans-serif;
     height: 100vh;
     display: flex;
@@ -49,15 +50,21 @@ body::before {
 
 .card {
     background-color: var(--card-bg);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
     border: 1px solid var(--card-border);
     padding: 80px 120px;
-    border-radius: 32px;
+    border-radius: 40px;
     position: relative;
     overflow: hidden;
-    box-shadow: 0 40px 100px -20px rgba(0, 0, 0, 0.7);
-    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+    box-shadow: 
+        0 10px 30px -10px rgba(0, 0, 0, 0.1),
+        0 40px 100px -20px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
     cursor: default;
 }
 
@@ -67,19 +74,20 @@ body::before {
 }
 
 .card h1 {
-    font-size: 5rem;
+    font-size: 40px;
     font-weight: 700;
     margin: 0;
     white-space: nowrap;
-    letter-spacing: -0.04em;
+    letter-spacing: -0.02em;
 }
 
 .gradient-text {
-    background: var(--text-gradient);
+    color: var(--text-main);
+    background: linear-gradient(135deg, #334155 0%, #0f172a 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    transition: opacity 0.5s ease;
+    transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 /* Mouse position effect for extra shine */
@@ -88,12 +96,40 @@ body::before {
     position: absolute;
     top: var(--mouse-y, -100%);
     left: var(--mouse-x, -100%);
-    width: 300px;
-    height: 300px;
-    background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, transparent 70%);
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 1) 0%, transparent 70%);
     transform: translate(-50%, -50%);
     pointer-events: none;
     z-index: 10;
+    opacity: 0.6;
+}
+
+.btn-next {
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    color: white;
+    border: none;
+    padding: 16px 40px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    border-radius: 20px;
+    cursor: pointer;
+    box-shadow: 0 10px 20px -5px rgba(37, 99, 235, 0.4);
+    transition: all 0.3s ease;
+    font-family: inherit;
+    z-index: 20;
+    animation: fadeIn 1s ease-out 0.2s forwards;
+    opacity: 0;
+}
+
+.btn-next:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 30px -5px rgba(37, 99, 235, 0.6);
+    filter: brightness(1.1);
+}
+
+.btn-next:active {
+    transform: translateY(0);
 }
 
 /* Animations */
