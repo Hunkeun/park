@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>내 첫번째 아이디어</title>
+    <meta name="description" content="나의 가장 첫 번째 아이디어를 담은 아름다운 웹페이지">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* CSS to ensure content doesn't flash before styles load */
+        body { margin: 0; background: #0a0a0c; font-family: 'Outfit', 'Noto Sans KR', sans-serif; overflow: hidden; }
+    </style>
+</head>
+<body>
+    <div class="background-animation"></div>
+    <main class="container">
+        <div class="card" id="mainCard">
+            <h1 class="gradient-text">내 첫번째 아이디어</h1>
+            <div class="shine"></div>
+        </div>
+    </main>
+    <script>
+        document.getElementById('mainCard').addEventListener('mousemove', (e) => {
+            const card = e.currentTarget;
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            card.style.setProperty('--mouse-x', `${x}px`);
+            card.style.setProperty('--mouse-y', `${y}px`);
+        });
+    </script>
+</body>
+</html>
