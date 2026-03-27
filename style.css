@@ -24,7 +24,6 @@ body {
     overflow: hidden;
 }
 
-/* Base Gradient Background */
 body::before {
     content: '';
     position: absolute;
@@ -53,7 +52,7 @@ body::before {
     backdrop-filter: blur(25px);
     -webkit-backdrop-filter: blur(25px);
     border: 1px solid var(--card-border);
-    padding: 80px 120px;
+    padding: 80px 100px;
     border-radius: 40px;
     position: relative;
     overflow: hidden;
@@ -66,11 +65,12 @@ body::before {
     gap: 40px;
     transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
     cursor: default;
+    min-width: 600px;
 }
 
 .card:hover {
     transform: scale(1.02) translateY(-10px);
-    box-shadow: 0 50px 120px -30px rgba(0, 0, 0, 0.8), 0 0 30px rgba(0, 102, 255, 0.2);
+    box-shadow: 0 50px 120px -30px rgba(0, 0, 0, 0.3), 0 0 30px rgba(99, 102, 241, 0.1);
 }
 
 .card h1 {
@@ -79,6 +79,7 @@ body::before {
     margin: 0;
     white-space: nowrap;
     letter-spacing: -0.02em;
+    animation: fadeIn 1s ease-out forwards;
 }
 
 .gradient-text {
@@ -87,10 +88,8 @@ body::before {
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
-/* Mouse position effect for extra shine */
 .card::before {
     content: '';
     position: absolute;
@@ -98,7 +97,7 @@ body::before {
     left: var(--mouse-x, -100%);
     width: 400px;
     height: 400px;
-    background: radial-gradient(circle, rgba(255, 255, 255, 1) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, transparent 70%);
     transform: translate(-50%, -50%);
     pointer-events: none;
     z-index: 10;
@@ -106,7 +105,6 @@ body::before {
 }
 
 .btn-next {
-    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
     color: white;
     border: none;
     padding: 16px 40px;
@@ -114,17 +112,17 @@ body::before {
     font-weight: 700;
     border-radius: 20px;
     cursor: pointer;
-    box-shadow: 0 10px 20px -5px rgba(37, 99, 235, 0.4);
     transition: all 0.3s ease;
     font-family: inherit;
     z-index: 20;
     animation: fadeIn 1s ease-out 0.2s forwards;
     opacity: 0;
+    text-decoration: none;
+    display: inline-block;
 }
 
 .btn-next:hover {
     transform: translateY(-2px);
-    box-shadow: 0 15px 30px -5px rgba(37, 99, 235, 0.6);
     filter: brightness(1.1);
 }
 
@@ -132,22 +130,17 @@ body::before {
     transform: translateY(0);
 }
 
-/* Animations */
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
 }
 
-.card h1 {
-    animation: fadeIn 1s ease-out forwards;
-}
-
-/* Media Queries */
 @media (max-width: 768px) {
     .card {
         padding: 40px 60px;
+        min-width: 90%;
     }
     .card h1 {
-        font-size: 2.2rem;
+        font-size: 1.8rem;
     }
 }
