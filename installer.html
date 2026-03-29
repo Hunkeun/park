@@ -38,9 +38,24 @@
             <div id="guideText" class="guide-text">
                 <p><strong>💡 팁:</strong> <span id="guideTip">이 단계를 진행하려면 터미널에서 nlm login을 입력하세요.</span></p>
             </div>
+            <div id="stepIcons" class="step-icons">
+            <!-- Icons will be injected here -->
+        </div>
 
-            <!-- 터미널 시뮬레이션 추가 -->
-            <div id="terminalWrapper" class="terminal-wrapper">
+        <div id="instructionBox" class="instruction-box" style="display:none;">
+            <!-- step instructions will be injected here -->
+        </div>
+
+        <div id="commandContainer" class="command-container" style="display:none;">
+            <div class="command-item">
+                <span id="commandText" class="command-text"></span>
+                <button id="copyBtn" class="copy-btn">
+                    <span>📋</span> <span class="copy-label">복사</span>
+                </button>
+            </div>
+        </div>
+
+        <div id="terminalContainer" class="terminal-wrapper" style="display:none;">
                 <div class="terminal-header">
                     <div class="dot red"></div>
                     <div class="dot yellow"></div>
@@ -66,80 +81,131 @@
     </div>
 
     <script>
+        // Steps data: Aligned with real installation workflow
         const steps = [
             {
+                id: 0,
+                icon: "🚀",
                 title: "시작하기",
-                icon: "fa-rocket",
-                color: "#f39c12",
                 desc: "설치에 필요한 준비가 끝났습니다. 첫 번째 단계를 진행할까요?",
-                btn: "좋아요, 시작!"
+                detail: "실제 컴퓨터에서 <strong>터미널(Terminal)</strong> 또는 <strong>PowerShell</strong> 창을 열고 준비해 주세요.",
+                btnText: "좋아요, 시작!"
             },
             {
-                title: "서버 확인 중...",
-                icon: "fa-search",
-                color: "var(--primary)",
-                desc: "우선 컴퓨터가 노트북LM과 친해질 준비가 됐는지 <br> 똑똑하게 살펴보고 있어요. (1단계)",
-                btn: "다음으로 넘어가기",
-                guide: false
+                id: 1,
+                icon: "🔍",
+                title: "1단계: 현재 상태 확인",
+                desc: "먼저 내 컴퓨터에 설치된 서버 정보를 확인합니다.",
+                detail: "아래 명령어를 복사해서 터미널에 붙여넣고 엔터를 치세요.",
+                command: "mcp_notebooklm-mcp_server_info",
+                btnText: "다음으로 넘어가기"
             },
             {
-                title: "새 옷으로 갈아입기",
-                icon: "fa-wand-magic-sparkles",
-                color: "var(--secondary)",
-                desc: "가장 최신 기능을 사용할 수 있도록 <br> 반짝반짝하게 업데이트 중이에요! (2단계)",
-                btn: "이제 거의 다 됐어요!",
-                guide: false
+                id: 2,
+                icon: "🪄",
+                title: "2단계: 최신 버전 업데이트",
+                desc: "새로운 기능을 위해 프로그램을 최신으로 업데이트합니다.",
+                detail: "이미 설치되어 있더라도 한 번 더 최신버전으로 명령어를 입력해 주세요.",
+                command: "pip install --upgrade notebooklm-mcp-cli",
+                btnText: "이제 거의 다 됐어요!"
             },
             {
-                title: "로그인 열쇠를 돌려주세요!",
-                icon: "fa-fingerprint",
-                color: "var(--accent)",
-                desc: "이제 '로그인' 단계예요. <br> 브라우저(인터넷 창)가 열리면 버튼을 눌러주세요.",
-                btn: "로그인 완료했어요!",
+                id: 3,
+                icon: "🔑",
+                title: "3단계: 구글 로그인 하기",
+                desc: "로그인 열쇠를 돌릴 시간이에요! 브라우저가 하나 뜰 거예요.",
+                detail: "명령어를 입력하면 구글 로그인 창이 열립니다. 평소처럼 로그인해 주세요.",
                 command: "nlm login",
-                guide: "터미널(검은 창)에 'nlm login'을 입력하고 엔터를 친 뒤, 인터넷 창에서 로그인하세요."
+                btnText: "로그인 완료했어요!"
             },
             {
-                title: "인증 정보 새로고침",
-                icon: "fa-rotate",
-                color: "#6366f1",
-                desc: "로그인한 정보를 내 컴퓨터에 <br> 잘 저장하도록 새로고침을 할게요.",
-                btn: "마지막 확인하기",
-                guide: false
+                id: 4,
+                icon: "🔄",
+                title: "4단계: 연결 정보 새로고침",
+                desc: "로그인 정보와 노트북 내용을 동기화합니다.",
+                detail: "로그인 후 컴퓨터가 새로운 정보를 인식할 수 있게 마지막으로 명령을 내립니다.",
+                command: "mcp_notebooklm-mcp_refresh_auth",
+                btnText: "마지막 확인하기"
             },
             {
-                title: "성공! 이제 제 친구예요!",
-                icon: "fa-face-grin-stars",
-                color: "var(--success)",
-                desc: "축하합니다! 이제 똑똑한 AI 친구 <br> 노트북LM을 마음껏 사용하실 수 있어요!",
-                btn: "처음부터 다시 보기",
-                guide: false
+                id: 5,
+                icon: "✅",
+                title: "최종 검증 및 완료!",
+                desc: "축하합니다! 이제 제가 당신을 도울 준비가 끝났습니다.",
+                detail: "아래 명령어로 당신의 노트북 리스트가 잘 나오는지 최종 확인해 보세요.",
+                command: "mcp_notebooklm-mcp_notebook_list",
+                btnText: "처음부터 다시 보기"
             }
         ];
 
         let currentStep = 0;
         const mainBtn = document.getElementById('mainBtn');
-        const stepTitle = document.getElementById('stepTitle');
-        const stepDescription = document.getElementById('stepDescription');
+        const mainTitle = document.getElementById('stepTitle');
+        const mainDesc = document.getElementById('stepDescription');
         const statusIcon = document.getElementById('statusIcon');
         const progressBar = document.getElementById('progressBar');
-        const guideText = document.getElementById('guideText');
-        const guideTip = document.getElementById('guideTip');
-        const terminalWrapper = document.getElementById('terminalWrapper');
+        const guideText = document.getElementById('guideText'); // This will be hidden or removed
+        const guideTip = document.getElementById('guideTip'); // This will be hidden or removed
+        const terminalContainer = document.getElementById('terminalContainer'); // Renamed from terminalWrapper
         const terminalCmd = document.getElementById('terminalCmd');
         const terminalResult = document.getElementById('terminalResult');
+        const instructionBox = document.getElementById('instructionBox');
+        const commandContainer = document.getElementById('commandContainer');
+        const commandText = document.getElementById('commandText');
+        const copyBtn = document.getElementById('copyBtn');
+
 
         function updateUI() {
             const step = steps[currentStep];
-            stepTitle.innerText = step.title;
-            stepDescription.innerHTML = step.desc;
-            statusIcon.innerHTML = `<i class="fas ${step.icon}" style="color:${step.color}"></i>`;
-            mainBtn.innerText = step.btn;
             
-            // Success Confetti
-            if (currentStep === steps.length - 1) {
-                createConfetti();
+            // Text updates
+            mainTitle.textContent = step.title;
+            mainDesc.innerHTML = step.desc;
+            mainBtn.textContent = step.btnText;
+            
+            // Instruction detail update
+            if (step.detail) {
+                instructionBox.style.display = 'block';
+                instructionBox.innerHTML = step.detail;
+            } else {
+                instructionBox.style.display = 'none';
             }
+
+            // Command element update
+            if (step.command) {
+                commandContainer.style.display = 'flex';
+                commandText.textContent = step.command;
+                copyBtn.classList.remove('copied');
+            } else {
+                commandContainer.style.display = 'none';
+            }
+
+            // Terminal visibility and typewriter effect for step 3 (Login step)
+            if (currentStep === 3) {
+                terminalContainer.style.display = 'block';
+                terminalCmd.innerText = "";
+                terminalResult.style.display = 'none';
+                
+                let i = 0;
+                function typeWriter() {
+                    if (currentStep !== 3) return; // Prevent animation if moved away
+                    if (i < step.command.length) {
+                        terminalCmd.innerText += step.command.charAt(i);
+                        i++;
+                        setTimeout(typeWriter, 100);
+                    } else {
+                        setTimeout(() => {
+                            if (currentStep === 3) terminalResult.style.display = 'block';
+                        }, 500);
+                    }
+                }
+                setTimeout(typeWriter, 800);
+            } else {
+                terminalContainer.style.display = 'none';
+            }
+
+            // Icon update
+            statusIcon.innerHTML = step.icon;
 
             // Progress Bar & Step Dots
             const progressMapping = [0, 20, 40, 60, 80, 100];
@@ -147,6 +213,7 @@
 
             for (let i = 1; i <= 5; i++) {
                 const el = document.getElementById(`step-btn-${i}`);
+                if (!el) continue;
                 if (i <= currentStep) {
                     el.classList.add('completed');
                     el.classList.remove('active');
@@ -161,35 +228,9 @@
                 }
             }
 
-            if (step.guide) {
-                guideText.style.display = 'block';
-                guideTip.innerText = step.guide;
-            } else {
-                guideText.style.display = 'none';
-            }
-
-            // Terminal Command Handling
-            if (step.command) {
-                terminalWrapper.style.display = 'block';
-                terminalCmd.innerText = "";
-                terminalResult.style.display = 'none';
-                
-                // Typewriter effect
-                let i = 0;
-                function type() {
-                    if (i < step.command.length) {
-                        terminalCmd.innerText += step.command.charAt(i);
-                        i++;
-                        setTimeout(type, 100);
-                    } else {
-                        setTimeout(() => {
-                            terminalResult.style.display = 'block';
-                        }, 500);
-                    }
-                }
-                setTimeout(type, 800);
-            } else {
-                terminalWrapper.style.display = 'none';
+            // Success Confetti
+            if (currentStep === steps.length - 1) {
+                createConfetti();
             }
         }
 
@@ -203,8 +244,23 @@
             }
         });
 
+        // Copy to clipboard logic
+        copyBtn.addEventListener('click', () => {
+            const cmd = commandText.textContent;
+            navigator.clipboard.writeText(cmd).then(() => {
+                copyBtn.classList.add('copied');
+                setTimeout(() => {
+                    copyBtn.classList.remove('copied');
+                }, 1500);
+            }).catch(err => {
+                console.error('복사 실패:', err);
+                alert('명령어 복사에 실패했습니다. 수동으로 복사해 주세요.');
+            });
+        });
+
         // Initialize
         updateUI();
+
         function createConfetti() {
             for (let i = 0; i < 50; i++) {
                 const confetti = document.createElement('div');

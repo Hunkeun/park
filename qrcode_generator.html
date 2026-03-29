@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Generator - Antigravity</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="qrcode.css">
+    <!-- QRCode.js Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+<body>
+    <a href="index.html" class="home-btn">← 메인으로</a>
+
+    <main class="container">
+        <div class="card" id="mainCard">
+            <h1 class="gradient-text">QR 코드 생성기</h1>
+            
+            <div class="input-group">
+                <input type="text" id="text-input" placeholder="URL 또는 텍스트를 입력하세요" autocomplete="off">
+            </div>
+
+            <button class="btn-generate" onclick="generateQRCode()">QR 코드 생성</button>
+
+            <div id="qrcode"></div>
+            
+            <a id="download-btn" class="download-link" href="#" download="qrcode.png">QR 코드 저장하기</a>
+        </div>
+    </main>
+
+    <script>
+        // 마우스 무브 효과 (기존 디자인과 통일)
+        const card = document.getElementById('mainCard');
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+            card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
+        });
+
+        // QR 코드 생성 로직
+        let qrcode = null;
+
+        function generateQRCode() {
+            const textInput = document.getElementById('text-input').value;
+            const qrcodeContainer = document.getElementById('qrcode');
+            const downloadBtn = document.getElementById('download-btn');
+
+            if (!textInput.trim()) {
+                alert("내용을 입력해주세요!");
+                return;
+            }
+
+            // 초기화
+            qrcodeContainer.innerHTML = "";
+            qrcodeContainer.style.display = "block";
+
+            // QR 코드 생성
+            qrcode = new QRCode(qrcodeContainer, {
+                text: textInput,
+                width: 256,
+                height: 256,
+                colorDark : "#000000",
+                colorLight : "#ffffff",
+                correctLevel : QRCode.CorrectLevel.H
+            });
+
+            // 다운로드 링크 업데이트 (약간의 뒤에 실행해야 이미지가 생성됨)
+            setTimeout(() => {
+                const img = qrcodeContainer.querySelector('img');
+                if (img) {
+                    downloadBtn.href = img.src;
+                    downloadBtn.style.display = "inline-block";
+                }
+            }, 300);
+        }
+
+        // Enter 키 지원
+        document.getElementById('text-input').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                generateQRCode();
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NotebookLM - Share Card</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;800&family=Noto+Sans+KR:wght@400;700;&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <style>
+        :root {
+            --primary: #6366f1;
+            --secondary: #a855f7;
+            --bg-gradient: linear-gradient(135deg, #1e1b4b 0%, #0f172a 100%);
+            --card-glass: rgba(255, 255, 255, 0.05);
+            --card-border: rgba(255, 255, 255, 0.1);
+            --text-white: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            font-family: 'Outfit', 'Noto Sans KR', sans-serif;
+            background: var(--bg-gradient);
+            color: var(--text-white);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .share-card {
+            background: var(--card-glass);
+            backdrop-filter: blur(25px);
+            border: 1px solid var(--card-border);
+            border-radius: 40px;
+            padding: 40px;
+            width: 400px;
+            text-align: center;
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.5);
+            position: relative;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+            transition: transform 0.1s ease;
+        }
+
+        .share-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            z-index: -1;
+            border-radius: 42px;
+            opacity: 0.3;
+        }
+
+        .avatar-container {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 3rem;
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.4);
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        h1 {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 5px;
+            background: linear-gradient(to right, #fff, #cbd5e1);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        p.subtitle {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+        }
+
+        #qrcode {
+            background: white;
+            padding: 15px;
+            border-radius: 20px;
+            display: inline-block;
+            margin-bottom: 25px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        #qrcode:hover {
+            transform: scale(1.05) rotate(2deg);
+        }
+
+        .url-display {
+            font-family: monospace;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 8px 15px;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            color: var(--primary);
+            margin-bottom: 30px;
+            display: inline-block;
+            border: 1px solid rgba(99, 102, 241, 0.2);
+        }
+
+        .action-group {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            border-radius: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            box-shadow: 0 10px 20px -5px rgba(99, 102, 241, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 25px -5px rgba(99, 102, 241, 0.6);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--card-border);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .back-btn {
+            position: fixed;
+            top: 30px;
+            left: 30px;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        .back-btn:hover {
+            color: white;
+        }
+
+        .copyright {
+            margin-top: 50px;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .shine {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255,255,255,0.1) 0%, transparent 50%);
+            border-radius: 40px;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> 돌아가기</a>
+
+    <div class="share-card" id="shareCard">
+        <div class="shine"></div>
+        <div class="avatar-container">
+            <i class="fas fa-robot"></i>
+        </div>
+        <h1>NotebookLM Installer</h1>
+        <p class="subtitle">모두를 위한 쉬운 설치 안내서</p>
+        
+        <div id="qrcode"></div>
+        
+        <br>
+        <div class="url-display" id="urlDisplay">https://github.com/google/notebooklm</div>
+
+        <div class="action-group">
+            <button class="btn btn-primary" onclick="changeUrl()">
+                <i class="fas fa-link"></i> URL 변경
+            </button>
+            <a id="downloadBtn" class="btn btn-secondary" href="#" download="installer_qr.png">
+                <i class="fas fa-download"></i> 저장하기
+            </a>
+        </div>
+    </div>
+
+    <p class="copyright">Developed by Antigravity</p>
+
+    <script>
+        const card = document.getElementById('shareCard');
+        const qrcodeContainer = document.getElementById('qrcode');
+        const urlDisplay = document.getElementById('urlDisplay');
+        const downloadBtn = document.getElementById('downloadBtn');
+
+        // Mouse tracked shine effect
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            card.style.setProperty('--mouse-x', `${x}px`);
+            card.style.setProperty('--mouse-y', `${y}px`);
+        });
+
+        // Generate QR Code
+        let qrcode = null;
+        function generateQR(url) {
+            qrcodeContainer.innerHTML = "";
+            qrcode = new QRCode(qrcodeContainer, {
+                text: url,
+                width: 180,
+                height: 180,
+                colorDark : "#1e1b4b",
+                colorLight : "#ffffff",
+                correctLevel : QRCode.CorrectLevel.H
+            });
+
+            // Update download button
+            setTimeout(() => {
+                const img = qrcodeContainer.querySelector('img');
+                if (img) downloadBtn.href = img.src;
+            }, 500);
+        }
+
+        function changeUrl() {
+            const newUrl = prompt("안내서가 있는 URL을 입력해주세요 (예: 배포된 Vercel 주소)", urlDisplay.textContent);
+            if (newUrl && newUrl.trim()) {
+                urlDisplay.textContent = newUrl;
+                generateQR(newUrl);
+            }
+        }
+
+        // Initial generation
+        generateQR(urlDisplay.textContent);
+    </script>
+</body>
+</html>
