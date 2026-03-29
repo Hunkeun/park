@@ -161,7 +161,7 @@ body {
 }
 
 #youtube-player {
-    pointer-events: none; /* Block clicks on player to control via UI */
+    pointer-events: auto; /* Allow interaction for CC/Quality/Settings */
 }
 
 .playing-indicator {
@@ -276,11 +276,11 @@ body {
 }
 
 .control-btn.primary {
-    width: 70px;
-    height: 70px;
+    width: 80px;
+    height: 80px;
     background: #fff;
     border-radius: 50%;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
 }
 
 .control-btn.primary svg {
@@ -391,6 +391,14 @@ body {
 .track-item-artist {
     font-size: 0.8rem;
     color: var(--text-gray);
+}
+
+@media (max-width: 480px) {
+    .app-title { font-size: 1.8rem; }
+    .track-title { font-size: 1.4rem; }
+    .control-btn.primary { width: 70px; height: 70px; }
+    .controls-main { gap: 20px; }
+    .player-container { padding: 16px; border-radius: 20px; }
 }
 
 .app-footer {

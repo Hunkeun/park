@@ -3,23 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sentence One</title>
+    <title>오늘의 응원 - 홈</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <style>
+        .btn-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            width: 100%;
+            margin-top: 20px;
+        }
+        .btn-next {
+            text-align: center;
+            display: block;
+            width: 100%;
+        }
+    </style>
 </head>
 <body>
     <div class="background-animation"></div>
     <main class="container">
         <div class="card" id="mainCard">
             <h1 class="gradient-text">오늘도 힘내세요!</h1>
-            <div style="display: flex; flex-direction: column; gap: 15px; width: 100%;">
-                <a href="page2.html" class="btn-next" style="background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); box-shadow: 0 10px 20px -5px rgba(37, 99, 235, 0.4); text-align: center;">다음 문장 보기</a>
-                <a href="installer.html" class="btn-next" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%); box-shadow: 0 10px 20px -5px rgba(16, 185, 129, 0.4); text-align: center;">NotebookLM 설치 가이드 시작</a>
-                <a href="share_card.html" class="btn-next" style="background: linear-gradient(135deg, #f43f5e 0%, #e11d48 100%); box-shadow: 0 10px 20px -5px rgba(244, 63, 94, 0.4); text-align: center;">설치 가이드 QR 카드 만들기</a>
-                <a href="qrcode_generator.html" class="btn-next" style="background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%); box-shadow: 0 10px 20px -5px rgba(139, 92, 246, 0.4); text-align: center;">일반 QR 코드 생성기</a>
-                <a href="medley.html" class="btn-next" style="background: linear-gradient(135deg, #c5a059 0%, #a47e3c 100%); box-shadow: 0 10px 20px -5px rgba(197, 160, 89, 0.4); text-align: center;">🎶 추억의 가요 메들리 (가사 포함)</a>
+            <div class="btn-container">
+                <a href="page2.html" class="btn-next" style="background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);">다음 문장 보기</a>
+                <a href="installer.html" class="btn-next" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%);">NotebookLM 설치 가이드</a>
+                <a href="share_card.html" class="btn-next" style="background: linear-gradient(135deg, #f43f5e 0%, #e11d48 100%);">설치 가이드 QR 카드 만들기</a>
+                <a href="qrcode_generator.html" class="btn-next" style="background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);">일반 QR 코드 생성기</a>
+                
+                <hr style="border: none; border-top: 1px solid rgba(255,255,255,0.1); margin: 10px 0;">
+                
+                <a href="medley_lyrics.html" class="btn-next" style="background: linear-gradient(135deg, #c5a059 0%, #a47e3c 100%);">🎶 인기 가요 10선 (가사용)</a>
+                <a href="medley.html" class="btn-next" style="background: linear-gradient(135deg, #4b5563 0%, #374151 100%);">🎹 고전 가곡 메들리 (6곡)</a>
             </div>
         </div>
     </main>

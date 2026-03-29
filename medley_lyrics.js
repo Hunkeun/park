@@ -1,40 +1,64 @@
 // Medley Playlist Data
 const playlist = [
     {
-        id: 'rhZJcYqjMFw',
-        title: '고향의 봄',
-        artist: '한국 동요/가곡',
-        thumbnail: 'https://img.youtube.com/vi/rhZJcYqjMFw/mqdefault.jpg'
+        id: 'NbnlzcgiSIM',
+        title: '그 겨울의 찻집',
+        artist: '조용필',
+        thumbnail: 'https://img.youtube.com/vi/NbnlzcgiSIM/mqdefault.jpg'
     },
     {
-        id: 'Vh6NM1NVohU',
-        title: '메기의 추억',
-        artist: '세계 민요',
-        thumbnail: 'https://img.youtube.com/vi/Vh6NM1NVohU/mqdefault.jpg'
+        id: 'w1YyyIvEQfc',
+        title: '안동역에서',
+        artist: '진성',
+        thumbnail: 'https://img.youtube.com/vi/w1YyyIvEQfc/mqdefault.jpg'
     },
     {
-        id: 'qnepzAiUtJ8',
-        title: '남촌',
-        artist: '가곡 (김동환 시)',
-        thumbnail: 'https://img.youtube.com/vi/qnepzAiUtJ8/mqdefault.jpg'
+        id: 'qjKO2FiTp3w',
+        title: '홍시',
+        artist: '나훈아',
+        thumbnail: 'https://img.youtube.com/vi/qjKO2FiTp3w/mqdefault.jpg'
     },
     {
-        id: 'xlTnMaVIO3w',
-        title: '애니로리',
-        artist: '스코틀랜드 민요',
-        thumbnail: 'https://img.youtube.com/vi/xlTnMaVIO3w/mqdefault.jpg'
+        id: 'P53SEMurUwI',
+        title: '내 나이가 어때서',
+        artist: '오승근',
+        thumbnail: 'https://img.youtube.com/vi/P53SEMurUwI/mqdefault.jpg'
     },
     {
-        id: 'x4FA-hJ5f4Y',
-        title: '스와니 강',
-        artist: '포스터 (Stephen Foster)',
-        thumbnail: 'https://img.youtube.com/vi/x4FA-hJ5f4Y/mqdefault.jpg'
+        id: 'siKZMFkIIwY',
+        title: '신사동 그 사람',
+        artist: '주현미',
+        thumbnail: 'https://img.youtube.com/vi/siKZMFkIIwY/mqdefault.jpg'
     },
     {
-        id: 'JoD1_8szr98',
-        title: '인생은 60부터야',
-        artist: '워싱턴 청춘합창단 (류연희 곡)',
-        thumbnail: 'https://img.youtube.com/vi/JoD1_8szr98/mqdefault.jpg'
+        id: 'HDUnz4vhhKc',
+        title: '동행',
+        artist: '최성수',
+        thumbnail: 'https://img.youtube.com/vi/HDUnz4vhhKc/mqdefault.jpg'
+    },
+    {
+        id: 'RE2IX3s88Ds',
+        title: '알고 싶어요',
+        artist: '이선희',
+        thumbnail: 'https://img.youtube.com/vi/RE2IX3s88Ds/mqdefault.jpg'
+    },
+    {
+        id: 'RfI-Yv-_VJo',
+        title: '부초 같은 인생',
+        artist: '김용임',
+        thumbnail: 'https://img.youtube.com/vi/RfI-Yv-_VJo/mqdefault.jpg'
+    },
+    {
+        id: 'gGrIHHInevE',
+        title: '막걸리 한잔',
+        artist: '강진',
+        thumbnail: 'https://img.youtube.com/vi/gGrIHHInevE/mqdefault.jpg'
+    },
+    {
+        id: 'OY1xikI_8w8',
+        title: '내 마음의 보석상자',
+        artist: '해바라기',
+        thumbnail: 'https://img.youtube.com/vi/OY1xikI_8w8/mqdefault.jpg'
     }
 ];
 
