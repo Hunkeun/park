@@ -31,10 +31,10 @@ const playlist = [
         thumbnail: 'https://img.youtube.com/vi/x4FA-hJ5f4Y/mqdefault.jpg'
     },
     {
-        id: '1JiB2ilQ9Dk',
+        id: 'JoD1_8szr98',
         title: '인생은 60부터야',
-        artist: '류연희 (작곡)',
-        thumbnail: 'https://img.youtube.com/vi/1JiB2ilQ9Dk/mqdefault.jpg'
+        artist: '워싱턴 청춘합창단 (류연희 곡)',
+        thumbnail: 'https://img.youtube.com/vi/JoD1_8szr98/mqdefault.jpg'
     }
 ];
 
