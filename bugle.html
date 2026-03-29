@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>육군 사관학교 명예의 나팔 & 행진곡</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .bugle-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            width: 100%;
+            margin-top: 20px;
+        }
+        .bugle-item {
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 20px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+        .bugle-item:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.8);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .bugle-img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .video-container {
+            width: 100%;
+            border-radius: 15px;
+            overflow: hidden;
+            margin-top: 10px;
+            background: #000;
+        }
+        .bugle-title {
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+            color: #1e293b;
+        }
+        .bugle-desc {
+            font-size: 0.9rem;
+            color: #64748b;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        .search-btn {
+            background: #ff0000;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-top: 10px;
+            display: inline-block;
+        }
+        @media (max-width: 768px) {
+            .card {
+                padding: 40px 20px;
+                min-width: 95%;
+            }
+            .bugle-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="background-animation"></div>
+    <main class="container">
+        <div class="card" id="bugleCard">
+            <h1 class="gradient-text">육사 명예의 소리</h1>
+            
+            <div class="bugle-grid">
+                <!-- Morning Bugle -->
+                <div class="bugle-item">
+                    <img src="army_bugle_call_scene_1774777648752.png" alt="Morning" class="bugle-img">
+                    <div class="bugle-title">☀️ 기상 나팔</div>
+                    <div class="bugle-desc">새벽을 깨우는 활기찬 기상곡</div>
+                    <div class="video-container">
+                        <iframe width="100%" height="150" src="https://www.youtube.com/embed/97O6s-E_U2w" title="Morning Bugle" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                </div>
+
+                <!-- Sleep Bugle -->
+                <div class="bugle-item">
+                    <img src="army_sleep_bugle_scene_1774777725677.png" alt="Sleep" class="bugle-img">
+                    <div class="bugle-title">🌙 취침 나팔</div>
+                    <div class="bugle-desc">일과를 마치는 서정적 선율</div>
+                    <div class="video-container">
+                        <iframe width="100%" height="150" src="https://www.youtube.com/embed/vVIdNfW3K_I" title="Sleep Bugle" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                </div>
+
+                <!-- Ceremony March -->
+                <div class="bugle-item">
+                    <img src="kma_hwarang_ceremony_scene_1774778263211.png" alt="Ceremony" class="bugle-img">
+                    <div class="bugle-title">💂 화랑의식 행진곡</div>
+                    <div class="bugle-desc">생도들의 명예로운 분열 행진곡</div>
+                    <div class="video-container">
+                        <iframe width="100%" height="150" src="https://www.youtube.com/embed/7_Zp03Bv2_c" title="Hwarang March" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <a href="https://www.youtube.com/results?search_query=육군사관학교+화랑의식+행진곡" target="_blank" class="search-btn">유튜브에서 검색하기</a>
+                </div>
+            </div>
+
+            <a href="index.html" class="btn-next" style="background: linear-gradient(135deg, #64748b 0%, #475569 100%); margin-top: 30px;">홈으로 돌아가기</a>
+        </div>
+    </main>
+    <script>
+        const card = document.getElementById('bugleCard');
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+            card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
+        });
+    </script>
+</body>
+</html>
