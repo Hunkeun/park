@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>QR Code Display</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <style>
+        body { display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100vh; font-family: sans-serif; background: #f0f2f5; }
+        #qrcode { background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        h2 { color: #1e293b; margin-bottom: 20px; text-align: center; }
+        p { color: #64748b; margin-top: 20px; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h2>🎺 육사 명예의 소리 모음 (전용) QR 코드</h2>
+    <div id="qrcode"></div>
+    <p>https://hunkeun.github.io/park/bugle.html</p>
+    <script>
+        new QRCode(document.getElementById("qrcode"), {
+            text: "https://hunkeun.github.io/park/bugle.html",
+            width: 300,
+            height: 300
+        });
+    </script>
+</body>
+</html>
