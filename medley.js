@@ -31,10 +31,10 @@ const playlist = [
         thumbnail: 'https://img.youtube.com/vi/x4FA-hJ5f4Y/mqdefault.jpg'
     },
     {
-        id: 'TwAO7zB4hUI',
-        title: '인생은 60부터',
-        artist: '이박사',
-        thumbnail: 'https://img.youtube.com/vi/TwAO7zB4hUI/mqdefault.jpg'
+        id: '1JiB2ilQ9Dk',
+        title: '인생은 60부터야',
+        artist: '류연희 (작곡)',
+        thumbnail: 'https://img.youtube.com/vi/1JiB2ilQ9Dk/mqdefault.jpg'
     }
 ];
 
