@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>오늘의 점심 메뉴 투표</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
+    <meta name="description" content="실시간 점심 메뉴 투표 앱입니다. 동료들과 오늘의 메뉴를 결정해보세요!">
+</head>
+<body>
+    <div class="background-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </div>
+
+    <main class="container">
+        <header class="header">
+            <h1 id="main-title">오늘 뭐 먹지?</h1>
+            <p class="subtitle">실시간 점심 메뉴 투표</p>
+        </header>
+
+        <div class="main-glass-card">
+            <section class="voting-section">
+                <div class="menu-grid">
+                    <!-- Bibimbap Card -->
+                    <div class="menu-card" data-menu="bibimbap" id="card-bibimbap" onclick="selectMenu('bibimbap')">
+                        <div class="image-wrapper">
+                            <img src="assets/bibimbap.png" alt="비빔밥" loading="lazy">
+                        </div>
+                        <div class="card-content">
+                            <h3>비빔밥</h3>
+                            <p>건강하고 담백한 한 끼</p>
+                        </div>
+                        <div class="selection-indicator">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <!-- Donkatsu Card -->
+                    <div class="menu-card" data-menu="donkatsu" id="card-donkatsu" onclick="selectMenu('donkatsu')">
+                        <div class="image-wrapper">
+                            <img src="assets/donkatsu.png" alt="돈까스" loading="lazy">
+                        </div>
+                        <div class="card-content">
+                            <h3>돈까스</h3>
+                            <p>겉바속촉 끝판왕</p>
+                        </div>
+                        <div class="selection-indicator">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <!-- Gukbap Card -->
+                    <div class="menu-card" data-menu="gukbap" id="card-gukbap" onclick="selectMenu('gukbap')">
+                        <div class="image-wrapper">
+                            <img src="assets/gukbap.png" alt="국밥" loading="lazy">
+                        </div>
+                        <div class="card-content">
+                            <h3>국밥</h3>
+                            <p>든든하게 속 채우는 뚝배기</p>
+                        </div>
+                        <div class="selection-indicator">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <!-- Salad Card -->
+                    <div class="menu-card" data-menu="salad" id="card-salad" onclick="selectMenu('salad')">
+                        <div class="image-wrapper">
+                            <img src="assets/salad.png" alt="샐러드" loading="lazy">
+                        </div>
+                        <div class="card-content">
+                            <h3>샐러드</h3>
+                            <p>가볍고 신선한 활력을 위해</p>
+                        </div>
+                        <div class="selection-indicator">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="action-area">
+                    <button id="vote-button" class="btn-primary" onclick="castVote()">투표하기</button>
+                </div>
+            </section>
+        </div>
+
+        <section class="results-section hidden" id="results-panel">
+            <h2 class="results-title">투표 현황</h2>
+            <div id="results-container" class="results-container">
+                <!-- Results will be injected here by JS -->
+            </div>
+            <div class="results-summary">
+                총 참여 인원: <span id="total-votes">0</span>명
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
