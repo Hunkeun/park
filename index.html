@@ -23,9 +23,20 @@
         </header>
 
         <div class="main-glass-card">
-            <div class="qr-code-section" style="text-align: center; margin-bottom: 25px; display: flex; flex-direction: column; align-items: center; gap: 10px;">
-                <p style="font-size: 0.95rem; font-weight: 600; color: #555; margin: 0;">📱 스마트폰으로 보기</p>
-                <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://lunch-menu-voting-app.vercel.app" alt="스마트폰 접속용 QR코드" style="border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); width: 100px; height: 100px; transition: transform 0.2s ease;">
+            <div class="qr-tooltip-container" style="text-align: center; margin-bottom: 25px;">
+                <style>
+                    .qr-wrapper { position: relative; display: inline-block; cursor: pointer; }
+                    .qr-text { font-size: 0.95rem; font-weight: 600; color: #555; background: rgba(255,255,255,0.6); padding: 8px 16px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.4); box-shadow: 0 2px 8px rgba(0,0,0,0.05); transition: background 0.3s; }
+                    .qr-text:hover { background: rgba(255,255,255,0.9); box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+                    .qr-popup { visibility: hidden; position: absolute; top: 130%; left: 50%; transform: translateX(-50%); opacity: 0; transition: all 0.3s ease; background: white; padding: 10px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.15); z-index: 50; }
+                    .qr-wrapper:hover .qr-popup, .qr-wrapper:focus .qr-popup { visibility: visible; opacity: 1; top: 110%; }
+                </style>
+                <div class="qr-wrapper">
+                    <span class="qr-text">📱 스마트폰으로 보기</span>
+                    <div class="qr-popup">
+                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://lunch-menu-voting-app.vercel.app" alt="QR Code" style="width: 150px; height: 150px; display: block;">
+                    </div>
+                </div>
             </div>
 
             <section class="voting-section">
