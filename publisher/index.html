@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 시대 영성 — 출판사</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Noto+Serif+KR:wght@300;400;600;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #0a192f;
+            --secondary: #172a45;
+            --accent: #d4af37;
+            --accent-soft: rgba(212, 175, 55, 0.15);
+            --text-main: #2c3e50;
+            --text-muted: #5d6d7e;
+            --white: #ffffff;
+            --bg-light: #fdfbf7;
+            --transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Noto Serif KR', serif;
+            color: var(--text-main);
+            background-color: var(--bg-light);
+            line-height: 1.85;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ─── HEADER ─── */
+        header {
+            background: var(--primary);
+            padding: 1.2rem 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            color: var(--accent);
+            letter-spacing: 0.1rem;
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: rgba(255,255,255,0.7);
+            font-size: 0.8rem;
+            font-family: 'Noto Sans KR', sans-serif;
+            font-weight: 300;
+            letter-spacing: 0.2rem;
+            display: block;
+            margin-top: -0.2rem;
+        }
+
+        nav a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 0.85rem;
+            letter-spacing: 0.1rem;
+            margin-left: 2rem;
+            transition: color 0.3s;
+        }
+
+        nav a:hover { color: var(--accent); }
+
+        /* ─── HERO ─── */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, #0d2440 60%, #1a3a5c 100%);
+            min-height: 70vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 6rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(ellipse at 60% 40%, rgba(212,175,55,0.08) 0%, transparent 70%);
+        }
+
+        .hero-tag {
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 0.8rem;
+            letter-spacing: 0.5rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.8rem, 7vw, 5rem);
+            color: var(--white);
+            line-height: 1.2;
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h1 em {
+            color: var(--accent);
+            font-style: italic;
+        }
+
+        .hero-sub {
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 1.05rem;
+            color: rgba(255,255,255,0.6);
+            letter-spacing: 0.15rem;
+            font-weight: 300;
+            max-width: 560px;
+            position: relative;
+        }
+
+        .hero-divider {
+            width: 60px;
+            height: 2px;
+            background: var(--accent);
+            margin: 2rem auto;
+            position: relative;
+        }
+
+        /* ─── SECTION COMMON ─── */
+        section {
+            padding: 6rem 2rem;
+        }
+
+        .container {
+            max-width: 860px;
+            margin: 0 auto;
+        }
+
+        .section-label {
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 0.75rem;
+            letter-spacing: 0.5rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 0.8rem;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+
+        .title-line {
+            width: 48px;
+            height: 3px;
+            background: var(--accent);
+            margin: 1.5rem 0 2.5rem;
+        }
+
+        /* ─── ABOUT ─── */
+        .about-bg {
+            background: var(--bg-light);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+            margin-top: 1rem;
+        }
+
+        .about-text p {
+            font-size: 1rem;
+            color: var(--text-muted);
+            margin-bottom: 1.2rem;
+            line-height: 2;
+        }
+
+        .about-values {
+            background: var(--primary);
+            border-radius: 4px;
+            padding: 2.5rem;
+            color: var(--white);
+        }
+
+        .about-values h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+        }
+
+        .value-item {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.4rem;
+            align-items: flex-start;
+        }
+
+        .value-icon {
+            color: var(--accent);
+            font-size: 1.1rem;
+            margin-top: 0.1rem;
+            flex-shrink: 0;
+        }
+
+        .value-item p {
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.75);
+            line-height: 1.7;
+        }
+
+        .value-item strong {
+            color: var(--white);
+            display: block;
+            font-size: 0.95rem;
+            margin-bottom: 0.2rem;
+        }
+
+        /* ─── BOOKS ─── */
+        .books-bg {
+            background: #f5f2ec;
+        }
+
+        .book-card {
+            background: var(--white);
+            border-radius: 4px;
+            box-shadow: 0 8px 40px rgba(10,25,47,0.08);
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            overflow: hidden;
+            margin-top: 2rem;
+        }
+
+        .book-cover-area {
+            background: linear-gradient(160deg, var(--primary) 0%, #1a3a5c 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .book-cover-area img {
+            width: 140px;
+            border-radius: 4px;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.4);
+            margin-bottom: 1.5rem;
+        }
+
+        .book-cover-placeholder {
+            width: 140px;
+            height: 200px;
+            background: linear-gradient(160deg, #1e3a5f, #2d5a8e);
+            border-radius: 4px;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.4);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(212,175,55,0.3);
+            padding: 1.2rem;
+        }
+
+        .book-cover-placeholder .book-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.8rem;
+            opacity: 0.8;
+        }
+
+        .book-cover-placeholder p {
+            font-family: 'Noto Serif KR', serif;
+            font-size: 0.75rem;
+            color: rgba(255,255,255,0.7);
+            text-align: center;
+            line-height: 1.5;
+        }
+
+        .book-badge {
+            background: var(--accent);
+            color: var(--primary);
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.15rem;
+            padding: 0.3rem 0.9rem;
+            border-radius: 2px;
+        }
+
+        .book-info {
+            padding: 3rem;
+        }
+
+        .book-meta {
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 0.78rem;
+            color: var(--accent);
+            letter-spacing: 0.3rem;
+            text-transform: uppercase;
+            margin-bottom: 0.8rem;
+        }
+
+        .book-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.7rem;
+            color: var(--primary);
+            line-height: 1.3;
+            margin-bottom: 0.5rem;
+        }
+
+        .book-subtitle {
+            font-family: 'Noto Serif KR', serif;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+
+        .book-divider {
+            width: 36px;
+            height: 2px;
+            background: var(--accent);
+            margin-bottom: 1.5rem;
+        }
+
+        .book-desc {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            line-height: 2;
+            margin-bottom: 2rem;
+        }
+
+        .book-details {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 0.82rem;
+        }
+
+        .book-detail-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.2rem;
+        }
+
+        .book-detail-item .label {
+            color: var(--text-muted);
+            font-size: 0.73rem;
+            letter-spacing: 0.1rem;
+        }
+
+        .book-detail-item .value {
+            color: var(--primary);
+            font-weight: 500;
+        }
+
+        /* ─── PUBLISHER INFO ─── */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .info-card {
+            text-align: center;
+            padding: 2.5rem 1.5rem;
+            border: 1px solid rgba(10,25,47,0.08);
+            border-radius: 4px;
+            background: var(--white);
+        }
+
+        .info-card .icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .info-card h3 {
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 0.8rem;
+            letter-spacing: 0.2rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            margin-bottom: 0.8rem;
+        }
+
+        .info-card p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+
+        /* ─── CONTACT ─── */
+        .contact-bg {
+            background: var(--primary);
+            text-align: center;
+        }
+
+        .contact-bg .section-title {
+            color: var(--white);
+        }
+
+        .contact-bg .section-label {
+            color: var(--accent);
+        }
+
+        .contact-email {
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 1.1rem;
+            color: rgba(255,255,255,0.8);
+            margin-top: 1rem;
+            letter-spacing: 0.05rem;
+        }
+
+        .contact-email a {
+            color: var(--accent);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(212,175,55,0.4);
+            padding-bottom: 2px;
+            transition: border-color 0.3s;
+        }
+
+        .contact-email a:hover {
+            border-color: var(--accent);
+        }
+
+        .contact-note {
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.4);
+            margin-top: 2.5rem;
+            letter-spacing: 0.05rem;
+        }
+
+        /* ─── FOOTER ─── */
+        footer {
+            background: #06111f;
+            padding: 2rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid rgba(212,175,55,0.15);
+        }
+
+        footer .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1rem;
+            color: var(--accent);
+        }
+
+        footer p {
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 0.75rem;
+            color: rgba(255,255,255,0.3);
+            letter-spacing: 0.05rem;
+        }
+
+        /* ─── SCROLL REVEAL ─── */
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: var(--transition);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ─── RESPONSIVE ─── */
+        @media (max-width: 720px) {
+            header { padding: 1rem 1.5rem; }
+            nav { display: none; }
+            .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+            .book-card { grid-template-columns: 1fr; }
+            .book-cover-area { padding: 2.5rem; }
+            .info-grid { grid-template-columns: 1fr; }
+            footer { flex-direction: column; gap: 0.8rem; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ─── HEADER ─── -->
+<header>
+    <a href="#" class="logo">
+        AI 시대 영성
+        <span>PUBLISHER</span>
+    </a>
+    <nav>
+        <a href="#about">출판사 소개</a>
+        <a href="#books">도서</a>
+        <a href="#contact">연락처</a>
+    </nav>
+</header>
+
+<!-- ─── HERO ─── -->
+<section class="hero">
+    <span class="hero-tag">AI 시대 영성 출판사</span>
+    <h1>믿음으로 <em>AI 시대</em>를<br>분별하다</h1>
+    <div class="hero-divider"></div>
+    <p class="hero-sub">기술 우상주의 시대, 신앙의 눈으로 본질을 읽다</p>
+</section>
+
+<!-- ─── ABOUT ─── -->
+<section id="about" class="about-bg">
+    <div class="container">
+        <div class="reveal">
+            <span class="section-label">About</span>
+            <h2 class="section-title">출판사 소개</h2>
+            <div class="title-line"></div>
+        </div>
+        <div class="about-grid">
+            <div class="about-text reveal">
+                <p>
+                    <strong>AI 시대 영성</strong>은 급격한 기술 변화 속에서 신앙과 영적 정체성을 지켜가려는 그리스도인들을 위한 출판사입니다.
+                </p>
+                <p>
+                    인공지능과 디지털 문명이 가져오는 신학적·윤리적 도전들을 성경적 시각으로 분석하고, 독자 스스로 영적 주체성을 확립할 수 있도록 돕는 콘텐츠를 출간합니다.
+                </p>
+                <p>
+                    지식 전달을 넘어, 실천적 신앙으로 이어지는 길을 함께 모색합니다.
+                </p>
+            </div>
+            <div class="about-values reveal">
+                <h3>출판 방향</h3>
+                <div class="value-item">
+                    <span class="value-icon">&#9670;</span>
+                    <p>
+                        <strong>분별력</strong>
+                        기술 혁신을 맹목적으로 수용하지 않고, 성경적 기준으로 분별하는 안목을 기릅니다.
+                    </p>
+                </div>
+                <div class="value-item">
+                    <span class="value-icon">&#9670;</span>
+                    <p>
+                        <strong>영적 주체성</strong>
+                        AI 시대에도 흔들리지 않는 신앙 정체성 확립을 돕습니다.
+                    </p>
+                </div>
+                <div class="value-item">
+                    <span class="value-icon">&#9670;</span>
+                    <p>
+                        <strong>실천 신앙</strong>
+                        일상과 사역 현장에서 적용 가능한 구체적 지침을 제시합니다.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ─── BOOKS ─── -->
+<section id="books" class="books-bg">
+    <div class="container">
+        <div class="reveal">
+            <span class="section-label">Publications</span>
+            <h2 class="section-title">출간 도서</h2>
+            <div class="title-line"></div>
+        </div>
+
+        <div class="book-card reveal">
+            <div class="book-cover-area">
+                <div class="book-cover-placeholder">
+                    <span class="book-icon">&#9997;</span>
+                    <p>AI 시대 영성</p>
+                </div>
+                <span class="book-badge">2026 출간</span>
+            </div>
+            <div class="book-info">
+                <p class="book-meta">저자 &mdash; 박헌근</p>
+                <h3 class="book-title">AI 시대 영성</h3>
+                <p class="book-subtitle">기술 우상주의 분별과 영적 주체성 확립 가이드</p>
+                <div class="book-divider"></div>
+                <p class="book-desc">
+                    인공지능이 인간의 사고와 신앙 영역까지 침투하는 시대,
+                    그리스도인은 어떻게 분별하고 어떻게 서야 하는가.
+                    성경적 세계관으로 AI 문명의 본질을 분석하고,
+                    영적 주체성을 회복하는 실천적 로드맵을 제시한다.
+                </p>
+                <div class="book-details">
+                    <div class="book-detail-item">
+                        <span class="label">출판사</span>
+                        <span class="value">AI 시대 영성</span>
+                    </div>
+                    <div class="book-detail-item">
+                        <span class="label">저자</span>
+                        <span class="value">박헌근</span>
+                    </div>
+                    <div class="book-detail-item">
+                        <span class="label">형태</span>
+                        <span class="value">전자책 (EPUB)</span>
+                    </div>
+                    <div class="book-detail-item">
+                        <span class="label">출간연도</span>
+                        <span class="value">2026</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ─── INFO ─── -->
+<section id="info">
+    <div class="container">
+        <div class="reveal">
+            <span class="section-label">Information</span>
+            <h2 class="section-title">출판사 정보</h2>
+            <div class="title-line"></div>
+        </div>
+        <div class="info-grid">
+            <div class="info-card reveal">
+                <span class="icon">&#128218;</span>
+                <h3>출판 분야</h3>
+                <p>신앙 · 영성<br>기독교 윤리<br>AI · 기술 신학</p>
+            </div>
+            <div class="info-card reveal">
+                <span class="icon">&#128196;</span>
+                <h3>출판 형태</h3>
+                <p>전자책 (EPUB)<br>디지털 출판<br>독립 출판</p>
+            </div>
+            <div class="info-card reveal">
+                <span class="icon">&#9993;</span>
+                <h3>연락처</h3>
+                <p>godsonphk@gmail.com</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ─── CONTACT ─── -->
+<section id="contact" class="contact-bg">
+    <div class="container reveal">
+        <span class="section-label">Contact</span>
+        <h2 class="section-title">문의하기</h2>
+        <div class="title-line" style="margin: 1.5rem auto 2rem;"></div>
+        <p class="contact-email">
+            <a href="mailto:godsonphk@gmail.com">godsonphk@gmail.com</a>
+        </p>
+        <p class="contact-note">도서 관련 문의, 원고 투고, 협업 제안을 환영합니다.</p>
+    </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+    <span class="footer-logo">AI 시대 영성</span>
+    <p>&copy; 2026 AI 시대 영성 출판사. All rights reserved.</p>
+</footer>
+
+<script>
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+            }
+        });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
