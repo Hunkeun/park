@@ -836,11 +836,14 @@
             .modal-cover img { width: 160px; }
             .modal-info { padding: 1.8rem; }
             .modal-details { grid-template-columns: 1fr 1fr; }
+            /* 모바일: 테이블이 좁아 의미 없음 → 자동으로 그리드 강제 */
+            body[data-view="table"] .table-wrap { display: none; }
+            body[data-view="table"] .grid { display: grid; }
         }
     </style>
     <script src="author_mode.js" defer></script>
 </head>
-<body>
+<body data-view="table">
 
 <header>
     <a href="index.html" class="logo">
@@ -928,8 +931,8 @@
         <div style="display:flex; gap:1rem; align-items:center;">
             <p class="desc" id="filterDesc">전체 도서</p>
             <div class="view-toggle">
-                <button class="view-btn active" data-view="grid" title="그리드 보기">⊞ 그리드</button>
-                <button class="view-btn" data-view="table" title="테이블 보기">☰ 테이블</button>
+                <button class="view-btn" data-view="grid" title="그리드 보기">⊞ 그리드</button>
+                <button class="view-btn active" data-view="table" title="테이블 보기">☰ 테이블</button>
             </div>
         </div>
     </div>
