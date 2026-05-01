@@ -1450,7 +1450,6 @@ $$('.view-btn').forEach(btn => {{
         $$('.view-btn').forEach(b => b.classList.toggle('active', b.dataset.view === v));
     }});
 }});
-document.body.dataset.view = 'grid';
 
 $$('.scope-btn').forEach(btn => {{
     btn.addEventListener('click', () => {{
