@@ -2,22 +2,24 @@
 """
 책방 사이트 단일 sync 스크립트.
 
-순서: books_master -> qr_assets -> copy_epubs -> catalog -> previews -> vercel deploy
+순서: books_master -> qr_assets -> copy_epubs -> catalog -> previews -> vercel deploy -> verify
 
 각 단계 진행 표시. 어느 단계든 실패하면 중단.
-마지막에 publisher/build_info.json 갱신 (사이트 footer가 표시할 빌드 시각).
+마지막 단계는 정합성 검증(verify_publisher.py): 외부 정본·publisher/epubs·Vercel 운영본
+세 곳이 같은 버전인지 확인. 깨졌으면 즉시 알림.
 
 옵션:
-  --no-deploy    Vercel 배포 생략 (로컬만 갱신)
+  --no-deploy    Vercel 배포 생략 (로컬만 갱신, verify는 --local-only로)
   --skip-deploy  동의어
+  --skip-verify  정합성 검증 생략
 
 실행: python sync_publisher.py
 """
 # PATCHED:utf8-stdout-v1
 import sys as _sys
 try:
-    _sys.stdout.reconfigure(encoding='utf-8')
-    _sys.stderr.reconfigure(encoding='utf-8')
+    _sys.stdout.reconfigure(encoding='utf-8', line_buffering=True)
+    _sys.stderr.reconfigure(encoding='utf-8', line_buffering=True)
 except AttributeError:
     pass
 
@@ -82,10 +84,27 @@ def deploy() -> None:
     print("--- [vercel deploy] 완료 ---")
 
 
+def verify(local_only: bool) -> None:
+    started = datetime.now()
+    print(f"\n--- [verify] {started:%H:%M:%S} 시작 ---")
+    cmd = [sys.executable, "-u", "verify_publisher.py", "--quiet"]
+    if local_only:
+        cmd.append("--local-only")
+    result = subprocess.run(cmd, cwd=PROJECT, capture_output=False)
+    elapsed = (datetime.now() - started).total_seconds()
+    if result.returncode != 0:
+        print(f"\n[경고] [verify] 정합성 검증 실패 ({elapsed:.1f}s).")
+        print("  수동으로 확인: python verify_publisher.py")
+        sys.exit(result.returncode)
+    print(f"--- [verify] 완료 ({elapsed:.1f}s) ---")
+
+
 def main():
     ap = argparse.ArgumentParser(description="책방 사이트 단일 sync 스크립트")
     ap.add_argument("--no-deploy", "--skip-deploy", action="store_true",
-                    help="Vercel 배포 생략 (로컬만 갱신)")
+                    help="Vercel 배포 생략 (로컬만 갱신, verify도 로컬만)")
+    ap.add_argument("--skip-verify", action="store_true",
+                    help="정합성 검증 생략")
     args = ap.parse_args()
 
     overall_start = datetime.now()
@@ -101,6 +120,11 @@ def main():
         deploy()
     else:
         print("\n[건너뜀] Vercel 배포 (--no-deploy)")
+
+    if not args.skip_verify:
+        verify(local_only=args.no_deploy)
+    else:
+        print("\n[건너뜀] 정합성 검증 (--skip-verify)")
 
     elapsed = (datetime.now() - overall_start).total_seconds()
     print(f"\n=== 전체 완료 ({elapsed:.1f}s) ===")
