@@ -478,6 +478,34 @@ PREVIEW_TEMPLATE = '''<!DOCTYPE html>
             border: 1px solid #c4302b;
         }}
         .btn-youtube:hover {{ background: #a52521; border-color: #a52521; color: #fff; transform: translateY(-2px); }}
+        .btn-cart {{
+            background: transparent;
+            color: var(--primary);
+            border: 1px solid var(--accent);
+        }}
+        .btn-cart:hover {{ background: var(--accent); color: var(--primary); transform: translateY(-2px); }}
+        .btn-cart.in-cart {{ background: var(--accent); color: var(--primary); }}
+        .btn-buy.disabled {{
+            background: #ddd6c8;
+            color: #8a7f6c;
+            cursor: not-allowed;
+            pointer-events: none;
+        }}
+        .purchase-note {{
+            background: #fff8e1;
+            border-left: 3px solid var(--accent);
+            padding: 0.8rem 1.1rem;
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 0.85rem;
+            color: #5d4f3a;
+            line-height: 1.7;
+            margin-bottom: 1.4rem;
+            border-radius: 2px;
+            max-width: 480px;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: left;
+        }}
 
         footer {{
             background: #06111f;
@@ -505,6 +533,7 @@ PREVIEW_TEMPLATE = '''<!DOCTYPE html>
         }}
     </style>
     <script src="../author_mode.js" defer></script>
+    <script src="../cart.js" defer></script>
 </head>
 <body>
 
@@ -564,8 +593,10 @@ PREVIEW_TEMPLATE = '''<!DOCTYPE html>
 
     <div class="preview-end">
         <p><strong>여기까지가 미리보기입니다.</strong><br>전체 본문은 구매 후 EPUB 파일로 받아보실 수 있습니다.</p>
-        <a href="../catalog.html?id={book_id}" class="btn-buy">구매하기</a>
+        {purchase_note_block}
+        {buy_button}
         {youtube_block}
+        <button type="button" id="previewCartBtn" data-book-id="{book_id}" class="btn-buy btn-cart" style="margin-left:0.6rem">장바구니 담기</button>
         <a href="../epubs/{book_id}.epub" download class="btn-buy btn-author author-only" style="display:none;margin-left:0.6rem">EPUB 다운로드</a>
     </div>
 </div>
@@ -576,6 +607,30 @@ document.addEventListener('DOMContentLoaded', function() {{
         document.querySelectorAll('.author-only').forEach(function(el) {{
             el.style.display = '';
         }});
+    }}
+
+    var btn = document.getElementById('previewCartBtn');
+    if (btn) {{
+        var bookId = btn.dataset.bookId;
+        function syncBtn() {{
+            if (window.cartHas && window.cartHas(bookId)) {{
+                btn.textContent = '✓ 담김 (제거)';
+                btn.classList.add('in-cart');
+            }} else {{
+                btn.textContent = '장바구니 담기';
+                btn.classList.remove('in-cart');
+            }}
+        }}
+        btn.addEventListener('click', function() {{
+            if (window.cartHas && window.cartHas(bookId)) {{
+                window.cartRemove(bookId);
+            }} else if (window.cartAdd) {{
+                window.cartAdd(bookId);
+            }}
+        }});
+        window.addEventListener('cartChanged', syncBtn);
+        // cart.js의 init이 끝난 뒤 라벨 동기화
+        setTimeout(syncBtn, 50);
     }}
 }});
 </script>
@@ -602,6 +657,16 @@ def series_label(b):
 def build():
     with open('publisher/books_master.json', encoding='utf-8') as f:
         master = json.load(f)
+
+    cfg_path = Path('publisher/site_config.json')
+    if cfg_path.exists():
+        with open(cfg_path, encoding='utf-8') as f:
+            cfg = json.load(f)
+    else:
+        cfg = {'purchase_enabled': True}
+    purchase_enabled = bool(cfg.get('purchase_enabled'))
+    purchase_short = cfg.get('purchase_disabled_short', '구매 준비 중')
+    purchase_note = cfg.get('purchase_disabled_note', '')
 
     out_dir = Path('publisher/preview')
     out_dir.mkdir(parents=True, exist_ok=True)
@@ -650,6 +715,16 @@ def build():
         else:
             youtube_block = ''
 
+        if purchase_enabled:
+            buy_button = f'<a href="../catalog.html?id={bid}" class="btn-buy">구매하기</a>'
+            purchase_note_block = ''
+        else:
+            buy_button = (
+                f'<a href="../catalog.html?id={bid}" class="btn-buy disabled" '
+                f'title="{purchase_note}">{purchase_short}</a>'
+            )
+            purchase_note_block = f'<div class="purchase-note">{purchase_note}</div>'
+
         page = PREVIEW_TEMPLATE.format(
             title=b['title'].replace('"', '&quot;'),
             subtitle=b.get('subtitle') or '',
@@ -663,6 +738,8 @@ def build():
             toc_items=toc_html,
             body_html=body_inner,
             youtube_block=youtube_block,
+            buy_button=buy_button,
+            purchase_note_block=purchase_note_block,
         )
         (out_dir / f'{bid}.html').write_text(page, encoding='utf-8')
         ok += 1

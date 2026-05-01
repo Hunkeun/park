@@ -332,6 +332,34 @@
             border: 1px solid #c4302b;
         }
         .btn-youtube:hover { background: #a52521; border-color: #a52521; color: #fff; transform: translateY(-2px); }
+        .btn-cart {
+            background: transparent;
+            color: var(--primary);
+            border: 1px solid var(--accent);
+        }
+        .btn-cart:hover { background: var(--accent); color: var(--primary); transform: translateY(-2px); }
+        .btn-cart.in-cart { background: var(--accent); color: var(--primary); }
+        .btn-buy.disabled {
+            background: #ddd6c8;
+            color: #8a7f6c;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+        .purchase-note {
+            background: #fff8e1;
+            border-left: 3px solid var(--accent);
+            padding: 0.8rem 1.1rem;
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 0.85rem;
+            color: #5d4f3a;
+            line-height: 1.7;
+            margin-bottom: 1.4rem;
+            border-radius: 2px;
+            max-width: 480px;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: left;
+        }
 
         footer {
             background: #06111f;
@@ -359,6 +387,7 @@
         }
     </style>
     <script src="../author_mode.js" defer></script>
+    <script src="../cart.js" defer></script>
 </head>
 <body>
 
@@ -446,8 +475,10 @@
 
     <div class="preview-end">
         <p><strong>여기까지가 미리보기입니다.</strong><br>전체 본문은 구매 후 EPUB 파일로 받아보실 수 있습니다.</p>
-        <a href="../catalog.html?id=s1-01" class="btn-buy">구매하기</a>
+        <div class="purchase-note">통신판매업 신고 절차 완료 후 정식 판매를 시작합니다. 그동안 미리보기를 자유롭게 보시고 마음에 드는 책을 장바구니에 담아두실 수 있습니다.</div>
+        <a href="../catalog.html?id=s1-01" class="btn-buy disabled" title="통신판매업 신고 절차 완료 후 정식 판매를 시작합니다. 그동안 미리보기를 자유롭게 보시고 마음에 드는 책을 장바구니에 담아두실 수 있습니다.">구매 준비 중</a>
         <a href="https://youtu.be/tmWkdC91UVA" target="_blank" rel="noopener" class="btn-buy btn-youtube" style="margin-left:0.6rem">유튜브 영상 ▶</a>
+        <button type="button" id="previewCartBtn" data-book-id="s1-01" class="btn-buy btn-cart" style="margin-left:0.6rem">장바구니 담기</button>
         <a href="../epubs/s1-01.epub" download class="btn-buy btn-author author-only" style="display:none;margin-left:0.6rem">EPUB 다운로드</a>
     </div>
 </div>
@@ -458,6 +489,30 @@ document.addEventListener('DOMContentLoaded', function() {
         document.querySelectorAll('.author-only').forEach(function(el) {
             el.style.display = '';
         });
+    }
+
+    var btn = document.getElementById('previewCartBtn');
+    if (btn) {
+        var bookId = btn.dataset.bookId;
+        function syncBtn() {
+            if (window.cartHas && window.cartHas(bookId)) {
+                btn.textContent = '✓ 담김 (제거)';
+                btn.classList.add('in-cart');
+            } else {
+                btn.textContent = '장바구니 담기';
+                btn.classList.remove('in-cart');
+            }
+        }
+        btn.addEventListener('click', function() {
+            if (window.cartHas && window.cartHas(bookId)) {
+                window.cartRemove(bookId);
+            } else if (window.cartAdd) {
+                window.cartAdd(bookId);
+            }
+        });
+        window.addEventListener('cartChanged', syncBtn);
+        // cart.js의 init이 끝난 뒤 라벨 동기화
+        setTimeout(syncBtn, 50);
     }
 });
 </script>

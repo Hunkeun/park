@@ -175,6 +175,13 @@ def build():
         ensure_ascii=False,
     )
 
+    cfg_path = Path('publisher/site_config.json')
+    if cfg_path.exists():
+        with open(cfg_path, encoding='utf-8') as f:
+            cfg = json.load(f)
+    else:
+        cfg = {'purchase_enabled': True}
+
     page = HTML_TEMPLATE.format(
         cards=cards_html,
         rows=rows_html,
@@ -183,6 +190,9 @@ def build():
         s1_main_count=len(s1_main),
         s2_main_count=len(s2_main),
         omni_count=len(s1_omni) + len(s2_omni),
+        purchase_enabled='true' if cfg.get('purchase_enabled') else 'false',
+        purchase_short=esc(cfg.get('purchase_disabled_short', '구매 준비 중')),
+        purchase_note=esc(cfg.get('purchase_disabled_note', '')),
     )
 
     out_path = Path('publisher/catalog.html')
@@ -928,6 +938,17 @@ HTML_TEMPLATE = '''<!DOCTYPE html>
             font-size: 1.05rem;
         }}
         .modal-actions {{ display: flex; gap: 0.6rem; flex-wrap: wrap; }}
+        .purchase-note {{
+            background: #fff8e1;
+            border-left: 3px solid var(--accent);
+            padding: 0.75rem 1rem;
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 0.82rem;
+            color: #5d4f3a;
+            line-height: 1.65;
+            margin: 0.6rem 0 1rem;
+            border-radius: 2px;
+        }}
         .btn {{
             font-family: 'Noto Sans KR', sans-serif;
             font-size: 0.88rem;
@@ -969,6 +990,18 @@ HTML_TEMPLATE = '''<!DOCTYPE html>
             font-weight: 600;
         }}
         .btn-youtube:hover {{ background: #a52521; border-color: #a52521; color: #fff; }}
+        .btn-cart {{
+            background: transparent;
+            color: var(--primary);
+            border: 1px solid var(--accent);
+            font-weight: 600;
+        }}
+        .btn-cart:hover {{ background: var(--accent); color: var(--primary); }}
+        .btn-cart.in-cart {{
+            background: var(--accent);
+            color: var(--primary);
+        }}
+        .btn-cart.in-cart:hover {{ background: transparent; color: var(--primary); }}
 
         /* 구매 모달 (송금 안내) */
         .buy-modal-bg {{
@@ -1034,6 +1067,7 @@ HTML_TEMPLATE = '''<!DOCTYPE html>
         }}
     </style>
     <script src="author_mode.js" defer></script>
+    <script src="cart.js" defer></script>
 </head>
 <body data-view="table">
 
@@ -1180,10 +1214,12 @@ HTML_TEMPLATE = '''<!DOCTYPE html>
                 <div class="item"><span class="label">발행</span><span class="value" id="mPubdate"></span></div>
                 <div class="item"><span class="label">형태</span><span class="value" id="mFormat"></span></div>
             </div>
+            <div id="mPurchaseNote" class="purchase-note" style="display:none"></div>
             <div class="modal-actions">
                 <button class="btn btn-primary">구매하기</button>
                 <a class="btn btn-outline" id="mPreview" target="_blank" rel="noopener">미리보기</a>
                 <a class="btn btn-youtube" id="mYoutube" target="_blank" rel="noopener" style="display:none">유튜브 영상 ▶</a>
+                <button class="btn btn-cart" id="mCart" type="button">장바구니 담기</button>
                 <a class="btn btn-author author-only" id="mDownload" download style="display:none">EPUB 다운로드</a>
                 <button class="btn btn-outline" onclick="closeBook()">닫기</button>
             </div>
@@ -1221,6 +1257,9 @@ HTML_TEMPLATE = '''<!DOCTYPE html>
 </div>
 
 <script>
+const PURCHASE_ENABLED = {purchase_enabled};
+const PURCHASE_SHORT = '{purchase_short}';
+const PURCHASE_NOTE = '{purchase_note}';
 const BOOKS = {books_json};
 
 Object.values(BOOKS).forEach(b => {{
@@ -1526,13 +1565,26 @@ function openBook(id) {{
     $('mBadges').innerHTML = badges.join('');
 
     const buyBtn = document.querySelector('#bookModal .btn-primary');
-    if (status.isPublished) {{
+    const noteEl = $('mPurchaseNote');
+    if (!PURCHASE_ENABLED) {{
+        buyBtn.textContent = PURCHASE_SHORT;
+        buyBtn.disabled = true;
+        buyBtn.style.background = '#ddd6c8';
+        buyBtn.style.color = '#8a7f6c';
+        buyBtn.style.cursor = 'not-allowed';
+        buyBtn.title = PURCHASE_NOTE;
+        buyBtn.onclick = null;
+        noteEl.textContent = PURCHASE_NOTE;
+        noteEl.style.display = 'block';
+    }} else if (status.isPublished) {{
         buyBtn.textContent = '구매하기';
         buyBtn.disabled = false;
         buyBtn.style.background = '';
         buyBtn.style.color = '';
         buyBtn.style.cursor = 'pointer';
+        buyBtn.title = '';
         buyBtn.onclick = openBuy;
+        noteEl.style.display = 'none';
     }} else {{
         const pubFmt = (b.publish_date||'').replace(/-/g, '.');
         buyBtn.textContent = `${{pubFmt}} 발행 예정`;
@@ -1540,7 +1592,9 @@ function openBook(id) {{
         buyBtn.style.background = '#ddd6c8';
         buyBtn.style.color = '#8a7f6c';
         buyBtn.style.cursor = 'not-allowed';
+        buyBtn.title = '';
         buyBtn.onclick = null;
+        noteEl.style.display = 'none';
     }}
 
     $('mPreview').href = `preview/${{id}}.html`;
@@ -1559,10 +1613,49 @@ function openBook(id) {{
     const dl = $('mDownload');
     dl.href = `epubs/${{id}}.epub`;
     dl.style.display = (window.isAuthorMode && window.isAuthorMode()) ? '' : 'none';
+
+    const cartBtn = $('mCart');
+    if (status.isPublished) {{
+        cartBtn.disabled = false;
+        cartBtn.style.cursor = 'pointer';
+        syncCartBtn(id);
+        cartBtn.onclick = () => {{
+            if (window.cartHas && window.cartHas(id)) window.cartRemove(id);
+            else if (window.cartAdd) window.cartAdd(id);
+        }};
+    }} else {{
+        cartBtn.textContent = '발행 후 담기';
+        cartBtn.classList.remove('in-cart');
+        cartBtn.disabled = true;
+        cartBtn.style.cursor = 'not-allowed';
+        cartBtn.onclick = null;
+    }}
+
     $('bookModal').classList.add('active');
     $('bookModal').dataset.id = id;
     document.body.style.overflow = 'hidden';
 }}
+
+function syncCartBtn(id) {{
+    const cartBtn = $('mCart');
+    if (!cartBtn) return;
+    if (window.cartHas && window.cartHas(id)) {{
+        cartBtn.textContent = '✓ 담김 (제거)';
+        cartBtn.classList.add('in-cart');
+    }} else {{
+        cartBtn.textContent = '장바구니 담기';
+        cartBtn.classList.remove('in-cart');
+    }}
+}}
+
+window.addEventListener('cartChanged', () => {{
+    const bm = $('bookModal');
+    if (bm && bm.classList.contains('active') && bm.dataset.id) {{
+        // 발행된 권만 담기 토글 가능 — 발행 전이면 라벨 변경 안 함
+        const cartBtn = $('mCart');
+        if (cartBtn && !cartBtn.disabled) syncCartBtn(bm.dataset.id);
+    }}
+}});
 
 function closeBook() {{
     $('bookModal').classList.remove('active');
