@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>시험 속에서 자라는 믿음 미리보기 — AI 시대 영성</title>
+    <meta name="description" content="시험은 우리를 파괴하려는 것이 아니라 우리를 완성하려는 과정이다.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Noto+Serif+KR:wght@300;400;500;600;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0a192f;
+            --secondary: #172a45;
+            --accent: #d4af37;
+            --accent-soft: rgba(212, 175, 55, 0.15);
+            --text-main: #2c3e50;
+            --text-muted: #5d6d7e;
+            --white: #ffffff;
+            --bg-card: #f5f2ec;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Noto Serif KR', serif;
+            color: var(--text-main);
+            background: var(--bg-card);
+            line-height: 1.95;
+            -webkit-font-smoothing: antialiased;
+        }
+        header {
+            background: var(--primary);
+            padding: 1.2rem 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            color: var(--accent);
+            letter-spacing: 0.1rem;
+            text-decoration: none;
+        }
+        .logo span {
+            color: rgba(255,255,255,0.7);
+            font-size: 0.78rem;
+            font-family: 'Noto Sans KR', sans-serif;
+            font-weight: 300;
+            letter-spacing: 0.2rem;
+            display: block;
+            margin-top: -0.2rem;
+        }
+        nav a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 0.85rem;
+            letter-spacing: 0.1rem;
+            margin-left: 2rem;
+            transition: color 0.3s;
+        }
+        nav a:hover { color: var(--accent); }
+
+        .preview-head {
+            background: linear-gradient(135deg, var(--primary) 0%, #0d2440 60%, #1a3a5c 100%);
+            padding: 4rem 2rem 3rem;
+            color: var(--white);
+        }
+        .head-inner {
+            max-width: 920px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+        .head-cover img {
+            width: 100%;
+            box-shadow: 0 16px 36px rgba(0,0,0,0.5);
+            border-radius: 4px;
+        }
+        .head-info .label {
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 0.75rem;
+            letter-spacing: 0.4rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+        .head-info h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            line-height: 1.3;
+            margin-bottom: 0.5rem;
+        }
+        .head-info .subtitle {
+            font-family: 'Noto Serif KR', serif;
+            font-size: 1.1rem;
+            color: rgba(255,255,255,0.7);
+            font-style: italic;
+            margin-bottom: 1.5rem;
+        }
+        .head-divider {
+            width: 48px;
+            height: 2px;
+            background: var(--accent);
+            margin: 1rem 0 1.4rem;
+        }
+        .head-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.6rem;
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 0.85rem;
+        }
+        .head-meta .item .label {
+            color: rgba(255,255,255,0.5);
+            font-size: 0.7rem;
+            letter-spacing: 0.1rem;
+        }
+        .head-meta .item .value {
+            color: var(--white);
+            font-weight: 500;
+        }
+        .head-meta .item.price .value {
+            color: var(--accent);
+            font-weight: 700;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+        }
+        .head-qr {
+            margin-top: 1.6rem;
+            display: inline-flex;
+            gap: 0.9rem;
+            align-items: center;
+            background: rgba(255,255,255,0.96);
+            padding: 0.7rem 1rem 0.7rem 0.7rem;
+            border-radius: 6px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.18);
+        }
+        .head-qr img {
+            width: 76px;
+            height: 76px;
+            display: block;
+            border-radius: 2px;
+        }
+        .head-qr-text {
+            font-family: 'Noto Sans KR', sans-serif;
+            line-height: 1.45;
+        }
+        .head-qr-text strong {
+            display: block;
+            color: var(--primary);
+            font-size: 0.82rem;
+            font-weight: 700;
+            letter-spacing: 0.05rem;
+        }
+        .head-qr-text span {
+            color: var(--text-muted);
+            font-size: 0.72rem;
+        }
+
+        .body-wrap {
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 4rem 2rem 3rem;
+        }
+        .section-label {
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 0.7rem;
+            letter-spacing: 0.4rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 0.8rem;
+        }
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.7rem;
+            color: var(--primary);
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 0.6rem;
+            display: inline-block;
+            margin-bottom: 2rem;
+        }
+
+        /* 목차 */
+        .toc {
+            background: var(--white);
+            border-radius: 4px;
+            padding: 2rem 2.4rem;
+            margin-bottom: 4rem;
+            box-shadow: 0 4px 16px rgba(10,25,47,0.06);
+        }
+        .toc ol {
+            list-style: none;
+            counter-reset: chapter;
+        }
+        .toc li {
+            counter-increment: chapter;
+            padding: 0.7rem 0;
+            border-bottom: 1px solid rgba(10,25,47,0.06);
+            font-family: 'Noto Serif KR', serif;
+            font-size: 1rem;
+            color: var(--primary);
+            display: flex;
+            align-items: baseline;
+            gap: 1rem;
+        }
+        .toc li::before {
+            content: counter(chapter, decimal-leading-zero);
+            font-family: 'Playfair Display', serif;
+            color: var(--accent);
+            font-weight: 700;
+            font-size: 0.9rem;
+            min-width: 2rem;
+            letter-spacing: 0.05rem;
+        }
+        .toc li:last-child { border-bottom: none; }
+
+        /* 본문 */
+        .chapter {
+            background: var(--white);
+            border-radius: 4px;
+            padding: 3rem 2.6rem;
+            box-shadow: 0 4px 16px rgba(10,25,47,0.06);
+            margin-bottom: 2rem;
+        }
+        .chapter h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            color: var(--primary);
+            margin-bottom: 0.8rem;
+            line-height: 1.35;
+        }
+        .chapter h3, .chapter .ch-sub {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.15rem;
+            color: var(--primary);
+            margin-top: 2rem;
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+        }
+        .chapter .ch-num {
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 0.7rem;
+            letter-spacing: 0.4rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 0.6rem;
+        }
+        .chapter .ch-divider {
+            width: 40px;
+            height: 2px;
+            background: var(--accent);
+            margin: 1.4rem 0 2rem;
+        }
+        .chapter p {
+            font-size: 1rem;
+            color: var(--text-main);
+            line-height: 2.05;
+            margin-bottom: 1.2rem;
+            text-align: justify;
+        }
+        .chapter .scripture {
+            background: var(--accent-soft);
+            border-left: 3px solid var(--accent);
+            padding: 1.2rem 1.4rem;
+            margin: 1.6rem 0;
+            font-style: italic;
+            border-radius: 0 4px 4px 0;
+        }
+        .chapter .scripture p {
+            margin-bottom: 0.4rem;
+            color: var(--text-main);
+        }
+        .chapter .scripture cite {
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            font-style: normal;
+            letter-spacing: 0.05rem;
+        }
+        .chapter strong { color: var(--primary); font-weight: 700; }
+
+        .preview-end {
+            text-align: center;
+            margin-top: 3rem;
+            padding: 3rem 2rem;
+            background: var(--white);
+            border-radius: 4px;
+            border: 1px dashed rgba(212,175,55,0.4);
+        }
+        .preview-end p {
+            font-family: 'Noto Sans KR', sans-serif;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 1.6rem;
+            letter-spacing: 0.1rem;
+        }
+        .preview-end strong {
+            color: var(--primary);
+            font-weight: 500;
+        }
+        .btn-buy {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--primary);
+            padding: 1rem 2.5rem;
+            border-radius: 2px;
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 700;
+            letter-spacing: 0.2rem;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        .btn-buy:hover { background: #b8941f; transform: translateY(-2px); }
+        .btn-author {
+            background: var(--primary);
+            color: var(--accent);
+            border: 1px solid var(--accent);
+        }
+        .btn-author:hover { background: var(--accent); color: var(--primary); }
+        .btn-youtube {
+            background: #c4302b;
+            color: #fff;
+            border: 1px solid #c4302b;
+        }
+        .btn-youtube:hover { background: #a52521; border-color: #a52521; color: #fff; transform: translateY(-2px); }
+
+        footer {
+            background: #06111f;
+            padding: 2rem 3rem;
+            text-align: center;
+            margin-top: 3rem;
+        }
+        footer p {
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 0.75rem;
+            color: rgba(255,255,255,0.3);
+            letter-spacing: 0.05rem;
+        }
+
+        @media (max-width: 720px) {
+            header { padding: 1rem 1.5rem; }
+            nav a { display: none; }
+            .head-inner { grid-template-columns: 1fr; gap: 2rem; }
+            .head-cover { max-width: 220px; margin: 0 auto; }
+            .head-info { text-align: center; }
+            .head-meta { justify-content: center; }
+            .head-divider { margin: 1rem auto 1.4rem; }
+            .body-wrap { padding: 2.5rem 1.2rem 2rem; }
+            .toc, .chapter { padding: 2rem 1.5rem; }
+        }
+    </style>
+    <script src="../author_mode.js" defer></script>
+</head>
+<body>
+
+<header>
+    <a href="../index.html" class="logo">
+        AI 시대 영성
+        <span>PUBLISHER</span>
+    </a>
+    <nav>
+        <a href="../index.html">홈</a>
+        <a href="../catalog.html">도서</a>
+        <a href="../catalog.html?id=s2-022">이 책 카드</a>
+    </nav>
+</header>
+
+<section class="preview-head">
+    <div class="head-inner">
+        <div class="head-cover">
+            <img src="../covers/s2-022.jpg" alt="시험 속에서 자라는 믿음 표지">
+        </div>
+        <div class="head-info">
+            <p class="label">미리보기 · 시즌 2 · G03 · EP 2</p>
+            <h1>시험 속에서 자라는 믿음</h1>
+            <p class="subtitle">연단의 은혜</p>
+            <div class="head-divider"></div>
+            <div class="head-meta">
+                <div class="item price"><span class="label">정가</span><span class="value">2,000원</span></div>
+                <div class="item"><span class="label">발행</span><span class="value">2026.05.02</span></div>
+                <div class="item"><span class="label">ISBN</span><span class="value">9791124569214</span></div>
+                <div class="item"><span class="label">저자</span><span class="value">AI, 박헌근</span></div>
+            </div>
+            <div class="head-qr">
+                <img src="../qr/s2-022.png" alt="이 책 QR">
+                <div class="head-qr-text">
+                    <strong>이 책 바로가기</strong>
+                    <span>QR로 책방에서 즉시 구매</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="body-wrap">
+    <span class="section-label">Contents</span>
+    <h2 class="section-title">목차</h2>
+    <div class="toc">
+        <ol>
+            <li>1. 시험이 찾아올 때</li>
+            <li>2. 압력 속의 다이아몬드</li>
+            <li>3. 인내의 뿌리</li>
+            <li>4. 지혜를 구하라</li>
+            <li>5. 연단의 은혜</li>
+            <li>6. 시험을 이기는 사람</li>
+            <li>7. 완성을 향한 여정</li>
+            <li>에필로그</li>
+        </ol>
+    </div>
+
+    <span class="section-label">First Chapter</span>
+    <h2 class="section-title">제1장 미리보기</h2>
+    <div class="chapter">
+<div>
+<span class="ch-num">Chapter 01</span>
+<h2 class="ch-title">시험이 찾아올 때</h2>
+<div class="ch-sub">두려움 대신 기쁨으로</div>
+<div class="ch-divider"></div>
+<p>삶의 어느 순간, 우리는 예고도 없이 찾아오는 시험 앞에 서게 됩니다. 사랑하는 사람을 잃는 슬픔, 오랫동안 쌓아온 것이 한순간에 무너지는 좌절, 몸과 마음이 한계에 다다르는 고통—이런 순간들은 마치 믿음을 뿌리째 뽑아내려는 폭풍처럼 느껴집니다. 그런데 성경은 우리에게 놀라운 말씀을 건넵니다. <strong>"온전히 기쁘게 여기라"</strong>고.</p>
+<div class="scripture"><p>내 형제들아 너희가 여러 가지 시험을 당하거든 온전히 기쁘게 여기라. 이는 너희 믿음의 시련이 인내를 만들어 내는 줄 너희가 앎이라.</p><cite>야고보서 1장 2~3절</cite></div>
+<p>이 구절을 처음 읽는 이라면 눈살을 찌푸릴지도 모릅니다. 기쁘게 여기라니—이것이 억지스러운 낙관주의일까요, 아니면 고통을 외면하라는 말일까요? 야고보의 초대를 제대로 듣기 위해서는 먼저 이 역설의 깊이 속으로 들어가야 합니다.</p>
+<div class="ch-sub">시험은 파괴가 아니라 형성이다</div>
+<p>야고보서가 말하는 시험의 헬라어 원어 <strong>'페이라스모스(peirasmos)'</strong>는 단순한 재난이나 불운을 뜻하지 않습니다. 그것은 금속을 불에 달구어 불순물을 걸러내는 제련의 이미지를 담고 있습니다. 금은 불 속에서 녹아 없어지는 것이 아니라, 오히려 불 속에서 더욱 순수해집니다. 시험도 마찬가지입니다. 시험은 우리를 파괴하려는 것이 아니라, <strong>우리 안에 아직 완성되지 않은 믿음을 다듬고 완성하려는 과정</strong>입니다.</p>
+<p>생각해 보십시오. 근육은 저항 없이는 강해지지 않습니다. 뿌리는 폭풍을 만나야 더 깊이 내려갑니다. 믿음도 마찬가지입니다. 편안한 자리에서만 머무르는 믿음은 언제까지나 유아기의 믿음입니다. 시험이라는 용광로를 통과할 때, 비로소 믿음은 성숙한 형태로 빚어집니다.</p>
+<div class="quote"><p>하나님은 우리를 시험의 불꽃 속에 내버려 두시는 분이 아닙니다. 그분은 그 불꽃 속에서 우리와 함께 걸으시며, 우리가 타지 않도록 붙드시는 분입니다.</p></div>
+<div class="ch-sub">역설적 기쁨의 정체</div>
+<p>그렇다면 야고보가 말하는 '기쁨'은 무엇일까요? 그것은 고통을 느끼지 않는 상태가 아닙니다. 눈물을 억누르고 억지웃음을 짓는 것도 아닙니다. 이 기쁨은 <strong>현재 상황 너머를 바라보는 시선</strong>에서 오는 기쁨입니다. 야고보는 "너희가 앎이라"고 덧붙입니다. 무엇을 알기에? 바로 이 시련이 인내를 만들어 내고, 인내는 온전함으로 이어진다는 것을—그 끝을 알기에 지금 이 고통을 다르게 바라볼 수 있다는 것입니다.</p>
+<p>마치 마라톤 선수가 42킬로미터 중 가장 힘든 구간을 달리면서도 포기하지 않는 이유는, 결승선을 알기 때문입니다. 믿음도 그렇습니다. 시험이 찾아올 때 우리가 기억해야 할 것은 <strong>하나님의 목적</strong>입니다. 그분은 우리를 넘어지게 하려는 것이 아니라, 우리를 온전하게 빚으시기 위해 이 과정을 허락하십니다.</p>
+<div class="scripture"><p>우리가 알거니와 하나님을 사랑하는 자 곧 그의 뜻대로 부르심을 입은 자들에게는 모든 것이 합력하여 선을 이루느니라.</p><cite>로마서 8장 28절</cite></div>
+<div class="ch-sub">시험 앞에 서는 자세</div>
+<p>시험이 찾아올 때, 우리의 첫 반응은 종종 <strong>도망치거나 원망하는 것</strong>입니다. 그러나 야고보의 초대는 제3의 길을 보여줍니다. 그것은 시험을 있는 그대로 직면하되, <strong>하나님의 손안에 있다는 신뢰를 놓지 않는 것</strong>입니다. 고통을 부정하지도, 고통에 잠식되지도 않는 자세—그것이 바로 역설적 기쁨의 자리입니다.</p>
+<p>실제로 이것은 오늘 당신의 삶에 이렇게 적용될 수 있습니다. 지금 당신이 마주한 어려움—관계의 갈등이든, 건강의 위기든, 오래된 상처든—그것을 향해 이렇게 물어보십시오. <strong>"하나님, 이 시험을 통해 나 안에서 무엇을 완성하려 하십니까?"</strong> 이 질문 하나가 우리의 시선을 바꿉니다. 불평의 자리에서 배움의 자리로, 피해자의 자리에서 하나님의 작품이 되어가는 자리로.</p>
+<p>시험은 끝이 아닙니다. 시험은 시작입니다. 믿음이 자라는 계절의 시작입니다.</p>
+<div class="meditation-q">
+<p class="mq-title">묵상 질문</p>
+<p class="mq-item">1. 지금 내 삶에서 가장 힘겨운 시험은 무엇입니까? 그 시험 속에서 하나님이 나에게 완성하려 하시는 것이 무엇일지 조용히 생각해 보십시오.</p>
+<p class="mq-item">2. '온전히 기쁘게 여기라'는 말씀이 나에게 억지스럽게 느껴진다면, 그 이유는 무엇입니까? 하나님의 목적을 신뢰하는 것이 나에게 왜 어려운지 솔직하게 나누어 보십시오.</p>
+<p class="mq-item">3. 과거에 시험을 통과한 후 돌아보았을 때, 그 시련이 나의 믿음을 어떻게 성장시켰습니까? 그 경험이 지금 이 시험을 대하는 자세에 어떤 용기를 줄 수 있습니까?</p>
+</div></div>
+    </div>
+
+    <div class="preview-end">
+        <p><strong>여기까지가 미리보기입니다.</strong><br>전체 본문은 구매 후 EPUB 파일로 받아보실 수 있습니다.</p>
+        <a href="../catalog.html?id=s2-022" class="btn-buy">구매하기</a>
+        <a href="https://youtu.be/24BM-T_F05o" target="_blank" rel="noopener" class="btn-buy btn-youtube" style="margin-left:0.6rem">유튜브 영상 ▶</a>
+        <a href="../epubs/s2-022.epub" download class="btn-buy btn-author author-only" style="display:none;margin-left:0.6rem">EPUB 다운로드</a>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    if (window.isAuthorMode && window.isAuthorMode()) {
+        document.querySelectorAll('.author-only').forEach(function(el) {
+            el.style.display = '';
+        });
+    }
+});
+</script>
+
+<footer>
+    <p>&copy; 2026 AI 시대 영성 출판사. 무단 전재·복제·배포 금지.</p>
+</footer>
+
+</body>
+</html>

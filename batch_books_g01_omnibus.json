@@ -1,0 +1,154 @@
+{
+  "project": {
+    "name": "G01 종합책 (100권 시즌 2 첫 그룹)",
+    "parent_project": "100권 영성 시리즈 G01 (ISBN 9791124569)",
+    "title": "영원의 문턱에서",
+    "subtitle": "그리스도인을 위한 사후세계 열 묵상",
+    "author": "박헌근",
+    "publisher": "AI 시대 영성",
+    "isbn": "9791176580014",
+    "isbn_prefix_hint": "신규 발행자번호 블록 9791176580 (2026-05-01 발급 통보, 시즌1 종합책=0007부터 G01=0014, G02=0021, ... +7 패턴, G09→G10만 +16 점프)",
+    "publish_date": "2026-05-30",
+    "format_primary": "전자책",
+    "format_secondary": "POD",
+    "status": "draft_2026-04-26"
+  },
+  "structure": {
+    "preface": {
+      "title": "여는 글 — 보이지 않는 세계의 문 앞에서",
+      "to_write": true,
+      "estimated_pages": 1
+    },
+    "parts": [
+      {
+        "part": 1,
+        "title": "1부 — 죽음의 문턱",
+        "subtitle": "죽음과 그 너머의 빛",
+        "intro": {
+          "title": "1부 도입 — 마지막 숨, 첫 빛",
+          "to_write": true,
+          "estimated_pages": 2
+        },
+        "books": [
+          {
+            "order": 1,
+            "src_no": 1,
+            "title": "천국의 문턱에서",
+            "epub": "천국의_문턱에서_20260418.epub",
+            "isbn": "9791124569009"
+          },
+          {
+            "order": 2,
+            "src_no": 4,
+            "title": "죽음 너머의 빛",
+            "epub": "죽음_너머의_빛_20260419.epub",
+            "isbn": "9791124569030"
+          }
+        ]
+      },
+      {
+        "part": 2,
+        "title": "2부 — 영혼의 정체",
+        "subtitle": "영혼이란 무엇인가",
+        "intro": {
+          "title": "2부 도입 — 영혼이라는 비밀",
+          "to_write": true,
+          "estimated_pages": 2
+        },
+        "books": [
+          {
+            "order": 3,
+            "src_no": 3,
+            "title": "영혼은 어디로 가는가",
+            "epub": "영혼은_어디로_가는가_20260419.epub",
+            "isbn": "9791124569023"
+          },
+          {
+            "order": 4,
+            "src_no": 7,
+            "title": "몸과 영혼의 경계",
+            "epub": "몸과_영혼의_경계_20260423.epub",
+            "isbn": "9791124569061"
+          },
+          {
+            "order": 5,
+            "src_no": 9,
+            "title": "영원한 생명의 실체",
+            "epub": "영원한_생명의_실체_20260423.epub",
+            "isbn": "9791124569085"
+          }
+        ]
+      },
+      {
+        "part": 3,
+        "title": "3부 — 보이지 않는 세계",
+        "subtitle": "영계의 풍경",
+        "intro": {
+          "title": "3부 도입 — 베일 너머의 풍경",
+          "to_write": true,
+          "estimated_pages": 2
+        },
+        "books": [
+          {
+            "order": 6,
+            "src_no": 5,
+            "title": "낙원과 지옥 사이",
+            "epub": "낙원과_지옥_사이_20260420.epub",
+            "isbn": "9791124569047"
+          },
+          {
+            "order": 7,
+            "src_no": 6,
+            "title": "영계의 언어",
+            "epub": "영계의_언어_20260421.epub",
+            "isbn": "9791124569054"
+          },
+          {
+            "order": 8,
+            "src_no": 10,
+            "title": "천사들의 사역",
+            "epub": "천사들의_사역_20260424.epub",
+            "isbn": "9791124569092"
+          }
+        ]
+      },
+      {
+        "part": 4,
+        "title": "4부 — 마지막 일들",
+        "subtitle": "부활과 심판",
+        "intro": {
+          "title": "4부 도입 — 시간의 끝에서",
+          "to_write": true,
+          "estimated_pages": 2
+        },
+        "books": [
+          {
+            "order": 9,
+            "src_no": 2,
+            "title": "부활의 증거들",
+            "epub": "부활의_증거들_20260419.epub",
+            "isbn": "9791124569016"
+          },
+          {
+            "order": 10,
+            "src_no": 8,
+            "title": "마지막 심판의 의미",
+            "epub": "마지막_심판의_의미_20260423.epub",
+            "isbn": "9791124569078"
+          }
+        ]
+      }
+    ],
+    "epilogue": {
+      "title": "닫는 글 — 영원의 문 안에서",
+      "to_write": true,
+      "estimated_pages": 2
+    }
+  },
+  "policies": {
+    "content_preservation": "원본 본문 거의 그대로 유지",
+    "edit_scope": "중복·불필요 제거, 부 도입글 신규 작성, 부 간 연결 보완, 종합 서문·결론 신규",
+    "cover_treatment": "epub 내부 통합 (분리 추출 안 함, 신규 종합책 표지 새로 만듦)",
+    "page_numbering": "통합 단일 페이지 번호"
+  }
+}

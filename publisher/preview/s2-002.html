@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>부활의 증거들 미리보기 — AI 시대 영성</title>
+    <meta name="description" content="부활은 신화가 아니라 역사다. 빈 무덤 앞에서 신앙은 지식이 된다.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Noto+Serif+KR:wght@300;400;500;600;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0a192f;
+            --secondary: #172a45;
+            --accent: #d4af37;
+            --accent-soft: rgba(212, 175, 55, 0.15);
+            --text-main: #2c3e50;
+            --text-muted: #5d6d7e;
+            --white: #ffffff;
+            --bg-card: #f5f2ec;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Noto Serif KR', serif;
+            color: var(--text-main);
+            background: var(--bg-card);
+            line-height: 1.95;
+            -webkit-font-smoothing: antialiased;
+        }
+        header {
+            background: var(--primary);
+            padding: 1.2rem 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            color: var(--accent);
+            letter-spacing: 0.1rem;
+            text-decoration: none;
+        }
+        .logo span {
+            color: rgba(255,255,255,0.7);
+            font-size: 0.78rem;
+            font-family: 'Noto Sans KR', sans-serif;
+            font-weight: 300;
+            letter-spacing: 0.2rem;
+            display: block;
+            margin-top: -0.2rem;
+        }
+        nav a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 0.85rem;
+            letter-spacing: 0.1rem;
+            margin-left: 2rem;
+            transition: color 0.3s;
+        }
+        nav a:hover { color: var(--accent); }
+
+        .preview-head {
+            background: linear-gradient(135deg, var(--primary) 0%, #0d2440 60%, #1a3a5c 100%);
+            padding: 4rem 2rem 3rem;
+            color: var(--white);
+        }
+        .head-inner {
+            max-width: 920px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+        .head-cover img {
+            width: 100%;
+            box-shadow: 0 16px 36px rgba(0,0,0,0.5);
+            border-radius: 4px;
+        }
+        .head-info .label {
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 0.75rem;
+            letter-spacing: 0.4rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+        .head-info h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            line-height: 1.3;
+            margin-bottom: 0.5rem;
+        }
+        .head-info .subtitle {
+            font-family: 'Noto Serif KR', serif;
+            font-size: 1.1rem;
+            color: rgba(255,255,255,0.7);
+            font-style: italic;
+            margin-bottom: 1.5rem;
+        }
+        .head-divider {
+            width: 48px;
+            height: 2px;
+            background: var(--accent);
+            margin: 1rem 0 1.4rem;
+        }
+        .head-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.6rem;
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 0.85rem;
+        }
+        .head-meta .item .label {
+            color: rgba(255,255,255,0.5);
+            font-size: 0.7rem;
+            letter-spacing: 0.1rem;
+        }
+        .head-meta .item .value {
+            color: var(--white);
+            font-weight: 500;
+        }
+        .head-meta .item.price .value {
+            color: var(--accent);
+            font-weight: 700;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+        }
+        .head-qr {
+            margin-top: 1.6rem;
+            display: inline-flex;
+            gap: 0.9rem;
+            align-items: center;
+            background: rgba(255,255,255,0.96);
+            padding: 0.7rem 1rem 0.7rem 0.7rem;
+            border-radius: 6px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.18);
+        }
+        .head-qr img {
+            width: 76px;
+            height: 76px;
+            display: block;
+            border-radius: 2px;
+        }
+        .head-qr-text {
+            font-family: 'Noto Sans KR', sans-serif;
+            line-height: 1.45;
+        }
+        .head-qr-text strong {
+            display: block;
+            color: var(--primary);
+            font-size: 0.82rem;
+            font-weight: 700;
+            letter-spacing: 0.05rem;
+        }
+        .head-qr-text span {
+            color: var(--text-muted);
+            font-size: 0.72rem;
+        }
+
+        .body-wrap {
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 4rem 2rem 3rem;
+        }
+        .section-label {
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 0.7rem;
+            letter-spacing: 0.4rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 0.8rem;
+        }
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.7rem;
+            color: var(--primary);
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 0.6rem;
+            display: inline-block;
+            margin-bottom: 2rem;
+        }
+
+        /* 목차 */
+        .toc {
+            background: var(--white);
+            border-radius: 4px;
+            padding: 2rem 2.4rem;
+            margin-bottom: 4rem;
+            box-shadow: 0 4px 16px rgba(10,25,47,0.06);
+        }
+        .toc ol {
+            list-style: none;
+            counter-reset: chapter;
+        }
+        .toc li {
+            counter-increment: chapter;
+            padding: 0.7rem 0;
+            border-bottom: 1px solid rgba(10,25,47,0.06);
+            font-family: 'Noto Serif KR', serif;
+            font-size: 1rem;
+            color: var(--primary);
+            display: flex;
+            align-items: baseline;
+            gap: 1rem;
+        }
+        .toc li::before {
+            content: counter(chapter, decimal-leading-zero);
+            font-family: 'Playfair Display', serif;
+            color: var(--accent);
+            font-weight: 700;
+            font-size: 0.9rem;
+            min-width: 2rem;
+            letter-spacing: 0.05rem;
+        }
+        .toc li:last-child { border-bottom: none; }
+
+        /* 본문 */
+        .chapter {
+            background: var(--white);
+            border-radius: 4px;
+            padding: 3rem 2.6rem;
+            box-shadow: 0 4px 16px rgba(10,25,47,0.06);
+            margin-bottom: 2rem;
+        }
+        .chapter h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            color: var(--primary);
+            margin-bottom: 0.8rem;
+            line-height: 1.35;
+        }
+        .chapter h3, .chapter .ch-sub {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.15rem;
+            color: var(--primary);
+            margin-top: 2rem;
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+        }
+        .chapter .ch-num {
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 0.7rem;
+            letter-spacing: 0.4rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 0.6rem;
+        }
+        .chapter .ch-divider {
+            width: 40px;
+            height: 2px;
+            background: var(--accent);
+            margin: 1.4rem 0 2rem;
+        }
+        .chapter p {
+            font-size: 1rem;
+            color: var(--text-main);
+            line-height: 2.05;
+            margin-bottom: 1.2rem;
+            text-align: justify;
+        }
+        .chapter .scripture {
+            background: var(--accent-soft);
+            border-left: 3px solid var(--accent);
+            padding: 1.2rem 1.4rem;
+            margin: 1.6rem 0;
+            font-style: italic;
+            border-radius: 0 4px 4px 0;
+        }
+        .chapter .scripture p {
+            margin-bottom: 0.4rem;
+            color: var(--text-main);
+        }
+        .chapter .scripture cite {
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            font-style: normal;
+            letter-spacing: 0.05rem;
+        }
+        .chapter strong { color: var(--primary); font-weight: 700; }
+
+        .preview-end {
+            text-align: center;
+            margin-top: 3rem;
+            padding: 3rem 2rem;
+            background: var(--white);
+            border-radius: 4px;
+            border: 1px dashed rgba(212,175,55,0.4);
+        }
+        .preview-end p {
+            font-family: 'Noto Sans KR', sans-serif;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 1.6rem;
+            letter-spacing: 0.1rem;
+        }
+        .preview-end strong {
+            color: var(--primary);
+            font-weight: 500;
+        }
+        .btn-buy {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--primary);
+            padding: 1rem 2.5rem;
+            border-radius: 2px;
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 700;
+            letter-spacing: 0.2rem;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        .btn-buy:hover { background: #b8941f; transform: translateY(-2px); }
+        .btn-author {
+            background: var(--primary);
+            color: var(--accent);
+            border: 1px solid var(--accent);
+        }
+        .btn-author:hover { background: var(--accent); color: var(--primary); }
+        .btn-youtube {
+            background: #c4302b;
+            color: #fff;
+            border: 1px solid #c4302b;
+        }
+        .btn-youtube:hover { background: #a52521; border-color: #a52521; color: #fff; transform: translateY(-2px); }
+
+        footer {
+            background: #06111f;
+            padding: 2rem 3rem;
+            text-align: center;
+            margin-top: 3rem;
+        }
+        footer p {
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 0.75rem;
+            color: rgba(255,255,255,0.3);
+            letter-spacing: 0.05rem;
+        }
+
+        @media (max-width: 720px) {
+            header { padding: 1rem 1.5rem; }
+            nav a { display: none; }
+            .head-inner { grid-template-columns: 1fr; gap: 2rem; }
+            .head-cover { max-width: 220px; margin: 0 auto; }
+            .head-info { text-align: center; }
+            .head-meta { justify-content: center; }
+            .head-divider { margin: 1rem auto 1.4rem; }
+            .body-wrap { padding: 2.5rem 1.2rem 2rem; }
+            .toc, .chapter { padding: 2rem 1.5rem; }
+        }
+    </style>
+    <script src="../author_mode.js" defer></script>
+</head>
+<body>
+
+<header>
+    <a href="../index.html" class="logo">
+        AI 시대 영성
+        <span>PUBLISHER</span>
+    </a>
+    <nav>
+        <a href="../index.html">홈</a>
+        <a href="../catalog.html">도서</a>
+        <a href="../catalog.html?id=s2-002">이 책 카드</a>
+    </nav>
+</header>
+
+<section class="preview-head">
+    <div class="head-inner">
+        <div class="head-cover">
+            <img src="../covers/s2-002.jpg" alt="부활의 증거들 표지">
+        </div>
+        <div class="head-info">
+            <p class="label">미리보기 · 시즌 2 · G01 · EP 2</p>
+            <h1>부활의 증거들</h1>
+            <p class="subtitle">죽음을 이긴 생명</p>
+            <div class="head-divider"></div>
+            <div class="head-meta">
+                <div class="item price"><span class="label">정가</span><span class="value">2,000원</span></div>
+                <div class="item"><span class="label">발행</span><span class="value">2026.05.02</span></div>
+                <div class="item"><span class="label">ISBN</span><span class="value">9791124569016</span></div>
+                <div class="item"><span class="label">저자</span><span class="value">AI, 박헌근</span></div>
+            </div>
+            <div class="head-qr">
+                <img src="../qr/s2-002.png" alt="이 책 QR">
+                <div class="head-qr-text">
+                    <strong>이 책 바로가기</strong>
+                    <span>QR로 책방에서 즉시 구매</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="body-wrap">
+    <span class="section-label">Contents</span>
+    <h2 class="section-title">목차</h2>
+    <div class="toc">
+        <ol>
+            <li>1. 빈 무덤의 아침</li>
+            <li>2. 증인들의 목소리</li>
+            <li>3. 무덤을 열 수 없었던 이유들</li>
+            <li>4. 씨앗의 신학</li>
+            <li>5. 두려움에서 담대함으로</li>
+            <li>6. 나의 죽음과 부활 신앙</li>
+            <li>7. 부활의 증인으로 살다</li>
+            <li>에필로그</li>
+        </ol>
+    </div>
+
+    <span class="section-label">First Chapter</span>
+    <h2 class="section-title">제1장 미리보기</h2>
+    <div class="chapter">
+<div>
+<span class="ch-num">Chapter 01</span>
+<h2 class="ch-title">빈 무덤의 아침</h2>
+<div class="ch-sub">역사가 시작된 그날</div>
+<div class="ch-divider"></div>
+<p>새벽 어둠이 채 걷히기 전, 막달라 마리아는 무덤을 향해 걸었다. 슬픔이 발걸음을 무겁게 눌렀다. 그녀가 기대한 것은 봉인된 돌문과 차가운 침묵뿐이었다. 그러나 그곳에서 그녀는 역사상 가장 충격적인 광경을 마주했다. <strong>무덤이 비어 있었다.</strong></p>
+<div class="ch-sub">돌이 굴려진 이유</div>
+<p>예수님의 부활은 조용히 은밀하게 일어나지 않았다. 그것은 로마 병사들의 경비와 공식 봉인을 뚫고, 새벽빛 속에서 역사의 한복판으로 터져 나왔다. 당시 유대 지도자들과 로마 당국은 부활의 소문을 잠재우기 위해 가장 간단한 방법을 쓸 수 있었다. 시신을 내보이면 그만이었다. 그러나 그들은 그렇게 하지 못했다. <strong>할 수 없었기 때문이다.</strong></p>
+<p>빈 무덤은 단순한 감정적 위로가 아니다. 그것은 역사적 사실의 영역에 놓인 증거다. 무덤이 비어 있다는 사실은 친구와 적 모두가 동의한 공통분모였다. 차이는 그 이유에 대한 해석이었다. 제자들이 시신을 훔쳐갔다는 주장은, 두려움에 도망쳤던 그 같은 사람들이 이후 목숨을 걸고 부활을 증언했다는 사실과 정면으로 충돌한다. 거짓말을 위해 십자가에 달리고 참수당하는 사람은 없다.</p>
+<div class="scripture"><p>"그가 여기 계시지 않고 그가 말씀하시던 대로 살아나셨느니라 와서 그가 누우셨던 곳을 보라"</p><cite>마태복음 28장 6절</cite></div>
+<div class="ch-sub">신앙이 지식이 되는 순간</div>
+<p>천사의 이 한 마디는 단순한 선언이 아니었다. <strong>"와서 보라"</strong>는 초대였다. 믿음을 강요하기 전에 먼저 확인하라는 것이었다. 이것은 기독교 신앙의 독특한 성격을 드러낸다. 성경의 하나님은 눈 감고 믿으라 하지 않으신다. 그분은 역사의 현장으로 우리를 이끌고, 증거 앞에 서게 하신다.</p>
+<p>사도 바울도 이 점을 분명히 했다. 그는 부활의 증인들을 구체적으로 열거했다. 베드로, 열두 제자, 그리고 한 번에 오백여 형제들이 부활하신 주님을 직접 목격했다고 기록했다. 이것은 신화적 언어가 아니라 <strong>법정 증언의 언어</strong>다. 목격자들이 살아 있고, 확인이 가능하며, 반박을 요청하는 언어다.</p>
+<div class="quote"><p>신앙은 증거 없는 도약이 아니다. 충분한 증거 위에서 확신을 선택하는 행위다. 빈 무덤 앞에서 신앙은 공허한 감정이 아니라 단단한 지식이 된다.</p></div>
+<div class="ch-sub">오늘 우리에게 열린 빈 무덤</div>
+<p>2천 년이 지난 지금, 우리는 그 새벽의 현장에 직접 설 수 없다. 그러나 빈 무덤이 남긴 파장은 여전히 우리 삶 안에서 검증된다. 삶이 무너진 자리에서 다시 일어선 사람들, 죽음 앞에서도 평안을 잃지 않는 사람들, 용서할 수 없던 사람을 용서하게 된 사람들—이 모든 변화는 부활이 과거의 사건으로 끝나지 않았음을 증언한다.</p>
+<p>부활은 역사적 사건이다. 동시에 <strong>지금 이 순간도 진행 중인 사건</strong>이다. 당신의 가장 깊은 절망, 가장 단단히 닫힌 무덤 앞에서도 하나님은 돌을 굴리신다. 그 새벽의 천사가 마리아에게 한 말은 오늘 우리에게도 울린다. "와서 보라. 그는 여기 계시지 않는다. 살아나셨다."</p>
+<div class="scripture"><p>"예수께서 이르시되 나는 부활이요 생명이니 나를 믿는 자는 죽어도 살겠고"</p><cite>요한복음 11장 25절</cite></div>
+<p>빈 무덤 앞에 서는 것은 단순히 과거를 회고하는 행위가 아니다. 그것은 오늘 나의 삶을 근본에서 다시 세우는 결단이다. 부활이 역사적 사실이라면, 죽음은 마지막 말이 아니다. 절망은 결론이 아니다. 그리고 당신의 이야기는 아직 끝나지 않았다.</p>
+<div class="meditation-q">
+<p class="mq-title">묵상 질문</p>
+<p class="mq-item">1. 나는 부활을 역사적 사실로 진지하게 생각해본 적이 있는가? 부활이 단순한 신화가 아니라 검증 가능한 사건이라는 사실이 나의 신앙에 어떤 변화를 가져오는가?</p>
+<p class="mq-item">2. 내 삶에서 "단단히 닫힌 무덤"처럼 느껴지는 상황이 있다면 무엇인가? 부활의 하나님이 그 자리에 계신다면 내 기도와 기대는 어떻게 달라질 수 있는가?</p>
+<p class="mq-item">3. 천사의 말 "와서 보라"는 나에게 어떤 초대로 들리는가? 오늘 내가 눈을 열고 확인해야 할 하나님의 살아계심의 증거는 무엇인가?</p>
+</div></div>
+    </div>
+
+    <div class="preview-end">
+        <p><strong>여기까지가 미리보기입니다.</strong><br>전체 본문은 구매 후 EPUB 파일로 받아보실 수 있습니다.</p>
+        <a href="../catalog.html?id=s2-002" class="btn-buy">구매하기</a>
+        <a href="https://youtu.be/gdRpJ79pfNY" target="_blank" rel="noopener" class="btn-buy btn-youtube" style="margin-left:0.6rem">유튜브 영상 ▶</a>
+        <a href="../epubs/s2-002.epub" download class="btn-buy btn-author author-only" style="display:none;margin-left:0.6rem">EPUB 다운로드</a>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    if (window.isAuthorMode && window.isAuthorMode()) {
+        document.querySelectorAll('.author-only').forEach(function(el) {
+            el.style.display = '';
+        });
+    }
+});
+</script>
+
+<footer>
+    <p>&copy; 2026 AI 시대 영성 출판사. 무단 전재·복제·배포 금지.</p>
+</footer>
+
+</body>
+</html>

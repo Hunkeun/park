@@ -1,0 +1,5 @@
+.vercel
+*.bak
+preview_card.html
+catalog_preview.html
+search_index.js

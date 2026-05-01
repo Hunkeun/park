@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>기도의 용사들 미리보기 — AI 시대 영성</title>
+    <meta name="description" content="역사의 모든 위대한 하나님의 역사 뒤에는 무릎 꿇은 기도의 용사들이 있었다.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Noto+Serif+KR:wght@300;400;500;600;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0a192f;
+            --secondary: #172a45;
+            --accent: #d4af37;
+            --accent-soft: rgba(212, 175, 55, 0.15);
+            --text-main: #2c3e50;
+            --text-muted: #5d6d7e;
+            --white: #ffffff;
+            --bg-card: #f5f2ec;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Noto Serif KR', serif;
+            color: var(--text-main);
+            background: var(--bg-card);
+            line-height: 1.95;
+            -webkit-font-smoothing: antialiased;
+        }
+        header {
+            background: var(--primary);
+            padding: 1.2rem 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            color: var(--accent);
+            letter-spacing: 0.1rem;
+            text-decoration: none;
+        }
+        .logo span {
+            color: rgba(255,255,255,0.7);
+            font-size: 0.78rem;
+            font-family: 'Noto Sans KR', sans-serif;
+            font-weight: 300;
+            letter-spacing: 0.2rem;
+            display: block;
+            margin-top: -0.2rem;
+        }
+        nav a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 0.85rem;
+            letter-spacing: 0.1rem;
+            margin-left: 2rem;
+            transition: color 0.3s;
+        }
+        nav a:hover { color: var(--accent); }
+
+        .preview-head {
+            background: linear-gradient(135deg, var(--primary) 0%, #0d2440 60%, #1a3a5c 100%);
+            padding: 4rem 2rem 3rem;
+            color: var(--white);
+        }
+        .head-inner {
+            max-width: 920px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+        .head-cover img {
+            width: 100%;
+            box-shadow: 0 16px 36px rgba(0,0,0,0.5);
+            border-radius: 4px;
+        }
+        .head-info .label {
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 0.75rem;
+            letter-spacing: 0.4rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+        .head-info h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            line-height: 1.3;
+            margin-bottom: 0.5rem;
+        }
+        .head-info .subtitle {
+            font-family: 'Noto Serif KR', serif;
+            font-size: 1.1rem;
+            color: rgba(255,255,255,0.7);
+            font-style: italic;
+            margin-bottom: 1.5rem;
+        }
+        .head-divider {
+            width: 48px;
+            height: 2px;
+            background: var(--accent);
+            margin: 1rem 0 1.4rem;
+        }
+        .head-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.6rem;
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 0.85rem;
+        }
+        .head-meta .item .label {
+            color: rgba(255,255,255,0.5);
+            font-size: 0.7rem;
+            letter-spacing: 0.1rem;
+        }
+        .head-meta .item .value {
+            color: var(--white);
+            font-weight: 500;
+        }
+        .head-meta .item.price .value {
+            color: var(--accent);
+            font-weight: 700;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+        }
+        .head-qr {
+            margin-top: 1.6rem;
+            display: inline-flex;
+            gap: 0.9rem;
+            align-items: center;
+            background: rgba(255,255,255,0.96);
+            padding: 0.7rem 1rem 0.7rem 0.7rem;
+            border-radius: 6px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.18);
+        }
+        .head-qr img {
+            width: 76px;
+            height: 76px;
+            display: block;
+            border-radius: 2px;
+        }
+        .head-qr-text {
+            font-family: 'Noto Sans KR', sans-serif;
+            line-height: 1.45;
+        }
+        .head-qr-text strong {
+            display: block;
+            color: var(--primary);
+            font-size: 0.82rem;
+            font-weight: 700;
+            letter-spacing: 0.05rem;
+        }
+        .head-qr-text span {
+            color: var(--text-muted);
+            font-size: 0.72rem;
+        }
+
+        .body-wrap {
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 4rem 2rem 3rem;
+        }
+        .section-label {
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 0.7rem;
+            letter-spacing: 0.4rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 0.8rem;
+        }
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.7rem;
+            color: var(--primary);
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 0.6rem;
+            display: inline-block;
+            margin-bottom: 2rem;
+        }
+
+        /* 목차 */
+        .toc {
+            background: var(--white);
+            border-radius: 4px;
+            padding: 2rem 2.4rem;
+            margin-bottom: 4rem;
+            box-shadow: 0 4px 16px rgba(10,25,47,0.06);
+        }
+        .toc ol {
+            list-style: none;
+            counter-reset: chapter;
+        }
+        .toc li {
+            counter-increment: chapter;
+            padding: 0.7rem 0;
+            border-bottom: 1px solid rgba(10,25,47,0.06);
+            font-family: 'Noto Serif KR', serif;
+            font-size: 1rem;
+            color: var(--primary);
+            display: flex;
+            align-items: baseline;
+            gap: 1rem;
+        }
+        .toc li::before {
+            content: counter(chapter, decimal-leading-zero);
+            font-family: 'Playfair Display', serif;
+            color: var(--accent);
+            font-weight: 700;
+            font-size: 0.9rem;
+            min-width: 2rem;
+            letter-spacing: 0.05rem;
+        }
+        .toc li:last-child { border-bottom: none; }
+
+        /* 본문 */
+        .chapter {
+            background: var(--white);
+            border-radius: 4px;
+            padding: 3rem 2.6rem;
+            box-shadow: 0 4px 16px rgba(10,25,47,0.06);
+            margin-bottom: 2rem;
+        }
+        .chapter h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            color: var(--primary);
+            margin-bottom: 0.8rem;
+            line-height: 1.35;
+        }
+        .chapter h3, .chapter .ch-sub {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.15rem;
+            color: var(--primary);
+            margin-top: 2rem;
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+        }
+        .chapter .ch-num {
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 0.7rem;
+            letter-spacing: 0.4rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 0.6rem;
+        }
+        .chapter .ch-divider {
+            width: 40px;
+            height: 2px;
+            background: var(--accent);
+            margin: 1.4rem 0 2rem;
+        }
+        .chapter p {
+            font-size: 1rem;
+            color: var(--text-main);
+            line-height: 2.05;
+            margin-bottom: 1.2rem;
+            text-align: justify;
+        }
+        .chapter .scripture {
+            background: var(--accent-soft);
+            border-left: 3px solid var(--accent);
+            padding: 1.2rem 1.4rem;
+            margin: 1.6rem 0;
+            font-style: italic;
+            border-radius: 0 4px 4px 0;
+        }
+        .chapter .scripture p {
+            margin-bottom: 0.4rem;
+            color: var(--text-main);
+        }
+        .chapter .scripture cite {
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            font-style: normal;
+            letter-spacing: 0.05rem;
+        }
+        .chapter strong { color: var(--primary); font-weight: 700; }
+
+        .preview-end {
+            text-align: center;
+            margin-top: 3rem;
+            padding: 3rem 2rem;
+            background: var(--white);
+            border-radius: 4px;
+            border: 1px dashed rgba(212,175,55,0.4);
+        }
+        .preview-end p {
+            font-family: 'Noto Sans KR', sans-serif;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 1.6rem;
+            letter-spacing: 0.1rem;
+        }
+        .preview-end strong {
+            color: var(--primary);
+            font-weight: 500;
+        }
+        .btn-buy {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--primary);
+            padding: 1rem 2.5rem;
+            border-radius: 2px;
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 700;
+            letter-spacing: 0.2rem;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        .btn-buy:hover { background: #b8941f; transform: translateY(-2px); }
+        .btn-author {
+            background: var(--primary);
+            color: var(--accent);
+            border: 1px solid var(--accent);
+        }
+        .btn-author:hover { background: var(--accent); color: var(--primary); }
+        .btn-youtube {
+            background: #c4302b;
+            color: #fff;
+            border: 1px solid #c4302b;
+        }
+        .btn-youtube:hover { background: #a52521; border-color: #a52521; color: #fff; transform: translateY(-2px); }
+
+        footer {
+            background: #06111f;
+            padding: 2rem 3rem;
+            text-align: center;
+            margin-top: 3rem;
+        }
+        footer p {
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 0.75rem;
+            color: rgba(255,255,255,0.3);
+            letter-spacing: 0.05rem;
+        }
+
+        @media (max-width: 720px) {
+            header { padding: 1rem 1.5rem; }
+            nav a { display: none; }
+            .head-inner { grid-template-columns: 1fr; gap: 2rem; }
+            .head-cover { max-width: 220px; margin: 0 auto; }
+            .head-info { text-align: center; }
+            .head-meta { justify-content: center; }
+            .head-divider { margin: 1rem auto 1.4rem; }
+            .body-wrap { padding: 2.5rem 1.2rem 2rem; }
+            .toc, .chapter { padding: 2rem 1.5rem; }
+        }
+    </style>
+    <script src="../author_mode.js" defer></script>
+</head>
+<body>
+
+<header>
+    <a href="../index.html" class="logo">
+        AI 시대 영성
+        <span>PUBLISHER</span>
+    </a>
+    <nav>
+        <a href="../index.html">홈</a>
+        <a href="../catalog.html">도서</a>
+        <a href="../catalog.html?id=s2-080">이 책 카드</a>
+    </nav>
+</header>
+
+<section class="preview-head">
+    <div class="head-inner">
+        <div class="head-cover">
+            <img src="../covers/s2-080.jpg" alt="기도의 용사들 표지">
+        </div>
+        <div class="head-info">
+            <p class="label">미리보기 · 시즌 2 · G08 · EP 10</p>
+            <h1>기도의 용사들</h1>
+            <p class="subtitle">역사를 바꾼 기도</p>
+            <div class="head-divider"></div>
+            <div class="head-meta">
+                <div class="item price"><span class="label">정가</span><span class="value">2,000원</span></div>
+                <div class="item"><span class="label">발행</span><span class="value">2026.05.16</span></div>
+                <div class="item"><span class="label">ISBN</span><span class="value">9791124569795</span></div>
+                <div class="item"><span class="label">저자</span><span class="value">AI, 박헌근</span></div>
+            </div>
+            <div class="head-qr">
+                <img src="../qr/s2-080.png" alt="이 책 QR">
+                <div class="head-qr-text">
+                    <strong>이 책 바로가기</strong>
+                    <span>QR로 책방에서 즉시 구매</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="body-wrap">
+    <span class="section-label">Contents</span>
+    <h2 class="section-title">목차</h2>
+    <div class="toc">
+        <ol>
+            <li>1. 무릎 꿇은 자가 세상을 움직인다</li>
+            <li>2. 조지 뮬러, 고아들의 아버지</li>
+            <li>3. 존 녹스, 스코틀랜드를 흔든 기도</li>
+            <li>4. 하이드 선교사, 기도의 사도</li>
+            <li>5. 평양대부흥과 길선주 장로</li>
+            <li>6. 역사 속 기도의 골방들</li>
+            <li>7. 나도 기도의 용사가 될 수 있다</li>
+            <li>에필로그</li>
+        </ol>
+    </div>
+
+    <span class="section-label">First Chapter</span>
+    <h2 class="section-title">제1장 미리보기</h2>
+    <div class="chapter">
+<div>
+<span class="ch-num">Chapter 01</span>
+<h2 class="ch-title">무릎 꿇은 자가 세상을 움직인다</h2>
+<div class="ch-sub">기도의 용사란 누구인가</div>
+<div class="ch-divider"></div>
+<div class="ch-sub">무릎이 꺾이는 곳에서 역사가 시작된다</div>
+<p>역사는 칼을 든 자가 아니라 <strong>무릎을 꿇은 자</strong>가 움직여 왔다. 세상은 웅변과 군대의 힘으로 흘러가는 듯 보이지만, 하늘의 저울은 골방에서 흘린 눈물의 무게로 기울어진다. 모세가 손을 들 때 아말렉이 무너졌고, 여호수아가 칼을 휘두를 때 승리는 이미 산 위의 기도에서 결정되어 있었다. 엘리야는 갈멜산의 불을 내리기 전, 먼저 땅에 엎드려 얼굴을 무릎 사이에 넣었다. 하나님의 역사는 언제나 사람이 가장 낮아지는 그 지점에서 솟아올랐다.</p>
+<div class="scripture">
+<p>"너희는 가만히 있어 내가 하나님 됨을 알지어다 내가 뭇 나라 중에서 높임을 받으리라 내가 세계 중에서 높임을 받으리라"</p>
+<cite>시편 46:10</cite>
+</div>
+<p>가만히 있으라는 이 명령은 나태함이 아니라 <strong>항복</strong>이다. 내 손을 내려놓고, 내 계획을 내려놓고, 오직 하나님의 주권 앞에 무릎이 꿺이는 것이다. 기도의 용사는 팔뚝이 굵은 자가 아니라, 무릎이 굳은살로 딱딱해진 자다. 교회사를 바꾼 종교개혁도, 웨일스와 평양을 뒤흔든 부흥의 불길도, 처음에는 이름 없는 몇 사람의 골방 신음에서 시작되었다.</p>
+<div class="ch-sub">세상을 바꾼 것은 군대가 아니라 기도였다</div>
+<p>야곱을 보라. 압복 나루에서 그는 형 에서의 군대가 두려워 하나님의 사자와 밤새 씨름했다. 환도뼈가 부러지고 절름발이가 되어서야 그는 <strong>이스라엘</strong>이라는 새 이름을 얻었다. 기도는 하나님을 이기려는 싸움이 아니라, 내 고집이 깨어지는 자리다. 다리를 저는 자가 민족의 아버지가 되는 역설, 그것이 기도의 세계다.</p>
+<div class="scripture">
+<p>"의인의 간구는 역사하는 힘이 큼이니라"</p>
+<cite>야고보서 5:16</cite>
+</div>
+<p>야고보는 엘리야를 <strong>우리와 성정이 같은 사람</strong>이라 말했다. 특별한 영웅이 아니라 우리 같은 사람이 간절히 기도했을 때, 삼 년 육 개월 동안 하늘이 닫혔다가 다시 열렸다. 또한 사도행전 12장, 베드로가 옥에 갇혔을 때 교회가 할 수 있는 유일한 일은 모여서 기도하는 것이었다. 그 기도가 쇠사슬을 풀고 철문을 저절로 열었다. 세상 어떤 권력도 무릎 꿇은 성도의 합심 기도 앞에서는 문을 걸어 잠글 수 없다.</p>
+<div class="ch-sub">오늘, 당신의 골방이 전쟁터다</div>
+<p>바울은 <strong>쉬지 말고 기도하라</strong>고 명령했다(데살로니가전서 5:17). 이는 종교적 구호가 아니라, 영적 전쟁의 실제적 태세다. 당신이 무릎 꿇지 않는 시간만큼 가정은 흔들리고, 자녀는 방황하며, 일터는 메마른다. 반대로 당신이 골방의 문을 닫고 은밀한 중에 보시는 아버지께 부르짖을 때, 보이지 않는 손이 움직이기 시작한다.</p>
+<div class="quote">
+<p>세상을 바꾸는 위대한 용사들은 전장에서 칼을 빼기 전, 먼저 골방에서 무릎을 꿇었다. 오늘 당신의 무릎이 닿는 그 바닥이, 하나님께서 역사를 시작하시는 제단이다.</p>
+</div>
+<p>빌립보서 4장 13절의 고백처럼 <strong>"내게 능력 주시는 자 안에서 내가 모든 것을 할 수 있느니라"</strong>. 이 능력은 내 안에서 솟는 것이 아니라, 무릎 꿇은 자에게 부어지는 하늘의 기름이다. 오늘, 당신의 작은 방 한 켠이 하나님의 군대가 집결하는 본진이 되기를.</p>
+<div class="meditation-q">
+<p class="mq-title">묵상 질문</p>
+<p class="mq-item">1. 나는 문제를 만날 때 가장 먼저 사람의 방법을 찾는가, 아니면 하나님 앞에 무릎을 꿇는가?</p>
+<p class="mq-item">2. 하나님께서 나의 환도뼈처럼 꺾으셔야 할 고집과 자아는 무엇인가?</p>
+<p class="mq-item">3. 오늘 나의 '골방'은 어디이며, 그곳에서 누구를 위해 중보할 것인가?</p>
+</div></div>
+    </div>
+
+    <div class="preview-end">
+        <p><strong>여기까지가 미리보기입니다.</strong><br>전체 본문은 구매 후 EPUB 파일로 받아보실 수 있습니다.</p>
+        <a href="../catalog.html?id=s2-080" class="btn-buy">구매하기</a>
+        
+        <a href="../epubs/s2-080.epub" download class="btn-buy btn-author author-only" style="display:none;margin-left:0.6rem">EPUB 다운로드</a>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    if (window.isAuthorMode && window.isAuthorMode()) {
+        document.querySelectorAll('.author-only').forEach(function(el) {
+            el.style.display = '';
+        });
+    }
+});
+</script>
+
+<footer>
+    <p>&copy; 2026 AI 시대 영성 출판사. 무단 전재·복제·배포 금지.</p>
+</footer>
+
+</body>
+</html>

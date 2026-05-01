@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>용서의 기적 미리보기 — AI 시대 영성</title>
+    <meta name="description" content="용서는 상대를 위한 것이 아니라 나를 위한 것이다. 용서하지 않으면 내가 감옥에 갇힌다.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Noto+Serif+KR:wght@300;400;500;600;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0a192f;
+            --secondary: #172a45;
+            --accent: #d4af37;
+            --accent-soft: rgba(212, 175, 55, 0.15);
+            --text-main: #2c3e50;
+            --text-muted: #5d6d7e;
+            --white: #ffffff;
+            --bg-card: #f5f2ec;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Noto Serif KR', serif;
+            color: var(--text-main);
+            background: var(--bg-card);
+            line-height: 1.95;
+            -webkit-font-smoothing: antialiased;
+        }
+        header {
+            background: var(--primary);
+            padding: 1.2rem 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            color: var(--accent);
+            letter-spacing: 0.1rem;
+            text-decoration: none;
+        }
+        .logo span {
+            color: rgba(255,255,255,0.7);
+            font-size: 0.78rem;
+            font-family: 'Noto Sans KR', sans-serif;
+            font-weight: 300;
+            letter-spacing: 0.2rem;
+            display: block;
+            margin-top: -0.2rem;
+        }
+        nav a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 0.85rem;
+            letter-spacing: 0.1rem;
+            margin-left: 2rem;
+            transition: color 0.3s;
+        }
+        nav a:hover { color: var(--accent); }
+
+        .preview-head {
+            background: linear-gradient(135deg, var(--primary) 0%, #0d2440 60%, #1a3a5c 100%);
+            padding: 4rem 2rem 3rem;
+            color: var(--white);
+        }
+        .head-inner {
+            max-width: 920px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+        .head-cover img {
+            width: 100%;
+            box-shadow: 0 16px 36px rgba(0,0,0,0.5);
+            border-radius: 4px;
+        }
+        .head-info .label {
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 0.75rem;
+            letter-spacing: 0.4rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+        .head-info h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            line-height: 1.3;
+            margin-bottom: 0.5rem;
+        }
+        .head-info .subtitle {
+            font-family: 'Noto Serif KR', serif;
+            font-size: 1.1rem;
+            color: rgba(255,255,255,0.7);
+            font-style: italic;
+            margin-bottom: 1.5rem;
+        }
+        .head-divider {
+            width: 48px;
+            height: 2px;
+            background: var(--accent);
+            margin: 1rem 0 1.4rem;
+        }
+        .head-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.6rem;
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 0.85rem;
+        }
+        .head-meta .item .label {
+            color: rgba(255,255,255,0.5);
+            font-size: 0.7rem;
+            letter-spacing: 0.1rem;
+        }
+        .head-meta .item .value {
+            color: var(--white);
+            font-weight: 500;
+        }
+        .head-meta .item.price .value {
+            color: var(--accent);
+            font-weight: 700;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+        }
+        .head-qr {
+            margin-top: 1.6rem;
+            display: inline-flex;
+            gap: 0.9rem;
+            align-items: center;
+            background: rgba(255,255,255,0.96);
+            padding: 0.7rem 1rem 0.7rem 0.7rem;
+            border-radius: 6px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.18);
+        }
+        .head-qr img {
+            width: 76px;
+            height: 76px;
+            display: block;
+            border-radius: 2px;
+        }
+        .head-qr-text {
+            font-family: 'Noto Sans KR', sans-serif;
+            line-height: 1.45;
+        }
+        .head-qr-text strong {
+            display: block;
+            color: var(--primary);
+            font-size: 0.82rem;
+            font-weight: 700;
+            letter-spacing: 0.05rem;
+        }
+        .head-qr-text span {
+            color: var(--text-muted);
+            font-size: 0.72rem;
+        }
+
+        .body-wrap {
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 4rem 2rem 3rem;
+        }
+        .section-label {
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 0.7rem;
+            letter-spacing: 0.4rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 0.8rem;
+        }
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.7rem;
+            color: var(--primary);
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 0.6rem;
+            display: inline-block;
+            margin-bottom: 2rem;
+        }
+
+        /* 목차 */
+        .toc {
+            background: var(--white);
+            border-radius: 4px;
+            padding: 2rem 2.4rem;
+            margin-bottom: 4rem;
+            box-shadow: 0 4px 16px rgba(10,25,47,0.06);
+        }
+        .toc ol {
+            list-style: none;
+            counter-reset: chapter;
+        }
+        .toc li {
+            counter-increment: chapter;
+            padding: 0.7rem 0;
+            border-bottom: 1px solid rgba(10,25,47,0.06);
+            font-family: 'Noto Serif KR', serif;
+            font-size: 1rem;
+            color: var(--primary);
+            display: flex;
+            align-items: baseline;
+            gap: 1rem;
+        }
+        .toc li::before {
+            content: counter(chapter, decimal-leading-zero);
+            font-family: 'Playfair Display', serif;
+            color: var(--accent);
+            font-weight: 700;
+            font-size: 0.9rem;
+            min-width: 2rem;
+            letter-spacing: 0.05rem;
+        }
+        .toc li:last-child { border-bottom: none; }
+
+        /* 본문 */
+        .chapter {
+            background: var(--white);
+            border-radius: 4px;
+            padding: 3rem 2.6rem;
+            box-shadow: 0 4px 16px rgba(10,25,47,0.06);
+            margin-bottom: 2rem;
+        }
+        .chapter h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            color: var(--primary);
+            margin-bottom: 0.8rem;
+            line-height: 1.35;
+        }
+        .chapter h3, .chapter .ch-sub {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.15rem;
+            color: var(--primary);
+            margin-top: 2rem;
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+        }
+        .chapter .ch-num {
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 0.7rem;
+            letter-spacing: 0.4rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 0.6rem;
+        }
+        .chapter .ch-divider {
+            width: 40px;
+            height: 2px;
+            background: var(--accent);
+            margin: 1.4rem 0 2rem;
+        }
+        .chapter p {
+            font-size: 1rem;
+            color: var(--text-main);
+            line-height: 2.05;
+            margin-bottom: 1.2rem;
+            text-align: justify;
+        }
+        .chapter .scripture {
+            background: var(--accent-soft);
+            border-left: 3px solid var(--accent);
+            padding: 1.2rem 1.4rem;
+            margin: 1.6rem 0;
+            font-style: italic;
+            border-radius: 0 4px 4px 0;
+        }
+        .chapter .scripture p {
+            margin-bottom: 0.4rem;
+            color: var(--text-main);
+        }
+        .chapter .scripture cite {
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            font-style: normal;
+            letter-spacing: 0.05rem;
+        }
+        .chapter strong { color: var(--primary); font-weight: 700; }
+
+        .preview-end {
+            text-align: center;
+            margin-top: 3rem;
+            padding: 3rem 2rem;
+            background: var(--white);
+            border-radius: 4px;
+            border: 1px dashed rgba(212,175,55,0.4);
+        }
+        .preview-end p {
+            font-family: 'Noto Sans KR', sans-serif;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 1.6rem;
+            letter-spacing: 0.1rem;
+        }
+        .preview-end strong {
+            color: var(--primary);
+            font-weight: 500;
+        }
+        .btn-buy {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--primary);
+            padding: 1rem 2.5rem;
+            border-radius: 2px;
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 700;
+            letter-spacing: 0.2rem;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        .btn-buy:hover { background: #b8941f; transform: translateY(-2px); }
+        .btn-author {
+            background: var(--primary);
+            color: var(--accent);
+            border: 1px solid var(--accent);
+        }
+        .btn-author:hover { background: var(--accent); color: var(--primary); }
+        .btn-youtube {
+            background: #c4302b;
+            color: #fff;
+            border: 1px solid #c4302b;
+        }
+        .btn-youtube:hover { background: #a52521; border-color: #a52521; color: #fff; transform: translateY(-2px); }
+
+        footer {
+            background: #06111f;
+            padding: 2rem 3rem;
+            text-align: center;
+            margin-top: 3rem;
+        }
+        footer p {
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 0.75rem;
+            color: rgba(255,255,255,0.3);
+            letter-spacing: 0.05rem;
+        }
+
+        @media (max-width: 720px) {
+            header { padding: 1rem 1.5rem; }
+            nav a { display: none; }
+            .head-inner { grid-template-columns: 1fr; gap: 2rem; }
+            .head-cover { max-width: 220px; margin: 0 auto; }
+            .head-info { text-align: center; }
+            .head-meta { justify-content: center; }
+            .head-divider { margin: 1rem auto 1.4rem; }
+            .body-wrap { padding: 2.5rem 1.2rem 2rem; }
+            .toc, .chapter { padding: 2rem 1.5rem; }
+        }
+    </style>
+    <script src="../author_mode.js" defer></script>
+</head>
+<body>
+
+<header>
+    <a href="../index.html" class="logo">
+        AI 시대 영성
+        <span>PUBLISHER</span>
+    </a>
+    <nav>
+        <a href="../index.html">홈</a>
+        <a href="../catalog.html">도서</a>
+        <a href="../catalog.html?id=s2-049">이 책 카드</a>
+    </nav>
+</header>
+
+<section class="preview-head">
+    <div class="head-inner">
+        <div class="head-cover">
+            <img src="../covers/s2-049.jpg" alt="용서의 기적 표지">
+        </div>
+        <div class="head-info">
+            <p class="label">미리보기 · 시즌 2 · G05 · EP 9</p>
+            <h1>용서의 기적</h1>
+            <p class="subtitle">용서받고 용서하는 삶</p>
+            <div class="head-divider"></div>
+            <div class="head-meta">
+                <div class="item price"><span class="label">정가</span><span class="value">2,000원</span></div>
+                <div class="item"><span class="label">발행</span><span class="value">2026.05.02</span></div>
+                <div class="item"><span class="label">ISBN</span><span class="value">9791124569481</span></div>
+                <div class="item"><span class="label">저자</span><span class="value">AI, 박헌근</span></div>
+            </div>
+            <div class="head-qr">
+                <img src="../qr/s2-049.png" alt="이 책 QR">
+                <div class="head-qr-text">
+                    <strong>이 책 바로가기</strong>
+                    <span>QR로 책방에서 즉시 구매</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="body-wrap">
+    <span class="section-label">Contents</span>
+    <h2 class="section-title">목차</h2>
+    <div class="toc">
+        <ol>
+            <li>1. 용서하지 못한 감옥</li>
+            <li>2. 십자가, 용서의 근원</li>
+            <li>3. 상처의 이름을 부르라</li>
+            <li>4. 용서와 화해 사이</li>
+            <li>5. 일흔 번씩 일곱 번</li>
+            <li>6. 자신을 용서하는 용기</li>
+            <li>7. 용서가 연 기적의 문</li>
+            <li>에필로그</li>
+        </ol>
+    </div>
+
+    <span class="section-label">First Chapter</span>
+    <h2 class="section-title">제1장 미리보기</h2>
+    <div class="chapter">
+<div>
+<span class="ch-num">Chapter 01</span>
+<h2 class="ch-title">용서하지 못한 감옥</h2>
+<div class="ch-sub">내가 나를 가둔 쇠창살</div>
+<div class="ch-divider"></div>
+<p>어느 날 한 노인이 상담실 문을 두드렸다. 평생 성실하게 살아온 그의 얼굴에는 짙은 그늘이 드리워져 있었다. "사십 년 전 저를 배신한 동업자를 아직도 용서할 수가 없습니다. 매일 밤 그 사람 생각에 잠을 이루지 못해요." 상담자가 조용히 물었다. "그 사람은 지금 어디에 있습니까?" 노인이 대답했다. "십 년 전에 죽었습니다." 상대는 이미 세상을 떠났는데, 노인은 여전히 사십 년째 자신이 만든 감옥에 갇혀 있었다.</p>
+<div class="ch-sub">나를 가두는 독</div>
+<p>용서하지 않음은 <strong>상대를 향한 칼</strong>처럼 보이지만, 실제로는 내 손을 먼저 베는 양날의 검이다. 분노를 품는 순간 그 독은 상대가 아니라 내 심장으로 흘러 들어간다. 불면, 두통, 위장병, 고혈압은 물론 영혼까지 병들게 한다. 성경은 이 진리를 일찍이 경고했다.</p>
+<div class="scripture">
+<p>"모든 악독과 노함과 분냄과 떠드는 것과 비방하는 것을 모든 악의와 함께 버리고 서로 친절하게 하며 불쌍히 여기며 서로 용서하기를 하나님이 그리스도 안에서 너희를 용서하심과 같이 하라"</p>
+<cite>에베소서 4:31-32</cite>
+</div>
+<p>바울은 용서하지 못함을 가벼운 감정이 아니라 <strong>'악독'</strong>이라고 표현했다. 독은 담긴 그릇을 먼저 부식시킨다. 내 안에 원한을 간직하는 동안 가장 큰 피해자는 바로 나 자신이다.</p>
+<div class="ch-sub">일만 달란트와 백 데나리온</div>
+<p>예수님께서 들려주신 비유 속 한 종은 임금에게 일만 달란트, 갚을 수 없는 빚을 탕감받았다. 그러나 그는 문을 나서자마자 자기에게 백 데나리온 빚진 동료의 멱살을 잡고 감옥에 가두었다. 이 사실을 들은 임금이 진노하며 말한다.</p>
+<div class="scripture">
+<p>"악한 종아 네가 빌기에 내가 네 빚을 전부 탕감하여 주었거늘 내가 너를 불쌍히 여김과 같이 너도 네 동료를 불쌍히 여김이 마땅하지 아니하냐"</p>
+<cite>마태복음 18:32-33</cite>
+</div>
+<p>그리고 그 종을 옥졸들에게 넘겨 빚을 다 갚을 때까지 가두었다고 하셨다(마태복음 18:34). 예수님은 덧붙이신다. "너희가 각각 마음으로부터 형제를 용서하지 아니하면 나의 하늘 아버지께서도 너희에게 이와 같이 하시리라"(마태복음 18:35). 용서하지 못한 사람이 갇힌 감옥은 <strong>하늘이 만든 옥이 아니라, 자기 마음이 판 옥</strong>이다.</p>
+<div class="ch-sub">먼저 풀려나야 할 사람</div>
+<p>주기도문에서 우리는 매일 이렇게 기도한다. "우리가 우리에게 죄 지은 자를 사하여 준 것 같이 우리 죄를 사하여 주시옵고"(마태복음 6:12). 용서는 하나님의 사랑을 통과시키는 통로이며, 그 통로가 막히면 은혜도 내 안에 머물지 못한다.</p>
+<div class="quote">
+<p>용서는 과거를 바꾸지 않는다. 그러나 미래를 바꾼다. 당신이 먼저 감옥 문을 여는 순간, 그 문은 이미 열려 있었음을 깨닫게 될 것이다.</p>
+</div>
+<p>오늘, 마음속 명단을 펼쳐보라. 수십 년 동안 가둬둔 이름, 떠올릴 때마다 심장이 조여오는 그 얼굴. 그를 위해서가 아니라 <strong>나 자신을 위해서</strong> 놓아주라. 하나님께서 그리스도 안에서 나를 용서하심과 같이(골로새서 3:13), 내가 먼저 그 감옥에서 걸어 나오라.</p>
+<div class="meditation-q">
+<p class="mq-title">묵상 질문</p>
+<p class="mq-item">1. 지금 내 마음의 감옥에 갇혀 있는 사람은 누구인가? 그를 붙잡고 있는 진짜 이유는 무엇인가?</p>
+<p class="mq-item">2. 일만 달란트 탕감받은 종처럼, 내가 하나님께 받은 용서는 얼마나 큰가? 그 은혜가 오늘 내 인간관계에 어떻게 흘러가고 있는가?</p>
+<p class="mq-item">3. 용서가 감정이 아니라 결단이라면, 오늘 내가 내릴 수 있는 가장 작은 한 걸음은 무엇인가?</p>
+</div></div>
+    </div>
+
+    <div class="preview-end">
+        <p><strong>여기까지가 미리보기입니다.</strong><br>전체 본문은 구매 후 EPUB 파일로 받아보실 수 있습니다.</p>
+        <a href="../catalog.html?id=s2-049" class="btn-buy">구매하기</a>
+        
+        <a href="../epubs/s2-049.epub" download class="btn-buy btn-author author-only" style="display:none;margin-left:0.6rem">EPUB 다운로드</a>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    if (window.isAuthorMode && window.isAuthorMode()) {
+        document.querySelectorAll('.author-only').forEach(function(el) {
+            el.style.display = '';
+        });
+    }
+});
+</script>
+
+<footer>
+    <p>&copy; 2026 AI 시대 영성 출판사. 무단 전재·복제·배포 금지.</p>
+</footer>
+
+</body>
+</html>

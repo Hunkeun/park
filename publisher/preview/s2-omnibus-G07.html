@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>바람과 불 미리보기 — AI 시대 영성</title>
+    <meta name="description" content="">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Noto+Serif+KR:wght@300;400;500;600;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0a192f;
+            --secondary: #172a45;
+            --accent: #d4af37;
+            --accent-soft: rgba(212, 175, 55, 0.15);
+            --text-main: #2c3e50;
+            --text-muted: #5d6d7e;
+            --white: #ffffff;
+            --bg-card: #f5f2ec;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Noto Serif KR', serif;
+            color: var(--text-main);
+            background: var(--bg-card);
+            line-height: 1.95;
+            -webkit-font-smoothing: antialiased;
+        }
+        header {
+            background: var(--primary);
+            padding: 1.2rem 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            color: var(--accent);
+            letter-spacing: 0.1rem;
+            text-decoration: none;
+        }
+        .logo span {
+            color: rgba(255,255,255,0.7);
+            font-size: 0.78rem;
+            font-family: 'Noto Sans KR', sans-serif;
+            font-weight: 300;
+            letter-spacing: 0.2rem;
+            display: block;
+            margin-top: -0.2rem;
+        }
+        nav a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 0.85rem;
+            letter-spacing: 0.1rem;
+            margin-left: 2rem;
+            transition: color 0.3s;
+        }
+        nav a:hover { color: var(--accent); }
+
+        .preview-head {
+            background: linear-gradient(135deg, var(--primary) 0%, #0d2440 60%, #1a3a5c 100%);
+            padding: 4rem 2rem 3rem;
+            color: var(--white);
+        }
+        .head-inner {
+            max-width: 920px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+        .head-cover img {
+            width: 100%;
+            box-shadow: 0 16px 36px rgba(0,0,0,0.5);
+            border-radius: 4px;
+        }
+        .head-info .label {
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 0.75rem;
+            letter-spacing: 0.4rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+        .head-info h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            line-height: 1.3;
+            margin-bottom: 0.5rem;
+        }
+        .head-info .subtitle {
+            font-family: 'Noto Serif KR', serif;
+            font-size: 1.1rem;
+            color: rgba(255,255,255,0.7);
+            font-style: italic;
+            margin-bottom: 1.5rem;
+        }
+        .head-divider {
+            width: 48px;
+            height: 2px;
+            background: var(--accent);
+            margin: 1rem 0 1.4rem;
+        }
+        .head-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.6rem;
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 0.85rem;
+        }
+        .head-meta .item .label {
+            color: rgba(255,255,255,0.5);
+            font-size: 0.7rem;
+            letter-spacing: 0.1rem;
+        }
+        .head-meta .item .value {
+            color: var(--white);
+            font-weight: 500;
+        }
+        .head-meta .item.price .value {
+            color: var(--accent);
+            font-weight: 700;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+        }
+        .head-qr {
+            margin-top: 1.6rem;
+            display: inline-flex;
+            gap: 0.9rem;
+            align-items: center;
+            background: rgba(255,255,255,0.96);
+            padding: 0.7rem 1rem 0.7rem 0.7rem;
+            border-radius: 6px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.18);
+        }
+        .head-qr img {
+            width: 76px;
+            height: 76px;
+            display: block;
+            border-radius: 2px;
+        }
+        .head-qr-text {
+            font-family: 'Noto Sans KR', sans-serif;
+            line-height: 1.45;
+        }
+        .head-qr-text strong {
+            display: block;
+            color: var(--primary);
+            font-size: 0.82rem;
+            font-weight: 700;
+            letter-spacing: 0.05rem;
+        }
+        .head-qr-text span {
+            color: var(--text-muted);
+            font-size: 0.72rem;
+        }
+
+        .body-wrap {
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 4rem 2rem 3rem;
+        }
+        .section-label {
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 0.7rem;
+            letter-spacing: 0.4rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 0.8rem;
+        }
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.7rem;
+            color: var(--primary);
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 0.6rem;
+            display: inline-block;
+            margin-bottom: 2rem;
+        }
+
+        /* 목차 */
+        .toc {
+            background: var(--white);
+            border-radius: 4px;
+            padding: 2rem 2.4rem;
+            margin-bottom: 4rem;
+            box-shadow: 0 4px 16px rgba(10,25,47,0.06);
+        }
+        .toc ol {
+            list-style: none;
+            counter-reset: chapter;
+        }
+        .toc li {
+            counter-increment: chapter;
+            padding: 0.7rem 0;
+            border-bottom: 1px solid rgba(10,25,47,0.06);
+            font-family: 'Noto Serif KR', serif;
+            font-size: 1rem;
+            color: var(--primary);
+            display: flex;
+            align-items: baseline;
+            gap: 1rem;
+        }
+        .toc li::before {
+            content: counter(chapter, decimal-leading-zero);
+            font-family: 'Playfair Display', serif;
+            color: var(--accent);
+            font-weight: 700;
+            font-size: 0.9rem;
+            min-width: 2rem;
+            letter-spacing: 0.05rem;
+        }
+        .toc li:last-child { border-bottom: none; }
+
+        /* 본문 */
+        .chapter {
+            background: var(--white);
+            border-radius: 4px;
+            padding: 3rem 2.6rem;
+            box-shadow: 0 4px 16px rgba(10,25,47,0.06);
+            margin-bottom: 2rem;
+        }
+        .chapter h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            color: var(--primary);
+            margin-bottom: 0.8rem;
+            line-height: 1.35;
+        }
+        .chapter h3, .chapter .ch-sub {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.15rem;
+            color: var(--primary);
+            margin-top: 2rem;
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+        }
+        .chapter .ch-num {
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 0.7rem;
+            letter-spacing: 0.4rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 0.6rem;
+        }
+        .chapter .ch-divider {
+            width: 40px;
+            height: 2px;
+            background: var(--accent);
+            margin: 1.4rem 0 2rem;
+        }
+        .chapter p {
+            font-size: 1rem;
+            color: var(--text-main);
+            line-height: 2.05;
+            margin-bottom: 1.2rem;
+            text-align: justify;
+        }
+        .chapter .scripture {
+            background: var(--accent-soft);
+            border-left: 3px solid var(--accent);
+            padding: 1.2rem 1.4rem;
+            margin: 1.6rem 0;
+            font-style: italic;
+            border-radius: 0 4px 4px 0;
+        }
+        .chapter .scripture p {
+            margin-bottom: 0.4rem;
+            color: var(--text-main);
+        }
+        .chapter .scripture cite {
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            font-style: normal;
+            letter-spacing: 0.05rem;
+        }
+        .chapter strong { color: var(--primary); font-weight: 700; }
+
+        .preview-end {
+            text-align: center;
+            margin-top: 3rem;
+            padding: 3rem 2rem;
+            background: var(--white);
+            border-radius: 4px;
+            border: 1px dashed rgba(212,175,55,0.4);
+        }
+        .preview-end p {
+            font-family: 'Noto Sans KR', sans-serif;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 1.6rem;
+            letter-spacing: 0.1rem;
+        }
+        .preview-end strong {
+            color: var(--primary);
+            font-weight: 500;
+        }
+        .btn-buy {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--primary);
+            padding: 1rem 2.5rem;
+            border-radius: 2px;
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 700;
+            letter-spacing: 0.2rem;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        .btn-buy:hover { background: #b8941f; transform: translateY(-2px); }
+        .btn-author {
+            background: var(--primary);
+            color: var(--accent);
+            border: 1px solid var(--accent);
+        }
+        .btn-author:hover { background: var(--accent); color: var(--primary); }
+        .btn-youtube {
+            background: #c4302b;
+            color: #fff;
+            border: 1px solid #c4302b;
+        }
+        .btn-youtube:hover { background: #a52521; border-color: #a52521; color: #fff; transform: translateY(-2px); }
+
+        footer {
+            background: #06111f;
+            padding: 2rem 3rem;
+            text-align: center;
+            margin-top: 3rem;
+        }
+        footer p {
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 0.75rem;
+            color: rgba(255,255,255,0.3);
+            letter-spacing: 0.05rem;
+        }
+
+        @media (max-width: 720px) {
+            header { padding: 1rem 1.5rem; }
+            nav a { display: none; }
+            .head-inner { grid-template-columns: 1fr; gap: 2rem; }
+            .head-cover { max-width: 220px; margin: 0 auto; }
+            .head-info { text-align: center; }
+            .head-meta { justify-content: center; }
+            .head-divider { margin: 1rem auto 1.4rem; }
+            .body-wrap { padding: 2.5rem 1.2rem 2rem; }
+            .toc, .chapter { padding: 2rem 1.5rem; }
+        }
+    </style>
+    <script src="../author_mode.js" defer></script>
+</head>
+<body>
+
+<header>
+    <a href="../index.html" class="logo">
+        AI 시대 영성
+        <span>PUBLISHER</span>
+    </a>
+    <nav>
+        <a href="../index.html">홈</a>
+        <a href="../catalog.html">도서</a>
+        <a href="../catalog.html?id=s2-omnibus-G07">이 책 카드</a>
+    </nav>
+</header>
+
+<section class="preview-head">
+    <div class="head-inner">
+        <div class="head-cover">
+            <img src="../covers/s2-omnibus-G07.jpg" alt="바람과 불 표지">
+        </div>
+        <div class="head-info">
+            <p class="label">미리보기 · 시즌 2 · G07 종합책</p>
+            <h1>바람과 불</h1>
+            <p class="subtitle">그리스도인을 위한 성령 열 묵상</p>
+            <div class="head-divider"></div>
+            <div class="head-meta">
+                <div class="item price"><span class="label">정가</span><span class="value">7,000원</span></div>
+                <div class="item"><span class="label">발행</span><span class="value">2026.05.30</span></div>
+                <div class="item"><span class="label">ISBN</span><span class="value">9791176580076</span></div>
+                <div class="item"><span class="label">저자</span><span class="value">AI, 박헌근</span></div>
+            </div>
+            <div class="head-qr">
+                <img src="../qr/s2-omnibus-G07.png" alt="이 책 QR">
+                <div class="head-qr-text">
+                    <strong>이 책 바로가기</strong>
+                    <span>QR로 책방에서 즉시 구매</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="body-wrap">
+    <span class="section-label">Contents</span>
+    <h2 class="section-title">목차</h2>
+    <div class="toc">
+        <ol>
+            <li>여는 글</li>
+            <li>1부 — 보혜사의 자리</li>
+            <li>성령님을 알아가는 시간</li>
+            <li>성령님은 누구이신가</li>
+            <li>임재의 문을 열다</li>
+            <li>거짓 자아와 참 자아</li>
+            <li>말씀으로 조명하시는 분</li>
+            <li>친구처럼 교제하다</li>
+            <li>은사는 관계의 열매</li>
+            <li>오늘, 성령님과 동행하다</li>
+            <li>오순절의 불</li>
+            <li>마가의 다락방</li>
+            <li>급하고 강한 바람</li>
+            <li>갈라진 불의 혀</li>
+            <li>방언과 복음의 통로</li>
+            <li>베드로의 첫 설교</li>
+            <li>초대교회의 불꽃</li>
+            <li>오늘도 임하시는 오순절</li>
+            <li>2부 — 능력으로 임하시는 분</li>
+            <li>방언의 은사</li>
+            <li>방언이란 무엇인가</li>
+            <li>오순절 예루살렘의 방언</li>
+            <li>고린도교회의 방언</li>
+            <li>참 방언과 거짓 방언의 분별</li>
+            <li>통변의 은사와 방언의 관계</li>
+            <li>타 종교의 방언 현상</li>
+            <li>한국교회 방언의 재해석</li>
+            <li>예언의 은사</li>
+            <li>예언이란 무엇인가</li>
+            <li>점술과 예언의 차이</li>
+            <li>성령의 은사로서의 예언</li>
+            <li>교회를 세우는 예언</li>
+            <li>예언의 분별</li>
+            <li>예언의 등대</li>
+            <li>하나님의 마음을 전하는 자</li>
+            <li>치유의 은사</li>
+            <li>치유하시는 하나님</li>
+            <li>예수님의 치유 사역</li>
+            <li>치유의 은사</li>
+            <li>야고보서의 치유 원리</li>
+            <li>기적과 의학 사이에서</li>
+            <li>치유되지 않을 때</li>
+            <li>영혼의 치유, 궁극의 회복</li>
+            <li>3부 — 분별과 지혜의 결</li>
+            <li>지혜의 영</li>
+            <li>위로부터 오는 지혜</li>
+            <li>솔로몬의 기도</li>
+            <li>지혜의 근본, 여호와를 경외함</li>
+            <li>성령, 지혜의 영</li>
+            <li>구하라, 후히 주시리라</li>
+            <li>분별의 은사</li>
+            <li>온유와 긍휼의 열매</li>
+            <li>분별의 은사</li>
+            <li>모든 영이 하나님께 속한 것은 아니다</li>
+            <li>분별의 은사란 무엇인가</li>
+            <li>금세공사의 눈</li>
+            <li>거짓 선지자를 분별하라</li>
+            <li>영을 시험하는 네 가지 테스트</li>
+            <li>분별하되 정죄하지 않는다</li>
+            <li>분별의 사람으로 살아가기</li>
+            <li>4부 — 충만에서 부흥까지</li>
+            <li>성령충만한 삶</li>
+            <li>성령충만이란 무엇인가</li>
+            <li>일회적 경험을 넘어서</li>
+            <li>매일의 양식처럼</li>
+            <li>성령충만을 방해하는 것들</li>
+            <li>성령충만의 열매</li>
+            <li>날마다 채우는 영성 습관</li>
+            <li>성령충만한 삶의 열매를 맺으며</li>
+            <li>성령의 열매</li>
+            <li>열매 맺는 삶의 비밀</li>
+            <li>사랑, 모든 열매의 뿌리</li>
+            <li>희락과 화평</li>
+            <li>오래 참음과 자비와 양선</li>
+            <li>충성과 온유</li>
+            <li>절제, 마지막 열매의 완성</li>
+            <li>포도나무에 붙어있으라</li>
+            <li>마지막 시대의 부흥</li>
+            <li>마지막 시대의 약속</li>
+            <li>쇠퇴가 아닌 추수</li>
+            <li>성령의 늦은 비</li>
+            <li>모든 육체 위에</li>
+            <li>꿈과 환상의 세대</li>
+            <li>추수꾼으로 부름받다</li>
+            <li>마라나타, 주여 오시옵소서</li>
+            <li>닫는 글</li>
+            <li>출판사 안내</li>
+        </ol>
+    </div>
+
+    <span class="section-label">First Chapter</span>
+    <h2 class="section-title">제1장 미리보기</h2>
+    <div class="chapter">
+<div>
+<h2>여는 글</h2>
+<h3>바람으로 임하시고 불로 머무시는 분</h3>
+<p>성령은 바람과 불로 오십니다. 요한복음 3장에서 예수께서 니고데모에게 말씀하셨습니다. 바람이 임의로 불매 네가 그 소리는 들어도 어디서 와서 어디로 가는지 알지 못한다고. 그리고 사도행전 2장에서, 마가의 다락방 위로 급하고 강한 바람이 불어왔고 갈라진 불의 혀가 임했습니다. 바람과 불 — 그 두 상징이 성령의 결을 함께 그려냅니다.</p>
+<p>바람은 자유롭게 임하시는 분이고, 불은 한 자리에 머무시며 빚으시는 분입니다. 한쪽 결만으로는 성령을 다 그릴 수 없습니다. 임하시는 자유와 머무시는 깊이가 함께 있어야 비로소 성령의 결이 또렷해집니다.</p>
+<p>이 책은 그 바람과 불의 결을 차례로 따라 걷습니다. 보혜사를 만나는 자리와, 능력으로 임하시는 은사들과, 분별과 지혜의 결과, 충만에서 부흥까지의 흐름. 100권 영성 시리즈의 일곱 번째 그룹 G07을 한 권으로 묶은 종합본입니다. 성령님을 알아가는 시간에서 마지막 시대의 부흥까지, 성령이라는 한 단어 안에 담긴 그리스도교의 가장 깊은 묵상을 네 갈래로 모았습니다.</p>
+<p>네 갈래는 한 영혼이 성령과 동행하는 한 길의 네 굽이입니다. <strong>1부 — 보혜사의 자리</strong>는 성령님을 알아가는 자리와 오순절의 임재에서 시작하고, <strong>2부 — 능력으로 임하시는 분</strong>은 방언·예언·치유의 은사를 통해 성령의 능력이 임하는 결을 응시합니다. <strong>3부 — 분별과 지혜의 결</strong>은 지혜의 영과 분별의 은사로 영적 자질이 빚어지는 자리를 짚고, <strong>4부 — 충만에서 부흥까지</strong>는 성령충만한 삶에서 마지막 시대의 부흥까지의 흐름을 마지막으로 모읍니다.</p>
+<p>이 책은 성령에 대한 모든 질문에 답하지 않습니다. 다만 성령이 추상이 아니라 한 영혼과 함께 살아 계신 분이라는 것을, 묵상의 자리로 우리를 데려가려 합니다. 이론이 아니라 동행, 교리가 아니라 임재. 그 결로 흘러가는 자리에서 비로소 성령을 만날 수 있습니다.</p>
+<p>한 번에 다 읽어내실 책이 아닙니다. 한 장씩, 한 묵상씩 호흡을 따라 가져가시면 됩니다. 이제 첫 장을 펼쳐 주십시오. 바람으로 임하시고 불로 머무시는 분을, 한 호흡씩 함께 만나 봅시다.</p>
+</div>
+    </div>
+
+    <div class="preview-end">
+        <p><strong>여기까지가 미리보기입니다.</strong><br>전체 본문은 구매 후 EPUB 파일로 받아보실 수 있습니다.</p>
+        <a href="../catalog.html?id=s2-omnibus-G07" class="btn-buy">구매하기</a>
+        
+        <a href="../epubs/s2-omnibus-G07.epub" download class="btn-buy btn-author author-only" style="display:none;margin-left:0.6rem">EPUB 다운로드</a>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    if (window.isAuthorMode && window.isAuthorMode()) {
+        document.querySelectorAll('.author-only').forEach(function(el) {
+            el.style.display = '';
+        });
+    }
+});
+</script>
+
+<footer>
+    <p>&copy; 2026 AI 시대 영성 출판사. 무단 전재·복제·배포 금지.</p>
+</footer>
+
+</body>
+</html>

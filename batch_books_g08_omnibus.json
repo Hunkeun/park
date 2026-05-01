@@ -1,0 +1,154 @@
+{
+  "project": {
+    "name": "G08 종합책 (100권 시즌 2 여덟 번째 그룹)",
+    "parent_project": "100권 영성 시리즈 G08 (ISBN 9791124569)",
+    "title": "무릎의 자리",
+    "subtitle": "그리스도인을 위한 기도 열 묵상",
+    "author": "박헌근",
+    "publisher": "AI 시대 영성",
+    "isbn": "9791176580083",
+    "isbn_prefix_hint": "신규 발행자번호 블록 9791176580 (2026-05-01 발급 통보, 시즌1 종합책=0007부터 G01=0014, G02=0021, ... +7 패턴, G09→G10만 +16 점프)",
+    "publish_date": "2026-05-30",
+    "format_primary": "전자책",
+    "format_secondary": "POD",
+    "status": "draft_2026-04-26"
+  },
+  "structure": {
+    "preface": {
+      "title": "여는 글 — 무릎이 가르치는 것들",
+      "to_write": true,
+      "estimated_pages": 1
+    },
+    "parts": [
+      {
+        "part": 1,
+        "title": "1부 — 기도의 본질",
+        "subtitle": "기도의 깊이와 주기도문",
+        "intro": {
+          "title": "1부 도입 — 기도라는 가장 본질적인 자리",
+          "to_write": true,
+          "estimated_pages": 2
+        },
+        "books": [
+          {
+            "order": 1,
+            "src_no": 1,
+            "title": "기도의 깊이",
+            "epub": "기도의_깊이_20260419.epub",
+            "isbn": "9791124569702"
+          },
+          {
+            "order": 2,
+            "src_no": 9,
+            "title": "주기도문 깊이 읽기",
+            "epub": "주기도문_깊이_읽기_20260424.epub",
+            "isbn": "9791124569788"
+          }
+        ]
+      },
+      {
+        "part": 2,
+        "title": "2부 — 시간과 양식의 결",
+        "subtitle": "새벽·통성·침묵·관상",
+        "intro": {
+          "title": "2부 도입 — 시간과 양식이 빚는 기도의 결",
+          "to_write": true,
+          "estimated_pages": 2
+        },
+        "books": [
+          {
+            "order": 3,
+            "src_no": 7,
+            "title": "새벽기도의 은혜",
+            "epub": "새벽기도의_은혜_20260423.epub",
+            "isbn": "9791124569764"
+          },
+          {
+            "order": 4,
+            "src_no": 8,
+            "title": "통성기도와 침묵기도",
+            "epub": "통성기도와_침묵기도_20260423.epub",
+            "isbn": "9791124569771"
+          },
+          {
+            "order": 5,
+            "src_no": 3,
+            "title": "관상기도란 무엇인가",
+            "epub": "관상기도란_무엇인가_20260419.epub",
+            "isbn": "9791124569726"
+          }
+        ]
+      },
+      {
+        "part": 3,
+        "title": "3부 — 능력으로 흐르는 기도",
+        "subtitle": "금식·응답·말씀과 동행",
+        "intro": {
+          "title": "3부 도입 — 기도가 능력으로 흐르는 자리",
+          "to_write": true,
+          "estimated_pages": 2
+        },
+        "books": [
+          {
+            "order": 6,
+            "src_no": 2,
+            "title": "금식기도의 능력",
+            "epub": "금식기도의_능력_20260419.epub",
+            "isbn": "9791124569719"
+          },
+          {
+            "order": 7,
+            "src_no": 5,
+            "title": "응답받는 기도의 비밀",
+            "epub": "응답받는_기도의_비밀_20260421.epub",
+            "isbn": "9791124569740"
+          },
+          {
+            "order": 8,
+            "src_no": 6,
+            "title": "기도와 말씀의 동행",
+            "epub": "기도와_말씀의_동행_20260422.epub",
+            "isbn": "9791124569757"
+          }
+        ]
+      },
+      {
+        "part": 4,
+        "title": "4부 — 무릎의 사람들",
+        "subtitle": "중보의 사명과 기도의 용사들",
+        "intro": {
+          "title": "4부 도입 — 무릎의 사람들이 남긴 발자국",
+          "to_write": true,
+          "estimated_pages": 2
+        },
+        "books": [
+          {
+            "order": 9,
+            "src_no": 4,
+            "title": "중보기도의 사명",
+            "epub": "중보기도의_사명_20260420.epub",
+            "isbn": "9791124569733"
+          },
+          {
+            "order": 10,
+            "src_no": 10,
+            "title": "기도의 용사들",
+            "epub": "기도의_용사들_20260424.epub",
+            "isbn": "9791124569795"
+          }
+        ]
+      }
+    ],
+    "epilogue": {
+      "title": "닫는 글 — 무릎의 자리에서 시작되는 모든 것",
+      "to_write": true,
+      "estimated_pages": 2
+    }
+  },
+  "policies": {
+    "content_preservation": "원본 본문 거의 그대로 유지",
+    "edit_scope": "중복·불필요 제거, 부 도입글 신규 작성, 부 간 연결 보완, 종합 서문·결론 신규",
+    "cover_treatment": "epub 내부 통합 (분리 추출 안 함, 신규 종합책 표지 새로 만듦)",
+    "page_numbering": "통합 단일 페이지 번호"
+  }
+}

@@ -1,0 +1,154 @@
+{
+  "project": {
+    "name": "G05 종합책 (100권 시즌 2 다섯 번째 그룹)",
+    "parent_project": "100권 영성 시리즈 G05 (ISBN 9791124569)",
+    "title": "흉터 위의 빛",
+    "subtitle": "그리스도인을 위한 내면 치유 열 묵상",
+    "author": "박헌근",
+    "publisher": "AI 시대 영성",
+    "isbn": "9791176580052",
+    "isbn_prefix_hint": "신규 발행자번호 블록 9791176580 (2026-05-01 발급 통보, 시즌1 종합책=0007부터 G01=0014, G02=0021, ... +7 패턴, G09→G10만 +16 점프)",
+    "publish_date": "2026-05-30",
+    "format_primary": "전자책",
+    "format_secondary": "POD",
+    "status": "draft_2026-04-26"
+  },
+  "structure": {
+    "preface": {
+      "title": "여는 글 — 흉터를 안고 빛으로 걸어가는 길",
+      "to_write": true,
+      "estimated_pages": 1
+    },
+    "parts": [
+      {
+        "part": 1,
+        "title": "1부 — 상처를 마주하다",
+        "subtitle": "트라우마와 몸의 기억",
+        "intro": {
+          "title": "1부 도입 — 상처를 정직하게 응시하는 자리",
+          "to_write": true,
+          "estimated_pages": 2
+        },
+        "books": [
+          {
+            "order": 1,
+            "src_no": 1,
+            "title": "상처받은 영혼의 회복",
+            "epub": "상처받은_영혼의_회복_20260418.epub",
+            "isbn": "9791124569405"
+          },
+          {
+            "order": 2,
+            "src_no": 2,
+            "title": "트라우마와 은혜",
+            "epub": "트라우마와_은혜_20260419.epub",
+            "isbn": "9791124569412"
+          },
+          {
+            "order": 3,
+            "src_no": 3,
+            "title": "몸의 기억, 영혼의 치유",
+            "epub": "몸의_기억,_영혼의_치유_20260419.epub",
+            "isbn": "9791124569429"
+          }
+        ]
+      },
+      {
+        "part": 2,
+        "title": "2부 — 감정과 함께 걷다",
+        "subtitle": "감정의 신학·분노·슬픔",
+        "intro": {
+          "title": "2부 도입 — 감정을 하나님 앞에 가져가는 자리",
+          "to_write": true,
+          "estimated_pages": 2
+        },
+        "books": [
+          {
+            "order": 4,
+            "src_no": 4,
+            "title": "감정의 신학",
+            "epub": "감정의_신학_20260420.epub",
+            "isbn": "9791124569436"
+          },
+          {
+            "order": 5,
+            "src_no": 5,
+            "title": "분노를 다스리는 법",
+            "epub": "분노를_다스리는_법_20260421.epub",
+            "isbn": "9791124569443"
+          },
+          {
+            "order": 6,
+            "src_no": 6,
+            "title": "슬픔도 선물이다",
+            "epub": "슬픔도_선물이다_20260422.epub",
+            "isbn": "9791124569450"
+          }
+        ]
+      },
+      {
+        "part": 3,
+        "title": "3부 — 회복으로 나아가다",
+        "subtitle": "번아웃·내면 아이의 치유",
+        "intro": {
+          "title": "3부 도입 — 무너진 자리에서 다시 일어나는 결",
+          "to_write": true,
+          "estimated_pages": 2
+        },
+        "books": [
+          {
+            "order": 7,
+            "src_no": 7,
+            "title": "번아웃에서 부활로",
+            "epub": "번아웃에서_부활로_20260423.epub",
+            "isbn": "9791124569467"
+          },
+          {
+            "order": 8,
+            "src_no": 8,
+            "title": "내면 아이의 치유",
+            "epub": "내면_아이의_치유_20260423.epub",
+            "isbn": "9791124569474"
+          }
+        ]
+      },
+      {
+        "part": 4,
+        "title": "4부 — 관계 안에서 빛이 되다",
+        "subtitle": "용서와 관계 회복",
+        "intro": {
+          "title": "4부 도입 — 관계라는 마지막 치유의 자리",
+          "to_write": true,
+          "estimated_pages": 2
+        },
+        "books": [
+          {
+            "order": 9,
+            "src_no": 9,
+            "title": "용서의 기적",
+            "epub": "용서의_기적_20260423.epub",
+            "isbn": "9791124569481"
+          },
+          {
+            "order": 10,
+            "src_no": 10,
+            "title": "관계의 상처를 넘어서",
+            "epub": "관계의_상처를_넘어서_20260424.epub",
+            "isbn": "9791124569498"
+          }
+        ]
+      }
+    ],
+    "epilogue": {
+      "title": "닫는 글 — 흉터 위에 비추는 빛",
+      "to_write": true,
+      "estimated_pages": 2
+    }
+  },
+  "policies": {
+    "content_preservation": "원본 본문 거의 그대로 유지",
+    "edit_scope": "중복·불필요 제거, 부 도입글 신규 작성, 부 간 연결 보완, 종합 서문·결론 신규",
+    "cover_treatment": "epub 내부 통합 (분리 추출 안 함, 신규 종합책 표지 새로 만듦)",
+    "page_numbering": "통합 단일 페이지 번호"
+  }
+}

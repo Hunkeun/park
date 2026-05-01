@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>기도의 깊이 미리보기 — AI 시대 영성</title>
+    <meta name="description" content="기도는 하나님을 설득하는 것이 아니라 하나님과 함께 있는 것이다.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Noto+Serif+KR:wght@300;400;500;600;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0a192f;
+            --secondary: #172a45;
+            --accent: #d4af37;
+            --accent-soft: rgba(212, 175, 55, 0.15);
+            --text-main: #2c3e50;
+            --text-muted: #5d6d7e;
+            --white: #ffffff;
+            --bg-card: #f5f2ec;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Noto Serif KR', serif;
+            color: var(--text-main);
+            background: var(--bg-card);
+            line-height: 1.95;
+            -webkit-font-smoothing: antialiased;
+        }
+        header {
+            background: var(--primary);
+            padding: 1.2rem 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            color: var(--accent);
+            letter-spacing: 0.1rem;
+            text-decoration: none;
+        }
+        .logo span {
+            color: rgba(255,255,255,0.7);
+            font-size: 0.78rem;
+            font-family: 'Noto Sans KR', sans-serif;
+            font-weight: 300;
+            letter-spacing: 0.2rem;
+            display: block;
+            margin-top: -0.2rem;
+        }
+        nav a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 0.85rem;
+            letter-spacing: 0.1rem;
+            margin-left: 2rem;
+            transition: color 0.3s;
+        }
+        nav a:hover { color: var(--accent); }
+
+        .preview-head {
+            background: linear-gradient(135deg, var(--primary) 0%, #0d2440 60%, #1a3a5c 100%);
+            padding: 4rem 2rem 3rem;
+            color: var(--white);
+        }
+        .head-inner {
+            max-width: 920px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+        .head-cover img {
+            width: 100%;
+            box-shadow: 0 16px 36px rgba(0,0,0,0.5);
+            border-radius: 4px;
+        }
+        .head-info .label {
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 0.75rem;
+            letter-spacing: 0.4rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+        .head-info h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            line-height: 1.3;
+            margin-bottom: 0.5rem;
+        }
+        .head-info .subtitle {
+            font-family: 'Noto Serif KR', serif;
+            font-size: 1.1rem;
+            color: rgba(255,255,255,0.7);
+            font-style: italic;
+            margin-bottom: 1.5rem;
+        }
+        .head-divider {
+            width: 48px;
+            height: 2px;
+            background: var(--accent);
+            margin: 1rem 0 1.4rem;
+        }
+        .head-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.6rem;
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 0.85rem;
+        }
+        .head-meta .item .label {
+            color: rgba(255,255,255,0.5);
+            font-size: 0.7rem;
+            letter-spacing: 0.1rem;
+        }
+        .head-meta .item .value {
+            color: var(--white);
+            font-weight: 500;
+        }
+        .head-meta .item.price .value {
+            color: var(--accent);
+            font-weight: 700;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+        }
+        .head-qr {
+            margin-top: 1.6rem;
+            display: inline-flex;
+            gap: 0.9rem;
+            align-items: center;
+            background: rgba(255,255,255,0.96);
+            padding: 0.7rem 1rem 0.7rem 0.7rem;
+            border-radius: 6px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.18);
+        }
+        .head-qr img {
+            width: 76px;
+            height: 76px;
+            display: block;
+            border-radius: 2px;
+        }
+        .head-qr-text {
+            font-family: 'Noto Sans KR', sans-serif;
+            line-height: 1.45;
+        }
+        .head-qr-text strong {
+            display: block;
+            color: var(--primary);
+            font-size: 0.82rem;
+            font-weight: 700;
+            letter-spacing: 0.05rem;
+        }
+        .head-qr-text span {
+            color: var(--text-muted);
+            font-size: 0.72rem;
+        }
+
+        .body-wrap {
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 4rem 2rem 3rem;
+        }
+        .section-label {
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 0.7rem;
+            letter-spacing: 0.4rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 0.8rem;
+        }
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.7rem;
+            color: var(--primary);
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 0.6rem;
+            display: inline-block;
+            margin-bottom: 2rem;
+        }
+
+        /* 목차 */
+        .toc {
+            background: var(--white);
+            border-radius: 4px;
+            padding: 2rem 2.4rem;
+            margin-bottom: 4rem;
+            box-shadow: 0 4px 16px rgba(10,25,47,0.06);
+        }
+        .toc ol {
+            list-style: none;
+            counter-reset: chapter;
+        }
+        .toc li {
+            counter-increment: chapter;
+            padding: 0.7rem 0;
+            border-bottom: 1px solid rgba(10,25,47,0.06);
+            font-family: 'Noto Serif KR', serif;
+            font-size: 1rem;
+            color: var(--primary);
+            display: flex;
+            align-items: baseline;
+            gap: 1rem;
+        }
+        .toc li::before {
+            content: counter(chapter, decimal-leading-zero);
+            font-family: 'Playfair Display', serif;
+            color: var(--accent);
+            font-weight: 700;
+            font-size: 0.9rem;
+            min-width: 2rem;
+            letter-spacing: 0.05rem;
+        }
+        .toc li:last-child { border-bottom: none; }
+
+        /* 본문 */
+        .chapter {
+            background: var(--white);
+            border-radius: 4px;
+            padding: 3rem 2.6rem;
+            box-shadow: 0 4px 16px rgba(10,25,47,0.06);
+            margin-bottom: 2rem;
+        }
+        .chapter h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            color: var(--primary);
+            margin-bottom: 0.8rem;
+            line-height: 1.35;
+        }
+        .chapter h3, .chapter .ch-sub {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.15rem;
+            color: var(--primary);
+            margin-top: 2rem;
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+        }
+        .chapter .ch-num {
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 0.7rem;
+            letter-spacing: 0.4rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 0.6rem;
+        }
+        .chapter .ch-divider {
+            width: 40px;
+            height: 2px;
+            background: var(--accent);
+            margin: 1.4rem 0 2rem;
+        }
+        .chapter p {
+            font-size: 1rem;
+            color: var(--text-main);
+            line-height: 2.05;
+            margin-bottom: 1.2rem;
+            text-align: justify;
+        }
+        .chapter .scripture {
+            background: var(--accent-soft);
+            border-left: 3px solid var(--accent);
+            padding: 1.2rem 1.4rem;
+            margin: 1.6rem 0;
+            font-style: italic;
+            border-radius: 0 4px 4px 0;
+        }
+        .chapter .scripture p {
+            margin-bottom: 0.4rem;
+            color: var(--text-main);
+        }
+        .chapter .scripture cite {
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            font-style: normal;
+            letter-spacing: 0.05rem;
+        }
+        .chapter strong { color: var(--primary); font-weight: 700; }
+
+        .preview-end {
+            text-align: center;
+            margin-top: 3rem;
+            padding: 3rem 2rem;
+            background: var(--white);
+            border-radius: 4px;
+            border: 1px dashed rgba(212,175,55,0.4);
+        }
+        .preview-end p {
+            font-family: 'Noto Sans KR', sans-serif;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 1.6rem;
+            letter-spacing: 0.1rem;
+        }
+        .preview-end strong {
+            color: var(--primary);
+            font-weight: 500;
+        }
+        .btn-buy {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--primary);
+            padding: 1rem 2.5rem;
+            border-radius: 2px;
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 700;
+            letter-spacing: 0.2rem;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        .btn-buy:hover { background: #b8941f; transform: translateY(-2px); }
+        .btn-author {
+            background: var(--primary);
+            color: var(--accent);
+            border: 1px solid var(--accent);
+        }
+        .btn-author:hover { background: var(--accent); color: var(--primary); }
+        .btn-youtube {
+            background: #c4302b;
+            color: #fff;
+            border: 1px solid #c4302b;
+        }
+        .btn-youtube:hover { background: #a52521; border-color: #a52521; color: #fff; transform: translateY(-2px); }
+
+        footer {
+            background: #06111f;
+            padding: 2rem 3rem;
+            text-align: center;
+            margin-top: 3rem;
+        }
+        footer p {
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 0.75rem;
+            color: rgba(255,255,255,0.3);
+            letter-spacing: 0.05rem;
+        }
+
+        @media (max-width: 720px) {
+            header { padding: 1rem 1.5rem; }
+            nav a { display: none; }
+            .head-inner { grid-template-columns: 1fr; gap: 2rem; }
+            .head-cover { max-width: 220px; margin: 0 auto; }
+            .head-info { text-align: center; }
+            .head-meta { justify-content: center; }
+            .head-divider { margin: 1rem auto 1.4rem; }
+            .body-wrap { padding: 2.5rem 1.2rem 2rem; }
+            .toc, .chapter { padding: 2rem 1.5rem; }
+        }
+    </style>
+    <script src="../author_mode.js" defer></script>
+</head>
+<body>
+
+<header>
+    <a href="../index.html" class="logo">
+        AI 시대 영성
+        <span>PUBLISHER</span>
+    </a>
+    <nav>
+        <a href="../index.html">홈</a>
+        <a href="../catalog.html">도서</a>
+        <a href="../catalog.html?id=s2-071">이 책 카드</a>
+    </nav>
+</header>
+
+<section class="preview-head">
+    <div class="head-inner">
+        <div class="head-cover">
+            <img src="../covers/s2-071.jpg" alt="기도의 깊이 표지">
+        </div>
+        <div class="head-info">
+            <p class="label">미리보기 · 시즌 2 · G08 · EP 1</p>
+            <h1>기도의 깊이</h1>
+            <p class="subtitle">표면을 넘어 깊은 곳으로</p>
+            <div class="head-divider"></div>
+            <div class="head-meta">
+                <div class="item price"><span class="label">정가</span><span class="value">2,000원</span></div>
+                <div class="item"><span class="label">발행</span><span class="value">2026.05.16</span></div>
+                <div class="item"><span class="label">ISBN</span><span class="value">9791124569702</span></div>
+                <div class="item"><span class="label">저자</span><span class="value">AI, 박헌근</span></div>
+            </div>
+            <div class="head-qr">
+                <img src="../qr/s2-071.png" alt="이 책 QR">
+                <div class="head-qr-text">
+                    <strong>이 책 바로가기</strong>
+                    <span>QR로 책방에서 즉시 구매</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="body-wrap">
+    <span class="section-label">Contents</span>
+    <h2 class="section-title">목차</h2>
+    <div class="toc">
+        <ol>
+            <li>1. 얕은 물에서 시작하다</li>
+            <li>2. 기도는 설득이 아니다</li>
+            <li>3. 침묵의 언어</li>
+            <li>4. 요청에서 교제로</li>
+            <li>5. 임재 안에 머물다</li>
+            <li>6. 어둠 속의 기도</li>
+            <li>7. 깊은 바다로 나아가라</li>
+            <li>에필로그</li>
+        </ol>
+    </div>
+
+    <span class="section-label">First Chapter</span>
+    <h2 class="section-title">제1장 미리보기</h2>
+    <div class="chapter">
+<div>
+<span class="ch-num">Chapter 01</span>
+<h2 class="ch-title">얕은 물에서 시작하다</h2>
+<div class="ch-sub">기도의 첫 걸음을 돌아보며</div>
+<div class="ch-divider"></div>
+<p>기도를 처음 배울 때, 우리는 대부분 말하는 법부터 배웠다. 무엇을 구해야 하는지, 어떤 순서로 드려야 하는지, 어떤 표현이 경건하게 들리는지를 먼저 익혔다. 그렇게 수십 년을 기도해왔지만, 어느 날 문득 이런 질문이 가슴 한켠에서 떠오른다. <strong>"나는 정말 하나님을 만나고 있는가, 아니면 그저 혼자 말하고 있는가?"</strong></p>
+<p>이 책은 그 질문에서 시작한다. 더 긴 기도, 더 유창한 기도, 더 많은 기도가 아니라 — <strong>더 깊은 기도</strong>로 나아가는 여정이다. 그 첫 걸음은 지금 내가 서 있는 자리를 솔직하게 바라보는 것이다.</p>
+<div class="ch-sub">우리는 얼마나 얕은 곳에 서 있는가</div>
+<p>솔직히 들여다보면, 많은 기도가 <strong>하나님을 설득하는 시간</strong>이 되어버렸다. 원하는 것을 아뢰고, 이유를 설명하고, 간절함을 증명하고, 응답이 오지 않으면 더 열심히 되풀이한다. 마치 주문을 외우듯, 혹은 탄원서를 제출하듯 기도한다. 이런 기도에는 하나님의 자리가 없다. 말하는 나만 있을 뿐이다.</p>
+<p>그뿐만 아니라, 어떤 기도는 <strong>의무감에서 드려지는 기도</strong>다. 하루를 마감하기 전에 챙겨야 하는 숙제처럼, 밥 먹기 전에 눈 감아야 하는 절차처럼. 하나님을 향한 갈망이 아니라 빠뜨렸을 때의 죄책감이 기도를 이끈다. 그것도 기도이기는 하지만, 얕은 물이다. 발만 적실 수 있는 깊이다.</p>
+<div class="scripture">
+<p>"너희는 내 얼굴을 찾으라 하실 때에 내가 마음으로 주께 말하되 여호와여 내가 주의 얼굴을 찾으리이다 하였나이다"</p>
+<cite>시편 27편 8절</cite>
+</div>
+<p>다윗은 응답을 구하기 전에 먼저 <strong>하나님의 얼굴</strong>을 구했다. 문제의 해결이 아니라 하나님 자신을. 이것이 얕은 물과 깊은 물의 차이다. 얕은 기도는 하나님의 손을 향하고, 깊은 기도는 하나님의 얼굴을 향한다.</p>
+<div class="ch-sub">기도는 설득이 아니라 임재다</div>
+<div class="quote">
+<p>기도는 하나님을 내 계획으로 끌어들이는 것이 아니라, 내가 하나님의 임재 안으로 들어가는 것이다.</p>
+</div>
+<p>이 전환이 모든 것을 바꾼다. 기도의 목적이 <strong>응답을 얻는 것</strong>에서 <strong>하나님과 함께 있는 것</strong>으로 바뀔 때, 기도는 비로소 관계가 된다. 오래된 친구와 함께 앉아 있는 것처럼 — 꼭 할 말이 없어도, 침묵 속에서도 충만한 그 자리.</p>
+<p>예수님은 겟세마네에서 "이 잔을 내게서 옮기시옵소서"라고 기도하셨다. 원하는 것을 구하셨다. 그러나 그 기도의 핵심은 다음 구절에 있다. <strong>"그러나 나의 원대로 마시옵고 아버지의 원대로 하옵소서"</strong>(마태복음 26장 39절). 예수님의 기도는 아버지의 뜻 안으로 자신을 내어드리는 것이었다. 그것이 가장 깊은 기도의 본질이다.</p>
+<div class="ch-sub">얕은 물에서 시작해도 괜찮다</div>
+<p>그러나 이것이 얕은 기도를 부끄러워해야 한다는 뜻은 아니다. <strong>얕은 물에서 시작하지 않으면 깊은 곳에 이를 수 없다.</strong> 어린아이처럼 "하나님, 저 오늘 힘들었어요"라고 말하는 기도도 하나님 앞에 서는 것이다. 그 솔직함 위에 깊이가 자란다.</p>
+<p>중요한 것은 방향이다. 지금 내 기도가 얕다면, 그것을 인정하고 더 깊은 곳으로 나아가겠다는 갈망을 품는 것. 오늘 단 5분이라도, 말을 멈추고 하나님 앞에 조용히 앉아 있어보는 것. 그 고요함 속에서 하나님이 말씀하실 공간을 내어드리는 것. 깊은 기도는 그렇게 시작된다.</p>
+<p>이 여정은 완벽한 기도자가 되기 위한 것이 아니다. <strong>하나님을 더 가까이 알아가기 위한 것</strong>이다. 얕은 물에서 출발한 우리가, 한 걸음씩 더 깊은 곳으로 걸어들어가는 것이다. 발이 땅에 닿지 않는 깊이, 그분 안에 완전히 잠기는 깊이까지.</p>
+<div class="meditation-q">
+<p class="mq-title">묵상 질문</p>
+<p class="mq-item">1. 지금까지 내가 드려온 기도를 솔직하게 떠올려볼 때, 그 기도는 주로 무엇을 향하고 있었습니까? 하나님의 손(응답과 도움)입니까, 아니면 하나님의 얼굴(그분 자신)입니까?</p>
+<p class="mq-item">2. 최근 기도 중에 진정으로 하나님과 함께 있다는 임재를 느낀 순간이 있었습니까? 그 순간과 그렇지 않은 순간의 차이는 무엇이었습니까?</p>
+<p class="mq-item">3. 오늘 말을 내려놓고 하나님 앞에 조용히 앉아있는 시간을 갖는다면, 어떤 마음이 드십니까? 그 마음 자체를 하나님께 가져가 보십시오.</p>
+</div></div>
+    </div>
+
+    <div class="preview-end">
+        <p><strong>여기까지가 미리보기입니다.</strong><br>전체 본문은 구매 후 EPUB 파일로 받아보실 수 있습니다.</p>
+        <a href="../catalog.html?id=s2-071" class="btn-buy">구매하기</a>
+        
+        <a href="../epubs/s2-071.epub" download class="btn-buy btn-author author-only" style="display:none;margin-left:0.6rem">EPUB 다운로드</a>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    if (window.isAuthorMode && window.isAuthorMode()) {
+        document.querySelectorAll('.author-only').forEach(function(el) {
+            el.style.display = '';
+        });
+    }
+});
+</script>
+
+<footer>
+    <p>&copy; 2026 AI 시대 영성 출판사. 무단 전재·복제·배포 금지.</p>
+</footer>
+
+</body>
+</html>

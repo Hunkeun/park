@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI가 묻는 신앙의 질문들 미리보기 — AI 시대 영성</title>
+    <meta name="description" content="AI는 질문을 잘하지만 답을 줄 수 없다. 본질은 기술 너머에 있다.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Noto+Serif+KR:wght@300;400;500;600;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0a192f;
+            --secondary: #172a45;
+            --accent: #d4af37;
+            --accent-soft: rgba(212, 175, 55, 0.15);
+            --text-main: #2c3e50;
+            --text-muted: #5d6d7e;
+            --white: #ffffff;
+            --bg-card: #f5f2ec;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Noto Serif KR', serif;
+            color: var(--text-main);
+            background: var(--bg-card);
+            line-height: 1.95;
+            -webkit-font-smoothing: antialiased;
+        }
+        header {
+            background: var(--primary);
+            padding: 1.2rem 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            color: var(--accent);
+            letter-spacing: 0.1rem;
+            text-decoration: none;
+        }
+        .logo span {
+            color: rgba(255,255,255,0.7);
+            font-size: 0.78rem;
+            font-family: 'Noto Sans KR', sans-serif;
+            font-weight: 300;
+            letter-spacing: 0.2rem;
+            display: block;
+            margin-top: -0.2rem;
+        }
+        nav a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 0.85rem;
+            letter-spacing: 0.1rem;
+            margin-left: 2rem;
+            transition: color 0.3s;
+        }
+        nav a:hover { color: var(--accent); }
+
+        .preview-head {
+            background: linear-gradient(135deg, var(--primary) 0%, #0d2440 60%, #1a3a5c 100%);
+            padding: 4rem 2rem 3rem;
+            color: var(--white);
+        }
+        .head-inner {
+            max-width: 920px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+        .head-cover img {
+            width: 100%;
+            box-shadow: 0 16px 36px rgba(0,0,0,0.5);
+            border-radius: 4px;
+        }
+        .head-info .label {
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 0.75rem;
+            letter-spacing: 0.4rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+        .head-info h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            line-height: 1.3;
+            margin-bottom: 0.5rem;
+        }
+        .head-info .subtitle {
+            font-family: 'Noto Serif KR', serif;
+            font-size: 1.1rem;
+            color: rgba(255,255,255,0.7);
+            font-style: italic;
+            margin-bottom: 1.5rem;
+        }
+        .head-divider {
+            width: 48px;
+            height: 2px;
+            background: var(--accent);
+            margin: 1rem 0 1.4rem;
+        }
+        .head-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.6rem;
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 0.85rem;
+        }
+        .head-meta .item .label {
+            color: rgba(255,255,255,0.5);
+            font-size: 0.7rem;
+            letter-spacing: 0.1rem;
+        }
+        .head-meta .item .value {
+            color: var(--white);
+            font-weight: 500;
+        }
+        .head-meta .item.price .value {
+            color: var(--accent);
+            font-weight: 700;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+        }
+        .head-qr {
+            margin-top: 1.6rem;
+            display: inline-flex;
+            gap: 0.9rem;
+            align-items: center;
+            background: rgba(255,255,255,0.96);
+            padding: 0.7rem 1rem 0.7rem 0.7rem;
+            border-radius: 6px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.18);
+        }
+        .head-qr img {
+            width: 76px;
+            height: 76px;
+            display: block;
+            border-radius: 2px;
+        }
+        .head-qr-text {
+            font-family: 'Noto Sans KR', sans-serif;
+            line-height: 1.45;
+        }
+        .head-qr-text strong {
+            display: block;
+            color: var(--primary);
+            font-size: 0.82rem;
+            font-weight: 700;
+            letter-spacing: 0.05rem;
+        }
+        .head-qr-text span {
+            color: var(--text-muted);
+            font-size: 0.72rem;
+        }
+
+        .body-wrap {
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 4rem 2rem 3rem;
+        }
+        .section-label {
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 0.7rem;
+            letter-spacing: 0.4rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 0.8rem;
+        }
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.7rem;
+            color: var(--primary);
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 0.6rem;
+            display: inline-block;
+            margin-bottom: 2rem;
+        }
+
+        /* 목차 */
+        .toc {
+            background: var(--white);
+            border-radius: 4px;
+            padding: 2rem 2.4rem;
+            margin-bottom: 4rem;
+            box-shadow: 0 4px 16px rgba(10,25,47,0.06);
+        }
+        .toc ol {
+            list-style: none;
+            counter-reset: chapter;
+        }
+        .toc li {
+            counter-increment: chapter;
+            padding: 0.7rem 0;
+            border-bottom: 1px solid rgba(10,25,47,0.06);
+            font-family: 'Noto Serif KR', serif;
+            font-size: 1rem;
+            color: var(--primary);
+            display: flex;
+            align-items: baseline;
+            gap: 1rem;
+        }
+        .toc li::before {
+            content: counter(chapter, decimal-leading-zero);
+            font-family: 'Playfair Display', serif;
+            color: var(--accent);
+            font-weight: 700;
+            font-size: 0.9rem;
+            min-width: 2rem;
+            letter-spacing: 0.05rem;
+        }
+        .toc li:last-child { border-bottom: none; }
+
+        /* 본문 */
+        .chapter {
+            background: var(--white);
+            border-radius: 4px;
+            padding: 3rem 2.6rem;
+            box-shadow: 0 4px 16px rgba(10,25,47,0.06);
+            margin-bottom: 2rem;
+        }
+        .chapter h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            color: var(--primary);
+            margin-bottom: 0.8rem;
+            line-height: 1.35;
+        }
+        .chapter h3, .chapter .ch-sub {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.15rem;
+            color: var(--primary);
+            margin-top: 2rem;
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+        }
+        .chapter .ch-num {
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 0.7rem;
+            letter-spacing: 0.4rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 0.6rem;
+        }
+        .chapter .ch-divider {
+            width: 40px;
+            height: 2px;
+            background: var(--accent);
+            margin: 1.4rem 0 2rem;
+        }
+        .chapter p {
+            font-size: 1rem;
+            color: var(--text-main);
+            line-height: 2.05;
+            margin-bottom: 1.2rem;
+            text-align: justify;
+        }
+        .chapter .scripture {
+            background: var(--accent-soft);
+            border-left: 3px solid var(--accent);
+            padding: 1.2rem 1.4rem;
+            margin: 1.6rem 0;
+            font-style: italic;
+            border-radius: 0 4px 4px 0;
+        }
+        .chapter .scripture p {
+            margin-bottom: 0.4rem;
+            color: var(--text-main);
+        }
+        .chapter .scripture cite {
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            font-style: normal;
+            letter-spacing: 0.05rem;
+        }
+        .chapter strong { color: var(--primary); font-weight: 700; }
+
+        .preview-end {
+            text-align: center;
+            margin-top: 3rem;
+            padding: 3rem 2rem;
+            background: var(--white);
+            border-radius: 4px;
+            border: 1px dashed rgba(212,175,55,0.4);
+        }
+        .preview-end p {
+            font-family: 'Noto Sans KR', sans-serif;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 1.6rem;
+            letter-spacing: 0.1rem;
+        }
+        .preview-end strong {
+            color: var(--primary);
+            font-weight: 500;
+        }
+        .btn-buy {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--primary);
+            padding: 1rem 2.5rem;
+            border-radius: 2px;
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 700;
+            letter-spacing: 0.2rem;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        .btn-buy:hover { background: #b8941f; transform: translateY(-2px); }
+        .btn-author {
+            background: var(--primary);
+            color: var(--accent);
+            border: 1px solid var(--accent);
+        }
+        .btn-author:hover { background: var(--accent); color: var(--primary); }
+        .btn-youtube {
+            background: #c4302b;
+            color: #fff;
+            border: 1px solid #c4302b;
+        }
+        .btn-youtube:hover { background: #a52521; border-color: #a52521; color: #fff; transform: translateY(-2px); }
+
+        footer {
+            background: #06111f;
+            padding: 2rem 3rem;
+            text-align: center;
+            margin-top: 3rem;
+        }
+        footer p {
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 0.75rem;
+            color: rgba(255,255,255,0.3);
+            letter-spacing: 0.05rem;
+        }
+
+        @media (max-width: 720px) {
+            header { padding: 1rem 1.5rem; }
+            nav a { display: none; }
+            .head-inner { grid-template-columns: 1fr; gap: 2rem; }
+            .head-cover { max-width: 220px; margin: 0 auto; }
+            .head-info { text-align: center; }
+            .head-meta { justify-content: center; }
+            .head-divider { margin: 1rem auto 1.4rem; }
+            .body-wrap { padding: 2.5rem 1.2rem 2rem; }
+            .toc, .chapter { padding: 2rem 1.5rem; }
+        }
+    </style>
+    <script src="../author_mode.js" defer></script>
+</head>
+<body>
+
+<header>
+    <a href="../index.html" class="logo">
+        AI 시대 영성
+        <span>PUBLISHER</span>
+    </a>
+    <nav>
+        <a href="../index.html">홈</a>
+        <a href="../catalog.html">도서</a>
+        <a href="../catalog.html?id=s2-011">이 책 카드</a>
+    </nav>
+</header>
+
+<section class="preview-head">
+    <div class="head-inner">
+        <div class="head-cover">
+            <img src="../covers/s2-011.jpg" alt="AI가 묻는 신앙의 질문들 표지">
+        </div>
+        <div class="head-info">
+            <p class="label">미리보기 · 시즌 2 · G02 · EP 1</p>
+            <h1>AI가 묻는 신앙의 질문들</h1>
+            <p class="subtitle">기술이 건드린 본질</p>
+            <div class="head-divider"></div>
+            <div class="head-meta">
+                <div class="item price"><span class="label">정가</span><span class="value">2,000원</span></div>
+                <div class="item"><span class="label">발행</span><span class="value">2026.05.02</span></div>
+                <div class="item"><span class="label">ISBN</span><span class="value">9791124569108</span></div>
+                <div class="item"><span class="label">저자</span><span class="value">AI, 박헌근</span></div>
+            </div>
+            <div class="head-qr">
+                <img src="../qr/s2-011.png" alt="이 책 QR">
+                <div class="head-qr-text">
+                    <strong>이 책 바로가기</strong>
+                    <span>QR로 책방에서 즉시 구매</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="body-wrap">
+    <span class="section-label">Contents</span>
+    <h2 class="section-title">목차</h2>
+    <div class="toc">
+        <ol>
+            <li>1. AI가 던진 첫 번째 질문</li>
+            <li>2. 지도와 길 사이</li>
+            <li>3. 대체될 수 없는 것들</li>
+            <li>4. 하나님의 필요는 줄어드는가</li>
+            <li>5. 인간이라는 소명</li>
+            <li>6. 질문을 품은 신앙</li>
+            <li>7. 본질로 돌아가다</li>
+            <li>에필로그</li>
+        </ol>
+    </div>
+
+    <span class="section-label">First Chapter</span>
+    <h2 class="section-title">제1장 미리보기</h2>
+    <div class="chapter">
+<div>
+<span class="ch-num">Chapter 01</span>
+<h2 class="ch-title">AI가 던진 첫 번째 질문</h2>
+<div class="ch-sub">기계가 묻고 인간이 답하다</div>
+<div class="ch-divider"></div>
+<div class="ch-sub">기계가 질문을 시작했다</div>
+<p>어느 날 한 청년이 AI 챗봇에게 물었다. "나는 왜 사는 걸까요?" 화면에는 수백 개의 단어가 즉각 쏟아졌다. 철학적 개념들, 심리학 이론들, 삶의 의미에 관한 다양한 관점들. 그런데 청년은 자리에서 일어나면서 이상한 공허함을 느꼈다. 답을 받았는데, 왜 여전히 아무것도 받지 못한 것 같은 느낌이 드는 걸까?</p>
+<p>AI는 오늘날 놀라운 속도로 인간의 언어를 학습하고, 방대한 지식을 처리하며, 심지어 시를 쓰고 그림을 그린다. 그런데 아이러니하게도, AI의 등장은 인간이 오랫동안 잊고 살아온 가장 근본적인 질문들을 다시 수면 위로 끌어올리고 있다. <strong>"나는 누구인가?"</strong> <strong>"무엇이 나를 인간으로 만드는가?"</strong> 기술이 발전할수록 이 질문들은 더욱 절박해진다.</p>
+<div class="scripture">
+<p>"태초에 하나님이 천지를 창조하시니라."</p>
+<cite>창세기 1장 1절</cite>
+</div>
+<p>성경은 모든 것의 시작에서 창조주 하나님을 선언한다. 존재는 우연이 아니라 의도에서 비롯되었다. 그 의도 안에 인간이 있고, 그 인간의 정체성 안에 이미 질문의 씨앗이 심겨 있다. AI는 인터넷 위의 모든 텍스트를 학습할 수 있지만, <strong>자신이 왜 존재하는지를 스스로 물을 수는 없다.</strong> 그것이 인간과 AI 사이의 가장 깊은 경계선이다.</p>
+<div class="ch-sub">질문할 수 있다는 것의 의미</div>
+<p>철학자들은 오래전부터 인간을 '질문하는 존재'라고 정의해왔다. 먹고 자고 번식하는 것은 동물도 한다. 그러나 밤하늘을 바라보며 "저 별은 왜 있는가?"를 묻고, 거울 앞에서 "나는 무엇인가?"를 묻는 것은 오직 인간만이 한다. 그런데 현대인은 바쁜 일상 속에서 이 질문들을 조용히 묻어두었다. 스마트폰의 알림 소리가, 끊임없는 콘텐츠의 홍수가, 그 질문이 떠오를 틈을 허락하지 않았다.</p>
+<p>그런데 AI가 등장하면서 역설이 일어났다. 기계가 인간처럼 말하고 생각하는 것처럼 보이기 시작하자, 사람들은 비로소 물었다. <strong>"그렇다면 인간만이 가진 것은 무엇인가?"</strong> AI는 답을 주는 도구로 만들어졌지만, 결국 그 존재 자체가 우리에게 새로운 질문을 던지는 셈이다.</p>
+<div class="scripture">
+<p>"여호와 우리 주여, 주의 이름이 온 땅에 어찌 그리 아름다운지요. 주께서 주의 영광을 하늘 위에 두셨나이다. … 사람이 무엇이기에 주께서 그를 생각하시며 인자가 무엇이기에 주께서 그를 돌보시나이까?"</p>
+<cite>시편 8편 1, 4절</cite>
+</div>
+<p>다윗은 밤하늘의 별과 달을 바라보며 이 질문을 하나님께 드렸다. 우주의 광대함 앞에서, 인간의 존재는 너무나 작고 보잘것없어 보였다. 그러나 그 질문 자체가 이미 인간의 위대함을 증명한다. <strong>질문을 하나님께 드릴 수 있는 존재,</strong> 그것이 바로 창조의 목적 안에 담긴 인간이다.</p>
+<div class="ch-sub">기술 너머, 관계 안에 있는 답</div>
+<p>AI는 정보를 줄 수 있지만 사랑을 줄 수는 없다. 지식을 전달할 수 있지만 위로할 수는 없다. 수천 개의 상담 사례를 학습했어도, 당신의 이름을 부르며 눈물을 닦아줄 수는 없다. 인간의 가장 깊은 질문들, "나는 사랑받고 있는가?", "내 삶에는 의미가 있는가?", "죽음 너머에는 무엇이 있는가?"는 데이터로 해결되지 않는다.</p>
+<p>이 질문들은 언제나 <strong>관계 안에서 답을 만난다.</strong> 성경이 증언하는 하나님은 정보를 전달하는 분이 아니라, 인간과 관계 맺기를 원하시는 분이다. 그분은 우리의 이름을 아시고, 우리의 고통을 들으시며, 독생자를 보내실 만큼 우리를 사랑하신다. AI 시대에 신앙은 구식이 아니다. 오히려 AI가 풀지 못하는 질문에 대한 가장 실존적인 응답이다.</p>
+<div class="quote">
+<p>기술이 발전할수록, 인간은 기술이 채울 수 없는 자리가 있음을 더 선명하게 느낀다. 그 자리는 하나님이 처음부터 당신을 위해 비워두신 자리다.</p>
+</div>
+<p>오늘 AI가 던진 첫 번째 질문은 결국 이것이다. <strong>"당신은 자신이 누구인지 알고 있습니까?"</strong> 이 질문 앞에서 우리는 다시 성경을 펼치고, 기도의 자리에 무릎을 꿇고, 창조주 앞에서 피조물로서의 자리를 되찾는다. 그것이 AI 시대에 신앙인이 걸어야 할 첫걸음이다.</p>
+<div class="meditation-q">
+<p class="mq-title">묵상 질문</p>
+<p class="mq-item">1. 나는 요즘 "나는 누구인가?"라는 질문을 얼마나 자주, 어디서 하고 있습니까? 그 질문을 하나님 앞에 가져간 적이 있습니까?</p>
+<p class="mq-item">2. AI나 기술이 내 삶의 공허함을 채워주려 한 순간이 있었습니까? 그 자리에 정말 필요한 것은 무엇이었습니까?</p>
+<p class="mq-item">3. 시편 8편의 다윗처럼, 나는 어떤 순간에 내 존재의 작음과 동시에 하나님의 돌보심을 느낍니까?</p>
+</div></div>
+    </div>
+
+    <div class="preview-end">
+        <p><strong>여기까지가 미리보기입니다.</strong><br>전체 본문은 구매 후 EPUB 파일로 받아보실 수 있습니다.</p>
+        <a href="../catalog.html?id=s2-011" class="btn-buy">구매하기</a>
+        <a href="https://youtu.be/XtOCHu08t0E" target="_blank" rel="noopener" class="btn-buy btn-youtube" style="margin-left:0.6rem">유튜브 영상 ▶</a>
+        <a href="../epubs/s2-011.epub" download class="btn-buy btn-author author-only" style="display:none;margin-left:0.6rem">EPUB 다운로드</a>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    if (window.isAuthorMode && window.isAuthorMode()) {
+        document.querySelectorAll('.author-only').forEach(function(el) {
+            el.style.display = '';
+        });
+    }
+});
+</script>
+
+<footer>
+    <p>&copy; 2026 AI 시대 영성 출판사. 무단 전재·복제·배포 금지.</p>
+</footer>
+
+</body>
+</html>

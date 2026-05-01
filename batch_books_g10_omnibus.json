@@ -1,0 +1,154 @@
+{
+  "project": {
+    "name": "G10 종합책 (100권 시즌 2 마지막 그룹)",
+    "parent_project": "100권 영성 시리즈 G10 (ISBN 9791124569)",
+    "title": "이미, 그러나 아직",
+    "subtitle": "그리스도인을 위한 하나님 나라 열 묵상",
+    "author": "박헌근",
+    "publisher": "AI 시대 영성",
+    "isbn": "9791176580106",
+    "isbn_prefix_hint": "신규 발행자번호 블록 9791176580 (2026-05-01 발급 통보, 시즌1 종합책=0007부터 G01=0014, G02=0021, ... +7 패턴, G09→G10만 +16 점프)",
+    "publish_date": "2026-05-30",
+    "format_primary": "전자책",
+    "format_secondary": "POD",
+    "status": "draft_2026-04-27"
+  },
+  "structure": {
+    "preface": {
+      "title": "여는 글 — 이미 임한 나라, 아직 오지 않은 완성",
+      "to_write": true,
+      "estimated_pages": 1
+    },
+    "parts": [
+      {
+        "part": 1,
+        "title": "1부 — 하나님 나라의 비전",
+        "subtitle": "이미 임한 나라와 복음의 능력",
+        "intro": {
+          "title": "1부 도입 — 이미 임한 나라의 비전",
+          "to_write": true,
+          "estimated_pages": 2
+        },
+        "books": [
+          {
+            "order": 1,
+            "src_no": 1,
+            "title": "하나님 나라의 비전",
+            "epub": "하나님_나라의_비전_20260419.epub",
+            "isbn": "9791124569900"
+          },
+          {
+            "order": 2,
+            "src_no": 7,
+            "title": "복음의 능력",
+            "epub": "복음의_능력_20260423.epub",
+            "isbn": "9791124569962"
+          }
+        ]
+      },
+      {
+        "part": 2,
+        "title": "2부 — 일상으로 흐르는 나라",
+        "subtitle": "예배·경제·문화",
+        "intro": {
+          "title": "2부 도입 — 일상으로 흐르는 하나님 나라",
+          "to_write": true,
+          "estimated_pages": 2
+        },
+        "books": [
+          {
+            "order": 3,
+            "src_no": 6,
+            "title": "예배가 삶이 될 때",
+            "epub": "예배가_삶이_될_때_20260423.epub",
+            "isbn": "9791124569955"
+          },
+          {
+            "order": 4,
+            "src_no": 5,
+            "title": "하나님 나라의 경제학",
+            "epub": "하나님_나라의_경제학_20260421.epub",
+            "isbn": "9791124569948"
+          },
+          {
+            "order": 5,
+            "src_no": 9,
+            "title": "하나님 나라의 문화",
+            "epub": "하나님_나라의_문화_20260424.epub",
+            "isbn": "9791124569986"
+          }
+        ]
+      },
+      {
+        "part": 3,
+        "title": "3부 — 부르심 받은 자들",
+        "subtitle": "제자도와 선교의 심장",
+        "intro": {
+          "title": "3부 도입 — 부르심 받은 자들의 자리",
+          "to_write": true,
+          "estimated_pages": 2
+        },
+        "books": [
+          {
+            "order": 6,
+            "src_no": 8,
+            "title": "제자도의 대가",
+            "epub": "제자도의_대가_20260423.epub",
+            "isbn": "9791124569979"
+          },
+          {
+            "order": 7,
+            "src_no": 2,
+            "title": "선교의 심장",
+            "epub": "선교의_심장_20260419.epub",
+            "isbn": "9791124569917"
+          }
+        ]
+      },
+      {
+        "part": 4,
+        "title": "4부 — 종말과 완성",
+        "subtitle": "재림·종말·새 하늘과 새 땅",
+        "intro": {
+          "title": "4부 도입 — 아직 오지 않은 완성을 기다리며",
+          "to_write": true,
+          "estimated_pages": 2
+        },
+        "books": [
+          {
+            "order": 8,
+            "src_no": 3,
+            "title": "종말을 사는 자세",
+            "epub": "종말을_사는_자세_20260419.epub",
+            "isbn": "9791124569924"
+          },
+          {
+            "order": 9,
+            "src_no": 4,
+            "title": "재림을 기다리며",
+            "epub": "재림을_기다리며_20260421.epub",
+            "isbn": "9791124569931"
+          },
+          {
+            "order": 10,
+            "src_no": 10,
+            "title": "새 하늘과 새 땅",
+            "epub": "새_하늘과_새_땅_20260424.epub",
+            "isbn": "9791124569993"
+          }
+        ]
+      }
+    ],
+    "epilogue": {
+      "title": "닫는 글 — 시즌 2의 마지막 한 호흡",
+      "to_write": true,
+      "estimated_pages": 2
+    }
+  },
+  "policies": {
+    "content_preservation": "원본 본문 거의 그대로 유지",
+    "edit_scope": "중복·불필요 제거, 부 도입글 신규 작성, 부 간 연결 보완, 종합 서문·결론 신규",
+    "cover_treatment": "epub 내부 통합 (분리 추출 안 함, 신규 종합책 표지 새로 만듦)",
+    "page_numbering": "통합 단일 페이지 번호"
+  }
+}

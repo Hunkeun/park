@@ -1,0 +1,154 @@
+{
+  "project": {
+    "name": "G04 종합책 (100권 시즌 2 네 번째 그룹)",
+    "parent_project": "100권 영성 시리즈 G04 (ISBN 9791124569)",
+    "title": "발자국과 눈물",
+    "subtitle": "그리스도인을 위한 성경 인물 열 묵상",
+    "author": "박헌근",
+    "publisher": "AI 시대 영성",
+    "isbn": "9791176580045",
+    "isbn_prefix_hint": "신규 발행자번호 블록 9791176580 (2026-05-01 발급 통보, 시즌1 종합책=0007부터 G01=0014, G02=0021, ... +7 패턴, G09→G10만 +16 점프)",
+    "publish_date": "2026-05-30",
+    "format_primary": "전자책",
+    "format_secondary": "POD",
+    "status": "draft_2026-04-26"
+  },
+  "structure": {
+    "preface": {
+      "title": "여는 글 — 그들도 사람이었다",
+      "to_write": true,
+      "estimated_pages": 1
+    },
+    "parts": [
+      {
+        "part": 1,
+        "title": "1부 — 광야의 사람들",
+        "subtitle": "연단의 시간을 통과한 자들",
+        "intro": {
+          "title": "1부 도입 — 광야의 자리에서 빚어지는 영혼",
+          "to_write": true,
+          "estimated_pages": 2
+        },
+        "books": [
+          {
+            "order": 1,
+            "src_no": 5,
+            "title": "모세의 광야",
+            "epub": "모세의_광야_20260421.epub",
+            "isbn": "9791124569344"
+          },
+          {
+            "order": 2,
+            "src_no": 6,
+            "title": "엘리야의 번아웃",
+            "epub": "엘리야의_번아웃_20260422.epub",
+            "isbn": "9791124569351"
+          },
+          {
+            "order": 3,
+            "src_no": 4,
+            "title": "욥의 질문",
+            "epub": "욥의_질문_20260420.epub",
+            "isbn": "9791124569337"
+          }
+        ]
+      },
+      {
+        "part": 2,
+        "title": "2부 — 결단의 사람들",
+        "subtitle": "부르심에 응답한 자들",
+        "intro": {
+          "title": "2부 도입 — 자기 자리를 결단한 자들",
+          "to_write": true,
+          "estimated_pages": 2
+        },
+        "books": [
+          {
+            "order": 4,
+            "src_no": 3,
+            "title": "에스더의 용기",
+            "epub": "에스더의_용기_20260419.epub",
+            "isbn": "9791124569320"
+          },
+          {
+            "order": 5,
+            "src_no": 7,
+            "title": "룻의 충성",
+            "epub": "룻의_충성_20260423.epub",
+            "isbn": "9791124569368"
+          },
+          {
+            "order": 6,
+            "src_no": 2,
+            "title": "바울의 변화",
+            "epub": "바울의_변화_20260419.epub",
+            "isbn": "9791124569313"
+          }
+        ]
+      },
+      {
+        "part": 3,
+        "title": "3부 — 눈물과 회개",
+        "subtitle": "떠난 자가 돌아오는 길",
+        "intro": {
+          "title": "3부 도입 — 떠난 자가 돌아오는 길",
+          "to_write": true,
+          "estimated_pages": 2
+        },
+        "books": [
+          {
+            "order": 7,
+            "src_no": 1,
+            "title": "다윗의 눈물",
+            "epub": "다윗의_눈물_20260418.epub",
+            "isbn": "9791124569306"
+          },
+          {
+            "order": 8,
+            "src_no": 8,
+            "title": "요나의 도망",
+            "epub": "요나의_도망_20260423.epub",
+            "isbn": "9791124569375"
+          },
+          {
+            "order": 9,
+            "src_no": 9,
+            "title": "막달라 마리아의 사랑",
+            "epub": "막달라_마리아의_사랑_20260423.epub",
+            "isbn": "9791124569382"
+          }
+        ]
+      },
+      {
+        "part": 4,
+        "title": "4부 — 지혜와 그림자",
+        "subtitle": "가장 높은 자리의 흔들림",
+        "intro": {
+          "title": "4부 도입 — 가장 높은 자리의 그림자",
+          "to_write": true,
+          "estimated_pages": 2
+        },
+        "books": [
+          {
+            "order": 10,
+            "src_no": 10,
+            "title": "솔로몬의 지혜와 실패",
+            "epub": "솔로몬의_지혜와_실패_20260424.epub",
+            "isbn": "9791124569399"
+          }
+        ]
+      }
+    ],
+    "epilogue": {
+      "title": "닫는 글 — 그들의 발자국 위에 서서",
+      "to_write": true,
+      "estimated_pages": 2
+    }
+  },
+  "policies": {
+    "content_preservation": "원본 본문 거의 그대로 유지",
+    "edit_scope": "중복·불필요 제거, 부 도입글 신규 작성, 부 간 연결 보완, 종합 서문·결론 신규",
+    "cover_treatment": "epub 내부 통합 (분리 추출 안 함, 신규 종합책 표지 새로 만듦)",
+    "page_numbering": "통합 단일 페이지 번호"
+  }
+}

@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>발자국과 눈물 미리보기 — AI 시대 영성</title>
+    <meta name="description" content="">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Noto+Serif+KR:wght@300;400;500;600;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0a192f;
+            --secondary: #172a45;
+            --accent: #d4af37;
+            --accent-soft: rgba(212, 175, 55, 0.15);
+            --text-main: #2c3e50;
+            --text-muted: #5d6d7e;
+            --white: #ffffff;
+            --bg-card: #f5f2ec;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Noto Serif KR', serif;
+            color: var(--text-main);
+            background: var(--bg-card);
+            line-height: 1.95;
+            -webkit-font-smoothing: antialiased;
+        }
+        header {
+            background: var(--primary);
+            padding: 1.2rem 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            color: var(--accent);
+            letter-spacing: 0.1rem;
+            text-decoration: none;
+        }
+        .logo span {
+            color: rgba(255,255,255,0.7);
+            font-size: 0.78rem;
+            font-family: 'Noto Sans KR', sans-serif;
+            font-weight: 300;
+            letter-spacing: 0.2rem;
+            display: block;
+            margin-top: -0.2rem;
+        }
+        nav a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 0.85rem;
+            letter-spacing: 0.1rem;
+            margin-left: 2rem;
+            transition: color 0.3s;
+        }
+        nav a:hover { color: var(--accent); }
+
+        .preview-head {
+            background: linear-gradient(135deg, var(--primary) 0%, #0d2440 60%, #1a3a5c 100%);
+            padding: 4rem 2rem 3rem;
+            color: var(--white);
+        }
+        .head-inner {
+            max-width: 920px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+        .head-cover img {
+            width: 100%;
+            box-shadow: 0 16px 36px rgba(0,0,0,0.5);
+            border-radius: 4px;
+        }
+        .head-info .label {
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 0.75rem;
+            letter-spacing: 0.4rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+        .head-info h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            line-height: 1.3;
+            margin-bottom: 0.5rem;
+        }
+        .head-info .subtitle {
+            font-family: 'Noto Serif KR', serif;
+            font-size: 1.1rem;
+            color: rgba(255,255,255,0.7);
+            font-style: italic;
+            margin-bottom: 1.5rem;
+        }
+        .head-divider {
+            width: 48px;
+            height: 2px;
+            background: var(--accent);
+            margin: 1rem 0 1.4rem;
+        }
+        .head-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.6rem;
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 0.85rem;
+        }
+        .head-meta .item .label {
+            color: rgba(255,255,255,0.5);
+            font-size: 0.7rem;
+            letter-spacing: 0.1rem;
+        }
+        .head-meta .item .value {
+            color: var(--white);
+            font-weight: 500;
+        }
+        .head-meta .item.price .value {
+            color: var(--accent);
+            font-weight: 700;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+        }
+        .head-qr {
+            margin-top: 1.6rem;
+            display: inline-flex;
+            gap: 0.9rem;
+            align-items: center;
+            background: rgba(255,255,255,0.96);
+            padding: 0.7rem 1rem 0.7rem 0.7rem;
+            border-radius: 6px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.18);
+        }
+        .head-qr img {
+            width: 76px;
+            height: 76px;
+            display: block;
+            border-radius: 2px;
+        }
+        .head-qr-text {
+            font-family: 'Noto Sans KR', sans-serif;
+            line-height: 1.45;
+        }
+        .head-qr-text strong {
+            display: block;
+            color: var(--primary);
+            font-size: 0.82rem;
+            font-weight: 700;
+            letter-spacing: 0.05rem;
+        }
+        .head-qr-text span {
+            color: var(--text-muted);
+            font-size: 0.72rem;
+        }
+
+        .body-wrap {
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 4rem 2rem 3rem;
+        }
+        .section-label {
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 0.7rem;
+            letter-spacing: 0.4rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 0.8rem;
+        }
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.7rem;
+            color: var(--primary);
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 0.6rem;
+            display: inline-block;
+            margin-bottom: 2rem;
+        }
+
+        /* 목차 */
+        .toc {
+            background: var(--white);
+            border-radius: 4px;
+            padding: 2rem 2.4rem;
+            margin-bottom: 4rem;
+            box-shadow: 0 4px 16px rgba(10,25,47,0.06);
+        }
+        .toc ol {
+            list-style: none;
+            counter-reset: chapter;
+        }
+        .toc li {
+            counter-increment: chapter;
+            padding: 0.7rem 0;
+            border-bottom: 1px solid rgba(10,25,47,0.06);
+            font-family: 'Noto Serif KR', serif;
+            font-size: 1rem;
+            color: var(--primary);
+            display: flex;
+            align-items: baseline;
+            gap: 1rem;
+        }
+        .toc li::before {
+            content: counter(chapter, decimal-leading-zero);
+            font-family: 'Playfair Display', serif;
+            color: var(--accent);
+            font-weight: 700;
+            font-size: 0.9rem;
+            min-width: 2rem;
+            letter-spacing: 0.05rem;
+        }
+        .toc li:last-child { border-bottom: none; }
+
+        /* 본문 */
+        .chapter {
+            background: var(--white);
+            border-radius: 4px;
+            padding: 3rem 2.6rem;
+            box-shadow: 0 4px 16px rgba(10,25,47,0.06);
+            margin-bottom: 2rem;
+        }
+        .chapter h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            color: var(--primary);
+            margin-bottom: 0.8rem;
+            line-height: 1.35;
+        }
+        .chapter h3, .chapter .ch-sub {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.15rem;
+            color: var(--primary);
+            margin-top: 2rem;
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+        }
+        .chapter .ch-num {
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 0.7rem;
+            letter-spacing: 0.4rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 0.6rem;
+        }
+        .chapter .ch-divider {
+            width: 40px;
+            height: 2px;
+            background: var(--accent);
+            margin: 1.4rem 0 2rem;
+        }
+        .chapter p {
+            font-size: 1rem;
+            color: var(--text-main);
+            line-height: 2.05;
+            margin-bottom: 1.2rem;
+            text-align: justify;
+        }
+        .chapter .scripture {
+            background: var(--accent-soft);
+            border-left: 3px solid var(--accent);
+            padding: 1.2rem 1.4rem;
+            margin: 1.6rem 0;
+            font-style: italic;
+            border-radius: 0 4px 4px 0;
+        }
+        .chapter .scripture p {
+            margin-bottom: 0.4rem;
+            color: var(--text-main);
+        }
+        .chapter .scripture cite {
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            font-style: normal;
+            letter-spacing: 0.05rem;
+        }
+        .chapter strong { color: var(--primary); font-weight: 700; }
+
+        .preview-end {
+            text-align: center;
+            margin-top: 3rem;
+            padding: 3rem 2rem;
+            background: var(--white);
+            border-radius: 4px;
+            border: 1px dashed rgba(212,175,55,0.4);
+        }
+        .preview-end p {
+            font-family: 'Noto Sans KR', sans-serif;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 1.6rem;
+            letter-spacing: 0.1rem;
+        }
+        .preview-end strong {
+            color: var(--primary);
+            font-weight: 500;
+        }
+        .btn-buy {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--primary);
+            padding: 1rem 2.5rem;
+            border-radius: 2px;
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 700;
+            letter-spacing: 0.2rem;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        .btn-buy:hover { background: #b8941f; transform: translateY(-2px); }
+        .btn-author {
+            background: var(--primary);
+            color: var(--accent);
+            border: 1px solid var(--accent);
+        }
+        .btn-author:hover { background: var(--accent); color: var(--primary); }
+        .btn-youtube {
+            background: #c4302b;
+            color: #fff;
+            border: 1px solid #c4302b;
+        }
+        .btn-youtube:hover { background: #a52521; border-color: #a52521; color: #fff; transform: translateY(-2px); }
+
+        footer {
+            background: #06111f;
+            padding: 2rem 3rem;
+            text-align: center;
+            margin-top: 3rem;
+        }
+        footer p {
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 0.75rem;
+            color: rgba(255,255,255,0.3);
+            letter-spacing: 0.05rem;
+        }
+
+        @media (max-width: 720px) {
+            header { padding: 1rem 1.5rem; }
+            nav a { display: none; }
+            .head-inner { grid-template-columns: 1fr; gap: 2rem; }
+            .head-cover { max-width: 220px; margin: 0 auto; }
+            .head-info { text-align: center; }
+            .head-meta { justify-content: center; }
+            .head-divider { margin: 1rem auto 1.4rem; }
+            .body-wrap { padding: 2.5rem 1.2rem 2rem; }
+            .toc, .chapter { padding: 2rem 1.5rem; }
+        }
+    </style>
+    <script src="../author_mode.js" defer></script>
+</head>
+<body>
+
+<header>
+    <a href="../index.html" class="logo">
+        AI 시대 영성
+        <span>PUBLISHER</span>
+    </a>
+    <nav>
+        <a href="../index.html">홈</a>
+        <a href="../catalog.html">도서</a>
+        <a href="../catalog.html?id=s2-omnibus-G04">이 책 카드</a>
+    </nav>
+</header>
+
+<section class="preview-head">
+    <div class="head-inner">
+        <div class="head-cover">
+            <img src="../covers/s2-omnibus-G04.jpg" alt="발자국과 눈물 표지">
+        </div>
+        <div class="head-info">
+            <p class="label">미리보기 · 시즌 2 · G04 종합책</p>
+            <h1>발자국과 눈물</h1>
+            <p class="subtitle">그리스도인을 위한 성경 인물 열 묵상</p>
+            <div class="head-divider"></div>
+            <div class="head-meta">
+                <div class="item price"><span class="label">정가</span><span class="value">7,000원</span></div>
+                <div class="item"><span class="label">발행</span><span class="value">2026.05.30</span></div>
+                <div class="item"><span class="label">ISBN</span><span class="value">9791176580045</span></div>
+                <div class="item"><span class="label">저자</span><span class="value">AI, 박헌근</span></div>
+            </div>
+            <div class="head-qr">
+                <img src="../qr/s2-omnibus-G04.png" alt="이 책 QR">
+                <div class="head-qr-text">
+                    <strong>이 책 바로가기</strong>
+                    <span>QR로 책방에서 즉시 구매</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="body-wrap">
+    <span class="section-label">Contents</span>
+    <h2 class="section-title">목차</h2>
+    <div class="toc">
+        <ol>
+            <li>여는 글</li>
+            <li>1부 — 광야의 사람들</li>
+            <li>모세의 광야</li>
+            <li>왕자의 자리에서 내려오다</li>
+            <li>미디안의 우물가</li>
+            <li>양 떼를 치는 40년</li>
+            <li>이름 없는 자의 기도</li>
+            <li>떨기나무의 불꽃</li>
+            <li>내가 누구이기에</li>
+            <li>광야에서 광야로</li>
+            <li>엘리야의 번아웃</li>
+            <li>갈멜산의 영웅</li>
+            <li>광야로 도망친 선지자</li>
+            <li>로뎀나무 아래</li>
+            <li>천사가 차려준 밥상</li>
+            <li>호렙산으로 가는 40일</li>
+            <li>세미한 음성</li>
+            <li>다시 보내심</li>
+            <li>욥의 질문</li>
+            <li>의인의 고난</li>
+            <li>재 위에 앉은 사람</li>
+            <li>친구들의 신학</li>
+            <li>욥의 항변</li>
+            <li>폭풍 가운데 임하신 하나님</li>
+            <li>티끌과 재 가운데서</li>
+            <li>고난 너머의 회복</li>
+            <li>2부 — 결단의 사람들</li>
+            <li>에스더의 용기</li>
+            <li>왕후가 된 고아</li>
+            <li>모르드개의 신념</li>
+            <li>하만의 음모</li>
+            <li>이때를 위함이라</li>
+            <li>죽으면 죽으리이다</li>
+            <li>금홀이 내밀어질 때</li>
+            <li>부림의 기쁨</li>
+            <li>룻의 충성</li>
+            <li>모압 땅의 눈물</li>
+            <li>당신의 하나님이 나의 하나님</li>
+            <li>이삭을 줍는 자의 영성</li>
+            <li>보아스의 그늘 아래</li>
+            <li>타작마당의 밤</li>
+            <li>기업 무를 자의 구속</li>
+            <li>다윗의 할머니 룻</li>
+            <li>바울의 변화</li>
+            <li>핍박자 사울</li>
+            <li>다메섹 도상의 빛</li>
+            <li>사흘의 어둠</li>
+            <li>아나니아의 손</li>
+            <li>아라비아의 광야</li>
+            <li>과거를 안고 달린 사도</li>
+            <li>누구나 바울이 될 수 있다</li>
+            <li>3부 — 눈물과 회개</li>
+            <li>다윗의 눈물</li>
+            <li>골리앗 앞에 선 소년</li>
+            <li>광야를 달리는 도망자</li>
+            <li>밧세바의 밤</li>
+            <li>나단의 손가락</li>
+            <li>시편 51편의 눈물</li>
+            <li>아들 압살롬의 반역</li>
+            <li>하나님 마음에 합한 자</li>
+            <li>요나의 도망</li>
+            <li>부르심의 음성</li>
+            <li>다시스로 가는 배</li>
+            <li>바다의 폭풍</li>
+            <li>물고기 배 속의 기도</li>
+            <li>두 번째 부르심</li>
+            <li>니느웨의 회개</li>
+            <li>박넝쿨 아래에서</li>
+            <li>막달라 마리아의 사랑</li>
+            <li>일곱 귀신 들린 여인</li>
+            <li>주님을 만난 날</li>
+            <li>많이 용서받은 자의 사랑</li>
+            <li>갈릴리에서 예루살렘까지</li>
+            <li>십자가 아래 선 여인</li>
+            <li>부활의 첫 증인</li>
+            <li>용서받은 자의 헌신</li>
+            <li>4부 — 지혜와 그림자</li>
+            <li>솔로몬의 지혜와 실패</li>
+            <li>지혜를 구한 왕</li>
+            <li>지혜의 절정</li>
+            <li>작은 틈, 큰 균열</li>
+            <li>마음을 빼앗긴 자리</li>
+            <li>지혜자의 고백</li>
+            <li>찢어진 나라</li>
+            <li>마음을 지키라</li>
+            <li>닫는 글</li>
+            <li>출판사 안내</li>
+        </ol>
+    </div>
+
+    <span class="section-label">First Chapter</span>
+    <h2 class="section-title">제1장 미리보기</h2>
+    <div class="chapter">
+<div>
+<h2>여는 글</h2>
+<h3>그들도 사람이었다</h3>
+<p>성경의 인물들은 박물관의 동상이 아닙니다. 그들도 우리와 같은 사람이었습니다. 두려워했고 도망쳤고 울었고 흔들렸고, 어떤 자리에서는 빛났고 어떤 자리에서는 그림자에 가려졌습니다. 그들의 발자국 위에 그들의 눈물이 함께 새겨져 있다는 사실이, 우리에게 가장 깊은 위로가 됩니다.</p>
+<p>이 책은 그 발자국과 눈물을 차례로 따라 걷습니다. 광야로 내몰린 자, 가장 큰 결단의 자리에 선 자, 떠났다가 돌아온 자, 그리고 가장 높은 자리에서 흔들린 자. 열 명의 인물이 차례로 우리 앞에 나와, 자기 자리에서 한 영혼이 무엇과 마주했는가를 증언합니다.</p>
+<p>이 책은 100권 영성 시리즈의 네 번째 그룹 G04를 한 권으로 묶은 종합본입니다. 모세에서 솔로몬까지, 다윗의 눈물에서 막달라 마리아의 사랑까지 — 성경 인물 열 명의 결을 네 갈래로 모았습니다. 열 권 각각의 본문을 거의 그대로 유지하면서, 그 사이를 흐르고 있던 결을 한 호흡으로 이어 붙였습니다.</p>
+<p>네 갈래는 한 영혼이 통과할 수 있는 네 가지 자리입니다. <strong>1부 — 광야의 사람들</strong>은 모세·엘리야·욥처럼 연단의 시간을 통과한 자들의 발자국을 따라 걷고, <strong>2부 — 결단의 사람들</strong>은 에스더·룻·바울처럼 자기 자리를 결단한 자들의 응답을 봅니다. <strong>3부 — 눈물과 회개</strong>는 다윗·요나·막달라 마리아처럼 떠났다가 돌아온 자들의 눈물 위에 서고, <strong>4부 — 지혜와 그림자</strong>는 솔로몬이라는 한 인물 안에서 가장 높은 자리의 흔들림을 응시합니다.</p>
+<p>이 책은 위인전이 아닙니다. 그들의 발자국을 칭송하기보다, 그들의 눈물을 정직하게 응시합니다. 그들이 위대했기 때문이 아니라, 그들이 우리와 같은 사람이었기 때문에 우리가 그들에게서 배웁니다. 영웅이 아닌 한 영혼의 자리에서 빛이 흘러나오는 그 결을 함께 따라가 보십시오.</p>
+<p>한 번에 다 읽어내실 책이 아닙니다. 한 인물씩, 한 묵상씩 호흡을 따라 가져가시면 됩니다. 이제 첫 장을 펼쳐 주십시오. 그들의 발자국 위에 우리의 발걸음을 놓으면서, 그들의 눈물 옆에 우리의 마음을 두면서, 한 호흡씩 함께 걸어가 봅시다.</p>
+</div>
+    </div>
+
+    <div class="preview-end">
+        <p><strong>여기까지가 미리보기입니다.</strong><br>전체 본문은 구매 후 EPUB 파일로 받아보실 수 있습니다.</p>
+        <a href="../catalog.html?id=s2-omnibus-G04" class="btn-buy">구매하기</a>
+        
+        <a href="../epubs/s2-omnibus-G04.epub" download class="btn-buy btn-author author-only" style="display:none;margin-left:0.6rem">EPUB 다운로드</a>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    if (window.isAuthorMode && window.isAuthorMode()) {
+        document.querySelectorAll('.author-only').forEach(function(el) {
+            el.style.display = '';
+        });
+    }
+});
+</script>
+
+<footer>
+    <p>&copy; 2026 AI 시대 영성 출판사. 무단 전재·복제·배포 금지.</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>영원의 문턱에서 미리보기 — AI 시대 영성</title>
+    <meta name="description" content="">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Noto+Serif+KR:wght@300;400;500;600;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0a192f;
+            --secondary: #172a45;
+            --accent: #d4af37;
+            --accent-soft: rgba(212, 175, 55, 0.15);
+            --text-main: #2c3e50;
+            --text-muted: #5d6d7e;
+            --white: #ffffff;
+            --bg-card: #f5f2ec;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Noto Serif KR', serif;
+            color: var(--text-main);
+            background: var(--bg-card);
+            line-height: 1.95;
+            -webkit-font-smoothing: antialiased;
+        }
+        header {
+            background: var(--primary);
+            padding: 1.2rem 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            color: var(--accent);
+            letter-spacing: 0.1rem;
+            text-decoration: none;
+        }
+        .logo span {
+            color: rgba(255,255,255,0.7);
+            font-size: 0.78rem;
+            font-family: 'Noto Sans KR', sans-serif;
+            font-weight: 300;
+            letter-spacing: 0.2rem;
+            display: block;
+            margin-top: -0.2rem;
+        }
+        nav a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 0.85rem;
+            letter-spacing: 0.1rem;
+            margin-left: 2rem;
+            transition: color 0.3s;
+        }
+        nav a:hover { color: var(--accent); }
+
+        .preview-head {
+            background: linear-gradient(135deg, var(--primary) 0%, #0d2440 60%, #1a3a5c 100%);
+            padding: 4rem 2rem 3rem;
+            color: var(--white);
+        }
+        .head-inner {
+            max-width: 920px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+        .head-cover img {
+            width: 100%;
+            box-shadow: 0 16px 36px rgba(0,0,0,0.5);
+            border-radius: 4px;
+        }
+        .head-info .label {
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 0.75rem;
+            letter-spacing: 0.4rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+        .head-info h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            line-height: 1.3;
+            margin-bottom: 0.5rem;
+        }
+        .head-info .subtitle {
+            font-family: 'Noto Serif KR', serif;
+            font-size: 1.1rem;
+            color: rgba(255,255,255,0.7);
+            font-style: italic;
+            margin-bottom: 1.5rem;
+        }
+        .head-divider {
+            width: 48px;
+            height: 2px;
+            background: var(--accent);
+            margin: 1rem 0 1.4rem;
+        }
+        .head-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.6rem;
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 0.85rem;
+        }
+        .head-meta .item .label {
+            color: rgba(255,255,255,0.5);
+            font-size: 0.7rem;
+            letter-spacing: 0.1rem;
+        }
+        .head-meta .item .value {
+            color: var(--white);
+            font-weight: 500;
+        }
+        .head-meta .item.price .value {
+            color: var(--accent);
+            font-weight: 700;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+        }
+        .head-qr {
+            margin-top: 1.6rem;
+            display: inline-flex;
+            gap: 0.9rem;
+            align-items: center;
+            background: rgba(255,255,255,0.96);
+            padding: 0.7rem 1rem 0.7rem 0.7rem;
+            border-radius: 6px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.18);
+        }
+        .head-qr img {
+            width: 76px;
+            height: 76px;
+            display: block;
+            border-radius: 2px;
+        }
+        .head-qr-text {
+            font-family: 'Noto Sans KR', sans-serif;
+            line-height: 1.45;
+        }
+        .head-qr-text strong {
+            display: block;
+            color: var(--primary);
+            font-size: 0.82rem;
+            font-weight: 700;
+            letter-spacing: 0.05rem;
+        }
+        .head-qr-text span {
+            color: var(--text-muted);
+            font-size: 0.72rem;
+        }
+
+        .body-wrap {
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 4rem 2rem 3rem;
+        }
+        .section-label {
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 0.7rem;
+            letter-spacing: 0.4rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 0.8rem;
+        }
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.7rem;
+            color: var(--primary);
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 0.6rem;
+            display: inline-block;
+            margin-bottom: 2rem;
+        }
+
+        /* 목차 */
+        .toc {
+            background: var(--white);
+            border-radius: 4px;
+            padding: 2rem 2.4rem;
+            margin-bottom: 4rem;
+            box-shadow: 0 4px 16px rgba(10,25,47,0.06);
+        }
+        .toc ol {
+            list-style: none;
+            counter-reset: chapter;
+        }
+        .toc li {
+            counter-increment: chapter;
+            padding: 0.7rem 0;
+            border-bottom: 1px solid rgba(10,25,47,0.06);
+            font-family: 'Noto Serif KR', serif;
+            font-size: 1rem;
+            color: var(--primary);
+            display: flex;
+            align-items: baseline;
+            gap: 1rem;
+        }
+        .toc li::before {
+            content: counter(chapter, decimal-leading-zero);
+            font-family: 'Playfair Display', serif;
+            color: var(--accent);
+            font-weight: 700;
+            font-size: 0.9rem;
+            min-width: 2rem;
+            letter-spacing: 0.05rem;
+        }
+        .toc li:last-child { border-bottom: none; }
+
+        /* 본문 */
+        .chapter {
+            background: var(--white);
+            border-radius: 4px;
+            padding: 3rem 2.6rem;
+            box-shadow: 0 4px 16px rgba(10,25,47,0.06);
+            margin-bottom: 2rem;
+        }
+        .chapter h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            color: var(--primary);
+            margin-bottom: 0.8rem;
+            line-height: 1.35;
+        }
+        .chapter h3, .chapter .ch-sub {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.15rem;
+            color: var(--primary);
+            margin-top: 2rem;
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+        }
+        .chapter .ch-num {
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 0.7rem;
+            letter-spacing: 0.4rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 0.6rem;
+        }
+        .chapter .ch-divider {
+            width: 40px;
+            height: 2px;
+            background: var(--accent);
+            margin: 1.4rem 0 2rem;
+        }
+        .chapter p {
+            font-size: 1rem;
+            color: var(--text-main);
+            line-height: 2.05;
+            margin-bottom: 1.2rem;
+            text-align: justify;
+        }
+        .chapter .scripture {
+            background: var(--accent-soft);
+            border-left: 3px solid var(--accent);
+            padding: 1.2rem 1.4rem;
+            margin: 1.6rem 0;
+            font-style: italic;
+            border-radius: 0 4px 4px 0;
+        }
+        .chapter .scripture p {
+            margin-bottom: 0.4rem;
+            color: var(--text-main);
+        }
+        .chapter .scripture cite {
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            font-style: normal;
+            letter-spacing: 0.05rem;
+        }
+        .chapter strong { color: var(--primary); font-weight: 700; }
+
+        .preview-end {
+            text-align: center;
+            margin-top: 3rem;
+            padding: 3rem 2rem;
+            background: var(--white);
+            border-radius: 4px;
+            border: 1px dashed rgba(212,175,55,0.4);
+        }
+        .preview-end p {
+            font-family: 'Noto Sans KR', sans-serif;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 1.6rem;
+            letter-spacing: 0.1rem;
+        }
+        .preview-end strong {
+            color: var(--primary);
+            font-weight: 500;
+        }
+        .btn-buy {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--primary);
+            padding: 1rem 2.5rem;
+            border-radius: 2px;
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 700;
+            letter-spacing: 0.2rem;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        .btn-buy:hover { background: #b8941f; transform: translateY(-2px); }
+        .btn-author {
+            background: var(--primary);
+            color: var(--accent);
+            border: 1px solid var(--accent);
+        }
+        .btn-author:hover { background: var(--accent); color: var(--primary); }
+        .btn-youtube {
+            background: #c4302b;
+            color: #fff;
+            border: 1px solid #c4302b;
+        }
+        .btn-youtube:hover { background: #a52521; border-color: #a52521; color: #fff; transform: translateY(-2px); }
+
+        footer {
+            background: #06111f;
+            padding: 2rem 3rem;
+            text-align: center;
+            margin-top: 3rem;
+        }
+        footer p {
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 0.75rem;
+            color: rgba(255,255,255,0.3);
+            letter-spacing: 0.05rem;
+        }
+
+        @media (max-width: 720px) {
+            header { padding: 1rem 1.5rem; }
+            nav a { display: none; }
+            .head-inner { grid-template-columns: 1fr; gap: 2rem; }
+            .head-cover { max-width: 220px; margin: 0 auto; }
+            .head-info { text-align: center; }
+            .head-meta { justify-content: center; }
+            .head-divider { margin: 1rem auto 1.4rem; }
+            .body-wrap { padding: 2.5rem 1.2rem 2rem; }
+            .toc, .chapter { padding: 2rem 1.5rem; }
+        }
+    </style>
+    <script src="../author_mode.js" defer></script>
+</head>
+<body>
+
+<header>
+    <a href="../index.html" class="logo">
+        AI 시대 영성
+        <span>PUBLISHER</span>
+    </a>
+    <nav>
+        <a href="../index.html">홈</a>
+        <a href="../catalog.html">도서</a>
+        <a href="../catalog.html?id=s2-omnibus-G01">이 책 카드</a>
+    </nav>
+</header>
+
+<section class="preview-head">
+    <div class="head-inner">
+        <div class="head-cover">
+            <img src="../covers/s2-omnibus-G01.jpg" alt="영원의 문턱에서 표지">
+        </div>
+        <div class="head-info">
+            <p class="label">미리보기 · 시즌 2 · G01 종합책</p>
+            <h1>영원의 문턱에서</h1>
+            <p class="subtitle">그리스도인을 위한 사후세계 열 묵상</p>
+            <div class="head-divider"></div>
+            <div class="head-meta">
+                <div class="item price"><span class="label">정가</span><span class="value">7,000원</span></div>
+                <div class="item"><span class="label">발행</span><span class="value">2026.05.30</span></div>
+                <div class="item"><span class="label">ISBN</span><span class="value">9791176580014</span></div>
+                <div class="item"><span class="label">저자</span><span class="value">AI, 박헌근</span></div>
+            </div>
+            <div class="head-qr">
+                <img src="../qr/s2-omnibus-G01.png" alt="이 책 QR">
+                <div class="head-qr-text">
+                    <strong>이 책 바로가기</strong>
+                    <span>QR로 책방에서 즉시 구매</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="body-wrap">
+    <span class="section-label">Contents</span>
+    <h2 class="section-title">목차</h2>
+    <div class="toc">
+        <ol>
+            <li>여는 글</li>
+            <li>1부 — 죽음의 문턱</li>
+            <li>천국의 문턱에서</li>
+            <li>문 앞에 서다</li>
+            <li>지금, 바로 여기서</li>
+            <li>번데기의 옷을 입고</li>
+            <li>찰나 속의 영원</li>
+            <li>걱정의 크기를 재다</li>
+            <li>부활의 빛 아래 선택하다</li>
+            <li>천국의 문턱에서</li>
+            <li>죽음 너머의 빛</li>
+            <li>어둠의 골짜기</li>
+            <li>새벽 직전의 밤</li>
+            <li>고난이라는 터널</li>
+            <li>십자가의 그 빛</li>
+            <li>부활의 아침</li>
+            <li>영광의 소망</li>
+            <li>빛이신 하나님과 동행</li>
+            <li>2부 — 영혼의 정체</li>
+            <li>영혼은 어디로 가는가</li>
+            <li>죽음이란 무엇인가</li>
+            <li>영혼의 기원과 귀향</li>
+            <li>한 번 죽는 것은 정한 것이요</li>
+            <li>중간상태의 신비</li>
+            <li>심판대 앞에서</li>
+            <li>천국과 지옥, 영원의 두 길</li>
+            <li>오늘을 사는 영원의 사람</li>
+            <li>몸과 영혼의 경계</li>
+            <li>흙으로 빚으신 사랑</li>
+            <li>악기와 음악</li>
+            <li>말씀이 육신이 되어</li>
+            <li>성전 된 몸</li>
+            <li>연약함 속의 은혜</li>
+            <li>부활의 소망</li>
+            <li>전인적 예배</li>
+            <li>영원한 생명의 실체</li>
+            <li>영생은 지금 시작된다</li>
+            <li>씨앗 안에 담긴 영원</li>
+            <li>예수, 영생 그 자체</li>
+            <li>약속의 말씀을 붙들다</li>
+            <li>지금 누리는 영원한 생명</li>
+            <li>죽음을 이기는 생명</li>
+            <li>영원을 품고 오늘을 살다</li>
+            <li>3부 — 보이지 않는 세계</li>
+            <li>낙원과 지옥 사이</li>
+            <li>영원의 두 문</li>
+            <li>낙원의 실재</li>
+            <li>지옥의 진실</li>
+            <li>심판대 앞에서</li>
+            <li>오늘의 선택</li>
+            <li>구원의 확신</li>
+            <li>영원을 품은 삶</li>
+            <li>영계의 언어</li>
+            <li>하나님은 지금도 말씀하신다</li>
+            <li>영혼의 주파수를 맞추라</li>
+            <li>기도, 쌍방향의 대화</li>
+            <li>성령의 세미한 음성</li>
+            <li>꿈과 환상, 밤의 계시</li>
+            <li>분별의 은사</li>
+            <li>듣는 자에서 전하는 자로</li>
+            <li>천사들의 사역</li>
+            <li>하나님의 사자, 천사</li>
+            <li>천사의 계시 사역</li>
+            <li>천사의 보호 사역</li>
+            <li>하나님의 군대, 천군</li>
+            <li>섬김의 영들</li>
+            <li>예수 그리스도와 천사</li>
+            <li>천사와 함께 사는 삶</li>
+            <li>4부 — 마지막 일들</li>
+            <li>부활의 증거들</li>
+            <li>빈 무덤의 아침</li>
+            <li>증인들의 목소리</li>
+            <li>무덤을 열 수 없었던 이유들</li>
+            <li>씨앗의 신학</li>
+            <li>두려움에서 담대함으로</li>
+            <li>나의 죽음과 부활 신앙</li>
+            <li>부활의 증인으로 살다</li>
+            <li>마지막 심판의 의미</li>
+            <li>심판이라는 단어 앞에서</li>
+            <li>공의로우신 하나님</li>
+            <li>모든 장부가 정리되는 날</li>
+            <li>사랑과 공의의 만남</li>
+            <li>은혜 안에서의 책임</li>
+            <li>억울함이 없는 세상</li>
+            <li>그 날을 준비하는 오늘</li>
+            <li>닫는 글</li>
+            <li>출판사 안내</li>
+        </ol>
+    </div>
+
+    <span class="section-label">First Chapter</span>
+    <h2 class="section-title">제1장 미리보기</h2>
+    <div class="chapter">
+<div>
+<h2>여는 글</h2>
+<h3>보이지 않는 세계의 문 앞에서</h3>
+<p>모든 그리스도인은 두 세계의 경계에서 살아갑니다. 손에 잡히는 오늘과 손에 잡히지 않는 영원. 보이는 세상의 분주함과 보이지 않는 세계의 고요함. 그 두 세계 사이에 한 영혼이 다리처럼 놓여 있고, 우리는 그 다리 위에서 매일을 살아갑니다.</p>
+<p>이 책은 그 다리 위에서 발걸음을 가다듬으려는 작업입니다. 죽음의 문턱부터 부활의 아침까지, 영혼의 행로부터 천사의 사역까지, 낙원과 지옥의 갈림길부터 마지막 심판의 의미까지 — 사후세계라는 한 단어 안에 담긴 그리스도교의 가장 깊은 묵상을 열 갈래로 펼쳐 놓았습니다.</p>
+<p>이 책은 100권 영성 시리즈의 첫 그룹 G01을 한 권으로 묶은 종합본입니다. 열 권 각각의 본문을 거의 그대로 유지하면서, 그 사이를 흐르고 있던 결을 네 갈래로 모았습니다. 한 권씩 따로 읽을 때 보이지 않던 결이 한 권으로 모이고 나니 비로소 또렷이 드러난다는 것이, 종합이라는 작업의 가장 정직한 보람일 것입니다.</p>
+<p>네 갈래는 이렇게 흐릅니다. 죽음의 문턱과 그 너머의 빛, 영혼의 정체에 대한 정직한 응시, 보이지 않는 세계의 풍경, 그리고 마지막 일들 — 부활과 심판에 이르는 영원의 자리. 이 넷은 따로 흐르는 것 같으면서도 결국 한 강을 이룹니다.</p>
+<p><strong>1부 — 죽음의 문턱</strong>은 죽음 앞에 정직하게 선 자의 시선을 보고, <strong>2부 — 영혼의 정체</strong>는 영혼이 무엇이고 어디로 가는가를 묻습니다. <strong>3부 — 보이지 않는 세계</strong>는 낙원·영계·천사로 이어지는 베일 너머의 풍경을 그리고, <strong>4부 — 마지막 일들</strong>은 부활과 심판에서 모든 길이 만나는 자리를 응시합니다.</p>
+<p>이 책은 사후세계의 모든 질문에 답하지 않습니다. 다만 그 질문들 앞에서 두려워하지 않을 수 있는 자리, 곧 영원의 입장에서 오늘을 다시 보는 묵상의 자리로 한 사람을 데려가려 합니다. 답을 서두르기보다 호흡을 가다듬는 자리, 두려움 너머의 약속을 함께 응시하는 자리. 이 책이 그런 자리가 되어 드린다면, G01 열 권을 한 권으로 묶은 의미는 충분할 것입니다.</p>
+<p>한 번에 다 읽어내실 책이 아닙니다. 한 장씩, 한 묵상씩 호흡을 따라 가져가시면 됩니다. 이제 첫 장을 펼쳐 주십시오. 보이지 않는 세계의 문 앞에서, 그러나 두려움이 아니라 약속을 보면서, 한 호흡씩 함께 걸어가 봅시다.</p>
+</div>
+    </div>
+
+    <div class="preview-end">
+        <p><strong>여기까지가 미리보기입니다.</strong><br>전체 본문은 구매 후 EPUB 파일로 받아보실 수 있습니다.</p>
+        <a href="../catalog.html?id=s2-omnibus-G01" class="btn-buy">구매하기</a>
+        <a href="https://www.youtube.com/playlist?list=PLzjKIbpRzBBBWex70AcIecC02srzL4Y1b" target="_blank" rel="noopener" class="btn-buy btn-youtube" style="margin-left:0.6rem">재생목록 ▶</a>
+        <a href="../epubs/s2-omnibus-G01.epub" download class="btn-buy btn-author author-only" style="display:none;margin-left:0.6rem">EPUB 다운로드</a>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    if (window.isAuthorMode && window.isAuthorMode()) {
+        document.querySelectorAll('.author-only').forEach(function(el) {
+            el.style.display = '';
+        });
+    }
+});
+</script>
+
+<footer>
+    <p>&copy; 2026 AI 시대 영성 출판사. 무단 전재·복제·배포 금지.</p>
+</footer>
+
+</body>
+</html>

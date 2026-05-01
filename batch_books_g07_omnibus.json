@@ -1,0 +1,154 @@
+{
+  "project": {
+    "name": "G07 종합책 (100권 시즌 2 일곱 번째 그룹)",
+    "parent_project": "100권 영성 시리즈 G07 (ISBN 9791124569)",
+    "title": "바람과 불",
+    "subtitle": "그리스도인을 위한 성령 열 묵상",
+    "author": "박헌근",
+    "publisher": "AI 시대 영성",
+    "isbn": "9791176580076",
+    "isbn_prefix_hint": "신규 발행자번호 블록 9791176580 (2026-05-01 발급 통보, 시즌1 종합책=0007부터 G01=0014, G02=0021, ... +7 패턴, G09→G10만 +16 점프)",
+    "publish_date": "2026-05-30",
+    "format_primary": "전자책",
+    "format_secondary": "POD",
+    "status": "draft_2026-04-26"
+  },
+  "structure": {
+    "preface": {
+      "title": "여는 글 — 바람으로 임하시고 불로 머무시는 분",
+      "to_write": true,
+      "estimated_pages": 1
+    },
+    "parts": [
+      {
+        "part": 1,
+        "title": "1부 — 보혜사의 자리",
+        "subtitle": "성령론과 오순절의 임재",
+        "intro": {
+          "title": "1부 도입 — 보혜사를 만나는 자리",
+          "to_write": true,
+          "estimated_pages": 2
+        },
+        "books": [
+          {
+            "order": 1,
+            "src_no": 1,
+            "title": "성령님을 알아가는 시간",
+            "epub": "성령님을_알아가는_시간_20260419.epub",
+            "isbn": "9791124569603"
+          },
+          {
+            "order": 2,
+            "src_no": 8,
+            "title": "오순절의 불",
+            "epub": "오순절의_불_20260423.epub",
+            "isbn": "9791124569672"
+          }
+        ]
+      },
+      {
+        "part": 2,
+        "title": "2부 — 능력으로 임하시는 분",
+        "subtitle": "방언·예언·치유의 은사",
+        "intro": {
+          "title": "2부 도입 — 능력으로 임하시는 분",
+          "to_write": true,
+          "estimated_pages": 2
+        },
+        "books": [
+          {
+            "order": 3,
+            "src_no": 2,
+            "title": "방언의 은사",
+            "epub": "방언의_은사_20260419.epub",
+            "isbn": "9791124569610"
+          },
+          {
+            "order": 4,
+            "src_no": 3,
+            "title": "예언의 은사",
+            "epub": "예언의_은사_20260419.epub",
+            "isbn": "9791124569627"
+          },
+          {
+            "order": 5,
+            "src_no": 4,
+            "title": "치유의 은사",
+            "epub": "치유의_은사_20260420.epub",
+            "isbn": "9791124569634"
+          }
+        ]
+      },
+      {
+        "part": 3,
+        "title": "3부 — 분별과 지혜의 결",
+        "subtitle": "지혜의 영과 분별의 은사",
+        "intro": {
+          "title": "3부 도입 — 분별과 지혜의 결",
+          "to_write": true,
+          "estimated_pages": 2
+        },
+        "books": [
+          {
+            "order": 6,
+            "src_no": 5,
+            "title": "지혜의 영",
+            "epub": "지혜의_영_20260421.epub",
+            "isbn": "9791124569641"
+          },
+          {
+            "order": 7,
+            "src_no": 6,
+            "title": "분별의 은사",
+            "epub": "분별의_은사_20260422.epub",
+            "isbn": "9791124569658"
+          }
+        ]
+      },
+      {
+        "part": 4,
+        "title": "4부 — 충만에서 부흥까지",
+        "subtitle": "충만한 삶·열매·마지막 부흥",
+        "intro": {
+          "title": "4부 도입 — 충만에서 부흥까지",
+          "to_write": true,
+          "estimated_pages": 2
+        },
+        "books": [
+          {
+            "order": 8,
+            "src_no": 7,
+            "title": "성령충만한 삶",
+            "epub": "성령충만한_삶_20260423.epub",
+            "isbn": "9791124569665"
+          },
+          {
+            "order": 9,
+            "src_no": 9,
+            "title": "성령의 열매",
+            "epub": "성령의_열매_20260424.epub",
+            "isbn": "9791124569689"
+          },
+          {
+            "order": 10,
+            "src_no": 10,
+            "title": "마지막 시대의 부흥",
+            "epub": "마지막_시대의_부흥_20260424.epub",
+            "isbn": "9791124569696"
+          }
+        ]
+      }
+    ],
+    "epilogue": {
+      "title": "닫는 글 — 바람과 불이 함께 흐르는 자리",
+      "to_write": true,
+      "estimated_pages": 2
+    }
+  },
+  "policies": {
+    "content_preservation": "원본 본문 거의 그대로 유지",
+    "edit_scope": "중복·불필요 제거, 부 도입글 신규 작성, 부 간 연결 보완, 종합 서문·결론 신규",
+    "cover_treatment": "epub 내부 통합 (분리 추출 안 함, 신규 종합책 표지 새로 만듦)",
+    "page_numbering": "통합 단일 페이지 번호"
+  }
+}

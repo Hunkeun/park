@@ -138,6 +138,37 @@
             position: relative;
         }
 
+        .hero-qr {
+            margin: 2.5rem auto 0;
+            display: inline-flex;
+            gap: 0.9rem;
+            align-items: center;
+            background: rgba(255,255,255,0.96);
+            padding: 0.7rem 1.1rem 0.7rem 0.7rem;
+            border-radius: 6px;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.3);
+            position: relative;
+            text-align: left;
+        }
+        .hero-qr img {
+            width: 76px;
+            height: 76px;
+            display: block;
+            border-radius: 2px;
+        }
+        .hero-qr strong {
+            display: block;
+            color: var(--primary);
+            font-size: 0.82rem;
+            font-weight: 700;
+            letter-spacing: 0.05rem;
+        }
+        .hero-qr span {
+            color: var(--text-muted);
+            font-size: 0.72rem;
+            line-height: 1.5;
+        }
+
         /* ─── SECTION COMMON ─── */
         section {
             padding: 6rem 2rem;
@@ -235,144 +266,161 @@
             margin-bottom: 0.2rem;
         }
 
-        /* ─── BOOKS ─── */
+        /* ─── SERIES CARDS ─── */
         .books-bg {
             background: #f5f2ec;
         }
 
-        .book-card {
-            background: var(--white);
-            border-radius: 4px;
-            box-shadow: 0 8px 40px rgba(10,25,47,0.08);
+        .series-grid {
             display: grid;
-            grid-template-columns: 280px 1fr;
-            overflow: hidden;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
             margin-top: 2rem;
         }
 
-        .book-cover-area {
+        .series-card {
+            background: var(--white);
+            border-radius: 4px;
+            box-shadow: 0 8px 30px rgba(10,25,47,0.08);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.4s, box-shadow 0.4s;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .series-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 18px 50px rgba(10,25,47,0.16);
+        }
+
+        .series-cover-stack {
             background: linear-gradient(160deg, var(--primary) 0%, #1a3a5c 100%);
+            padding: 2.4rem 1.6rem 2rem;
             display: flex;
-            flex-direction: column;
             justify-content: center;
-            align-items: center;
-            padding: 3rem 2rem;
-            text-align: center;
+            align-items: flex-end;
+            gap: 0.5rem;
+            min-height: 220px;
+            position: relative;
         }
 
-        .book-cover-area img {
-            width: 140px;
-            border-radius: 4px;
-            box-shadow: 0 12px 30px rgba(0,0,0,0.4);
-            margin-bottom: 1.5rem;
+        .series-cover-stack img {
+            width: 24%;
+            border-radius: 2px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.45);
+            transition: transform 0.4s;
         }
 
-        .book-cover-placeholder {
-            width: 140px;
-            height: 200px;
-            background: linear-gradient(160deg, #1e3a5f, #2d5a8e);
-            border-radius: 4px;
-            box-shadow: 0 12px 30px rgba(0,0,0,0.4);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 1.5rem;
-            border: 1px solid rgba(212,175,55,0.3);
-            padding: 1.2rem;
-        }
+        .series-cover-stack img:nth-child(1) { transform: rotate(-6deg) translateY(8px); }
+        .series-cover-stack img:nth-child(2) { transform: rotate(-2deg) translateY(2px); z-index: 1; }
+        .series-cover-stack img:nth-child(3) { transform: rotate(2deg) translateY(2px); z-index: 1; }
+        .series-cover-stack img:nth-child(4) { transform: rotate(6deg) translateY(8px); }
 
-        .book-cover-placeholder .book-icon {
-            font-size: 2.5rem;
-            margin-bottom: 0.8rem;
-            opacity: 0.8;
-        }
+        .series-card:hover .series-cover-stack img:nth-child(1) { transform: rotate(-9deg) translateY(0); }
+        .series-card:hover .series-cover-stack img:nth-child(4) { transform: rotate(9deg) translateY(0); }
 
-        .book-cover-placeholder p {
-            font-family: 'Noto Serif KR', serif;
-            font-size: 0.75rem;
-            color: rgba(255,255,255,0.7);
-            text-align: center;
-            line-height: 1.5;
-        }
-
-        .book-badge {
+        .series-count-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
             background: var(--accent);
             color: var(--primary);
-            font-family: 'Noto Sans KR', sans-serif;
-            font-size: 0.7rem;
+            font-family: 'Playfair Display', serif;
+            font-size: 0.95rem;
             font-weight: 700;
-            letter-spacing: 0.15rem;
             padding: 0.3rem 0.9rem;
             border-radius: 2px;
+            letter-spacing: 0.05rem;
         }
 
-        .book-info {
-            padding: 3rem;
+        .series-body {
+            padding: 1.8rem 1.6rem 2rem;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
         }
 
-        .book-meta {
+        .series-meta {
             font-family: 'Noto Sans KR', sans-serif;
-            font-size: 0.78rem;
+            font-size: 0.72rem;
             color: var(--accent);
-            letter-spacing: 0.3rem;
+            letter-spacing: 0.25rem;
             text-transform: uppercase;
-            margin-bottom: 0.8rem;
+            margin-bottom: 0.6rem;
         }
 
-        .book-title {
+        .series-title {
             font-family: 'Playfair Display', serif;
-            font-size: 1.7rem;
+            font-size: 1.45rem;
             color: var(--primary);
             line-height: 1.3;
             margin-bottom: 0.5rem;
         }
 
-        .book-subtitle {
-            font-family: 'Noto Serif KR', serif;
-            font-size: 0.95rem;
-            color: var(--text-muted);
-            margin-bottom: 1.5rem;
-            font-style: italic;
-        }
-
-        .book-divider {
+        .series-divider {
             width: 36px;
             height: 2px;
             background: var(--accent);
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
         }
 
-        .book-desc {
-            font-size: 0.95rem;
+        .series-desc {
+            font-size: 0.9rem;
             color: var(--text-muted);
-            line-height: 2;
-            margin-bottom: 2rem;
+            line-height: 1.85;
+            margin-bottom: 1.4rem;
+            flex: 1;
         }
 
-        .book-details {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1.5rem;
+        .series-cta {
             font-family: 'Noto Sans KR', sans-serif;
             font-size: 0.82rem;
-        }
-
-        .book-detail-item {
-            display: flex;
-            flex-direction: column;
-            gap: 0.2rem;
-        }
-
-        .book-detail-item .label {
-            color: var(--text-muted);
-            font-size: 0.73rem;
-            letter-spacing: 0.1rem;
-        }
-
-        .book-detail-item .value {
             color: var(--primary);
+            letter-spacing: 0.15rem;
             font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            transition: color 0.3s;
+        }
+
+        .series-card:hover .series-cta {
+            color: var(--accent);
+        }
+
+        .series-cta-arrow {
+            transition: transform 0.3s;
+        }
+
+        .series-card:hover .series-cta-arrow {
+            transform: translateX(4px);
+        }
+
+        .catalog-link-row {
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .catalog-link {
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 0.9rem;
+            color: var(--primary);
+            text-decoration: none;
+            border: 1px solid rgba(10,25,47,0.2);
+            padding: 0.9rem 1.8rem;
+            border-radius: 2px;
+            letter-spacing: 0.15rem;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .catalog-link:hover {
+            border-color: var(--accent);
+            color: var(--accent);
         }
 
         /* ─── PUBLISHER INFO ─── */
@@ -490,16 +538,19 @@
         }
 
         /* ─── RESPONSIVE ─── */
+        @media (max-width: 960px) {
+            .series-grid { grid-template-columns: 1fr; gap: 1.5rem; max-width: 480px; margin: 2rem auto 0; }
+        }
+
         @media (max-width: 720px) {
             header { padding: 1rem 1.5rem; }
             nav { display: none; }
             .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-            .book-card { grid-template-columns: 1fr; }
-            .book-cover-area { padding: 2.5rem; }
             .info-grid { grid-template-columns: 1fr; }
             footer { flex-direction: column; gap: 0.8rem; text-align: center; }
         }
     </style>
+    <script src="author_mode.js" defer></script>
 </head>
 <body>
 
@@ -511,7 +562,7 @@
     </a>
     <nav>
         <a href="#about">출판사 소개</a>
-        <a href="#books">도서</a>
+        <a href="catalog.html">도서</a>
         <a href="#contact">연락처</a>
     </nav>
 </header>
@@ -522,6 +573,13 @@
     <h1>믿음으로 <em>AI 시대</em>를<br>분별하다</h1>
     <div class="hero-divider"></div>
     <p class="hero-sub">기술 우상주의 시대, 신앙의 눈으로 본질을 읽다</p>
+    <div class="hero-qr">
+        <img src="qr/main.png" alt="책방 사이트 QR">
+        <div>
+            <strong>책방 사이트 공유</strong>
+            <span>QR로 모바일에서 보기<br>친구에게도 추천</span>
+        </div>
+    </div>
 </section>
 
 <!-- ─── ABOUT ─── -->
@@ -574,51 +632,78 @@
 
 <!-- ─── BOOKS ─── -->
 <section id="books" class="books-bg">
-    <div class="container">
+    <div class="container" style="max-width: 1080px;">
         <div class="reveal">
             <span class="section-label">Publications</span>
-            <h2 class="section-title">출간 도서</h2>
+            <h2 class="section-title">출간 도서 121권</h2>
             <div class="title-line"></div>
+            <p style="font-family:'Noto Sans KR',sans-serif; font-size:0.95rem; color: #5d6d7e; max-width: 620px; line-height: 1.9;">
+                두 시즌의 본권 110권과 그 시리즈를 한 권으로 묶은 종합책 11권. 모두 자체 출판사 명의로 ISBN 발급·발행된 정식 전자책입니다.
+            </p>
         </div>
 
-        <div class="book-card reveal">
-            <div class="book-cover-area">
-                <div class="book-cover-placeholder">
-                    <span class="book-icon">&#9997;</span>
-                    <p>AI 시대 영성</p>
+        <div class="series-grid">
+            <a href="catalog.html#season1" class="series-card reveal">
+                <div class="series-cover-stack">
+                    <span class="series-count-badge">10</span>
+                    <img src="covers/s1-01.jpg" alt="">
+                    <img src="covers/s1-02.jpg" alt="">
+                    <img src="covers/s1-09.jpg" alt="">
+                    <img src="covers/s1-10.jpg" alt="">
                 </div>
-                <span class="book-badge">2026 출간</span>
-            </div>
-            <div class="book-info">
-                <p class="book-meta">저자 &mdash; 박헌근</p>
-                <h3 class="book-title">AI 시대 영성</h3>
-                <p class="book-subtitle">기술 우상주의 분별과 영적 주체성 확립 가이드</p>
-                <div class="book-divider"></div>
-                <p class="book-desc">
-                    인공지능이 인간의 사고와 신앙 영역까지 침투하는 시대,
-                    그리스도인은 어떻게 분별하고 어떻게 서야 하는가.
-                    성경적 세계관으로 AI 문명의 본질을 분석하고,
-                    영적 주체성을 회복하는 실천적 로드맵을 제시한다.
-                </p>
-                <div class="book-details">
-                    <div class="book-detail-item">
-                        <span class="label">출판사</span>
-                        <span class="value">AI 시대 영성</span>
-                    </div>
-                    <div class="book-detail-item">
-                        <span class="label">저자</span>
-                        <span class="value">박헌근</span>
-                    </div>
-                    <div class="book-detail-item">
-                        <span class="label">형태</span>
-                        <span class="value">전자책 (EPUB)</span>
-                    </div>
-                    <div class="book-detail-item">
-                        <span class="label">출간연도</span>
-                        <span class="value">2026</span>
-                    </div>
+                <div class="series-body">
+                    <p class="series-meta">Season 1</p>
+                    <h3 class="series-title">AI 시대 영성<br>첫 묵상 시리즈</h3>
+                    <div class="series-divider"></div>
+                    <p class="series-desc">
+                        AI 시대를 신앙으로 살아가는 길의 첫 열 권.
+                        영성 상담·믿음·자유의지·죽음·치유 등의 주제로 시작된 시리즈.
+                    </p>
+                    <span class="series-cta">10권 보기 <span class="series-cta-arrow">→</span></span>
                 </div>
-            </div>
+            </a>
+
+            <a href="catalog.html#season2" class="series-card reveal">
+                <div class="series-cover-stack">
+                    <span class="series-count-badge">100</span>
+                    <img src="covers/s2-001.jpg" alt="">
+                    <img src="covers/s2-031.jpg" alt="">
+                    <img src="covers/s2-061.jpg" alt="">
+                    <img src="covers/s2-091.jpg" alt="">
+                </div>
+                <div class="series-body">
+                    <p class="series-meta">Season 2 · Main</p>
+                    <h3 class="series-title">100권 영성 묵상<br>시리즈</h3>
+                    <div class="series-divider"></div>
+                    <p class="series-desc">
+                        사후세계·AI·믿음·성경 인물·내면 치유·시대 분별·성령·기도·관계·하나님 나라 — 열 그룹으로 나뉜 100권.
+                    </p>
+                    <span class="series-cta">100권 보기 <span class="series-cta-arrow">→</span></span>
+                </div>
+            </a>
+
+            <a href="catalog.html#omnibus" class="series-card reveal">
+                <div class="series-cover-stack">
+                    <span class="series-count-badge">11</span>
+                    <img src="covers/s1-omnibus.jpg" alt="">
+                    <img src="covers/s2-omnibus-G01.jpg" alt="">
+                    <img src="covers/s2-omnibus-G05.jpg" alt="">
+                    <img src="covers/s2-omnibus-G10.jpg" alt="">
+                </div>
+                <div class="series-body">
+                    <p class="series-meta">Omnibus</p>
+                    <h3 class="series-title">시리즈를 한 권으로<br>종합책</h3>
+                    <div class="series-divider"></div>
+                    <p class="series-desc">
+                        시즌1 열 권을 한 권으로, 시즌2 열 그룹을 각각 한 권으로 — 묶고 다듬은 합본 11권.
+                    </p>
+                    <span class="series-cta">11권 보기 <span class="series-cta-arrow">→</span></span>
+                </div>
+            </a>
+        </div>
+
+        <div class="catalog-link-row reveal">
+            <a href="catalog.html" class="catalog-link">전체 도서 카탈로그 →</a>
         </div>
     </div>
 </section>
