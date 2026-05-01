@@ -138,8 +138,14 @@
             position: relative;
         }
 
-        .hero-qr {
+        .hero-qr-row {
             margin: 2.5rem auto 0;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .hero-qr {
             display: inline-flex;
             gap: 0.9rem;
             align-items: center;
@@ -149,6 +155,15 @@
             box-shadow: 0 6px 18px rgba(0,0,0,0.3);
             position: relative;
             text-align: left;
+        }
+        .hero-qr.kakao {
+            background: #fee500;
+        }
+        .hero-qr.kakao strong {
+            color: #3c1e1e;
+        }
+        .hero-qr.kakao span {
+            color: #5a3a2a;
         }
         .hero-qr img {
             width: 76px;
@@ -573,12 +588,21 @@
     <h1>믿음으로 <em>AI 시대</em>를<br>분별하다</h1>
     <div class="hero-divider"></div>
     <p class="hero-sub">기술 우상주의 시대, 신앙의 눈으로 본질을 읽다</p>
-    <div class="hero-qr">
-        <img src="qr/main.png" alt="책방 사이트 QR">
-        <div>
-            <strong>책방 사이트 공유</strong>
-            <span>QR로 모바일에서 보기<br>친구에게도 추천</span>
+    <div class="hero-qr-row">
+        <div class="hero-qr">
+            <img src="qr/main.png" alt="책방 사이트 QR">
+            <div>
+                <strong>책방 사이트 공유</strong>
+                <span>QR로 모바일에서 보기<br>친구에게도 추천</span>
+            </div>
         </div>
+        <a href="https://pf.kakao.com/_PxdHTX" target="_blank" rel="noopener" class="hero-qr kakao" style="text-decoration:none">
+            <img src="qr/kakao.png" alt="카카오톡 채널 QR">
+            <div>
+                <strong>카카오톡 채널 추가</strong>
+                <span>새 책 소식·문의<br>AI 시대 영성</span>
+            </div>
+        </a>
     </div>
 </section>
 

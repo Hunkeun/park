@@ -22,7 +22,7 @@ except AttributeError:
 import json
 from pathlib import Path
 
-from qr_util import SITE_BASE, book_url, catalog_url, make_qr_png_bytes
+from qr_util import SITE_BASE, book_url, catalog_url, kakao_url, make_qr_png_bytes
 
 QR_DIR = Path("publisher") / "qr"
 
@@ -33,6 +33,7 @@ def build():
     pairs = [
         ("main.png", SITE_BASE + "/"),
         ("catalog.png", catalog_url()),
+        ("kakao.png", kakao_url()),
     ]
 
     with open("publisher/books_master.json", encoding="utf-8") as f:
@@ -47,7 +48,7 @@ def build():
         total_bytes += len(png)
 
     print(f"[완료] {len(pairs)}장 QR 생성 → {QR_DIR}/")
-    print(f"  메인 2장 + 책 {len(pairs) - 2}장")
+    print(f"  메인 3장 (사이트·카탈로그·카톡 채널) + 책 {len(pairs) - 3}장")
     print(f"  총 용량: {total_bytes / 1024:.1f} KB (평균 {total_bytes / len(pairs):.0f} bytes)")
 
 

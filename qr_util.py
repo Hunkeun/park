@@ -24,10 +24,16 @@ import qrcode
 from qrcode.constants import ERROR_CORRECT_M
 
 SITE_BASE = "https://ai-spirituality-books.vercel.app"
+KAKAO_CHANNEL_URL = "https://pf.kakao.com/_PxdHTX"  # AI 시대 영성 채널
 
 
 def catalog_url() -> str:
     return f"{SITE_BASE}/catalog"
+
+
+def kakao_url() -> str:
+    """AI 시대 영성 카카오톡 채널."""
+    return KAKAO_CHANNEL_URL
 
 
 def book_url(book_id: str) -> str:
