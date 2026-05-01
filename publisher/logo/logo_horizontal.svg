@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 200" width="600" height="200">
+  <title>AI 시대 영성 - 생기 엠블럼 (가로형)</title>
+  <g transform="translate(30, -10) scale(0.78)" fill="#D4A42A">
+    <path d="M 108 20 Q 140 100 115 200 L 85 200 Q 60 100 108 20 Z"/>
+    <rect x="80" y="208" width="10" height="10"/>
+    <rect x="95" y="208" width="10" height="10"/>
+    <rect x="110" y="208" width="10" height="10"/>
+  </g>
+  <text x="215" y="120" text-anchor="start"
+        font-family="Malgun Gothic, '맑은 고딕', 'Apple SD Gothic Neo', sans-serif"
+        font-size="42" font-weight="600" fill="#D4A42A"
+        letter-spacing="4">AI 시대 영성</text>
+</svg>

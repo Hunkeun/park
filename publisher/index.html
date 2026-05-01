@@ -46,21 +46,24 @@
         }
 
         .logo {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.4rem;
-            color: var(--accent);
-            letter-spacing: 0.1rem;
+            display: inline-flex;
+            align-items: center;
             text-decoration: none;
+            gap: 0.6rem;
         }
-
-        .logo span {
-            color: rgba(255,255,255,0.7);
-            font-size: 0.8rem;
+        .logo img {
+            height: 38px;
+            width: auto;
+            display: block;
+        }
+        .logo span.label {
+            color: rgba(255,255,255,0.55);
+            font-size: 0.7rem;
             font-family: 'Noto Sans KR', sans-serif;
             font-weight: 300;
-            letter-spacing: 0.2rem;
-            display: block;
-            margin-top: -0.2rem;
+            letter-spacing: 0.3rem;
+            border-left: 1px solid rgba(212,175,55,0.4);
+            padding-left: 0.7rem;
         }
 
         nav a {
@@ -96,13 +99,23 @@
             background: radial-gradient(ellipse at 60% 40%, rgba(212,175,55,0.08) 0%, transparent 70%);
         }
 
+        .hero-logo {
+            margin-bottom: 1.8rem;
+            position: relative;
+        }
+        .hero-logo img {
+            height: 200px;
+            width: auto;
+            display: block;
+            filter: drop-shadow(0 6px 16px rgba(0,0,0,0.35));
+        }
         .hero-tag {
             font-family: 'Noto Sans KR', sans-serif;
-            font-size: 0.8rem;
-            letter-spacing: 0.5rem;
-            color: var(--accent);
+            font-size: 0.72rem;
+            letter-spacing: 0.4rem;
+            color: rgba(212,175,55,0.85);
             text-transform: uppercase;
-            margin-bottom: 2rem;
+            margin-bottom: 1.6rem;
             position: relative;
         }
 
@@ -573,8 +586,8 @@
 <!-- ─── HEADER ─── -->
 <header>
     <a href="#" class="logo">
-        AI 시대 영성
-        <span>PUBLISHER</span>
+        <img src="logo/logo_horizontal.svg" alt="AI 시대 영성">
+        <span class="label">PUBLISHER</span>
     </a>
     <nav>
         <a href="#about">출판사 소개</a>
@@ -585,7 +598,10 @@
 
 <!-- ─── HERO ─── -->
 <section class="hero">
-    <span class="hero-tag">AI 시대 영성 출판사</span>
+    <div class="hero-logo">
+        <img src="logo/logo_vertical.svg" alt="AI 시대 영성">
+    </div>
+    <span class="hero-tag">EST. 2026 · 121권 진열</span>
     <h1>믿음으로 <em>AI 시대</em>를<br>분별하다</h1>
     <div class="hero-divider"></div>
     <p class="hero-sub">기술 우상주의 시대, 신앙의 눈으로 본질을 읽다</p>

@@ -239,20 +239,24 @@ HTML_TEMPLATE = '''<!DOCTYPE html>
             z-index: 100;
         }}
         .logo {{
-            font-family: 'Playfair Display', serif;
-            font-size: 1.4rem;
-            color: var(--accent);
-            letter-spacing: 0.1rem;
+            display: inline-flex;
+            align-items: center;
             text-decoration: none;
+            gap: 0.6rem;
         }}
-        .logo span {{
-            color: rgba(255,255,255,0.7);
-            font-size: 0.78rem;
+        .logo img {{
+            height: 36px;
+            width: auto;
+            display: block;
+        }}
+        .logo span.label {{
+            color: rgba(255,255,255,0.55);
+            font-size: 0.68rem;
             font-family: 'Noto Sans KR', sans-serif;
             font-weight: 300;
-            letter-spacing: 0.2rem;
-            display: block;
-            margin-top: -0.2rem;
+            letter-spacing: 0.3rem;
+            border-left: 1px solid rgba(212,175,55,0.4);
+            padding-left: 0.7rem;
         }}
         nav a {{
             color: rgba(255,255,255,0.7);
@@ -1073,8 +1077,8 @@ HTML_TEMPLATE = '''<!DOCTYPE html>
 
 <header>
     <a href="index.html" class="logo">
-        AI 시대 영성
-        <span>PUBLISHER</span>
+        <img src="logo/logo_horizontal.svg" alt="AI 시대 영성">
+        <span class="label">CATALOG</span>
     </a>
     <nav>
         <a href="index.html">홈</a>
