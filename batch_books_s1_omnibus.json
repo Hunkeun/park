@@ -1,0 +1,154 @@
+{
+  "project": {
+    "name": "시즌 1 10권 종합책",
+    "parent_project": "100권 이전 시즌 1 컬렉션 (ISBN 9791199881)",
+    "title": "AI 시대를 살아가는 영성",
+    "subtitle": "디지털 시대 그리스도인을 위한 열 가지 묵상",
+    "author": "AI, 박헌근",
+    "publisher": "AI 시대 영성",
+    "isbn": "9791176580007",
+    "isbn_prefix_hint": "신규 발행자번호 블록 9791176580 (2026-05-01 발급 통보)",
+    "publish_date": "2026-05-30",
+    "format_primary": "전자책",
+    "format_secondary": "POD",
+    "status": "draft_2026-04-25"
+  },
+  "structure": {
+    "preface": {
+      "title": "여는 글 — 시즌 1을 한 권으로 묶으며",
+      "to_write": true,
+      "estimated_pages": 3
+    },
+    "parts": [
+      {
+        "part": 1,
+        "title": "1부 — 시대를 보는 시선",
+        "subtitle": "AI·새 시대·분별",
+        "intro": {
+          "title": "1부 도입 — 광장과 광야 사이",
+          "to_write": true,
+          "estimated_pages": 2
+        },
+        "books": [
+          {
+            "order": 1,
+            "src_no": 1,
+            "title": "AI 시대 영성 상담사를 만나다",
+            "epub": "AI_시대_영성_상담사를_만나다_20260412.epub",
+            "isbn": "9791199881211"
+          },
+          {
+            "order": 2,
+            "src_no": 5,
+            "title": "새술은 새부대에 담아야",
+            "epub": "새술은_새부대에_담아야_20260412.epub",
+            "isbn": "9791199881280"
+          },
+          {
+            "order": 3,
+            "src_no": 4,
+            "title": "다수의 횡포를 직관하라",
+            "epub": "다수의_횡포를_직관하라_20260415.epub",
+            "isbn": "9791199881259"
+          }
+        ]
+      },
+      {
+        "part": 2,
+        "title": "2부 — 믿음의 도전",
+        "subtitle": "믿음·시간·결단",
+        "intro": {
+          "title": "2부 도입 — 산을 옮기는 결단의 자리",
+          "to_write": true,
+          "estimated_pages": 2
+        },
+        "books": [
+          {
+            "order": 4,
+            "src_no": 2,
+            "title": "산을 옮길만한 믿음",
+            "epub": "산을_옮길만한_믿음_20260412.epub",
+            "isbn": "9791199881228"
+          },
+          {
+            "order": 5,
+            "src_no": 6,
+            "title": "카이로스와 자유의지",
+            "epub": "카이로스와_자유의지_20260415.epub",
+            "isbn": "9791199881235"
+          },
+          {
+            "order": 6,
+            "src_no": 8,
+            "title": "이스라엘 어느 왕의 덤 인생",
+            "epub": "이스라엘_어느_왕의_덤_인생_20260415.epub",
+            "isbn": "9791199881242"
+          }
+        ]
+      },
+      {
+        "part": 3,
+        "title": "3부 — 감성과 치유",
+        "subtitle": "내면·몸과 영혼",
+        "intro": {
+          "title": "3부 도입 — 마음의 결을 따라",
+          "to_write": true,
+          "estimated_pages": 2
+        },
+        "books": [
+          {
+            "order": 7,
+            "src_no": 3,
+            "title": "아름다운 감성을 사모하자",
+            "epub": "아름다운_감성을_사모하자_20260413.epub",
+            "isbn": "9791199881297"
+          },
+          {
+            "order": 8,
+            "src_no": 7,
+            "title": "진동 에너지와 치유",
+            "epub": "진동_에너지와_치유_20260413.epub",
+            "isbn": "9791199881266"
+          }
+        ]
+      },
+      {
+        "part": 4,
+        "title": "4부 — 종말과 영원",
+        "subtitle": "죽음·내세",
+        "intro": {
+          "title": "4부 도입 — 두 세계 사이에서",
+          "to_write": true,
+          "estimated_pages": 2
+        },
+        "books": [
+          {
+            "order": 9,
+            "src_no": 9,
+            "title": "죽음의 역설",
+            "epub": "죽음의_역설_20260413.epub",
+            "isbn": "9791199881273"
+          },
+          {
+            "order": 10,
+            "src_no": 10,
+            "title": "이 세상과 저 세상",
+            "epub": "이_세상과_저_세상_20260416.epub",
+            "isbn": "9791199881204"
+          }
+        ]
+      }
+    ],
+    "epilogue": {
+      "title": "닫는 글 — 시즌 1을 마치며",
+      "to_write": true,
+      "estimated_pages": 2
+    }
+  },
+  "policies": {
+    "content_preservation": "원본 본문 거의 그대로 유지",
+    "edit_scope": "중복·불필요 제거, 부 도입글 신규 작성, 부 간 연결 보완, 종합 서문·결론 신규",
+    "cover_treatment": "epub 내부 통합 (분리 추출 안 함, 신규 종합책 표지 새로 만듦)",
+    "page_numbering": "통합 단일 페이지 번호 (각 권 페이지가 아닌 책 전체 일련 페이지)"
+  }
+}
