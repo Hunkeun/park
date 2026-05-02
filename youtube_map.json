@@ -8,8 +8,8 @@
     },
     "epub_dir": "~/Downloads/전자책/",
     "epub_dir_bookk_extended": "~/Downloads/_부크크검수/ (시즌 1 부크크 확장본)",
-    "last_updated": "2026-04-30",
-    "status": "시즌 1 10권 + 시즌 2 G01·G02·G03 30권 영상화·업로드 완료. 시즌 2 G04는 빌드 진행 중."
+    "last_updated": "2026-05-02",
+    "status": "시즌 1 10권 + 시즌 2 G01·G02·G03·G04 40권 영상화·업로드·재생목록 정렬 완료."
   },
   "books": [
     {"season": 1, "num":  1, "group": "S1", "ep":  1, "title": "AI 시대 영성 상담사를 만나다", "isbn": "9791199881211", "epub": "AI_시대_영성_상담사를_만나다_20260412.epub", "youtube_id": "tmWkdC91UVA"},
@@ -56,21 +56,22 @@
     {"season": 2, "num": 29, "group": "G03", "ep":  9, "s_no":  9, "title": "마지막 때의 믿음",          "isbn": "9791124569283", "epub": "마지막_때의_믿음_20260423.epub",          "youtube_id": "176j1F1m0_A"},
     {"season": 2, "num": 30, "group": "G03", "ep": 10, "s_no": 10, "title": "흔들리지 않는 닻",         "isbn": "9791124569290", "epub": "흔들리지_않는_닻_20260424.epub",          "youtube_id": "g0EZgUGpjpY"},
 
-    {"season": 2, "num": 31, "group": "G04", "ep":  1, "s_no":  1, "title": "다윗의 눈물",                "isbn": "9791124569306", "epub": "다윗의_눈물_20260418.epub",                "youtube_id": ""},
-    {"season": 2, "num": 32, "group": "G04", "ep":  2, "s_no":  2, "title": "바울의 변화",                "isbn": "9791124569313", "epub": "바울의_변화_20260419.epub",                "youtube_id": ""},
-    {"season": 2, "num": 33, "group": "G04", "ep":  3, "s_no":  3, "title": "에스더의 용기",              "isbn": "9791124569320", "epub": "에스더의_용기_20260419.epub",              "youtube_id": ""},
-    {"season": 2, "num": 34, "group": "G04", "ep":  4, "s_no":  4, "title": "욥의 질문",                  "isbn": "9791124569337", "epub": "욥의_질문_20260420.epub",                  "youtube_id": ""},
-    {"season": 2, "num": 35, "group": "G04", "ep":  5, "s_no":  5, "title": "모세의 광야",                "isbn": "9791124569344", "epub": "모세의_광야_20260421.epub",                "youtube_id": ""},
-    {"season": 2, "num": 36, "group": "G04", "ep":  6, "s_no":  6, "title": "엘리야의 번아웃",            "isbn": "9791124569351", "epub": "엘리야의_번아웃_20260422.epub",            "youtube_id": ""},
-    {"season": 2, "num": 37, "group": "G04", "ep":  7, "s_no":  7, "title": "룻의 충성",                  "isbn": "9791124569368", "epub": "룻의_충성_20260423.epub",                  "youtube_id": ""},
-    {"season": 2, "num": 38, "group": "G04", "ep":  8, "s_no":  8, "title": "요나의 도망",                "isbn": "9791124569375", "epub": "요나의_도망_20260423.epub",                "youtube_id": ""},
-    {"season": 2, "num": 39, "group": "G04", "ep":  9, "s_no":  9, "title": "막달라 마리아의 사랑",       "isbn": "9791124569382", "epub": "막달라_마리아의_사랑_20260423.epub",       "youtube_id": ""},
-    {"season": 2, "num": 40, "group": "G04", "ep": 10, "s_no": 10, "title": "솔로몬의 지혜와 실패",      "isbn": "9791124569399", "epub": "솔로몬의_지혜와_실패_20260424.epub",       "youtube_id": ""}
+    {"season": 2, "num": 31, "group": "G04", "ep":  1, "s_no":  1, "title": "다윗의 눈물",                "isbn": "9791124569306", "epub": "다윗의_눈물_20260418.epub",                "youtube_id": "pKx2dZ0jrL8"},
+    {"season": 2, "num": 32, "group": "G04", "ep":  2, "s_no":  2, "title": "바울의 변화",                "isbn": "9791124569313", "epub": "바울의_변화_20260419.epub",                "youtube_id": "Ts488ureyEQ"},
+    {"season": 2, "num": 33, "group": "G04", "ep":  3, "s_no":  3, "title": "에스더의 용기",              "isbn": "9791124569320", "epub": "에스더의_용기_20260419.epub",              "youtube_id": "HxaJi8pis58"},
+    {"season": 2, "num": 34, "group": "G04", "ep":  4, "s_no":  4, "title": "욥의 질문",                  "isbn": "9791124569337", "epub": "욥의_질문_20260420.epub",                  "youtube_id": "0sziGXXZB2g"},
+    {"season": 2, "num": 35, "group": "G04", "ep":  5, "s_no":  5, "title": "모세의 광야",                "isbn": "9791124569344", "epub": "모세의_광야_20260421.epub",                "youtube_id": "KbxIAcSTQhA"},
+    {"season": 2, "num": 36, "group": "G04", "ep":  6, "s_no":  6, "title": "엘리야의 번아웃",            "isbn": "9791124569351", "epub": "엘리야의_번아웃_20260422.epub",            "youtube_id": "nrX1UgQ9EKU"},
+    {"season": 2, "num": 37, "group": "G04", "ep":  7, "s_no":  7, "title": "룻의 충성",                  "isbn": "9791124569368", "epub": "룻의_충성_20260423.epub",                  "youtube_id": "uUKRv2qqH0k"},
+    {"season": 2, "num": 38, "group": "G04", "ep":  8, "s_no":  8, "title": "요나의 도망",                "isbn": "9791124569375", "epub": "요나의_도망_20260423.epub",                "youtube_id": "9gzhJ_Ngcrk"},
+    {"season": 2, "num": 39, "group": "G04", "ep":  9, "s_no":  9, "title": "막달라 마리아의 사랑",       "isbn": "9791124569382", "epub": "막달라_마리아의_사랑_20260423.epub",       "youtube_id": "nklHlNjTdIU"},
+    {"season": 2, "num": 40, "group": "G04", "ep": 10, "s_no": 10, "title": "솔로몬의 지혜와 실패",      "isbn": "9791124569399", "epub": "솔로몬의_지혜와_실패_20260424.epub",       "youtube_id": "dmqH2LZB1G8"}
   ],
   "playlists": {
     "S1":  {"season": 1, "title": "AI 시대를 살아가는 영성 (시즌 1 10권)", "id": "(미확정 - 시즌 1 재생목록 ID 확인 필요)"},
     "G01": {"season": 2, "title": "천국과 영계",          "id": "PLzjKIbpRzBBBWex70AcIecC02srzL4Y1b"},
     "G02": {"season": 2, "title": "알고리즘 시대의 영성", "id": "PLzjKIbpRzBBAhomYMUoTd37sqxrdPD4u2"},
-    "G03": {"season": 2, "title": "겨자씨에서 산까지",   "id": "PLzjKIbpRzBBDWsJZ1hjQR-fiDGxJA29m1"}
+    "G03": {"season": 2, "title": "겨자씨에서 산까지",   "id": "PLzjKIbpRzBBDWsJZ1hjQR-fiDGxJA29m1"},
+    "G04": {"season": 2, "title": "발자국과 눈물",       "id": "PLzjKIbpRzBBCNWIygOw7gFuxP1OqTbmlA"}
   }
 }
