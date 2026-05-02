@@ -35,11 +35,12 @@ PROJECT = Path(__file__).parent
 PUBLISHER = PROJECT / "publisher"
 
 STAGES = [
-    ("books_master", [sys.executable, "build_books_master.py"]),
-    ("qr_assets",    [sys.executable, "build_qr_assets.py"]),
-    ("copy_epubs",   [sys.executable, "copy_epubs_to_publisher.py"]),
-    ("catalog",      [sys.executable, "build_catalog.py"]),
-    ("previews",     [sys.executable, "build_previews.py"]),
+    ("books_master",  [sys.executable, "build_books_master.py"]),
+    ("qr_assets",     [sys.executable, "build_qr_assets.py"]),
+    ("copy_epubs",    [sys.executable, "copy_epubs_to_publisher.py"]),
+    ("omni_covers",   [sys.executable, "extract_omnibus_covers.py"]),
+    ("catalog",       [sys.executable, "build_catalog.py"]),
+    ("previews",      [sys.executable, "build_previews.py"]),
 ]
 
 
