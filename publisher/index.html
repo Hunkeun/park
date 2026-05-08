@@ -4,6 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI 시대 영성 — 출판사</title>
+    <meta name="description" content="AI 시대를 살아가는 그리스도인의 영성을 위한 묵상 도서. 시즌 1·2 본권 110권과 종합책 11권. 매일 한 편씩, 깊이와 일상을 잇는 영성 시리즈.">
+    <link rel="canonical" href="https://ai-spirituality-books.vercel.app/">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="AI 시대 영성 책방">
+    <meta property="og:description" content="AI 시대를 살아가는 그리스도인의 영성 묵상 도서 110권 + 종합책 11권. 본문 무료 베타 운영 중.">
+    <meta property="og:image" content="https://ai-spirituality-books.vercel.app/covers/s1-omnibus.jpg">
+    <meta property="og:url" content="https://ai-spirituality-books.vercel.app/">
+    <meta property="og:site_name" content="AI 시대 영성 책방">
+    <meta property="og:locale" content="ko_KR">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="AI 시대 영성 책방">
+    <meta name="twitter:description" content="AI 시대를 살아가는 그리스도인의 영성 묵상 도서 110권 + 종합책 11권.">
+    <meta name="twitter:image" content="https://ai-spirituality-books.vercel.app/covers/s1-omnibus.jpg">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#0a192f">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Noto+Serif+KR:wght@300;400;600;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
@@ -313,14 +328,17 @@
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            transition: transform 0.4s, box-shadow 0.4s;
+            transition: box-shadow 0.3s ease, border-color 0.3s ease;
             text-decoration: none;
             color: inherit;
+            border: 1px solid transparent;
         }
 
-        .series-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 18px 50px rgba(10,25,47,0.16);
+        @media (hover: hover) {
+            .series-card:hover {
+                box-shadow: 0 10px 30px rgba(10,25,47,0.12);
+                border-color: rgba(212,175,55,0.35);
+            }
         }
 
         .series-cover-stack {
@@ -572,7 +590,7 @@
 
         @media (max-width: 720px) {
             header { padding: 1rem 1.5rem; }
-            nav { display: none; }
+            nav > a { display: none; }    /* 헤더 메뉴만 숨김. chip 드롭다운은 보존 */
             .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
             .info-grid { grid-template-columns: 1fr; }
             footer { flex-direction: column; gap: 0.8rem; text-align: center; }
@@ -580,19 +598,23 @@
     </style>
     <script src="author_mode.js" defer></script>
     <script src="cart.js" defer></script>
+    <script src="beta-banner.js" defer></script>
+    <script src="pwa.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="auth.js" defer></script>
 </head>
 <body>
 
 <!-- ─── HEADER ─── -->
 <header>
-    <a href="#" class="logo">
+    <a href="/" class="logo">
         <img src="logo/logo_horizontal.svg" alt="AI 시대 영성">
         <span class="label">PUBLISHER</span>
     </a>
     <nav>
-        <a href="#about">출판사 소개</a>
-        <a href="catalog.html">도서</a>
-        <a href="#contact">연락처</a>
+        <a href="/">홈</a>
+        <a href="/catalog">도서</a>
+        <a href="/library">내 서가</a>
     </nav>
 </header>
 
@@ -684,7 +706,7 @@
         </div>
 
         <div class="series-grid">
-            <a href="catalog.html#season1" class="series-card reveal">
+            <a href="/catalog#season1" class="series-card reveal">
                 <div class="series-cover-stack">
                     <span class="series-count-badge">10</span>
                     <img src="covers/s1-01.jpg" alt="">
@@ -704,7 +726,7 @@
                 </div>
             </a>
 
-            <a href="catalog.html#season2" class="series-card reveal">
+            <a href="/catalog#season2" class="series-card reveal">
                 <div class="series-cover-stack">
                     <span class="series-count-badge">100</span>
                     <img src="covers/s2-001.jpg" alt="">
@@ -723,7 +745,7 @@
                 </div>
             </a>
 
-            <a href="catalog.html#omnibus" class="series-card reveal">
+            <a href="/catalog#omnibus" class="series-card reveal">
                 <div class="series-cover-stack">
                     <span class="series-count-badge">11</span>
                     <img src="covers/s1-omnibus.jpg" alt="">
@@ -744,7 +766,7 @@
         </div>
 
         <div class="catalog-link-row reveal">
-            <a href="catalog.html" class="catalog-link">전체 도서 카탈로그 →</a>
+            <a href="/catalog" class="catalog-link">전체 도서 카탈로그 →</a>
         </div>
     </div>
 </section>

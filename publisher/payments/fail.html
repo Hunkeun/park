@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>결제 실패 — AI 시대 영성</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Noto+Serif+KR:wght@400;600;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --primary:#0a192f; --accent:#d4af37; --bg:#fdfbf7; --text:#2c3e50; --muted:#5d6d7e; --err:#8a1a1a; }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { font-family:'Noto Serif KR',serif; background:var(--bg); color:var(--text); display:flex; min-height:100vh; align-items:center; justify-content:center; padding:2rem; }
+        .card { background:white; max-width:520px; width:100%; padding:2.6rem 2rem; border-radius:6px; box-shadow:0 12px 48px rgba(10,25,47,0.12); border-top:4px solid var(--err); text-align:center; }
+        h1 { font-family:'Playfair Display',serif; font-size:1.8rem; color:var(--err); margin-bottom:0.4rem; }
+        .sub { font-family:'Noto Sans KR',sans-serif; color:var(--muted); font-size:0.95rem; line-height:1.7; margin-bottom:1.6rem; }
+        .muted-block { background:#fdf3f3; padding:1rem; border:1px solid rgba(200,50,50,0.18); border-radius:4px; font-family:'Noto Sans KR',sans-serif; font-size:0.82rem; color:var(--muted); margin-top:1.2rem; text-align:left; line-height:1.7; }
+        .muted-block strong { color:var(--primary); }
+        .btn-row { margin-top:1.8rem; display:flex; gap:0.6rem; justify-content:center; flex-wrap:wrap; }
+        .btn { padding:0.7rem 1.3rem; border:1px solid var(--primary); background:var(--primary); color:white; text-decoration:none; border-radius:3px; font-family:'Noto Sans KR',sans-serif; font-size:0.9rem; cursor:pointer; }
+        .btn.outline { background:transparent; color:var(--primary); }
+        .btn:hover { background:var(--accent); border-color:var(--accent); color:var(--primary); }
+    </style>
+</head>
+<body>
+<div class="card">
+    <h1>결제가 완료되지 않았습니다</h1>
+    <p class="sub" id="reason">결제 도중 취소되었거나 오류가 발생했습니다.</p>
+    <div class="muted-block">
+        <span id="detail"></span>
+        결제는 진행되지 않았으니 다시 시도하시거나 다른 결제 수단을 선택해 주세요.
+    </div>
+    <div class="btn-row">
+        <a class="btn" href="/catalog">책 목록으로</a>
+        <a class="btn outline" href="/library">내 서가</a>
+    </div>
+</div>
+<script>
+(function () {
+    const params = new URLSearchParams(location.search);
+    const code = params.get('code');
+    const message = params.get('message');
+    const orderId = params.get('orderId');
+    if (message) document.getElementById('reason').textContent = message;
+    let detail = '';
+    if (code) detail += `오류 코드: <strong>${code}</strong><br>`;
+    if (orderId) detail += `주문 번호: <strong>${orderId}</strong><br>`;
+    if (detail) document.getElementById('detail').innerHTML = detail;
+})();
+</script>
+</body>
+</html>

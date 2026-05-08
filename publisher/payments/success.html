@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>결제 처리 중 — AI 시대 영성</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Noto+Serif+KR:wght@400;600;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --primary:#0a192f; --accent:#d4af37; --bg:#fdfbf7; --text:#2c3e50; --muted:#5d6d7e; --ok:#1a6b30; --err:#8a1a1a; }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { font-family:'Noto Serif KR',serif; background:var(--bg); color:var(--text); display:flex; min-height:100vh; align-items:center; justify-content:center; padding:2rem; }
+        .card {
+            background:white; max-width:520px; width:100%; padding:2.6rem 2rem;
+            border-radius:6px; box-shadow:0 12px 48px rgba(10,25,47,0.12);
+            border-top:4px solid var(--accent); text-align:center;
+        }
+        h1 { font-family:'Playfair Display',serif; font-size:1.8rem; color:var(--primary); margin-bottom:0.4rem; }
+        .sub { font-family:'Noto Sans KR',sans-serif; color:var(--muted); font-size:0.95rem; margin-bottom:1.6rem; }
+        .spin { width:36px; height:36px; border:3px solid rgba(10,25,47,0.1); border-top-color:var(--accent); border-radius:50%; margin:1rem auto; animation:spin 0.8s linear infinite; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .info { font-family:'Noto Sans KR',sans-serif; font-size:0.85rem; color:var(--muted); line-height:1.7; margin-top:1rem; }
+        .info strong { color:var(--primary); }
+        .btn-row { margin-top:1.8rem; display:flex; gap:0.6rem; justify-content:center; flex-wrap:wrap; }
+        .btn { padding:0.7rem 1.3rem; border:1px solid var(--primary); background:var(--primary); color:white; text-decoration:none; border-radius:3px; font-family:'Noto Sans KR',sans-serif; font-size:0.9rem; cursor:pointer; }
+        .btn.outline { background:transparent; color:var(--primary); }
+        .btn:hover { background:var(--accent); border-color:var(--accent); color:var(--primary); }
+        .ok { color:var(--ok); }
+        .err { color:var(--err); }
+        .muted-block { background:#fdfbf0; padding:1rem; border:1px solid rgba(212,175,55,0.3); border-radius:4px; font-family:'Noto Sans KR',sans-serif; font-size:0.82rem; color:var(--muted); margin-top:1.2rem; text-align:left; line-height:1.7; }
+    </style>
+</head>
+<body>
+<div class="card" id="card">
+    <div class="spin"></div>
+    <h1>결제 처리 중…</h1>
+    <p class="sub">잠시만 기다려 주세요. 토스에서 결제를 확인하고 서가에 책을 추가하고 있습니다.</p>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+(async function () {
+    const card = document.getElementById('card');
+    const params = new URLSearchParams(location.search);
+    const paymentKey = params.get('paymentKey');
+    const orderId = params.get('orderId');
+    const amount = params.get('amount');
+    const bookId = params.get('bookId');
+
+    function render(html) { card.innerHTML = html; }
+
+    if (!paymentKey || !orderId || !amount || !bookId) {
+        render(`
+            <h1 class="err">결제 정보 누락</h1>
+            <p class="sub">결제 페이지에서 돌아온 정보가 비어 있습니다.</p>
+            <div class="btn-row">
+                <a class="btn" href="/catalog">책 목록으로</a>
+            </div>
+        `);
+        return;
+    }
+
+    // Supabase access_token 가져오기
+    let accessToken = null;
+    try {
+        const cfg = await fetch('/site_config.json').then(r => r.json());
+        const sb = window.supabase.createClient(cfg.supabase_url, cfg.supabase_anon_key, {
+            auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true },
+        });
+        const { data: { session } } = await sb.auth.getSession();
+        if (session) accessToken = session.access_token;
+    } catch (e) {
+        console.error(e);
+    }
+
+    if (!accessToken) {
+        render(`
+            <h1 class="err">로그인이 필요합니다</h1>
+            <p class="sub">결제 후 서가 자동 추가를 위해 로그인 상태가 필요합니다.</p>
+            <div class="muted-block">
+                결제 자체는 토스 측에 이미 처리되었을 수 있습니다.
+                혹시 결제는 됐는데 서가에 안 들어왔다면 다음 정보를 보관하시고 문의해 주세요:<br>
+                orderId: <strong>${orderId}</strong><br>
+                paymentKey: <strong>${paymentKey}</strong>
+            </div>
+            <div class="btn-row">
+                <a class="btn" href="/library">로그인 후 서가</a>
+                <a class="btn outline" href="/catalog">책 목록</a>
+            </div>
+        `);
+        return;
+    }
+
+    // 백엔드 confirm 호출
+    let result;
+    try {
+        const resp = await fetch('/api/payments/confirm', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ paymentKey, orderId, amount: Number(amount), bookId, accessToken }),
+        });
+        result = await resp.json();
+        if (!resp.ok || !result.ok) {
+            // 이미 보유 케이스는 "성공"처럼 안내 (불필요한 결제는 토스가 막음)
+            if (result && result.alreadyOwned) {
+                render(`
+                    <h1 class="ok">이미 보유 중인 책</h1>
+                    <p class="sub">이 책은 이미 서가에 있습니다. 결제는 진행되지 않았으니 안심하셔도 됩니다.</p>
+                    <div class="btn-row">
+                        <a class="btn" href="/library">내 서가로</a>
+                        <a class="btn" href="/reader?id=${encodeURIComponent(bookId)}">바로 읽기</a>
+                        <a class="btn outline" href="/catalog">책 목록</a>
+                    </div>
+                `);
+                return;
+            }
+            render(`
+                <h1 class="err">결제 승인 실패</h1>
+                <p class="sub">${(result && result.error) || '서버 응답이 비정상입니다'}</p>
+                <div class="muted-block">
+                    결제 정보가 일치하지 않거나 일시적 오류일 수 있습니다.<br>
+                    같은 결제가 이미 처리되었다면 서가에 책이 들어가 있을 수 있습니다.<br>
+                    orderId: <strong>${orderId}</strong>
+                </div>
+                <div class="btn-row">
+                    <a class="btn" href="/library">서가 확인</a>
+                    <a class="btn outline" href="/catalog">책 목록</a>
+                </div>
+            `);
+            return;
+        }
+        // duplicate=true: 사용자가 success 페이지 새로고침 — 그래도 정상 응답으로 처리
+        if (result.duplicate) {
+            render(`
+                <h1 class="ok">결제 완료 (확인됨)</h1>
+                <p class="sub"><strong>${result.title || result.bookId}</strong> — 이 결제는 이미 처리되었습니다.</p>
+                <div class="btn-row">
+                    <a class="btn" href="/library">내 서가</a>
+                    <a class="btn" href="/reader?id=${encodeURIComponent(result.bookId)}">바로 읽기</a>
+                    <a class="btn outline" href="/catalog">책 더 보기</a>
+                </div>
+            `);
+            return;
+        }
+    } catch (e) {
+        render(`
+            <h1 class="err">네트워크 오류</h1>
+            <p class="sub">${e.message || e}</p>
+            <div class="btn-row">
+                <a class="btn" href="/catalog">책 목록</a>
+            </div>
+        `);
+        return;
+    }
+
+    render(`
+        <h1 class="ok">결제 완료</h1>
+        <p class="sub"><strong>${result.title || result.bookId}</strong> 책이 서가에 추가되었습니다.</p>
+        <div class="muted-block">
+            영수증 번호: <strong>${result.purchaseId || result.orderId}</strong><br>
+            바로 본문을 펼쳐서 보실 수 있고, 어느 기기에서나 서가에서 다시 보실 수 있습니다.
+        </div>
+        <div class="btn-row">
+            <a class="btn" href="/library">내 서가로</a>
+            <a class="btn" href="/reader?id=${encodeURIComponent(result.bookId)}">바로 읽기</a>
+            <a class="btn outline" href="/catalog">책 더 보기</a>
+        </div>
+    `);
+})();
+</script>
+</body>
+</html>

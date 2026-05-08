@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>본문 읽기 — AI 시대 영성</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Noto+Serif+KR:wght@300;400;600;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #0a192f;
+            --secondary: #172a45;
+            --accent: #d4af37;
+            --accent-soft: rgba(212, 175, 55, 0.15);
+            --text-main: #2c3e50;
+            --text-muted: #5d6d7e;
+            --white: #ffffff;
+            --bg-light: #fdfbf7;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html, body { height: 100%; overflow: hidden; }
+
+        body {
+            font-family: 'Noto Serif KR', serif;
+            color: var(--text-main);
+            background: var(--bg-light);
+            display: flex;
+            flex-direction: column;
+        }
+
+        body.dark {
+            background: #14222e;
+            color: #e8e1d2;
+        }
+
+        header.reader-bar {
+            background: var(--primary);
+            color: white;
+            padding: 0.7rem 1.4rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(212,175,55,0.3);
+            flex-shrink: 0;
+        }
+
+        .reader-title {
+            font-family: 'Noto Serif KR', serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: white;
+            flex: 1;
+            min-width: 0;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            margin: 0 0.8rem;
+        }
+
+        .reader-title .meta {
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 0.72rem;
+            color: rgba(212,175,55,0.85);
+            margin-left: 0.6rem;
+            font-weight: 400;
+        }
+
+        .reader-back {
+            color: white;
+            text-decoration: none;
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 0.92rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.45rem 0.9rem;
+            background: rgba(212,175,55,0.18);
+            border: 1px solid rgba(212,175,55,0.5);
+            border-radius: 4px;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+        .reader-back:hover {
+            background: var(--accent);
+            color: var(--primary);
+            border-color: var(--accent);
+        }
+
+        .reader-tools {
+            display: flex;
+            gap: 0.4rem;
+            align-items: center;
+        }
+
+        .reader-tools .tool-close {
+            background: rgba(255,255,255,0.1);
+            color: white;
+            border-color: rgba(255,255,255,0.3);
+            font-weight: 600;
+        }
+        .reader-tools .tool-close:hover {
+            background: #c0392b;
+            border-color: #c0392b;
+            color: white;
+        }
+
+        .reader-tools button {
+            background: transparent;
+            color: rgba(255,255,255,0.85);
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 0.35rem 0.7rem;
+            border-radius: 3px;
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 0.78rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .reader-tools button:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+        .reader-tools button.active {
+            background: var(--accent);
+            color: var(--primary);
+            border-color: var(--accent);
+        }
+
+        .reader-stage {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* TOC 사이드 패널 */
+        .toc-panel {
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            width: 320px;
+            background: white;
+            box-shadow: 4px 0 24px rgba(10,25,47,0.18);
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+            z-index: 50;
+            display: flex;
+            flex-direction: column;
+        }
+        body.dark .toc-panel { background: #1a2a3a; color: #e8e1d2; }
+        .toc-panel.open { transform: translateX(0); }
+        .toc-panel-head {
+            padding: 1rem 1.2rem;
+            border-bottom: 1px solid rgba(10,25,47,0.08);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-family: 'Noto Sans KR', sans-serif;
+            font-weight: 700;
+            color: var(--primary);
+            background: var(--accent-soft);
+        }
+        body.dark .toc-panel-head { color: var(--accent); background: rgba(212,175,55,0.1); border-color: rgba(212,175,55,0.2); }
+        .toc-panel-head button {
+            background: transparent;
+            border: 1px solid rgba(10,25,47,0.2);
+            color: var(--primary);
+            padding: 0.3rem 0.6rem;
+            font-size: 0.8rem;
+            cursor: pointer;
+            border-radius: 3px;
+            font-family: inherit;
+        }
+        body.dark .toc-panel-head button { color: #e8e1d2; border-color: rgba(232,225,210,0.3); }
+        .toc-panel-list {
+            flex: 1;
+            overflow-y: auto;
+            padding: 0.6rem 0;
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 0.92rem;
+        }
+        .toc-panel-list ul { list-style: none; padding: 0; margin: 0; }
+        .toc-panel-list li > a {
+            display: block;
+            padding: 0.7rem 1.2rem;
+            color: var(--primary);
+            text-decoration: none;
+            border-left: 3px solid transparent;
+            transition: all 0.15s;
+        }
+        body.dark .toc-panel-list li > a { color: #e8e1d2; }
+        .toc-panel-list li > a:hover {
+            background: var(--accent-soft);
+            border-left-color: var(--accent);
+        }
+        .toc-panel-list li.current > a {
+            background: var(--accent-soft);
+            border-left-color: var(--accent);
+            font-weight: 600;
+        }
+        .toc-panel-list li ul li > a {
+            padding-left: 2rem;
+            font-size: 0.86rem;
+            color: var(--text-muted);
+        }
+        body.dark .toc-panel-list li ul li > a { color: rgba(232,225,210,0.7); }
+
+        .toc-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(10,25,47,0.4);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+            z-index: 40;
+        }
+        .toc-overlay.open { opacity: 1; pointer-events: auto; }
+
+        .reader-tools .tool-toc {
+            background: rgba(212,175,55,0.18);
+            color: white;
+            border-color: rgba(212,175,55,0.5);
+            font-weight: 600;
+        }
+        .reader-tools .tool-toc:hover {
+            background: var(--accent);
+            color: var(--primary);
+            border-color: var(--accent);
+        }
+
+        #reader-area {
+            width: 100%;
+            height: 100%;
+        }
+
+        .nav-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: transparent;
+            color: rgba(10,25,47,0.28);
+            border: none;
+            width: 44px;
+            height: 64px;
+            font-size: 2.2rem;
+            line-height: 1;
+            cursor: pointer;
+            transition: color 0.2s, background 0.2s;
+            font-family: serif;
+            text-shadow: 0 1px 2px rgba(255,255,255,0.6);
+        }
+        .nav-arrow:hover {
+            color: var(--accent);
+            background: rgba(10,25,47,0.06);
+            border-radius: 4px;
+        }
+        body.dark .nav-arrow {
+            color: rgba(232,225,210,0.32);
+            text-shadow: 0 1px 2px rgba(0,0,0,0.4);
+        }
+        body.dark .nav-arrow:hover {
+            color: var(--accent);
+            background: rgba(212,175,55,0.12);
+        }
+        .nav-arrow.prev { left: 0.4rem; }
+        .nav-arrow.next { right: 0.4rem; }
+
+        .progress-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: rgba(10,25,47,0.08);
+        }
+        .progress-bar .fill {
+            height: 100%;
+            background: var(--accent);
+            width: 0;
+            transition: width 0.3s;
+        }
+
+        .reader-footer {
+            background: var(--primary);
+            color: white;
+            padding: 0.8rem 1rem;
+            display: flex;
+            justify-content: center;
+            gap: 0.6rem;
+            border-top: 1px solid rgba(212,175,55,0.3);
+            flex-shrink: 0;
+            flex-wrap: wrap;
+        }
+        .reader-footer button,
+        .reader-footer a {
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 0.88rem;
+            font-weight: 600;
+            padding: 0.55rem 1.1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: rgba(212,175,55,0.15);
+            color: white;
+            border: 1px solid rgba(212,175,55,0.5);
+        }
+        .reader-footer button:hover,
+        .reader-footer a:hover {
+            background: var(--accent);
+            color: var(--primary);
+            border-color: var(--accent);
+        }
+        .reader-footer .primary {
+            background: var(--accent);
+            color: var(--primary);
+            border-color: var(--accent);
+        }
+        .reader-footer .primary:hover {
+            background: white;
+            color: var(--primary);
+            border-color: white;
+        }
+
+        .loading-state, .error-state {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--text-muted);
+            font-family: 'Noto Sans KR', sans-serif;
+            padding: 2rem;
+        }
+        .loading-state .spin {
+            width: 32px;
+            height: 32px;
+            border: 3px solid rgba(10,25,47,0.1);
+            border-top-color: var(--accent);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin-bottom: 1rem;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .error-state h3 { color: var(--primary); font-family: 'Playfair Display', serif; font-size: 1.4rem; margin-bottom: 0.6rem; }
+        .error-state p { font-size: 0.92rem; line-height: 1.7; max-width: 520px; }
+        .error-state a {
+            display: inline-block;
+            margin-top: 1.2rem;
+            padding: 0.6rem 1.2rem;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            border: 1px solid var(--accent);
+            border-radius: 3px;
+            font-size: 0.85rem;
+        }
+
+        .free-beta-flag {
+            background: linear-gradient(90deg, var(--accent) 0%, #b8941f 100%);
+            color: var(--primary);
+            text-align: center;
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.1rem;
+            padding: 0.45rem 1rem;
+            flex-shrink: 0;
+        }
+
+        /* 집중 모드: 헤더·푸터·베타배너 숨김, 본문만 화면 가득 */
+        body.immersive header.reader-bar,
+        body.immersive footer.reader-footer,
+        body.immersive .free-beta-flag {
+            display: none;
+        }
+        .tool-immersive {
+            background: rgba(212,175,55,0.18) !important;
+            color: white !important;
+            border-color: rgba(212,175,55,0.5) !important;
+        }
+        .tool-immersive:hover {
+            background: var(--accent) !important;
+            color: var(--primary) !important;
+            border-color: var(--accent) !important;
+        }
+        /* 좌상단 작은 floating "도구 표시" 버튼 — 집중 모드에서만 보임 */
+        .immersive-exit {
+            position: fixed;
+            top: 12px;
+            left: 12px;
+            z-index: 80;
+            background: rgba(10,25,47,0.78);
+            color: white;
+            border: 1px solid rgba(212,175,55,0.55);
+            padding: 0.35rem 0.7rem;
+            border-radius: 4px;
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 0.78rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: none;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+        }
+        body.immersive .immersive-exit { display: block; }
+        .immersive-exit:hover {
+            background: var(--accent);
+            color: var(--primary);
+            border-color: var(--accent);
+        }
+
+        /* 진도 복원 토스트 */
+        .restore-toast {
+            position: fixed;
+            left: 50%;
+            transform: translate(-50%, 60px);
+            bottom: 92px;
+            background: var(--primary);
+            color: white;
+            padding: 0.7rem 1.1rem;
+            border: 1px solid var(--accent);
+            border-radius: 6px;
+            box-shadow: 0 8px 24px rgba(10,25,47,0.35);
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 0.88rem;
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s, transform 0.3s;
+            z-index: 60;
+            max-width: calc(100vw - 32px);
+        }
+        .restore-toast.show {
+            opacity: 1;
+            transform: translate(-50%, 0);
+            pointer-events: auto;
+        }
+        .restore-toast-msg { white-space: nowrap; }
+        .restore-toast-btn {
+            background: var(--accent);
+            color: var(--primary);
+            border: none;
+            padding: 0.35rem 0.8rem;
+            border-radius: 3px;
+            font-family: inherit;
+            font-size: 0.82rem;
+            font-weight: 700;
+            cursor: pointer;
+        }
+        .restore-toast-btn:hover { background: white; }
+        .restore-toast-close {
+            background: transparent;
+            color: rgba(255,255,255,0.7);
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 0 0.3rem;
+            line-height: 1;
+        }
+        .restore-toast-close:hover { color: white; }
+
+        @media (max-width: 720px) {
+            header.reader-bar { padding: 0.6rem 0.7rem; flex-wrap: wrap; gap: 0.4rem; }
+            .reader-title { font-size: 0.82rem; margin: 0 0.4rem; order: 3; flex-basis: 100%; text-align: center; }
+            .reader-title .meta { display: none; }
+            .reader-back { font-size: 0.82rem; padding: 0.4rem 0.7rem; }
+            .reader-tools button { padding: 0.35rem 0.6rem; font-size: 0.78rem; }
+            .nav-arrow { width: 36px; height: 48px; font-size: 1.1rem; }
+            .reader-footer { padding: 0.7rem 0.6rem; gap: 0.4rem; }
+            .reader-footer button, .reader-footer a {
+                font-size: 0.8rem; padding: 0.5rem 0.8rem; flex: 1; justify-content: center; min-width: 0;
+            }
+            .toc-panel { width: 85%; max-width: 320px; }
+        }
+    </style>
+
+    <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/epubjs@0.3.93/dist/epub.min.js"></script>
+</head>
+<body>
+
+<div class="free-beta-flag" id="beta-flag" style="display:none">
+    무료 베타 운영 중 — 정식 오픈 전, 모든 본문을 자유롭게 보실 수 있습니다
+</div>
+
+<header class="reader-bar">
+    <a href="/catalog" class="reader-back" title="책 목록으로 돌아가기">← 책 목록</a>
+    <div class="reader-title" id="reader-title">
+        <span id="reader-title-text">불러오는 중…</span>
+        <span class="meta" id="reader-title-meta"></span>
+    </div>
+    <div class="reader-tools">
+        <button id="tool-toc" class="tool-toc" title="목차 열기">☰ 목차</button>
+        <button id="font-down" title="글자 작게">글자 −</button>
+        <button id="font-up" title="글자 크게">글자 +</button>
+        <button id="theme-toggle" title="다크 모드">밤</button>
+        <button id="tool-immersive" class="tool-immersive" title="읽기 집중 모드 (ESC)">⛶ 집중</button>
+        <button id="tool-home" class="tool-close" title="이 책 첫 페이지로">↶ 책 처음</button>
+    </div>
+</header>
+
+<button id="immersive-exit" class="immersive-exit" type="button" title="도구 표시 (ESC)">↗ 도구 표시</button>
+
+<div class="reader-stage">
+    <div id="reader-area"></div>
+    <button class="nav-arrow prev" id="nav-prev" style="display:none">‹</button>
+    <button class="nav-arrow next" id="nav-next" style="display:none">›</button>
+    <div class="progress-bar"><div class="fill" id="progress-fill"></div></div>
+
+    <div class="toc-overlay" id="toc-overlay"></div>
+    <aside class="toc-panel" id="toc-panel" aria-hidden="true">
+        <div class="toc-panel-head">
+            <span>목차</span>
+            <button id="toc-close" type="button">닫기 ×</button>
+        </div>
+        <div class="toc-panel-list" id="toc-list">
+            <p style="padding:1.2rem; color:var(--text-muted); font-size:0.85rem;">목차를 불러오는 중…</p>
+        </div>
+    </aside>
+
+    <div class="loading-state" id="loading-state">
+        <div class="spin"></div>
+        <p>본문을 준비하고 있습니다…</p>
+    </div>
+
+    <div class="error-state" id="error-state" style="display:none">
+        <h3>본문을 열 수 없습니다</h3>
+        <p id="error-msg">잠시 후 다시 시도해 주세요.</p>
+        <a href="/catalog">책 목록으로</a>
+    </div>
+</div>
+
+<footer class="reader-footer">
+    <a href="/catalog" class="primary">← 책 목록으로</a>
+    <a href="/" id="footer-site-home" title="사이트 홈으로">↶ 사이트 홈</a>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="reader.js" defer></script>
+
+</body>
+</html>

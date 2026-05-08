@@ -151,6 +151,25 @@ PREVIEW_TEMPLATE = '''<!DOCTYPE html>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{title} 미리보기 — AI 시대 영성</title>
     <meta name="description" content="{summary}">
+    <link rel="canonical" href="https://ai-spirituality-books.vercel.app/preview/{book_id}.html">
+    <!-- Open Graph (카카오톡·페이스북·디스코드 등) -->
+    <meta property="og:type" content="book">
+    <meta property="og:title" content="{title} — AI 시대 영성">
+    <meta property="og:description" content="{summary}">
+    <meta property="og:image" content="https://ai-spirituality-books.vercel.app/covers/{book_id}.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="1600">
+    <meta property="og:url" content="https://ai-spirituality-books.vercel.app/preview/{book_id}.html">
+    <meta property="og:site_name" content="AI 시대 영성 책방">
+    <meta property="og:locale" content="ko_KR">
+    <meta property="book:author" content="{author}">
+    <meta property="book:isbn" content="{isbn}">
+    <meta property="book:release_date" content="{publish_date}">
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{title} — AI 시대 영성">
+    <meta name="twitter:description" content="{summary}">
+    <meta name="twitter:image" content="https://ai-spirituality-books.vercel.app/covers/{book_id}.jpg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Noto+Serif+KR:wght@300;400;500;600;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
@@ -284,16 +303,16 @@ PREVIEW_TEMPLATE = '''<!DOCTYPE html>
         .head-qr {{
             margin-top: 1.6rem;
             display: inline-flex;
-            gap: 0.9rem;
+            gap: 0.7rem;
             align-items: center;
             background: rgba(255,255,255,0.96);
-            padding: 0.7rem 1rem 0.7rem 0.7rem;
+            padding: 0.55rem 0.9rem 0.55rem 0.55rem;
             border-radius: 6px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.18);
         }}
         .head-qr img {{
-            width: 76px;
-            height: 76px;
+            width: 60px;
+            height: 60px;
             display: block;
             border-radius: 2px;
         }}
@@ -538,18 +557,19 @@ PREVIEW_TEMPLATE = '''<!DOCTYPE html>
     </style>
     <script src="../author_mode.js" defer></script>
     <script src="../cart.js" defer></script>
+    <script src="../beta-banner.js" defer></script>
 </head>
 <body>
 
 <header>
-    <a href="../index.html" class="logo">
+    <a href="/" class="logo">
         <img src="../logo/logo_horizontal.svg" alt="AI 시대 영성">
         <span class="label">PREVIEW</span>
     </a>
     <nav>
-        <a href="../index.html">홈</a>
-        <a href="../catalog.html">도서</a>
-        <a href="../catalog.html?id={book_id}">이 책 카드</a>
+        <a href="/">홈</a>
+        <a href="/catalog">도서</a>
+        <a href="/library">내 서가</a>
     </nav>
 </header>
 
@@ -720,11 +740,11 @@ def build():
             youtube_block = ''
 
         if purchase_enabled:
-            buy_button = f'<a href="../catalog.html?id={bid}" class="btn-buy">구매하기</a>'
+            buy_button = f'<a href="/catalog?id={bid}" class="btn-buy">구매하기</a>'
             purchase_note_block = ''
         else:
             buy_button = (
-                f'<a href="../catalog.html?id={bid}" class="btn-buy disabled" '
+                f'<a href="/catalog?id={bid}" class="btn-buy disabled" '
                 f'title="{purchase_note}">{purchase_short}</a>'
             )
             purchase_note_block = f'<div class="purchase-note">{purchase_note}</div>'
@@ -738,7 +758,8 @@ def build():
             price_fmt=f'{b.get("price", 0):,}원',
             pubdate_fmt=(b.get('publish_date') or '').replace('-', '.'),
             isbn=b.get('isbn') or '',
-            author=b.get('author') or '',
+            author=(b.get('author') or '').replace('"', '&quot;'),
+            publish_date=b.get('publish_date') or '',
             toc_items=toc_html,
             body_html=body_inner,
             youtube_block=youtube_block,

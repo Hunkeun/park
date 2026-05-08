@@ -1,0 +1,42 @@
+{
+  "name": "AI 시대 영성 책방",
+  "short_name": "AI 영성",
+  "description": "AI 시대를 살아가는 그리스도인을 위한 영성 묵상 도서 121권",
+  "start_url": "/catalog",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#fdfbf7",
+  "theme_color": "#0a192f",
+  "lang": "ko-KR",
+  "dir": "ltr",
+  "categories": ["books", "education", "lifestyle"],
+  "icons": [
+    {
+      "src": "/logo/logo_vertical_gold.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/covers/s1-omnibus.jpg",
+      "sizes": "1200x1600",
+      "type": "image/jpeg",
+      "purpose": "any"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "도서 카탈로그",
+      "short_name": "카탈로그",
+      "description": "전체 도서 121권 둘러보기",
+      "url": "/catalog"
+    },
+    {
+      "name": "내 서가",
+      "short_name": "서가",
+      "description": "구매한 책 이어 읽기",
+      "url": "/library"
+    }
+  ]
+}
