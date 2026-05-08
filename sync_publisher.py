@@ -42,6 +42,8 @@ STAGES = [
     ("omni_covers",   [sys.executable, "extract_omnibus_covers.py"]),
     ("catalog",       [sys.executable, "build_catalog.py"]),
     ("previews",      [sys.executable, "build_previews.py"]),
+    ("sitemap",       [sys.executable, "build_sitemap.py"]),
+    ("verify_routing", [sys.executable, "verify_publisher_routing.py"]),
 ]
 
 

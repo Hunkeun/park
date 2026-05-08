@@ -151,7 +151,7 @@ PREVIEW_TEMPLATE = '''<!DOCTYPE html>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{title} 미리보기 — AI 시대 영성</title>
     <meta name="description" content="{summary}">
-    <link rel="canonical" href="https://ai-spirituality-books.vercel.app/preview/{book_id}.html">
+    <link rel="canonical" href="https://ai-spirituality-books.vercel.app/preview/{book_id}">
     <!-- Open Graph (카카오톡·페이스북·디스코드 등) -->
     <meta property="og:type" content="book">
     <meta property="og:title" content="{title} — AI 시대 영성">
@@ -159,7 +159,7 @@ PREVIEW_TEMPLATE = '''<!DOCTYPE html>
     <meta property="og:image" content="https://ai-spirituality-books.vercel.app/covers/{book_id}.jpg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="1600">
-    <meta property="og:url" content="https://ai-spirituality-books.vercel.app/preview/{book_id}.html">
+    <meta property="og:url" content="https://ai-spirituality-books.vercel.app/preview/{book_id}">
     <meta property="og:site_name" content="AI 시대 영성 책방">
     <meta property="og:locale" content="ko_KR">
     <meta property="book:author" content="{author}">
