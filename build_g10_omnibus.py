@@ -363,7 +363,7 @@ def build_book_front_xhtml(b: dict) -> str:
     <span style="display:inline-block;width:60px;border-top:1px solid #C8B99A"></span>
   </div>
 </div>
-<div style="max-width:32em;margin:0 auto">
+<div style="">
   {paragraphs_html}
 </div>
 <div style="page-break-after:always;break-after:page;height:0;font-size:0;line-height:0" aria-hidden="true"></div>
@@ -412,7 +412,7 @@ def build_part_intro_xhtml(part_no: int, part_title: str, part_subtitle: str, pa
   </div>
 </div>
 <h3 style="color:#0F1E3C;text-align:center;font-size:1.15em;margin:0.4em 0 1em">{intro.get('headline', '')}</h3>
-<div style="max-width:34em;margin:0 auto">
+<div style="">
 {paragraphs_html}
 </div>
 {guides_html}
@@ -458,7 +458,7 @@ def build_publisher_xhtml(meta: dict, today_iso: str) -> str:
 
 <h2 style="color:#0F1E3C;text-align:center;font-size:1.3em;border-bottom:1px solid #C8B99A;padding-bottom:0.6em;margin-bottom:1.5em">출판사 안내</h2>
 
-<div style="max-width:34em;margin:0 auto">
+<div style="">
 
 <h3 style="color:#0F1E3C;font-size:1em;margin-top:1.5em;letter-spacing:0.05em">「AI 시대 영성」 출판사</h3>
 <p style="margin:0.4em 0">기술의 시대 한복판에서, 흔들리지 않는 영성의 자리를 찾는 책을 펴냅니다.</p>
@@ -555,7 +555,7 @@ def build_toc_xhtml(parts, meta):
   <div style="padding-left:3em">{books_html}</div>
 </div>""")
 
-    body = f"""<div style="padding:0.8em 1.5em;line-height:1.5;max-width:36em;margin:0 auto">
+    body = f"""<div style="padding:0.8em 1.5em;line-height:1.5;">
 <h1 style="color:#0F1E3C;text-align:center;font-size:1.35em;margin:0.2em 0">차례</h1>
 <div style="color:#666;text-align:center;margin-bottom:0.5em;font-style:italic;font-size:0.85em">{meta['subtitle']}</div>
 <div style="padding-left:5em">
