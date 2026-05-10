@@ -1,0 +1,8 @@
+# AI 시대 영성 책방
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /payments/success.html
+Disallow: /payments/fail.html
+
+Sitemap: https://ai-spirituality-books.vercel.app/sitemap.xml

@@ -13,7 +13,7 @@
  * Cache 버전: 코드 변경 시 CACHE_VERSION 만 바꾸면 모든 옛 캐시 일괄 폐기
  */
 
-const CACHE_VERSION = 'aisb-v2-2026-05-08b';
+const CACHE_VERSION = 'aisb-v2-2026-05-10d';
 const STATIC_CACHE = `${CACHE_VERSION}-static`;
 const COVERS_CACHE = `${CACHE_VERSION}-covers`;
 const DATA_CACHE = `${CACHE_VERSION}-data`;
@@ -62,6 +62,15 @@ self.addEventListener('fetch', (event) => {
         url.pathname.startsWith('/epubs/') ||
         url.pathname.startsWith('/api/') ||
         url.pathname.startsWith('/payments/')) {
+        return;
+    }
+
+    // JS 자원은 SW 가 끼지 않는다. 브라우저가 reader.js / cart.js 등을
+    // Vercel 의 max-age=0 must-revalidate 정책으로 매번 etag 검증해 최신을 받는데,
+    // SW 의 stale-while-revalidate 가 끼면 첫 응답이 옛 캐시본이 되어 새 배포가
+    // 한 사이클 늦게 적용된다. 본문 fetch 옵션 같은 핵심 로직 변경이 즉시 반영되도록
+    // JS 는 통과 시킨다.
+    if (url.pathname.endsWith('.js')) {
         return;
     }
 

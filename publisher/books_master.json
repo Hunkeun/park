@@ -68,7 +68,7 @@
       "season": 1,
       "type": "main",
       "seq": 4,
-      "title": "다수의 횡포를 직관하라",
+      "title": "다수의 횡포를 직관 하라",
       "isbn": "9791199881259",
       "price": 2000,
       "publish_date": "2026-04-25",
@@ -85,7 +85,7 @@
       "season": 1,
       "type": "main",
       "seq": 5,
-      "title": "새술은 새부대에 담아야",
+      "title": "새 술은 새 부대에 담아야",
       "isbn": "9791199881280",
       "price": 2000,
       "publish_date": "2026-04-25",
@@ -195,7 +195,9 @@
       "author": "AI, 박헌근",
       "publisher": "AI 시대 영성",
       "format": "전자책 (EPUB)",
-      "epub_filename": "AI_시대를_살아가는_영성_20260530_종합책.epub"
+      "epub_filename": "AI_시대를_살아가는_영성_20260530_종합책.epub",
+      "playlist_id": "PLzjKIbpRzBBDvZehv1VMyiTep5vl17TY8",
+      "playlist_title": "AI 시대를 살아가는 영성"
     },
     {
       "id": "s2-001",
@@ -431,7 +433,7 @@
       "type": "main",
       "seq": 10,
       "group_seq": 10,
-      "title": "천사들의 사역",
+      "title": "천사의 사역",
       "subtitle": "하나님의 사자들",
       "isbn": "9791124569092",
       "price": 2000,
@@ -481,6 +483,31 @@
       "type": "main",
       "seq": 12,
       "group_seq": 2,
+      "title": "AI와 함께 읽는 성경",
+      "subtitle": "새로운 렌즈로 본 말씀",
+      "isbn": "9791124569139",
+      "price": 2000,
+      "publish_date": "2026-05-02",
+      "author": "AI, 박헌근",
+      "publisher": "AI 시대 영성",
+      "format": "전자책 (EPUB)",
+      "summary": "AI는 성경을 분석할 수 있지만, 성령만이 말씀을 깨닫게 하신다.",
+      "keywords": "AI, 성경, 해석, 묵상, 새로운 시각, 도구",
+      "metaphor": "현미경이 세포를 보여주지만 생명을 줄 수 없듯, AI는 성경을 분석하지만 변화를 줄 수 없다.",
+      "epub_filename": "AI와_함께_읽는_성경_20260419.epub",
+      "cover_filename": "AI와_함께_읽는_성경_20260419_cover.jpg",
+      "cover_source_dir": "C:\\Users\\godso/Downloads/전자책",
+      "youtube_id": "E0Z-N5bDFPw"
+    },
+    {
+      "id": "s2-013",
+      "season": 2,
+      "group": "G02",
+      "group_name": "알고리즘 시대의 영성",
+      "group_theme": "AI·디지털",
+      "type": "main",
+      "seq": 13,
+      "group_seq": 3,
       "title": "알고리즘과 섭리",
       "subtitle": "계획하시는 하나님",
       "isbn": "9791124569115",
@@ -495,31 +522,6 @@
       "epub_filename": "알고리즘과_섭리_20260419.epub",
       "cover_filename": "알고리즘과_섭리_20260419_cover.jpg",
       "cover_source_dir": "C:\\Users\\godso/Downloads/전자책",
-      "youtube_id": "E0Z-N5bDFPw"
-    },
-    {
-      "id": "s2-013",
-      "season": 2,
-      "group": "G02",
-      "group_name": "알고리즘 시대의 영성",
-      "group_theme": "AI·디지털",
-      "type": "main",
-      "seq": 13,
-      "group_seq": 3,
-      "title": "디지털 시대의 기도",
-      "subtitle": "변하지 않는 대화",
-      "isbn": "9791124569122",
-      "price": 2000,
-      "publish_date": "2026-05-02",
-      "author": "AI, 박헌근",
-      "publisher": "AI 시대 영성",
-      "format": "전자책 (EPUB)",
-      "summary": "소음이 커질수록 침묵의 기도가 더 혁명적이 된다.",
-      "keywords": "기도, 디지털, SNS, 침묵, 하나님, 소통",
-      "metaphor": "수천 개의 알림 속에서 하나님의 음성은 가장 조용하지만 가장 중요한 메시지다.",
-      "epub_filename": "디지털_시대의_기도_20260419.epub",
-      "cover_filename": "디지털_시대의_기도_20260419_cover.jpg",
-      "cover_source_dir": "C:\\Users\\godso/Downloads/전자책",
       "youtube_id": "ecdi89stF5I"
     },
     {
@@ -531,19 +533,19 @@
       "type": "main",
       "seq": 14,
       "group_seq": 4,
-      "title": "AI와 함께 읽는 성경",
-      "subtitle": "새로운 렌즈로 본 말씀",
-      "isbn": "9791124569139",
+      "title": "빅데이터가 모르는 것",
+      "subtitle": "숫자 너머의 인간",
+      "isbn": "9791124569153",
       "price": 2000,
       "publish_date": "2026-05-02",
       "author": "AI, 박헌근",
       "publisher": "AI 시대 영성",
       "format": "전자책 (EPUB)",
-      "summary": "AI는 성경을 분석할 수 있지만, 성령만이 말씀을 깨닫게 하신다.",
-      "keywords": "AI, 성경, 해석, 묵상, 새로운 시각, 도구",
-      "metaphor": "현미경이 세포를 보여주지만 생명을 줄 수 없듯, AI는 성경을 분석하지만 변화를 줄 수 없다.",
-      "epub_filename": "AI와_함께_읽는_성경_20260419.epub",
-      "cover_filename": "AI와_함께_읽는_성경_20260419_cover.jpg",
+      "summary": "사랑, 용서, 은혜는 데이터로 측정되지 않는다. 가장 중요한 것은 수치화되지 않는다.",
+      "keywords": "빅데이터, 영혼, 사랑, 은혜, 인간성, 측정불가",
+      "metaphor": "바람의 방향은 측정되지만 바람의 의미는 측정되지 않듯, 인간의 본질은 데이터 너머에 있다.",
+      "epub_filename": "빅데이터가_모르는_것_20260421.epub",
+      "cover_filename": "빅데이터가_모르는_것_20260421_cover.jpg",
       "cover_source_dir": "C:\\Users\\godso/Downloads/전자책",
       "youtube_id": "FzH6PniaiJQ"
     },
@@ -581,19 +583,19 @@
       "type": "main",
       "seq": 16,
       "group_seq": 6,
-      "title": "빅데이터가 모르는 것",
-      "subtitle": "숫자 너머의 인간",
-      "isbn": "9791124569153",
+      "title": "디지털 시대의 기도",
+      "subtitle": "변하지 않는 대화",
+      "isbn": "9791124569122",
       "price": 2000,
       "publish_date": "2026-05-02",
       "author": "AI, 박헌근",
       "publisher": "AI 시대 영성",
       "format": "전자책 (EPUB)",
-      "summary": "사랑, 용서, 은혜는 데이터로 측정되지 않는다. 가장 중요한 것은 수치화되지 않는다.",
-      "keywords": "빅데이터, 영혼, 사랑, 은혜, 인간성, 측정불가",
-      "metaphor": "바람의 방향은 측정되지만 바람의 의미는 측정되지 않듯, 인간의 본질은 데이터 너머에 있다.",
-      "epub_filename": "빅데이터가_모르는_것_20260421.epub",
-      "cover_filename": "빅데이터가_모르는_것_20260421_cover.jpg",
+      "summary": "소음이 커질수록 침묵의 기도가 더 혁명적이 된다.",
+      "keywords": "기도, 디지털, SNS, 침묵, 하나님, 소통",
+      "metaphor": "수천 개의 알림 속에서 하나님의 음성은 가장 조용하지만 가장 중요한 메시지다.",
+      "epub_filename": "디지털_시대의_기도_20260419.epub",
+      "cover_filename": "디지털_시대의_기도_20260419_cover.jpg",
       "cover_source_dir": "C:\\Users\\godso/Downloads/전자책",
       "youtube_id": "TqLN5K34jLg"
     },
@@ -606,31 +608,6 @@
       "type": "main",
       "seq": 17,
       "group_seq": 7,
-      "title": "로봇 시대의 인간 존엄",
-      "subtitle": "하나님의 형상으로",
-      "isbn": "9791124569160",
-      "price": 2000,
-      "publish_date": "2026-05-02",
-      "author": "AI, 박헌근",
-      "publisher": "AI 시대 영성",
-      "format": "전자책 (EPUB)",
-      "summary": "인간의 존엄은 능력에서 오지 않는다. 하나님의 형상 자체가 존엄의 근거다.",
-      "keywords": "로봇, 인간 존엄, 하나님의 형상, 창조, 가치, 노동",
-      "metaphor": "아무리 정교한 모조품도 진품의 가치를 가질 수 없듯, 로봇은 하나님의 형상인 인간을 대체할 수 없다.",
-      "epub_filename": "로봇_시대의_인간_존엄_20260423.epub",
-      "cover_filename": "로봇_시대의_인간_존엄_20260422_cover.jpg",
-      "cover_source_dir": "C:\\Users\\godso/Downloads/전자책",
-      "youtube_id": "iJyBK1If43s"
-    },
-    {
-      "id": "s2-018",
-      "season": 2,
-      "group": "G02",
-      "group_name": "알고리즘 시대의 영성",
-      "group_theme": "AI·디지털",
-      "type": "main",
-      "seq": 18,
-      "group_seq": 8,
       "title": "메타버스 속의 예배",
       "subtitle": "공간을 초월한 임재",
       "isbn": "9791124569177",
@@ -644,6 +621,31 @@
       "metaphor": "사진이 실제 만남을 대신할 수 없듯, 디지털 예배는 몸의 교제의 보완이지 대체가 아니다.",
       "epub_filename": "메타버스_속의_예배_20260423.epub",
       "cover_filename": "메타버스_속의_예배_20260423_cover.jpg",
+      "cover_source_dir": "C:\\Users\\godso/Downloads/전자책",
+      "youtube_id": "iJyBK1If43s"
+    },
+    {
+      "id": "s2-018",
+      "season": 2,
+      "group": "G02",
+      "group_name": "알고리즘 시대의 영성",
+      "group_theme": "AI·디지털",
+      "type": "main",
+      "seq": 18,
+      "group_seq": 8,
+      "title": "로봇 시대의 인간 존엄",
+      "subtitle": "하나님의 형상으로",
+      "isbn": "9791124569160",
+      "price": 2000,
+      "publish_date": "2026-05-02",
+      "author": "AI, 박헌근",
+      "publisher": "AI 시대 영성",
+      "format": "전자책 (EPUB)",
+      "summary": "인간의 존엄은 능력에서 오지 않는다. 하나님의 형상 자체가 존엄의 근거다.",
+      "keywords": "로봇, 인간 존엄, 하나님의 형상, 창조, 가치, 노동",
+      "metaphor": "아무리 정교한 모조품도 진품의 가치를 가질 수 없듯, 로봇은 하나님의 형상인 인간을 대체할 수 없다.",
+      "epub_filename": "로봇_시대의_인간_존엄_20260423.epub",
+      "cover_filename": "로봇_시대의_인간_존엄_20260422_cover.jpg",
       "cover_source_dir": "C:\\Users\\godso/Downloads/전자책",
       "youtube_id": "GvFUY3HDh6s"
     },
@@ -1444,7 +1446,8 @@
       "metaphor": "깨진 그릇 조각들이 다시 맞춰지듯, 화해는 상처 입은 관계를 오히려 더 강하게 만든다.",
       "epub_filename": "관계의_상처를_넘어서_20260424.epub",
       "cover_filename": "관계의_상처를_넘어서_20260424_cover.jpg",
-      "cover_source_dir": "C:\\Users\\godso/Downloads/전자책"
+      "cover_source_dir": "C:\\Users\\godso/Downloads/전자책",
+      "youtube_id": "YUvmWKm6Hf4"
     },
     {
       "id": "s2-051",
@@ -1468,7 +1471,8 @@
       "metaphor": "거울은 우리가 원하는 얼굴이 아니라 있는 그대로를 보여준다. 말씀도 그러하다.",
       "epub_filename": "진실이_불편한_시대_20260419.epub",
       "cover_filename": "진실이_불편한_시대_20260419_cover.jpg",
-      "cover_source_dir": "C:\\Users\\godso/Downloads/전자책"
+      "cover_source_dir": "C:\\Users\\godso/Downloads/전자책",
+      "youtube_id": "QhXaPjte2MA"
     },
     {
       "id": "s2-052",
@@ -1492,7 +1496,8 @@
       "metaphor": "수많은 씨앗 중 좋은 씨앗을 골라내는 농부처럼, 정보 속에서 진실을 분별하는 훈련이 필요하다.",
       "epub_filename": "미디어와_영적_분별_20260419.epub",
       "cover_filename": "미디어와_영적_분별_20260419_cover.jpg",
-      "cover_source_dir": "C:\\Users\\godso/Downloads/전자책"
+      "cover_source_dir": "C:\\Users\\godso/Downloads/전자책",
+      "youtube_id": "uiVkKTLluEE"
     },
     {
       "id": "s2-053",
@@ -1516,7 +1521,8 @@
       "metaphor": "강물은 낮은 곳으로 흐르듯, 포퓰리즘은 항상 다수의 귀에 달콤한 말로 흐른다.",
       "epub_filename": "포퓰리즘의_유혹_20260419.epub",
       "cover_filename": "포퓰리즘의_유혹_20260419_cover.jpg",
-      "cover_source_dir": "C:\\Users\\godso/Downloads/전자책"
+      "cover_source_dir": "C:\\Users\\godso/Downloads/전자책",
+      "youtube_id": "2Y8CQzTqcQk"
     },
     {
       "id": "s2-054",
@@ -1540,7 +1546,8 @@
       "metaphor": "소금이 스며들어 썩음을 막듯, 크리스천 시민은 사회 곳곳에 스며들어 변화를 일으킨다.",
       "epub_filename": "크리스천_시민의_책임_20260420.epub",
       "cover_filename": "크리스천_시민의_책임_20260419_cover.jpg",
-      "cover_source_dir": "C:\\Users\\godso/Downloads/전자책"
+      "cover_source_dir": "C:\\Users\\godso/Downloads/전자책",
+      "youtube_id": "RKS7h3v-OM8"
     },
     {
       "id": "s2-055",
@@ -1564,7 +1571,8 @@
       "metaphor": "법정의 저울처럼, 하나님의 정의는 정확하되 자비의 무게도 함께 단다.",
       "epub_filename": "정의란_무엇인가_-_성경적_답_20260421.epub",
       "cover_filename": "정의란_무엇인가_-_성경적_답_20260421_cover.jpg",
-      "cover_source_dir": "C:\\Users\\godso/Downloads/전자책"
+      "cover_source_dir": "C:\\Users\\godso/Downloads/전자책",
+      "youtube_id": "1siWX3_nymk"
     },
     {
       "id": "s2-056",
@@ -1588,7 +1596,8 @@
       "metaphor": "두 주인을 함께 섬길 수 없듯, 두 기준을 동시에 따르다 보면 결국 하나를 버리게 된다.",
       "epub_filename": "세상의_기준_vs_하나님의_기준_20260423.epub",
       "cover_filename": "세상의_기준_vs_하나님의_기준_20260422_cover.jpg",
-      "cover_source_dir": "C:\\Users\\godso/Downloads/전자책"
+      "cover_source_dir": "C:\\Users\\godso/Downloads/전자책",
+      "youtube_id": "3N1hpzrXPMw"
     },
     {
       "id": "s2-057",
@@ -1612,7 +1621,8 @@
       "metaphor": "깃발은 바람이 셀수록 더 높이 펄럭이듯, 영적 용기는 핍박이 클수록 더 빛난다.",
       "epub_filename": "영적_용기가_필요한_시대_20260423.epub",
       "cover_filename": "영적_용기가_필요한_시대_20260423_cover.jpg",
-      "cover_source_dir": "C:\\Users\\godso/Downloads/전자책"
+      "cover_source_dir": "C:\\Users\\godso/Downloads/전자책",
+      "youtube_id": "NhGU_ItxYY0"
     },
     {
       "id": "s2-058",
@@ -1627,7 +1637,7 @@
       "subtitle": "예언자적 소수의 역할",
       "isbn": "9791124569573",
       "price": 2000,
-      "publish_date": "2026-05-16",
+      "publish_date": "2026-05-02",
       "author": "AI, 박헌근",
       "publisher": "AI 시대 영성",
       "format": "전자책 (EPUB)",
@@ -1636,7 +1646,8 @@
       "metaphor": "작은 효모가 온 덩이를 부풀리듯, 신실한 소수가 사회 전체를 변화시킨다.",
       "epub_filename": "소수의_목소리_20260423.epub",
       "cover_filename": "소수의_목소리_20260423_cover.jpg",
-      "cover_source_dir": "C:\\Users\\godso/Downloads/전자책"
+      "cover_source_dir": "C:\\Users\\godso/Downloads/전자책",
+      "youtube_id": "Pc6fp3WXhDk"
     },
     {
       "id": "s2-059",
@@ -1651,7 +1662,7 @@
       "subtitle": "대안 현실을 꿈꾸는 신앙",
       "isbn": "9791124569580",
       "price": 2000,
-      "publish_date": "2026-05-16",
+      "publish_date": "2026-05-02",
       "author": "AI, 박헌근",
       "publisher": "AI 시대 영성",
       "format": "전자책 (EPUB)",
@@ -1660,7 +1671,8 @@
       "metaphor": "씨앗 안에 열매의 설계도가 있듯, 예언자적 상상력은 하나님 나라의 청사진을 이 땅에 그린다.",
       "epub_filename": "예언자적_상상력_20260423.epub",
       "cover_filename": "예언자적_상상력_20260423_cover.jpg",
-      "cover_source_dir": "C:\\Users\\godso/Downloads/전자책"
+      "cover_source_dir": "C:\\Users\\godso/Downloads/전자책",
+      "youtube_id": "0bqiI_EroeI"
     },
     {
       "id": "s2-060",
@@ -1675,7 +1687,7 @@
       "subtitle": "평강을 분별하는 영성",
       "isbn": "9791124569597",
       "price": 2000,
-      "publish_date": "2026-05-16",
+      "publish_date": "2026-05-02",
       "author": "AI, 박헌근",
       "publisher": "AI 시대 영성",
       "format": "전자책 (EPUB)",
@@ -1684,7 +1696,8 @@
       "metaphor": "화산 위에 지은 집이 당장은 조용해 보이듯, 거짓 평화는 겉으로는 평안해 보이지만 언제든 무너진다.",
       "epub_filename": "거짓_평화에_속지_마라_20260424.epub",
       "cover_filename": "거짓_평화에_속지_마라_20260424_cover.jpg",
-      "cover_source_dir": "C:\\Users\\godso/Downloads/전자책"
+      "cover_source_dir": "C:\\Users\\godso/Downloads/전자책",
+      "youtube_id": "LAC_cmzh1NE"
     },
     {
       "id": "s2-061",
@@ -1699,7 +1712,7 @@
       "subtitle": "보혜사의 임재",
       "isbn": "9791124569603",
       "price": 2000,
-      "publish_date": "2026-05-16",
+      "publish_date": "2026-05-02",
       "author": "AI, 박헌근",
       "publisher": "AI 시대 영성",
       "format": "전자책 (EPUB)",
@@ -1708,7 +1721,8 @@
       "metaphor": "친구를 알아가듯, 성령님과의 관계도 시간과 관심과 대화를 통해 깊어진다.",
       "epub_filename": "성령님을_알아가는_시간_20260419.epub",
       "cover_filename": "성령님을_알아가는_시간_20260419_cover.jpg",
-      "cover_source_dir": "C:\\Users\\godso/Downloads/전자책"
+      "cover_source_dir": "C:\\Users\\godso/Downloads/전자책",
+      "youtube_id": "fsdoaxYSn4c"
     },
     {
       "id": "s2-062",
@@ -1723,7 +1737,7 @@
       "subtitle": "영으로 드리는 기도",
       "isbn": "9791124569610",
       "price": 2000,
-      "publish_date": "2026-05-16",
+      "publish_date": "2026-05-02",
       "author": "AI, 박헌근",
       "publisher": "AI 시대 영성",
       "format": "전자책 (EPUB)",
@@ -1732,7 +1746,8 @@
       "metaphor": "언어를 초월한 음악이 마음을 움직이듯, 방언은 이해를 초월한 영의 기도다.",
       "epub_filename": "방언의_은사_20260419.epub",
       "cover_filename": "방언의_은사_20260419_cover.jpg",
-      "cover_source_dir": "C:\\Users\\godso/Downloads/전자책"
+      "cover_source_dir": "C:\\Users\\godso/Downloads/전자책",
+      "youtube_id": "CM_bJyCqtyk"
     },
     {
       "id": "s2-063",
@@ -1747,7 +1762,7 @@
       "subtitle": "말씀을 전하는 은사",
       "isbn": "9791124569627",
       "price": 2000,
-      "publish_date": "2026-05-16",
+      "publish_date": "2026-05-02",
       "author": "AI, 박헌근",
       "publisher": "AI 시대 영성",
       "format": "전자책 (EPUB)",
@@ -1756,7 +1771,8 @@
       "metaphor": "등대가 항구를 안내하듯, 예언은 공동체가 하나님의 방향으로 가도록 빛을 비춘다.",
       "epub_filename": "예언의_은사_20260419.epub",
       "cover_filename": "예언의_은사_20260419_cover.jpg",
-      "cover_source_dir": "C:\\Users\\godso/Downloads/전자책"
+      "cover_source_dir": "C:\\Users\\godso/Downloads/전자책",
+      "youtube_id": "mDyRuvlB3Xo"
     },
     {
       "id": "s2-064",
@@ -1771,7 +1787,7 @@
       "subtitle": "병 고치는 하나님의 능력",
       "isbn": "9791124569634",
       "price": 2000,
-      "publish_date": "2026-05-16",
+      "publish_date": "2026-05-02",
       "author": "AI, 박헌근",
       "publisher": "AI 시대 영성",
       "format": "전자책 (EPUB)",
@@ -1780,7 +1796,8 @@
       "metaphor": "의사의 손도 하나님의 도구듯, 치유의 방법은 다양해도 치유의 원천은 하나다.",
       "epub_filename": "치유의_은사_20260420.epub",
       "cover_filename": "치유의_은사_20260419_cover.jpg",
-      "cover_source_dir": "C:\\Users\\godso/Downloads/전자책"
+      "cover_source_dir": "C:\\Users\\godso/Downloads/전자책",
+      "youtube_id": "mV1GukpEhYY"
     },
     {
       "id": "s2-065",
@@ -1795,7 +1812,7 @@
       "subtitle": "하나님이 주시는 지혜",
       "isbn": "9791124569641",
       "price": 2000,
-      "publish_date": "2026-05-16",
+      "publish_date": "2026-05-02",
       "author": "AI, 박헌근",
       "publisher": "AI 시대 영성",
       "format": "전자책 (EPUB)",
@@ -1804,7 +1821,8 @@
       "metaphor": "깊은 우물에서 맑은 물이 나오듯, 성령의 지혜는 깊은 기도에서 솟아오른다.",
       "epub_filename": "지혜의_영_20260421.epub",
       "cover_filename": "지혜의_영_20260421_cover.jpg",
-      "cover_source_dir": "C:\\Users\\godso/Downloads/전자책"
+      "cover_source_dir": "C:\\Users\\godso/Downloads/전자책",
+      "youtube_id": "hBi0elrEBuE"
     },
     {
       "id": "s2-066",
@@ -1819,7 +1837,7 @@
       "subtitle": "영들을 분별하라",
       "isbn": "9791124569658",
       "price": 2000,
-      "publish_date": "2026-05-16",
+      "publish_date": "2026-05-02",
       "author": "AI, 박헌근",
       "publisher": "AI 시대 영성",
       "format": "전자책 (EPUB)",
@@ -1828,7 +1846,8 @@
       "metaphor": "금세공사가 진짜 금과 모조금을 구별하듯, 분별의 은사는 진짜 성령의 역사를 알아본다.",
       "epub_filename": "분별의_은사_20260422.epub",
       "cover_filename": "분별의_은사_20260422_cover.jpg",
-      "cover_source_dir": "C:\\Users\\godso/Downloads/전자책"
+      "cover_source_dir": "C:\\Users\\godso/Downloads/전자책",
+      "youtube_id": "NmoOcNNKiDg"
     },
     {
       "id": "s2-067",
@@ -1843,7 +1862,7 @@
       "subtitle": "날마다 채워지는 삶",
       "isbn": "9791124569665",
       "price": 2000,
-      "publish_date": "2026-05-16",
+      "publish_date": "2026-05-02",
       "author": "AI, 박헌근",
       "publisher": "AI 시대 영성",
       "format": "전자책 (EPUB)",
@@ -1852,7 +1871,8 @@
       "metaphor": "매일 밥을 먹어야 하듯, 성령충만도 매일 새롭게 채워져야 한다.",
       "epub_filename": "성령충만한_삶_20260423.epub",
       "cover_filename": "성령충만한_삶_20260423_cover.jpg",
-      "cover_source_dir": "C:\\Users\\godso/Downloads/전자책"
+      "cover_source_dir": "C:\\Users\\godso/Downloads/전자책",
+      "youtube_id": "mZX1QF3S6Yk"
     },
     {
       "id": "s2-068",
@@ -1867,7 +1887,7 @@
       "subtitle": "불같이 임하신 성령",
       "isbn": "9791124569672",
       "price": 2000,
-      "publish_date": "2026-05-16",
+      "publish_date": "2026-05-02",
       "author": "AI, 박헌근",
       "publisher": "AI 시대 영성",
       "format": "전자책 (EPUB)",
@@ -1876,7 +1896,8 @@
       "metaphor": "처음 불꽃에서 전 세계로 번진 불처럼, 오순절의 불은 2000년이 지나도 꺼지지 않는다.",
       "epub_filename": "오순절의_불_20260423.epub",
       "cover_filename": "오순절의_불_20260423_cover.jpg",
-      "cover_source_dir": "C:\\Users\\godso/Downloads/전자책"
+      "cover_source_dir": "C:\\Users\\godso/Downloads/전자책",
+      "youtube_id": "lMCrpZ6RRvo"
     },
     {
       "id": "s2-069",
@@ -1891,7 +1912,7 @@
       "subtitle": "내면에서 피어나는 성품",
       "isbn": "9791124569689",
       "price": 2000,
-      "publish_date": "2026-05-16",
+      "publish_date": "2026-05-02",
       "author": "AI, 박헌근",
       "publisher": "AI 시대 영성",
       "format": "전자책 (EPUB)",
@@ -1900,7 +1921,8 @@
       "metaphor": "포도나무에 붙어있는 가지만 열매를 맺듯, 성령 안에 거할 때만 성령의 열매가 맺힌다.",
       "epub_filename": "성령의_열매_20260424.epub",
       "cover_filename": "성령의_열매_20260424_cover.jpg",
-      "cover_source_dir": "C:\\Users\\godso/Downloads/전자책"
+      "cover_source_dir": "C:\\Users\\godso/Downloads/전자책",
+      "youtube_id": "SosqRssAhxw"
     },
     {
       "id": "s2-070",
@@ -1915,7 +1937,7 @@
       "subtitle": "요엘의 예언이 이루어지다",
       "isbn": "9791124569696",
       "price": 2000,
-      "publish_date": "2026-05-16",
+      "publish_date": "2026-05-02",
       "author": "AI, 박헌근",
       "publisher": "AI 시대 영성",
       "format": "전자책 (EPUB)",
@@ -1948,7 +1970,8 @@
       "metaphor": "얕은 물에서 깊은 바다로 나아가듯, 기도도 형식에서 친밀함으로 깊어져야 한다.",
       "epub_filename": "기도의_깊이_20260419.epub",
       "cover_filename": "기도의_깊이_20260419_cover.jpg",
-      "cover_source_dir": "C:\\Users\\godso/Downloads/전자책"
+      "cover_source_dir": "C:\\Users\\godso/Downloads/전자책",
+      "youtube_id": "IBVobmmuwyk"
     },
     {
       "id": "s2-072",
@@ -1972,7 +1995,8 @@
       "metaphor": "안테나를 세워야 신호가 잡히듯, 금식은 영적 감도를 높이는 안테나다.",
       "epub_filename": "금식기도의_능력_20260419.epub",
       "cover_filename": "금식기도의_능력_20260419_cover.jpg",
-      "cover_source_dir": "C:\\Users\\godso/Downloads/전자책"
+      "cover_source_dir": "C:\\Users\\godso/Downloads/전자책",
+      "youtube_id": "Zk8PP0Ad3GI"
     },
     {
       "id": "s2-073",
@@ -1996,7 +2020,8 @@
       "metaphor": "해바라기가 해를 향해 돌아가듯, 관상기도는 온 존재를 하나님을 향해 돌리는 것이다.",
       "epub_filename": "관상기도란_무엇인가_20260419.epub",
       "cover_filename": "관상기도란_무엇인가_20260419_cover.jpg",
-      "cover_source_dir": "C:\\Users\\godso/Downloads/전자책"
+      "cover_source_dir": "C:\\Users\\godso/Downloads/전자책",
+      "youtube_id": "T_j_rz2Np9w"
     },
     {
       "id": "s2-074",
@@ -2020,7 +2045,8 @@
       "metaphor": "피뢰침이 번개를 대신 맞듯, 중보기도자는 하나님의 자비를 끌어내는 영적 피뢰침이다.",
       "epub_filename": "중보기도의_사명_20260420.epub",
       "cover_filename": "중보기도의_사명_20260420_cover.jpg",
-      "cover_source_dir": "C:\\Users\\godso/Downloads/전자책"
+      "cover_source_dir": "C:\\Users\\godso/Downloads/전자책",
+      "youtube_id": "ggsPskds7iY"
     },
     {
       "id": "s2-075",
@@ -2044,7 +2070,8 @@
       "metaphor": "농부가 씨앗을 심고 계절을 기다리듯, 기도도 심고 하나님의 때를 기다린다.",
       "epub_filename": "응답받는_기도의_비밀_20260421.epub",
       "cover_filename": "응답받는_기도의_비밀_20260421_cover.jpg",
-      "cover_source_dir": "C:\\Users\\godso/Downloads/전자책"
+      "cover_source_dir": "C:\\Users\\godso/Downloads/전자책",
+      "youtube_id": "kBPMXUHIyK4"
     },
     {
       "id": "s2-076",
@@ -2068,7 +2095,8 @@
       "metaphor": "새가 두 날개로 날듯, 기도와 말씀은 영성의 두 날개다.",
       "epub_filename": "기도와_말씀의_동행_20260422.epub",
       "cover_filename": "기도와_말씀의_동행_20260422_cover.jpg",
-      "cover_source_dir": "C:\\Users\\godso/Downloads/전자책"
+      "cover_source_dir": "C:\\Users\\godso/Downloads/전자책",
+      "youtube_id": "Vn1X5n3FbN0"
     },
     {
       "id": "s2-077",
@@ -2092,7 +2120,8 @@
       "metaphor": "이슬이 해 뜨기 전 맺히듯, 새벽기도는 하루의 영적 이슬을 받는 시간이다.",
       "epub_filename": "새벽기도의_은혜_20260423.epub",
       "cover_filename": "새벽기도의_은혜_20260423_cover.jpg",
-      "cover_source_dir": "C:\\Users\\godso/Downloads/전자책"
+      "cover_source_dir": "C:\\Users\\godso/Downloads/전자책",
+      "youtube_id": "Ohqma-q4Iac"
     },
     {
       "id": "s2-078",
@@ -2116,7 +2145,8 @@
       "metaphor": "사랑을 표현하는 방법이 다양하듯, 하나님께 드리는 기도의 형식도 다양하게 아름답다.",
       "epub_filename": "통성기도와_침묵기도_20260423.epub",
       "cover_filename": "통성기도와_침묵기도_20260423_cover.jpg",
-      "cover_source_dir": "C:\\Users\\godso/Downloads/전자책"
+      "cover_source_dir": "C:\\Users\\godso/Downloads/전자책",
+      "youtube_id": "o0P63A9cips"
     },
     {
       "id": "s2-079",
@@ -2140,7 +2170,8 @@
       "metaphor": "지도 한 장에 전 세계가 담기듯, 주기도문 몇 줄에 기도의 모든 차원이 담겨있다.",
       "epub_filename": "주기도문_깊이_읽기_20260424.epub",
       "cover_filename": "주기도문_깊이_읽기_20260424_cover.jpg",
-      "cover_source_dir": "C:\\Users\\godso/Downloads/전자책"
+      "cover_source_dir": "C:\\Users\\godso/Downloads/전자책",
+      "youtube_id": "nloPO6sRW_I"
     },
     {
       "id": "s2-080",
@@ -2164,7 +2195,8 @@
       "metaphor": "보이지 않는 뿌리가 나무를 지탱하듯, 보이지 않는 기도가 하나님 역사의 뿌리다.",
       "epub_filename": "기도의_용사들_20260424.epub",
       "cover_filename": "기도의_용사들_20260424_cover.jpg",
-      "cover_source_dir": "C:\\Users\\godso/Downloads/전자책"
+      "cover_source_dir": "C:\\Users\\godso/Downloads/전자책",
+      "youtube_id": "gLyvPSXp5sY"
     },
     {
       "id": "s2-081",
@@ -2188,7 +2220,8 @@
       "metaphor": "악보와 연주가 함께 음악을 만들듯, 남편과 아내는 함께 하나님의 사랑 이야기를 연주한다.",
       "epub_filename": "결혼의_신학_20260419.epub",
       "cover_filename": "결혼의_신학_20260419_cover.jpg",
-      "cover_source_dir": "C:\\Users\\godso/Downloads/전자책"
+      "cover_source_dir": "C:\\Users\\godso/Downloads/전자책",
+      "youtube_id": "l4kyTdjOKj4"
     },
     {
       "id": "s2-082",
@@ -2212,7 +2245,8 @@
       "metaphor": "강물이 원천을 반영하듯, 자녀는 부모를 통해 하나님을 먼저 경험한다.",
       "epub_filename": "부모와_자녀_20260419.epub",
       "cover_filename": "부모와_자녀_20260419_cover.jpg",
-      "cover_source_dir": "C:\\Users\\godso/Downloads/전자책"
+      "cover_source_dir": "C:\\Users\\godso/Downloads/전자책",
+      "youtube_id": "uMUY-1uJUOs"
     },
     {
       "id": "s2-083",
@@ -2236,7 +2270,8 @@
       "metaphor": "모자이크처럼, 교회는 서로 다른 조각들이 모여 하나의 아름다운 그림을 이룬다.",
       "epub_filename": "교회_공동체의_아름다움_20260419.epub",
       "cover_filename": "교회_공동체의_아름다움_20260419_cover.jpg",
-      "cover_source_dir": "C:\\Users\\godso/Downloads/전자책"
+      "cover_source_dir": "C:\\Users\\godso/Downloads/전자책",
+      "youtube_id": "jzq9wOrCu-s"
     },
     {
       "id": "s2-084",
@@ -2260,7 +2295,8 @@
       "metaphor": "숨을 쉬는 것처럼, 관계 속의 용서는 공동체가 살기 위한 호흡이다.",
       "epub_filename": "용서하는_관계_20260420.epub",
       "cover_filename": "용서하는_관계_20260420_cover.jpg",
-      "cover_source_dir": "C:\\Users\\godso/Downloads/전자책"
+      "cover_source_dir": "C:\\Users\\godso/Downloads/전자책",
+      "youtube_id": "UdIGbud-53w"
     },
     {
       "id": "s2-085",
@@ -2284,7 +2320,8 @@
       "metaphor": "나침반처럼, 진정한 친구는 서로를 하나님을 향해 방향 잡아준다.",
       "epub_filename": "우정의_은혜_20260421.epub",
       "cover_filename": "우정의_은혜_20260421_cover.jpg",
-      "cover_source_dir": "C:\\Users\\godso/Downloads/전자책"
+      "cover_source_dir": "C:\\Users\\godso/Downloads/전자책",
+      "youtube_id": "I_rgHHt_wvU"
     },
     {
       "id": "s2-086",
@@ -2308,7 +2345,8 @@
       "metaphor": "교각이 강 양쪽을 연결하듯, 화해는 갈등으로 나뉜 두 사람을 연결하는 다리다.",
       "epub_filename": "갈등_속의_화해_20260422.epub",
       "cover_filename": "갈등_속의_화해_20260422_cover.jpg",
-      "cover_source_dir": "C:\\Users\\godso/Downloads/전자책"
+      "cover_source_dir": "C:\\Users\\godso/Downloads/전자책",
+      "youtube_id": "CDUK1HYxZlU"
     },
     {
       "id": "s2-087",
@@ -2332,7 +2370,8 @@
       "metaphor": "고요한 물이 하늘을 반영하듯, 홀로 있는 영혼이 하나님을 더 선명하게 반영한다.",
       "epub_filename": "홀로_서는_신앙_20260423.epub",
       "cover_filename": "홀로_서는_신앙_20260423_cover.jpg",
-      "cover_source_dir": "C:\\Users\\godso/Downloads/전자책"
+      "cover_source_dir": "C:\\Users\\godso/Downloads/전자책",
+      "youtube_id": "ZKPmH7lBNcM"
     },
     {
       "id": "s2-088",
@@ -2356,7 +2395,8 @@
       "metaphor": "횃불 릴레이처럼, 신앙의 유산은 한 세대에서 다음 세대로 직접 전달되어야 한다.",
       "epub_filename": "세대를_잇는_믿음_20260423.epub",
       "cover_filename": "세대를_잇는_믿음_20260423_cover.jpg",
-      "cover_source_dir": "C:\\Users\\godso/Downloads/전자책"
+      "cover_source_dir": "C:\\Users\\godso/Downloads/전자책",
+      "youtube_id": "xFkhVVtJXR0"
     },
     {
       "id": "s2-089",
@@ -2380,7 +2420,8 @@
       "metaphor": "선한 사마리아인처럼, 진정한 이웃 사랑은 편한 사람만이 아니라 불편한 만남 속에서 증명된다.",
       "epub_filename": "이웃을_사랑하는_방법_20260424.epub",
       "cover_filename": "이웃을_사랑하는_방법_20260424_cover.jpg",
-      "cover_source_dir": "C:\\Users\\godso/Downloads/전자책"
+      "cover_source_dir": "C:\\Users\\godso/Downloads/전자책",
+      "youtube_id": "-qePHYkLl7k"
     },
     {
       "id": "s2-090",
@@ -2404,7 +2445,8 @@
       "metaphor": "퍼즐 조각이 혼자로는 불완전하지만 함께 맞춰지면 아름다운 그림이 되듯, 지체들이 모여 그리스도의 몸을 이룬다.",
       "epub_filename": "공동체로_사는_삶_20260424.epub",
       "cover_filename": "공동체로_사는_삶_20260424_cover.jpg",
-      "cover_source_dir": "C:\\Users\\godso/Downloads/전자책"
+      "cover_source_dir": "C:\\Users\\godso/Downloads/전자책",
+      "youtube_id": "30icD4NSHxk"
     },
     {
       "id": "s2-091",
@@ -2428,7 +2470,8 @@
       "metaphor": "새벽이 밤도 낮도 아니듯, 우리는 하나님 나라의 이미와 아직 사이에서 살고 있다.",
       "epub_filename": "하나님_나라의_비전_20260419.epub",
       "cover_filename": "하나님_나라의_비전_20260419_cover.jpg",
-      "cover_source_dir": "C:\\Users\\godso/Downloads/전자책"
+      "cover_source_dir": "C:\\Users\\godso/Downloads/전자책",
+      "youtube_id": "2m2DnIsszDI"
     },
     {
       "id": "s2-092",
@@ -2443,7 +2486,7 @@
       "subtitle": "보내심을 받은 자들",
       "isbn": "9791124569917",
       "price": 2000,
-      "publish_date": "2026-05-30",
+      "publish_date": "2026-05-16",
       "author": "AI, 박헌근",
       "publisher": "AI 시대 영성",
       "format": "전자책 (EPUB)",
@@ -2452,7 +2495,8 @@
       "metaphor": "심장이 몸 전체에 피를 보내듯, 선교는 교회의 심장에서 열방으로 생명을 보낸다.",
       "epub_filename": "선교의_심장_20260419.epub",
       "cover_filename": "선교의_심장_20260419_cover.jpg",
-      "cover_source_dir": "C:\\Users\\godso/Downloads/전자책"
+      "cover_source_dir": "C:\\Users\\godso/Downloads/전자책",
+      "youtube_id": "urrBe1zvHoI"
     },
     {
       "id": "s2-093",
@@ -2467,7 +2511,7 @@
       "subtitle": "끝을 알고 사는 삶",
       "isbn": "9791124569924",
       "price": 2000,
-      "publish_date": "2026-05-30",
+      "publish_date": "2026-05-16",
       "author": "AI, 박헌근",
       "publisher": "AI 시대 영성",
       "format": "전자책 (EPUB)",
@@ -2476,7 +2520,8 @@
       "metaphor": "마감이 있는 프로젝트에 더 집중하듯, 종말을 아는 크리스천은 오늘을 더 의미있게 산다.",
       "epub_filename": "종말을_사는_자세_20260419.epub",
       "cover_filename": "종말을_사는_자세_20260419_cover.jpg",
-      "cover_source_dir": "C:\\Users\\godso/Downloads/전자책"
+      "cover_source_dir": "C:\\Users\\godso/Downloads/전자책",
+      "youtube_id": "8E3BQI_Dmu4"
     },
     {
       "id": "s2-094",
@@ -2491,7 +2536,7 @@
       "subtitle": "마라나타 - 주여 오시옵소서",
       "isbn": "9791124569931",
       "price": 2000,
-      "publish_date": "2026-05-30",
+      "publish_date": "2026-05-16",
       "author": "AI, 박헌근",
       "publisher": "AI 시대 영성",
       "format": "전자책 (EPUB)",
@@ -2500,7 +2545,8 @@
       "metaphor": "결혼을 앞둔 신부가 설레며 준비하듯, 재림을 기다리는 교회는 기쁨으로 준비한다.",
       "epub_filename": "재림을_기다리며_20260421.epub",
       "cover_filename": "재림을_기다리며_20260420_cover.jpg",
-      "cover_source_dir": "C:\\Users\\godso/Downloads/전자책"
+      "cover_source_dir": "C:\\Users\\godso/Downloads/전자책",
+      "youtube_id": "UStufsXjbV0"
     },
     {
       "id": "s2-095",
@@ -2515,7 +2561,7 @@
       "subtitle": "청지기 삶의 원리",
       "isbn": "9791124569948",
       "price": 2000,
-      "publish_date": "2026-05-30",
+      "publish_date": "2026-05-16",
       "author": "AI, 박헌근",
       "publisher": "AI 시대 영성",
       "format": "전자책 (EPUB)",
@@ -2524,7 +2570,8 @@
       "metaphor": "은행 직원이 고객의 돈을 관리하듯, 크리스천은 하나님의 것을 위탁받아 관리하는 청지기다.",
       "epub_filename": "하나님_나라의_경제학_20260421.epub",
       "cover_filename": "하나님_나라의_경제학_20260421_cover.jpg",
-      "cover_source_dir": "C:\\Users\\godso/Downloads/전자책"
+      "cover_source_dir": "C:\\Users\\godso/Downloads/전자책",
+      "youtube_id": "Fg4dhYsxjM4"
     },
     {
       "id": "s2-096",
@@ -2539,7 +2586,7 @@
       "subtitle": "24시간 예배자",
       "isbn": "9791124569955",
       "price": 2000,
-      "publish_date": "2026-05-30",
+      "publish_date": "2026-05-16",
       "author": "AI, 박헌근",
       "publisher": "AI 시대 영성",
       "format": "전자책 (EPUB)",
@@ -2548,7 +2595,8 @@
       "metaphor": "강이 쉬지 않고 흐르듯, 삶의 예배는 주일에만 흐르는 것이 아니라 매 순간 흐른다.",
       "epub_filename": "예배가_삶이_될_때_20260423.epub",
       "cover_filename": "예배가_삶이_될_때_20260422_cover.jpg",
-      "cover_source_dir": "C:\\Users\\godso/Downloads/전자책"
+      "cover_source_dir": "C:\\Users\\godso/Downloads/전자책",
+      "youtube_id": "g16XB9m9yFs"
     },
     {
       "id": "s2-097",
@@ -2563,7 +2611,7 @@
       "subtitle": "부끄럽지 않은 복음",
       "isbn": "9791124569962",
       "price": 2000,
-      "publish_date": "2026-05-30",
+      "publish_date": "2026-05-16",
       "author": "AI, 박헌근",
       "publisher": "AI 시대 영성",
       "format": "전자책 (EPUB)",
@@ -2572,7 +2620,8 @@
       "metaphor": "씨앗 하나가 땅을 뚫고 나오듯, 복음은 모든 저항을 뚫고 생명을 만든다.",
       "epub_filename": "복음의_능력_20260423.epub",
       "cover_filename": "복음의_능력_20260423_cover.jpg",
-      "cover_source_dir": "C:\\Users\\godso/Downloads/전자책"
+      "cover_source_dir": "C:\\Users\\godso/Downloads/전자책",
+      "youtube_id": "JuMluTIuja4"
     },
     {
       "id": "s2-098",
@@ -2587,7 +2636,7 @@
       "subtitle": "십자가를 지고 따르라",
       "isbn": "9791124569979",
       "price": 2000,
-      "publish_date": "2026-05-30",
+      "publish_date": "2026-05-16",
       "author": "AI, 박헌근",
       "publisher": "AI 시대 영성",
       "format": "전자책 (EPUB)",
@@ -2596,7 +2645,8 @@
       "metaphor": "건물을 세우기 전 비용을 계산하듯, 진정한 제자도는 대가를 알고 선택하는 것이다.",
       "epub_filename": "제자도의_대가_20260423.epub",
       "cover_filename": "제자도의_대가_20260423_cover.jpg",
-      "cover_source_dir": "C:\\Users\\godso/Downloads/전자책"
+      "cover_source_dir": "C:\\Users\\godso/Downloads/전자책",
+      "youtube_id": "fvjnSgAffWQ"
     },
     {
       "id": "s2-099",
@@ -2611,7 +2661,7 @@
       "subtitle": "대안 문화를 사는 공동체",
       "isbn": "9791124569986",
       "price": 2000,
-      "publish_date": "2026-05-30",
+      "publish_date": "2026-05-16",
       "author": "AI, 박헌근",
       "publisher": "AI 시대 영성",
       "format": "전자책 (EPUB)",
@@ -2620,7 +2670,8 @@
       "metaphor": "소금이 음식 전체의 맛을 바꾸듯, 하나님 나라의 문화는 세상 문화 전체에 영향을 미친다.",
       "epub_filename": "하나님_나라의_문화_20260424.epub",
       "cover_filename": "하나님_나라의_문화_20260424_cover.jpg",
-      "cover_source_dir": "C:\\Users\\godso/Downloads/전자책"
+      "cover_source_dir": "C:\\Users\\godso/Downloads/전자책",
+      "youtube_id": "na4Ww9j9yzs"
     },
     {
       "id": "s2-100",
@@ -2635,7 +2686,7 @@
       "subtitle": "완성될 하나님의 나라",
       "isbn": "9791124569993",
       "price": 2000,
-      "publish_date": "2026-05-30",
+      "publish_date": "2026-05-16",
       "author": "AI, 박헌근",
       "publisher": "AI 시대 영성",
       "format": "전자책 (EPUB)",
@@ -2644,7 +2695,8 @@
       "metaphor": "교향곡의 마지막 악장이 모든 주제를 웅장하게 마무리하듯, 새 하늘과 새 땅은 창조의 모든 주제가 완성되는 대단원이다.",
       "epub_filename": "새_하늘과_새_땅_20260424.epub",
       "cover_filename": "새_하늘과_새_땅_20260424_cover.jpg",
-      "cover_source_dir": "C:\\Users\\godso/Downloads/전자책"
+      "cover_source_dir": "C:\\Users\\godso/Downloads/전자책",
+      "youtube_id": "JzwANBMv6IQ"
     },
     {
       "id": "s2-omnibus-G01",
@@ -2756,7 +2808,9 @@
       "author": "AI, 박헌근",
       "publisher": "AI 시대 영성",
       "format": "전자책",
-      "epub_filename": "광야의_외침_20260530_종합책.epub"
+      "epub_filename": "광야의_외침_20260530_종합책.epub",
+      "playlist_id": "PLzjKIbpRzBBA12D77X1j8R4ygZAVvBkmT",
+      "playlist_title": "광야의 외침"
     },
     {
       "id": "s2-omnibus-G07",
@@ -2773,7 +2827,9 @@
       "author": "AI, 박헌근",
       "publisher": "AI 시대 영성",
       "format": "전자책",
-      "epub_filename": "바람과_불_20260530_종합책.epub"
+      "epub_filename": "바람과_불_20260530_종합책.epub",
+      "playlist_id": "PLzjKIbpRzBBBUJXHrZOQCVBL9t1tb32_V",
+      "playlist_title": "바람과 불"
     },
     {
       "id": "s2-omnibus-G08",
@@ -2790,7 +2846,9 @@
       "author": "AI, 박헌근",
       "publisher": "AI 시대 영성",
       "format": "전자책",
-      "epub_filename": "무릎의_자리_20260530_종합책.epub"
+      "epub_filename": "무릎의_자리_20260530_종합책.epub",
+      "playlist_id": "PLzjKIbpRzBBCM2VXEi8u158v2u9N2eMI3",
+      "playlist_title": "무릎의 자리"
     },
     {
       "id": "s2-omnibus-G09",
@@ -2807,7 +2865,9 @@
       "author": "AI, 박헌근",
       "publisher": "AI 시대 영성",
       "format": "전자책",
-      "epub_filename": "곁에_두신_분들_20260530_종합책.epub"
+      "epub_filename": "곁에_두신_분들_20260530_종합책.epub",
+      "playlist_id": "PLzjKIbpRzBBB3p9mMSJ31RQAdl1POj7E9",
+      "playlist_title": "곁에 두신 분들"
     },
     {
       "id": "s2-omnibus-G10",
@@ -2824,7 +2884,9 @@
       "author": "AI, 박헌근",
       "publisher": "AI 시대 영성",
       "format": "전자책",
-      "epub_filename": "이미,_그러나_아직_20260530_종합책.epub"
+      "epub_filename": "이미,_그러나_아직_20260530_종합책.epub",
+      "playlist_id": "PLzjKIbpRzBBD4r2K9rfwHs2GxwpTiNbau",
+      "playlist_title": "이미, 그러나 아직"
     }
   ]
 }
