@@ -73,6 +73,8 @@ SEASONS = {
         "voice_default": "ko-KR-InJoonNeural",
         "rate_default": "-10%",
         "tags_extra": [],
+        "playlist_title": "AI 시대를 살아가는 영성",
+        "playlist_description": "시즌 1 본권 10권과 종합책 트레일러. AI 시대를 살아가는 그리스도인의 영성을 위한 묵상 영상 모음.",
         "books": [
             {"num":  1, "title": "AI 시대 영성 상담사를 만나다"},
             {"num":  2, "title": "산을 옮길만한 믿음"},
@@ -84,6 +86,7 @@ SEASONS = {
             {"num":  8, "title": "이스라엘 어느 왕의 덤 인생"},
             {"num":  9, "title": "죽음의 역설"},
             {"num": 10, "title": "이 세상과 저 세상"},
+            {"num": 11, "title": "AI 시대를 살아가는 영성"},
         ],
     },
     2: {
@@ -189,6 +192,86 @@ SEASONS = {
                     "muted": "#8a7864",     # 더스트 그레이
                 },
             },
+            "G07": {
+                "label": "G07(성령)",
+                "footer_label": "시즌 2 · G07",
+                "meta_label": "시즌 2 · G07(성령)",
+                "voice_default": "ko-KR-SunHiNeural",
+                "tags_extra": ["성령", "보혜사", "오순절", "방언", "예언", "치유", "성령충만"],
+                "playlist_title": "바람과 불",
+                "playlist_description": "100권 영성 묵상 시리즈 G07 — 성령 10권. 성령님을 알아가는 시간·방언·예언·치유·지혜·분별·충만·오순절의 불·열매·마지막 시대의 부흥, 바람과 불로 임하시는 보혜사의 자리들을 따라 걷는 묵상 영상 모음.",
+                "theme": {
+                    "primary": "#3a1530",   # 딥 자주 (강림의 깊이)
+                    "secondary": "#5e2447", # 자주 (성령의 불)
+                    "accent": "#d4af37",    # 골드 (채널 공통)
+                    "ink": "#f5e8ec",       # 웜 핑크 아이보리
+                    "muted": "#9b7a8a",     # 자주 그레이
+                },
+            },
+            "G08": {
+                "label": "G08(기도)",
+                "footer_label": "시즌 2 · G08",
+                "meta_label": "시즌 2 · G08(기도)",
+                "voice_default": "ko-KR-SunHiNeural",
+                "tags_extra": ["기도", "무릎", "골방", "중보기도", "응답기도", "주기도문"],
+                "playlist_title": "무릎의 자리",
+                "playlist_description": "100권 영성 묵상 시리즈 G08 — 기도 10권. 무릎으로 다시 시작하는 자리, 골방·중보·금식·통성·침묵·응답·주기도문 등 기도의 다양한 결을 따라 걷는 묵상 영상 모음.",
+                "theme": {
+                    "primary": "#2a1a0a",   # 딥 앰버 브라운 (촛불 그림자)
+                    "secondary": "#4a2f15", # 리치 브라운 (기도 매트)
+                    "accent": "#d4af37",    # 골드 (채널 공통)
+                    "ink": "#f5e8d4",       # 웜 아이보리
+                    "muted": "#8a7060",     # 웜 그레이
+                },
+            },
+            "G09": {
+                "label": "G09(관계)",
+                "footer_label": "시즌 2 · G09",
+                "meta_label": "시즌 2 · G09(관계)",
+                "voice_default": "ko-KR-SunHiNeural",
+                "tags_extra": ["관계", "공동체", "가족", "이웃", "사랑", "용서", "교제"],
+                "playlist_title": "곁에 두신 분들",
+                "playlist_description": "100권 영성 묵상 시리즈 G09 — 관계 10권. 가족·친구·교회·일터·이웃, 하나님이 곁에 두신 사람들과의 관계 속에서 사랑·용서·섬김·경계·화해를 따라 걷는 묵상 영상 모음.",
+                "theme": {
+                    "primary": "#2a121a",   # 딥 마룬 (관계의 깊이)
+                    "secondary": "#4a1f2a", # 리치 로즈 버건디
+                    "accent": "#d4af37",    # 골드 (채널 공통)
+                    "ink": "#f5e6e8",       # 로즈 아이보리
+                    "muted": "#a0808a",     # 로즈 그레이
+                },
+            },
+            "G10": {
+                "label": "G10(하나님 나라)",
+                "footer_label": "시즌 2 · G10",
+                "meta_label": "시즌 2 · G10(하나님 나라)",
+                "voice_default": "ko-KR-SunHiNeural",
+                "tags_extra": ["하나님나라", "이미그러나아직", "재림", "종말", "선교", "정의", "샬롬"],
+                "playlist_title": "이미, 그러나 아직",
+                "playlist_description": "100권 영성 묵상 시리즈 G10 — 하나님 나라 10권. 이미 임한 나라와 아직 오지 않은 나라 사이, 재림·종말·심판·새 하늘과 새 땅·선교·정의·샬롬을 따라 걷는 묵상 영상 모음.",
+                "theme": {
+                    "primary": "#1a0d2e",   # 딥 로열 바이올렛
+                    "secondary": "#2d1948", # 리치 바이올렛
+                    "accent": "#d4af37",    # 골드 (채널 공통)
+                    "ink": "#f0e8f7",       # 바이올렛 아이보리
+                    "muted": "#9080a8",     # 바이올렛 그레이
+                },
+            },
+            "OMNIBUS": {
+                "label": "시즌 2 종합책 트레일러",
+                "footer_label": "시즌 2 종합책",
+                "meta_label": "시즌 2 · 종합책 트레일러",
+                "voice_default": "ko-KR-InJoonNeural",  # 남성 (S1 종합책과 통일)
+                "tags_extra": ["종합책", "트레일러", "10권묶음", "AI시대영성"],
+                "playlist_title": "시즌 2 종합책 트레일러",
+                "playlist_description": "100권 영성 묵상 시리즈 시즌 2 종합책 트레일러 10편. 그룹 G01~G10 각 10권을 한 호흡으로 잇는 종합책 트레일러 영상 모음.",
+                "theme": {
+                    "primary": "#0F1E3C",   # 딥 네이비 (시즌 1 종합책 톤)
+                    "secondary": "#1c2f5a", # 미드 네이비
+                    "accent": "#d4af37",    # 골드
+                    "ink": "#f0eaf7",       # 라벤더 아이보리
+                    "muted": "#a696c2",     # 블루-퍼플 그레이
+                },
+            },
         },
         "books": [
             {"num":  1, "group": "G01", "title": "천국의 문턱에서"},
@@ -251,6 +334,59 @@ SEASONS = {
             {"num": 58, "group": "G06", "title": "소수의 목소리"},
             {"num": 59, "group": "G06", "title": "예언자적 상상력"},
             {"num": 60, "group": "G06", "title": "거짓 평화에 속지 마라"},
+            {"num": 61, "group": "G07", "title": "성령님을 알아가는 시간"},
+            {"num": 62, "group": "G07", "title": "방언의 은사"},
+            {"num": 63, "group": "G07", "title": "예언의 은사"},
+            {"num": 64, "group": "G07", "title": "치유의 은사"},
+            {"num": 65, "group": "G07", "title": "지혜의 영"},
+            {"num": 66, "group": "G07", "title": "분별의 은사"},
+            {"num": 67, "group": "G07", "title": "성령충만한 삶"},
+            {"num": 68, "group": "G07", "title": "오순절의 불"},
+            {"num": 69, "group": "G07", "title": "성령의 열매"},
+            {"num": 70, "group": "G07", "title": "마지막 시대의 부흥"},
+            {"num": 71, "group": "G08", "title": "기도의 깊이"},
+            {"num": 72, "group": "G08", "title": "금식기도의 능력"},
+            {"num": 73, "group": "G08", "title": "관상기도란 무엇인가"},
+            {"num": 74, "group": "G08", "title": "중보기도의 사명"},
+            {"num": 75, "group": "G08", "title": "응답받는 기도의 비밀"},
+            {"num": 76, "group": "G08", "title": "기도와 말씀의 동행"},
+            {"num": 77, "group": "G08", "title": "새벽기도의 은혜"},
+            {"num": 78, "group": "G08", "title": "통성기도와 침묵기도"},
+            {"num": 79, "group": "G08", "title": "주기도문 깊이 읽기"},
+            {"num": 80, "group": "G08", "title": "기도의 용사들"},
+            {"num": 81, "group": "G09", "title": "결혼의 신학"},
+            {"num": 82, "group": "G09", "title": "부모와 자녀"},
+            {"num": 83, "group": "G09", "title": "교회 공동체의 아름다움"},
+            {"num": 84, "group": "G09", "title": "용서하는 관계"},
+            {"num": 85, "group": "G09", "title": "우정의 은혜"},
+            {"num": 86, "group": "G09", "title": "갈등 속의 화해"},
+            {"num": 87, "group": "G09", "title": "홀로 서는 신앙"},
+            {"num": 88, "group": "G09", "title": "세대를 잇는 믿음"},
+            {"num": 89, "group": "G09", "title": "이웃을 사랑하는 방법"},
+            {"num": 90, "group": "G09", "title": "공동체로 사는 삶"},
+            {"num": 91, "group": "G10", "title": "하나님 나라의 비전"},
+            {"num": 92, "group": "G10", "title": "선교의 심장"},
+            {"num": 93, "group": "G10", "title": "종말을 사는 자세"},
+            {"num": 94, "group": "G10", "title": "재림을 기다리며"},
+            {"num": 95, "group": "G10", "title": "하나님 나라의 경제학"},
+            {"num": 96, "group": "G10", "title": "예배가 삶이 될 때"},
+            {"num": 97, "group": "G10", "title": "복음의 능력"},
+            {"num": 98, "group": "G10", "title": "제자도의 대가"},
+            {"num": 99, "group": "G10", "title": "하나님 나라의 문화"},
+            {"num": 100, "group": "G10", "title": "새 하늘과 새 땅"},
+            # 시즌 2 종합책 트레일러 10편 (num 101~110, OMNIBUS 그룹).
+            # 음성·테마는 OMNIBUS 그룹 default 사용 (남성 InJoonNeural, 네이비 톤).
+            # finale 슬라이드의 qr_book_id 로 책방 종합책 페이지(s2-omnibus-G01 등)에 직링크.
+            {"num": 101, "group": "OMNIBUS", "title": "영원의 문턱에서"},        # G01 종합
+            {"num": 102, "group": "OMNIBUS", "title": "알고리즘 시대의 영혼"},   # G02 종합
+            {"num": 103, "group": "OMNIBUS", "title": "겨자씨와 산"},            # G03 종합
+            {"num": 104, "group": "OMNIBUS", "title": "발자국과 눈물"},          # G04 종합
+            {"num": 105, "group": "OMNIBUS", "title": "흉터 위의 빛"},           # G05 종합
+            {"num": 106, "group": "OMNIBUS", "title": "광야의 외침"},            # G06 종합
+            {"num": 107, "group": "OMNIBUS", "title": "바람과 불"},              # G07 종합
+            {"num": 108, "group": "OMNIBUS", "title": "무릎의 자리"},            # G08 종합
+            {"num": 109, "group": "OMNIBUS", "title": "곁에 두신 분들"},         # G09 종합
+            {"num": 110, "group": "OMNIBUS", "title": "이미, 그러나 아직"},      # G10 종합
         ],
     },
 }
@@ -286,12 +422,29 @@ def season_cfg(season):
     return SEASONS[season]
 
 
+def book_by_num(cfg, num):
+    """books 배열에서 num 값으로 entry 조회 (배열 인덱스 가정 X — 종합책 처럼 num 이 비연속일 때도 안전)."""
+    for b in cfg["books"]:
+        if b.get("num") == num:
+            return b
+    raise KeyError(f"book num {num} not found in season")
+
+
+def adjacent_book(cfg, num, group, direction):
+    """같은 그룹 내에서 num 의 prev/next entry. 없으면 None."""
+    if direction == "prev":
+        cands = [b for b in cfg["books"] if b.get("group") == group and b["num"] < num]
+        return max(cands, key=lambda b: b["num"]) if cands else None
+    cands = [b for b in cfg["books"] if b.get("group") == group and b["num"] > num]
+    return min(cands, key=lambda b: b["num"]) if cands else None
+
+
 def group_cfg(season, num):
     """num 권이 속한 그룹의 메타를 반환. 시즌에 groups가 없으면 시즌 cfg 그대로."""
     cfg = season_cfg(season)
     if "groups" not in cfg:
         return cfg
-    book = cfg["books"][num - 1]
+    book = book_by_num(cfg, num)
     grp = book.get("group")
     if not grp:
         return cfg
@@ -303,7 +456,7 @@ def group_books(season, num):
     cfg = season_cfg(season)
     if "groups" not in cfg:
         return cfg["books"]
-    grp = cfg["books"][num - 1].get("group")
+    grp = book_by_num(cfg, num).get("group")
     if not grp:
         return cfg["books"]
     return [b for b in cfg["books"] if b.get("group") == grp]
@@ -314,7 +467,7 @@ def episode_no(season, num):
     cfg = season_cfg(season)
     if "groups" not in cfg:
         return num
-    grp = cfg["books"][num - 1].get("group")
+    grp = book_by_num(cfg, num).get("group")
     if not grp:
         return num
     count = 0
@@ -599,7 +752,7 @@ def render_cover(s, footer, num=1, season=2):
       <h1>{s['title_main']}<br><span class="accent">{s['title_accent']}</span>{s['title_sub']}</h1>
       <div class="stripe"></div>
       <div class="desc">{s['desc']}</div>
-      <div class="qr-block" style="position:absolute;bottom:7vh;right:5vw;text-align:center;background:rgba(255,255,255,0.96);padding:1.4vh 1.6vh 1vh;border-radius:1.2vh;box-shadow:0 0.6vh 2vh rgba(0,0,0,0.18)">
+      <div class="qr-block" style="position:absolute;bottom:14vh;right:5vw;text-align:center;background:rgba(255,255,255,0.96);padding:1.4vh 1.6vh 1vh;border-radius:1.2vh;box-shadow:0 0.6vh 2vh rgba(0,0,0,0.18)">
         <img src="{qr_src}" alt="책방 QR" style="width:14vh;height:14vh;display:block"/>
         <div style="margin-top:0.6vh;color:#0F1E3C;font-size:1.5vh;font-weight:700;letter-spacing:0.05em">AI 시대 책방</div>
         <div style="color:#666;font-size:1.2vh">스캔 → 이 책 바로가기</div>
@@ -654,25 +807,30 @@ def _book_id(season, num):
     return f"s{season}-{num:03d}" if season == 2 else f"s{season}-{num:02d}"
 
 
-def _qr_data_url(season, num):
-    """finale 슬라이드용 QR (책방 직링크) base64 data URL."""
+def _qr_data_url(season, num, override_id=None):
+    """finale 슬라이드용 QR (책방 직링크) base64 data URL.
+
+    override_id: 슬라이드에 qr_book_id 가 있으면 본권 ID 대신 그 값으로 링크.
+                 종합책 트레일러처럼 본권이 아닌 자원을 가리킬 때 사용.
+    """
     import base64
 
-    url = book_url(_book_id(season, num))
+    bid = override_id or _book_id(season, num)
+    url = book_url(bid)
     png = make_qr_png_bytes(url, box_size=10, border=2)
     b64 = base64.b64encode(png).decode("ascii")
     return f"data:image/png;base64,{b64}"
 
 
 def render_finale(s, footer, season=2, num=1):
-    qr_src = _qr_data_url(season, num)
+    qr_src = _qr_data_url(season, num, override_id=s.get("qr_book_id"))
     return f"""
     <div class="slide finale">
       <span class="num-chip">{s['num']}</span>
       <h1>{s['title']}</h1>
       <div class="quote-center">"{s['quote']}"</div>
       <div class="cta">{s['cta']}</div>
-      <div class="qr-block" style="position:absolute;bottom:7vh;right:5vw;text-align:center;background:rgba(255,255,255,0.96);padding:1.4vh 1.6vh 1vh;border-radius:1.2vh;box-shadow:0 0.6vh 2vh rgba(0,0,0,0.18)">
+      <div class="qr-block" style="position:absolute;bottom:14vh;right:5vw;text-align:center;background:rgba(255,255,255,0.96);padding:1.4vh 1.6vh 1vh;border-radius:1.2vh;box-shadow:0 0.6vh 2vh rgba(0,0,0,0.18)">
         <img src="{qr_src}" alt="책방 QR" style="width:14vh;height:14vh;display:block"/>
         <div style="margin-top:0.6vh;color:#0F1E3C;font-size:1.5vh;font-weight:700;letter-spacing:0.05em">AI 시대 책방</div>
         <div style="color:#666;font-size:1.2vh">스캔 → 이 책 바로가기</div>
@@ -727,7 +885,7 @@ def step_slides(season, num, content):
     footer_left = (
         book.get("footer_left")
         or book.get("title_short")
-        or cfg["books"][num - 1]["title"]
+        or book_by_num(cfg, num)["title"]
     )
     footer = _footer_html(season, footer_left, num)
 
@@ -972,19 +1130,22 @@ def _compose_description(season, num, content, chapters):
     gcfg = group_cfg(season, num)
     book = content.BOOK
     n = len(content.SLIDES)
-    title = cfg["books"][num - 1]["title"]
+    cur_book = book_by_num(cfg, num)
+    title = cur_book["title"]
     intro = book.get("description_intro", "")
     hashtags = book.get("hashtags", "#영성묵상 #100권시리즈 #우주나")
 
-    cur_grp = cfg["books"][num - 1].get("group")
+    cur_grp = cur_book.get("group")
     ep = episode_no(season, num)
 
     prev_hint = ""
     next_hint = ""
-    if num > 1 and cfg["books"][num - 2].get("group") == cur_grp:
-        prev_hint = f"\n▶ 이전 회\n{gcfg['footer_label']} · {ep-1}편 — {cfg['books'][num-2]['title']}\n"
-    if num < len(cfg["books"]) and cfg["books"][num].get("group") == cur_grp:
-        next_hint = f"\n▶ 다음 회 예고\n{gcfg['footer_label']} · {ep+1}편 — {cfg['books'][num]['title']}\n"
+    prev_b = adjacent_book(cfg, num, cur_grp, "prev") if cur_grp else None
+    next_b = adjacent_book(cfg, num, cur_grp, "next") if cur_grp else None
+    if prev_b:
+        prev_hint = f"\n▶ 이전 회\n{gcfg['footer_label']} · {ep-1}편 — {prev_b['title']}\n"
+    if next_b:
+        next_hint = f"\n▶ 다음 회 예고\n{gcfg['footer_label']} · {ep+1}편 — {next_b['title']}\n"
 
     return (
         f"{intro}\n\n"
@@ -1015,7 +1176,7 @@ def step_upload(season, num, content):
     book = content.BOOK
     gcfg = group_cfg(season, num)
     ep = episode_no(season, num)
-    title_fallback = f"{cfg['books'][num-1]['title']} | {SERIES_NAME} · {gcfg['footer_label']} · {ep}편"
+    title_fallback = f"{book_by_num(cfg, num)['title']} | {SERIES_NAME} · {gcfg['footer_label']} · {ep}편"
     title = book.get("title_long") or title_fallback
     description = _compose_description(season, num, content, chapters)
     tags = TAGS_COMMON + list(gcfg.get("tags_extra", [])) + list(book.get("tags_extra", []))
@@ -1267,15 +1428,16 @@ def main():
     except ValueError:
         print("[오류] 권수는 숫자(1~10), 'list', 또는 'playlist'")
         sys.exit(1)
-    if not (1 <= num <= len(books)):
-        print(f"[오류] 권수 범위 1~{len(books)}")
+    valid_nums = sorted(b["num"] for b in books)
+    if num not in valid_nums:
+        print(f"[오류] 권수 {num} 미등록. 사용 가능: {valid_nums}")
         sys.exit(1)
 
     content = load_content(season, num)
     gcfg = group_cfg(season, num)
     ep = episode_no(season, num)
     label_prefix = gcfg.get("footer_label", cfg["label"])
-    print(f"== {label_prefix} · {ep}편 (num {num}) · {books[num-1]['title']} ==\n")
+    print(f"== {label_prefix} · {ep}편 (num {num}) · {book_by_num(cfg, num)['title']} ==\n")
 
     if args.step in ("slides", "build"):
         step_slides(season, num, content)

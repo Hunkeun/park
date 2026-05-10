@@ -380,6 +380,7 @@
                             ttsActive && !ttsAdvancing) {
                             ttsCancel();
                             setTtsBtnState('idle');
+                            showTtsStoppedToast();
                         }
                         lastSpineHref = loc.start.href;
                         // 표지 spine 으로 이동하면 (toc 클릭 등) overlay 로 가린다
@@ -669,17 +670,40 @@
 
     function getCurrentChapterText() {
         // 현재 챕터(spine item) 본문 텍스트.
+        // 블록 요소(제목·단락·인용·리스트)를 명시적으로 순회해 단락 경계를 \n\n 으로
+        // 보존한다. innerText 한 번 호출로는 단락 경계가 \n 1 개로 평탄해져 TTS 가
+        // 단락 사이 호흡을 잡지 못하는 케이스가 있다.
         if (!rendition || typeof rendition.getContents !== 'function') return '';
         const arr = rendition.getContents();
         if (!arr || !arr.length) return '';
-        let parts = [];
+        const SEL = 'h1,h2,h3,h4,h5,h6,p,li,blockquote';
+        const parts = [];
         for (const c of arr) {
             try {
                 const body = c.document && c.document.body;
-                if (body) parts.push(body.innerText || body.textContent || '');
+                if (!body) continue;
+                const blocks = body.querySelectorAll(SEL);
+                const lines = [];
+                for (const el of blocks) {
+                    // 중첩된 블록은 부모 처리 시 같이 들어가므로 직계만 처리.
+                    let p = el.parentElement;
+                    let nested = false;
+                    while (p && p !== body) {
+                        if (p.matches && p.matches(SEL)) { nested = true; break; }
+                        p = p.parentElement;
+                    }
+                    if (nested) continue;
+                    const t = (el.textContent || '').replace(/\s+/g, ' ').trim();
+                    if (!t) continue;
+                    // 제목은 끝에 마침표를 보강해 utter 종결을 또렷하게 한다.
+                    const isHeading = /^H[1-6]$/.test(el.tagName);
+                    lines.push(isHeading && !/[.!?。!?…]$/.test(t) ? t + '.' : t);
+                }
+                if (lines.length) parts.push(lines.join('\n\n'));
+                else parts.push((body.innerText || body.textContent || '').trim());
             } catch (e) {}
         }
-        return parts.join('\n').trim();
+        return parts.join('\n\n').trim();
     }
     // 성경 인용 표기를 자연스러운 한국어로 풀어 쓴다 (TTS 발화용 전처리).
     // EPUB 본문은 그대로 두고, 발화 직전 텍스트만 변환.
@@ -703,20 +727,42 @@
         + '\\s*(\\d{1,3})\\s*[:：]\\s*(\\d{1,3})(?:\\s*[-–~−]\\s*(\\d{1,3}))?(?:\\s*절)?',
         'g'
     );
+    const KO_DIGIT = ['영','일','이','삼','사','오','육','칠','팔','구'];
     function koreanNumber(n) {
         if (!isFinite(n) || n < 0) return String(n);
         if (n === 0) return '영';
         const ones = ['', '일','이','삼','사','오','육','칠','팔','구'];
-        const tens = ['', '십','이십','삼십','사십','오십','육십','칠십','팔십','구십'];
-        if (n < 10) return ones[n];
-        if (n < 100) {
-            const t = Math.floor(n / 10), o = n % 10;
-            return tens[t] + (o ? ones[o] : '');
+        function below10000(num) {
+            // 0~9999 한자어 변환 (한 자리 = '한' 같은 고유어 안 씀, 모두 한자어)
+            if (num === 0) return '';
+            let r = '';
+            const t = Math.floor(num / 1000);
+            const h = Math.floor((num % 1000) / 100);
+            const tn = Math.floor((num % 100) / 10);
+            const o = num % 10;
+            if (t) r += (t === 1 ? '' : ones[t]) + '천';
+            if (h) r += (h === 1 ? '' : ones[h]) + '백';
+            if (tn) r += (tn === 1 ? '' : ones[tn]) + '십';
+            if (o) r += ones[o];
+            return r;
         }
-        if (n < 1000) {
-            const h = Math.floor(n / 100), rest = n % 100;
-            const head = (h === 1 ? '' : ones[h]) + '백';
-            return head + (rest ? koreanNumber(rest) : '');
+        if (n < 10000) return below10000(n);
+        if (n < 100000000) {
+            const man = Math.floor(n / 10000);
+            const rest = n % 10000;
+            return below10000(man) + '만' + (rest ? below10000(rest) : '');
+        }
+        if (n < 1000000000000) {
+            const eok = Math.floor(n / 100000000);
+            const restAfterEok = n % 100000000;
+            let r = below10000(eok) + '억';
+            if (restAfterEok) {
+                const man = Math.floor(restAfterEok / 10000);
+                const sub = restAfterEok % 10000;
+                if (man) r += below10000(man) + '만';
+                if (sub) r += below10000(sub);
+            }
+            return r;
         }
         return String(n);
     }
@@ -740,8 +786,9 @@
     );
     function ttsPreprocess(text) {
         if (!text) return text;
-        // 1) 줄바꿈·탭을 마침표·공백으로 정규화 (단락 경계에 자연 쉼)
-        let out = text.replace(/[\r\n]+/g, '. ').replace(/\t+/g, ' ');
+        // 1) 줄바꿈 정규화 (탭 → 공백). 단락 경계 \n\n 은 그대로 두고 splitSentences
+        //    가 1차 분할 기준으로 사용 → 단락 사이를 별 utterance 로 발화해 자연 쉼.
+        let out = text.replace(/\r\n/g, '\n').replace(/\r/g, '\n').replace(/\t+/g, ' ');
         // 2) 성경 인용 한자어 한글 변환
         out = out.replace(BIBLE_BOOK_PAT, (m, book, chap, verse, verseEnd) => {
             const unit = (book === '시편') ? '편' : '장';
@@ -749,10 +796,28 @@
             if (verseEnd) return `${head}부터 ${koreanNumber(parseInt(verseEnd, 10))}절`;
             return head;
         });
-        // 3) 접속사 앞에 쉼표 삽입 (이미 구두점이 있으면 건너뜀)
+        // 3) 영문 표제 한국어 변환 ("Chapter 03" → "삼장", "BOOK 01" → "일권", "PART 1" → "일부")
+        out = out.replace(/\bChapter\.?\s*(\d+)\b/gi, (_, n) => `${koreanNumber(parseInt(n, 10))}장`);
+        out = out.replace(/\bCh\.?\s*(\d+)\b/gi, (_, n) => `${koreanNumber(parseInt(n, 10))}장`);
+        out = out.replace(/\bBOOK\.?\s*(\d+)\b/gi, (_, n) => `${koreanNumber(parseInt(n, 10))}권`);
+        out = out.replace(/\bPART\.?\s*(\d+)\b/gi, (_, n) => `${koreanNumber(parseInt(n, 10))}부`);
+        // 4) 일반 아라비아 숫자 → 한자어 한글 (소수점 먼저 처리)
+        out = out.replace(/(\d+)\.(\d+)/g, (_, ip, dp) => {
+            const i = parseInt(ip, 10);
+            const intK = isFinite(i) ? koreanNumber(i) : ip;
+            const decK = dp.split('').map(d => KO_DIGIT[parseInt(d, 10)] || d).join('');
+            return intK + '점' + decK;
+        });
+        out = out.replace(/(\d+)/g, (m) => {
+            const n = parseInt(m, 10);
+            if (!isFinite(n) || n > 999999999999) return m;
+            return koreanNumber(n);
+        });
+        // 5) 접속사 앞에 쉼표 삽입 (이미 구두점이 있으면 건너뜀)
         out = out.replace(TTS_CONJ_PAT, ', $1');
-        // 4) ".." ".." 같은 중복 마침표는 ".. " 한번으로 (3 이상은 그대로 유지 - 줄임표)
-        out = out.replace(/\. \./g, '.').replace(/\.{2}(?!\.)/g, '.');
+        // 6) 중복 마침표 정리. 단, 단락 경계로 만든 ". . " 시퀀스는 공백을 사이에 둔
+        //    별 utterance 분리 신호이므로 합치지 않는다 (정규식이 공백 없는 ".." 만 매치).
+        out = out.replace(/\.{2}(?!\.)/g, '.');
         // 5) 마침표·쉼표 뒤 공백 보장 (드물지만 안전망)
         out = out.replace(/([.,!?])([^\s,.!?…\)\]"'」』])/g, '$1 $2');
         // 6) 연속 공백 정리
@@ -761,21 +826,25 @@
     }
 
     function splitSentences(text) {
-        // 한국어/영문 문장 종결부호 기준 분할. 너무 짧은 토막은 합쳐 200~250자 사이.
+        // 단락 경계(\n{2,}) 1차 분할 후, 각 단락 안에서만 종결부호 기준으로 합친다.
+        // 단락 사이는 절대 합치지 않음 → 별 utterance 로 발화돼 자연 쉼이 들어간다.
         if (!text) return [];
-        const raw = text.split(/(?<=[\.!?。!?…])\s+|\n+/).map(s => s.trim()).filter(Boolean);
+        const SOFT = 80;
+        const HARD = 240;
         const merged = [];
-        let buf = '';
-        const SOFT = 80;   // 너무 짧으면 합쳐 자연스럽게
-        const HARD = 240;  // 한 utter 너무 길면 끊김
-        for (const s of raw) {
-            if (!buf) { buf = s; continue; }
-            if (buf.length < SOFT) { buf += ' ' + s; continue; }
-            if ((buf + ' ' + s).length <= HARD) { buf += ' ' + s; continue; }
-            merged.push(buf);
-            buf = s;
+        const paragraphs = text.split(/\n{2,}/).map(p => p.trim()).filter(Boolean);
+        for (const para of paragraphs) {
+            const raw = para.split(/(?<=[\.!?。!?…])\s+|\n+/).map(s => s.trim()).filter(Boolean);
+            let buf = '';
+            for (const s of raw) {
+                if (!buf) { buf = s; continue; }
+                if (buf.length < SOFT) { buf += ' ' + s; continue; }
+                if ((buf + ' ' + s).length <= HARD) { buf += ' ' + s; continue; }
+                merged.push(buf);
+                buf = s;
+            }
+            if (buf) merged.push(buf);
         }
-        if (buf) merged.push(buf);
         return merged;
     }
     function setTtsBtnState(state) {
@@ -957,6 +1026,27 @@
     function hideRestoreToast() {
         const toast = document.getElementById('restore-toast');
         if (toast) toast.classList.remove('show');
+    }
+
+    // TTS 가 페이지 이동으로 자동 중지됐을 때 사용자에게 짧게 안내. 같은 .restore-toast
+    // 스타일 재사용.
+    function showTtsStoppedToast() {
+        let toast = document.getElementById('tts-stopped-toast');
+        if (!toast) {
+            toast = document.createElement('div');
+            toast.id = 'tts-stopped-toast';
+            toast.className = 'restore-toast';
+            document.body.appendChild(toast);
+        }
+        toast.innerHTML = (
+            '<span class="restore-toast-msg">페이지를 넘기셔서 본문 읽기를 멈췄어요</span>' +
+            '<button type="button" class="restore-toast-close" id="tts-stopped-close" title="닫기">×</button>'
+        );
+        toast.classList.add('show');
+        const closeBtn = toast.querySelector('#tts-stopped-close');
+        if (closeBtn) closeBtn.addEventListener('click', () => toast.classList.remove('show'));
+        clearTimeout(showTtsStoppedToast._t);
+        showTtsStoppedToast._t = setTimeout(() => toast.classList.remove('show'), 4000);
     }
 
     init();

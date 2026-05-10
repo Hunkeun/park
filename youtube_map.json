@@ -8,82 +8,1290 @@
     },
     "epub_dir": "~/Downloads/전자책/",
     "epub_dir_bookk_extended": "~/Downloads/_부크크검수/ (시즌 1 부크크 확장본)",
-    "last_updated": "2026-05-02",
-    "status": "시즌 1 10권 + 시즌 2 G01·G02·G03·G04 40권 + G05 9권(50번 한도 초과로 24h 후 재시도 예정) 업로드 완료."
+    "last_updated": "2026-05-10",
+    "status": "시즌 1 본권 10권 + 시즌 2 본권 100권 + 시즌 2 종합책 트레일러 10권 + 시즌 1 종합책 트레일러 1권 업로드 완료. 시즌 1 트레일러는 썸네일 한도로 커스텀 썸네일 미적용 (별도 패치 예정)."
   },
   "books": [
-    {"season": 1, "num":  1, "group": "S1", "ep":  1, "title": "AI 시대 영성 상담사를 만나다", "isbn": "9791199881211", "epub": "AI_시대_영성_상담사를_만나다_20260412.epub", "youtube_id": "tmWkdC91UVA"},
-    {"season": 1, "num":  2, "group": "S1", "ep":  2, "title": "산을 옮길만한 믿음",            "isbn": "9791199881228", "epub": "산을_옮길만한_믿음_20260412.epub",             "youtube_id": "Q7bJXGNyi9M"},
-    {"season": 1, "num":  3, "group": "S1", "ep":  3, "title": "아름다운 감성을 사모하자",      "isbn": "9791199881297", "epub": "아름다운_감성을_사모하자_20260413.epub",       "youtube_id": "MhjqRWNPp4w"},
-    {"season": 1, "num":  4, "group": "S1", "ep":  4, "title": "다수의 횡포를 직관하라",        "isbn": "9791199881259", "epub": "다수의_횡포를_직관하라_20260415.epub",         "youtube_id": "jFR-g-RPJmg"},
-    {"season": 1, "num":  5, "group": "S1", "ep":  5, "title": "새술은 새부대에 담아야",        "isbn": "9791199881280", "epub": "새술은_새부대에_담아야_20260412.epub",         "youtube_id": "eTA-U5CMgpE"},
-    {"season": 1, "num":  6, "group": "S1", "ep":  6, "title": "카이로스와 자유의지",           "isbn": "9791199881235", "epub": "카이로스와_자유의지_20260415.epub",            "youtube_id": "O-gy363CQao"},
-    {"season": 1, "num":  7, "group": "S1", "ep":  7, "title": "진동 에너지와 치유",            "isbn": "9791199881266", "epub": "진동_에너지와_치유_20260413.epub",             "youtube_id": "tCEdcIknXt0"},
-    {"season": 1, "num":  8, "group": "S1", "ep":  8, "title": "이스라엘 어느 왕의 덤 인생",    "isbn": "9791199881242", "epub": "이스라엘_어느_왕의_덤_인생_20260415.epub",     "youtube_id": "qvHkKXH81eE"},
-    {"season": 1, "num":  9, "group": "S1", "ep":  9, "title": "죽음의 역설",                   "isbn": "9791199881273", "epub": "죽음의_역설_20260413.epub",                    "youtube_id": "TqmORW6iCNM"},
-    {"season": 1, "num": 10, "group": "S1", "ep": 10, "title": "이 세상과 저 세상",             "isbn": "9791199881204", "epub": "이_세상과_저_세상_20260416.epub",              "youtube_id": "g-7mH-q4EkY"},
-
-    {"season": 2, "num":  1, "group": "G01", "ep":  1, "s_no":  1, "title": "천국의 문턱에서",            "isbn": "9791124569009", "epub": "천국의_문턱에서_20260418.epub",            "youtube_id": "zMjeRkCQHuA"},
-    {"season": 2, "num":  2, "group": "G01", "ep":  2, "s_no":  2, "title": "부활의 증거들",              "isbn": "9791124569016", "epub": "부활의_증거들_20260419.epub",              "youtube_id": "gdRpJ79pfNY"},
-    {"season": 2, "num":  3, "group": "G01", "ep":  3, "s_no":  3, "title": "영혼은 어디로 가는가",        "isbn": "9791124569023", "epub": "영혼은_어디로_가는가_20260419.epub",        "youtube_id": "lqoUeIFZams"},
-    {"season": 2, "num":  4, "group": "G01", "ep":  4, "s_no":  4, "title": "죽음 너머의 빛",              "isbn": "9791124569030", "epub": "죽음_너머의_빛_20260419.epub",              "youtube_id": "5f3QN4CwH-A"},
-    {"season": 2, "num":  5, "group": "G01", "ep":  5, "s_no":  5, "title": "낙원과 지옥 사이",            "isbn": "9791124569047", "epub": "낙원과_지옥_사이_20260420.epub",            "youtube_id": "iAEH_kXU7Vg"},
-    {"season": 2, "num":  6, "group": "G01", "ep":  6, "s_no":  6, "title": "영계의 언어",                "isbn": "9791124569054", "epub": "영계의_언어_20260421.epub",                "youtube_id": "aNYQZknP29c"},
-    {"season": 2, "num":  7, "group": "G01", "ep":  7, "s_no":  7, "title": "몸과 영혼의 경계",            "isbn": "9791124569061", "epub": "몸과_영혼의_경계_20260423.epub",            "youtube_id": "nLH5r5Fb4fE"},
-    {"season": 2, "num":  8, "group": "G01", "ep":  8, "s_no":  8, "title": "마지막 심판의 의미",          "isbn": "9791124569078", "epub": "마지막_심판의_의미_20260423.epub",          "youtube_id": "QHOO_6da080"},
-    {"season": 2, "num":  9, "group": "G01", "ep":  9, "s_no":  9, "title": "영원한 생명의 실체",          "isbn": "9791124569085", "epub": "영원한_생명의_실체_20260423.epub",          "youtube_id": "29Bs36g8s8k"},
-    {"season": 2, "num": 10, "group": "G01", "ep": 10, "s_no": 10, "title": "천사들의 사역",              "isbn": "9791124569092", "epub": "천사들의_사역_20260424.epub",              "youtube_id": "f-L-6wzIeQA"},
-
-    {"season": 2, "num": 11, "group": "G02", "ep":  1, "s_no":  1, "title": "AI가 묻는 신앙의 질문들",   "isbn": "9791124569108", "epub": "AI가_묻는_신앙의_질문들_20260418.epub",   "youtube_id": "XtOCHu08t0E"},
-    {"season": 2, "num": 12, "group": "G02", "ep":  2, "s_no":  4, "title": "AI와 함께 읽는 성경",       "isbn": "9791124569139", "epub": "AI와_함께_읽는_성경_20260419.epub",       "youtube_id": "E0Z-N5bDFPw"},
-    {"season": 2, "num": 13, "group": "G02", "ep":  3, "s_no":  2, "title": "알고리즘과 섭리",           "isbn": "9791124569115", "epub": "알고리즘과_섭리_20260419.epub",           "youtube_id": "ecdi89stF5I"},
-    {"season": 2, "num": 14, "group": "G02", "ep":  4, "s_no":  6, "title": "빅데이터가 모르는 것",      "isbn": "9791124569153", "epub": "빅데이터가_모르는_것_20260421.epub",      "youtube_id": "FzH6PniaiJQ"},
-    {"season": 2, "num": 15, "group": "G02", "ep":  5, "s_no":  5, "title": "트랜스휴머니즘과 영혼",     "isbn": "9791124569146", "epub": "트랜스휴머니즘과_영혼_20260421.epub",     "youtube_id": "tsqIJWgC52k"},
-    {"season": 2, "num": 16, "group": "G02", "ep":  6, "s_no":  3, "title": "디지털 시대의 기도",        "isbn": "9791124569122", "epub": "디지털_시대의_기도_20260419.epub",        "youtube_id": "TqLN5K34jLg"},
-    {"season": 2, "num": 17, "group": "G02", "ep":  7, "s_no":  8, "title": "메타버스 속의 예배",        "isbn": "9791124569177", "epub": "메타버스_속의_예배_20260423.epub",        "youtube_id": "iJyBK1If43s"},
-    {"season": 2, "num": 18, "group": "G02", "ep":  8, "s_no":  7, "title": "로봇 시대의 인간 존엄",     "isbn": "9791124569160", "epub": "로봇_시대의_인간_존엄_20260423.epub",     "youtube_id": "GvFUY3HDh6s"},
-    {"season": 2, "num": 19, "group": "G02", "ep":  9, "s_no":  9, "title": "AI 목사가 올 수 있는가",    "isbn": "9791124569184", "epub": "AI_목사가_올_수_있는가_20260423.epub",    "youtube_id": "KU8hSZEetmE"},
-    {"season": 2, "num": 20, "group": "G02", "ep": 10, "s_no": 10, "title": "디지털 선교의 미래",       "isbn": "9791124569191", "epub": "디지털_선교의_미래_20260424.epub",        "youtube_id": "6NSB-sBUukk"},
-
-    {"season": 2, "num": 21, "group": "G03", "ep":  1, "s_no":  1, "title": "의심을 넘어선 확신",        "isbn": "9791124569207", "epub": "의심을_넘어선_확신_20260418.epub",        "youtube_id": "FxBqyIfzFKw"},
-    {"season": 2, "num": 22, "group": "G03", "ep":  2, "s_no":  2, "title": "시험 속에서 자라는 믿음",   "isbn": "9791124569214", "epub": "시험_속에서_자라는_믿음_20260419.epub",   "youtube_id": "24BM-T_F05o"},
-    {"season": 2, "num": 23, "group": "G03", "ep":  3, "s_no":  3, "title": "보이지 않는 것을 보는 눈",  "isbn": "9791124569221", "epub": "보이지_않는_것을_보는_눈_20260419.epub",  "youtube_id": "hNc-MhQrdZs"},
-    {"season": 2, "num": 24, "group": "G03", "ep":  4, "s_no":  4, "title": "기적은 지금도 일어난다",    "isbn": "9791124569238", "epub": "기적은_지금도_일어난다_20260419.epub",    "youtube_id": "30w9pac351A"},
-    {"season": 2, "num": 25, "group": "G03", "ep":  5, "s_no":  5, "title": "믿음의 선배들",             "isbn": "9791124569245", "epub": "믿음의_선배들_20260421.epub",             "youtube_id": "57410zjkgx8"},
-    {"season": 2, "num": 26, "group": "G03", "ep":  6, "s_no":  6, "title": "작은 믿음의 큰 힘",         "isbn": "9791124569252", "epub": "작은_믿음의_큰_힘_20260422.epub",         "youtube_id": "hfZ4leCvFrM"},
-    {"season": 2, "num": 27, "group": "G03", "ep":  7, "s_no":  7, "title": "두려움 없는 믿음",          "isbn": "9791124569269", "epub": "두려움_없는_믿음_20260423.epub",          "youtube_id": "seYbeCgCx84"},
-    {"season": 2, "num": 28, "group": "G03", "ep":  8, "s_no":  8, "title": "믿음과 행함의 균형",        "isbn": "9791124569276", "epub": "믿음과_행함의_균형_20260423.epub",        "youtube_id": "Nf5IMUH8XME"},
-    {"season": 2, "num": 29, "group": "G03", "ep":  9, "s_no":  9, "title": "마지막 때의 믿음",          "isbn": "9791124569283", "epub": "마지막_때의_믿음_20260423.epub",          "youtube_id": "176j1F1m0_A"},
-    {"season": 2, "num": 30, "group": "G03", "ep": 10, "s_no": 10, "title": "흔들리지 않는 닻",         "isbn": "9791124569290", "epub": "흔들리지_않는_닻_20260424.epub",          "youtube_id": "g0EZgUGpjpY"},
-
-    {"season": 2, "num": 31, "group": "G04", "ep":  1, "s_no":  1, "title": "다윗의 눈물",                "isbn": "9791124569306", "epub": "다윗의_눈물_20260418.epub",                "youtube_id": "pKx2dZ0jrL8"},
-    {"season": 2, "num": 32, "group": "G04", "ep":  2, "s_no":  2, "title": "바울의 변화",                "isbn": "9791124569313", "epub": "바울의_변화_20260419.epub",                "youtube_id": "Ts488ureyEQ"},
-    {"season": 2, "num": 33, "group": "G04", "ep":  3, "s_no":  3, "title": "에스더의 용기",              "isbn": "9791124569320", "epub": "에스더의_용기_20260419.epub",              "youtube_id": "HxaJi8pis58"},
-    {"season": 2, "num": 34, "group": "G04", "ep":  4, "s_no":  4, "title": "욥의 질문",                  "isbn": "9791124569337", "epub": "욥의_질문_20260420.epub",                  "youtube_id": "0sziGXXZB2g"},
-    {"season": 2, "num": 35, "group": "G04", "ep":  5, "s_no":  5, "title": "모세의 광야",                "isbn": "9791124569344", "epub": "모세의_광야_20260421.epub",                "youtube_id": "KbxIAcSTQhA"},
-    {"season": 2, "num": 36, "group": "G04", "ep":  6, "s_no":  6, "title": "엘리야의 번아웃",            "isbn": "9791124569351", "epub": "엘리야의_번아웃_20260422.epub",            "youtube_id": "nrX1UgQ9EKU"},
-    {"season": 2, "num": 37, "group": "G04", "ep":  7, "s_no":  7, "title": "룻의 충성",                  "isbn": "9791124569368", "epub": "룻의_충성_20260423.epub",                  "youtube_id": "uUKRv2qqH0k"},
-    {"season": 2, "num": 38, "group": "G04", "ep":  8, "s_no":  8, "title": "요나의 도망",                "isbn": "9791124569375", "epub": "요나의_도망_20260423.epub",                "youtube_id": "9gzhJ_Ngcrk"},
-    {"season": 2, "num": 39, "group": "G04", "ep":  9, "s_no":  9, "title": "막달라 마리아의 사랑",       "isbn": "9791124569382", "epub": "막달라_마리아의_사랑_20260423.epub",       "youtube_id": "nklHlNjTdIU"},
-    {"season": 2, "num": 40, "group": "G04", "ep": 10, "s_no": 10, "title": "솔로몬의 지혜와 실패",      "isbn": "9791124569399", "epub": "솔로몬의_지혜와_실패_20260424.epub",       "youtube_id": "dmqH2LZB1G8"},
-
-    {"season": 2, "num": 41, "group": "G05", "ep":  1, "s_no":  1, "title": "상처받은 영혼의 회복",      "isbn": "9791124569405", "epub": "상처받은_영혼의_회복_20260418.epub",      "youtube_id": "TpxFXLFWDdM"},
-    {"season": 2, "num": 42, "group": "G05", "ep":  2, "s_no":  2, "title": "트라우마와 은혜",          "isbn": "9791124569412", "epub": "트라우마와_은혜_20260419.epub",          "youtube_id": "2CHTafMkVK0"},
-    {"season": 2, "num": 43, "group": "G05", "ep":  3, "s_no":  3, "title": "몸의 기억, 영혼의 치유",   "isbn": "9791124569429", "epub": "몸의_기억,_영혼의_치유_20260419.epub",   "youtube_id": "MhOKnAVjXOU"},
-    {"season": 2, "num": 44, "group": "G05", "ep":  4, "s_no":  4, "title": "감정의 신학",              "isbn": "9791124569436", "epub": "감정의_신학_20260420.epub",              "youtube_id": "PVS7ljD0K9Q"},
-    {"season": 2, "num": 45, "group": "G05", "ep":  5, "s_no":  5, "title": "분노를 다스리는 법",       "isbn": "9791124569443", "epub": "분노를_다스리는_법_20260421.epub",       "youtube_id": "uFneXneOTc0"},
-    {"season": 2, "num": 46, "group": "G05", "ep":  6, "s_no":  6, "title": "슬픔도 선물이다",          "isbn": "9791124569450", "epub": "슬픔도_선물이다_20260422.epub",          "youtube_id": "tFrCXzaLWz8"},
-    {"season": 2, "num": 47, "group": "G05", "ep":  7, "s_no":  7, "title": "번아웃에서 부활로",        "isbn": "9791124569467", "epub": "번아웃에서_부활로_20260423.epub",        "youtube_id": "j76jGQPvXjo"},
-    {"season": 2, "num": 48, "group": "G05", "ep":  8, "s_no":  8, "title": "내면 아이의 치유",         "isbn": "9791124569474", "epub": "내면_아이의_치유_20260423.epub",         "youtube_id": "m4NcFkbn0Ss"},
-    {"season": 2, "num": 49, "group": "G05", "ep":  9, "s_no":  9, "title": "용서의 기적",              "isbn": "9791124569481", "epub": "용서의_기적_20260423.epub",              "youtube_id": "owls-FB_Mkc"},
-    {"season": 2, "num": 50, "group": "G05", "ep": 10, "s_no": 10, "title": "관계의 상처를 넘어서",      "isbn": "9791124569498", "epub": "관계의_상처를_넘어서_20260424.epub",      "youtube_id": ""}
+    {
+      "season": 1,
+      "num": 1,
+      "group": "S1",
+      "ep": 1,
+      "title": "AI 시대 영성 상담사를 만나다",
+      "isbn": "9791199881211",
+      "epub": "AI_시대_영성_상담사를_만나다_20260412.epub",
+      "youtube_id": "tmWkdC91UVA"
+    },
+    {
+      "season": 1,
+      "num": 2,
+      "group": "S1",
+      "ep": 2,
+      "title": "산을 옮길만한 믿음",
+      "isbn": "9791199881228",
+      "epub": "산을_옮길만한_믿음_20260412.epub",
+      "youtube_id": "Q7bJXGNyi9M"
+    },
+    {
+      "season": 1,
+      "num": 3,
+      "group": "S1",
+      "ep": 3,
+      "title": "아름다운 감성을 사모하자",
+      "isbn": "9791199881297",
+      "epub": "아름다운_감성을_사모하자_20260413.epub",
+      "youtube_id": "MhjqRWNPp4w"
+    },
+    {
+      "season": 1,
+      "num": 4,
+      "group": "S1",
+      "ep": 4,
+      "title": "다수의 횡포를 직관하라",
+      "isbn": "9791199881259",
+      "epub": "다수의_횡포를_직관하라_20260415.epub",
+      "youtube_id": "jFR-g-RPJmg"
+    },
+    {
+      "season": 1,
+      "num": 5,
+      "group": "S1",
+      "ep": 5,
+      "title": "새술은 새부대에 담아야",
+      "isbn": "9791199881280",
+      "epub": "새술은_새부대에_담아야_20260412.epub",
+      "youtube_id": "eTA-U5CMgpE"
+    },
+    {
+      "season": 1,
+      "num": 6,
+      "group": "S1",
+      "ep": 6,
+      "title": "카이로스와 자유의지",
+      "isbn": "9791199881235",
+      "epub": "카이로스와_자유의지_20260415.epub",
+      "youtube_id": "O-gy363CQao"
+    },
+    {
+      "season": 1,
+      "num": 7,
+      "group": "S1",
+      "ep": 7,
+      "title": "진동 에너지와 치유",
+      "isbn": "9791199881266",
+      "epub": "진동_에너지와_치유_20260413.epub",
+      "youtube_id": "tCEdcIknXt0"
+    },
+    {
+      "season": 1,
+      "num": 8,
+      "group": "S1",
+      "ep": 8,
+      "title": "이스라엘 어느 왕의 덤 인생",
+      "isbn": "9791199881242",
+      "epub": "이스라엘_어느_왕의_덤_인생_20260415.epub",
+      "youtube_id": "qvHkKXH81eE"
+    },
+    {
+      "season": 1,
+      "num": 9,
+      "group": "S1",
+      "ep": 9,
+      "title": "죽음의 역설",
+      "isbn": "9791199881273",
+      "epub": "죽음의_역설_20260413.epub",
+      "youtube_id": "TqmORW6iCNM"
+    },
+    {
+      "season": 1,
+      "num": 10,
+      "group": "S1",
+      "ep": 10,
+      "title": "이 세상과 저 세상",
+      "isbn": "9791199881204",
+      "epub": "이_세상과_저_세상_20260416.epub",
+      "youtube_id": "g-7mH-q4EkY"
+    },
+    {
+      "season": 1,
+      "num": 11,
+      "group": "S1_OMNIBUS",
+      "ep": 11,
+      "title": "AI 시대를 살아가는 영성",
+      "isbn": "9791176580007",
+      "youtube_id": "p0-PKFgPdcY",
+      "note": "시즌1 종합책 트레일러. 썸네일 한도(429)로 커스텀 썸네일 미적용 — 별도 패치 예정."
+    },
+    {
+      "season": 2,
+      "num": 1,
+      "group": "G01",
+      "ep": 1,
+      "s_no": 1,
+      "title": "천국의 문턱에서",
+      "isbn": "9791124569009",
+      "epub": "천국의_문턱에서_20260418.epub",
+      "youtube_id": "zMjeRkCQHuA"
+    },
+    {
+      "season": 2,
+      "num": 2,
+      "group": "G01",
+      "ep": 2,
+      "s_no": 2,
+      "title": "부활의 증거들",
+      "isbn": "9791124569016",
+      "epub": "부활의_증거들_20260419.epub",
+      "youtube_id": "gdRpJ79pfNY"
+    },
+    {
+      "season": 2,
+      "num": 3,
+      "group": "G01",
+      "ep": 3,
+      "s_no": 3,
+      "title": "영혼은 어디로 가는가",
+      "isbn": "9791124569023",
+      "epub": "영혼은_어디로_가는가_20260419.epub",
+      "youtube_id": "lqoUeIFZams"
+    },
+    {
+      "season": 2,
+      "num": 4,
+      "group": "G01",
+      "ep": 4,
+      "s_no": 4,
+      "title": "죽음 너머의 빛",
+      "isbn": "9791124569030",
+      "epub": "죽음_너머의_빛_20260419.epub",
+      "youtube_id": "5f3QN4CwH-A"
+    },
+    {
+      "season": 2,
+      "num": 5,
+      "group": "G01",
+      "ep": 5,
+      "s_no": 5,
+      "title": "낙원과 지옥 사이",
+      "isbn": "9791124569047",
+      "epub": "낙원과_지옥_사이_20260420.epub",
+      "youtube_id": "iAEH_kXU7Vg"
+    },
+    {
+      "season": 2,
+      "num": 6,
+      "group": "G01",
+      "ep": 6,
+      "s_no": 6,
+      "title": "영계의 언어",
+      "isbn": "9791124569054",
+      "epub": "영계의_언어_20260421.epub",
+      "youtube_id": "aNYQZknP29c"
+    },
+    {
+      "season": 2,
+      "num": 7,
+      "group": "G01",
+      "ep": 7,
+      "s_no": 7,
+      "title": "몸과 영혼의 경계",
+      "isbn": "9791124569061",
+      "epub": "몸과_영혼의_경계_20260423.epub",
+      "youtube_id": "nLH5r5Fb4fE"
+    },
+    {
+      "season": 2,
+      "num": 8,
+      "group": "G01",
+      "ep": 8,
+      "s_no": 8,
+      "title": "마지막 심판의 의미",
+      "isbn": "9791124569078",
+      "epub": "마지막_심판의_의미_20260423.epub",
+      "youtube_id": "QHOO_6da080"
+    },
+    {
+      "season": 2,
+      "num": 9,
+      "group": "G01",
+      "ep": 9,
+      "s_no": 9,
+      "title": "영원한 생명의 실체",
+      "isbn": "9791124569085",
+      "epub": "영원한_생명의_실체_20260423.epub",
+      "youtube_id": "29Bs36g8s8k"
+    },
+    {
+      "season": 2,
+      "num": 10,
+      "group": "G01",
+      "ep": 10,
+      "s_no": 10,
+      "title": "천사들의 사역",
+      "isbn": "9791124569092",
+      "epub": "천사들의_사역_20260424.epub",
+      "youtube_id": "f-L-6wzIeQA"
+    },
+    {
+      "season": 2,
+      "num": 11,
+      "group": "G02",
+      "ep": 1,
+      "s_no": 1,
+      "title": "AI가 묻는 신앙의 질문들",
+      "isbn": "9791124569108",
+      "epub": "AI가_묻는_신앙의_질문들_20260418.epub",
+      "youtube_id": "XtOCHu08t0E"
+    },
+    {
+      "season": 2,
+      "num": 12,
+      "group": "G02",
+      "ep": 2,
+      "s_no": 4,
+      "title": "AI와 함께 읽는 성경",
+      "isbn": "9791124569139",
+      "epub": "AI와_함께_읽는_성경_20260419.epub",
+      "youtube_id": "E0Z-N5bDFPw"
+    },
+    {
+      "season": 2,
+      "num": 13,
+      "group": "G02",
+      "ep": 3,
+      "s_no": 2,
+      "title": "알고리즘과 섭리",
+      "isbn": "9791124569115",
+      "epub": "알고리즘과_섭리_20260419.epub",
+      "youtube_id": "ecdi89stF5I"
+    },
+    {
+      "season": 2,
+      "num": 14,
+      "group": "G02",
+      "ep": 4,
+      "s_no": 6,
+      "title": "빅데이터가 모르는 것",
+      "isbn": "9791124569153",
+      "epub": "빅데이터가_모르는_것_20260421.epub",
+      "youtube_id": "FzH6PniaiJQ"
+    },
+    {
+      "season": 2,
+      "num": 15,
+      "group": "G02",
+      "ep": 5,
+      "s_no": 5,
+      "title": "트랜스휴머니즘과 영혼",
+      "isbn": "9791124569146",
+      "epub": "트랜스휴머니즘과_영혼_20260421.epub",
+      "youtube_id": "tsqIJWgC52k"
+    },
+    {
+      "season": 2,
+      "num": 16,
+      "group": "G02",
+      "ep": 6,
+      "s_no": 3,
+      "title": "디지털 시대의 기도",
+      "isbn": "9791124569122",
+      "epub": "디지털_시대의_기도_20260419.epub",
+      "youtube_id": "TqLN5K34jLg"
+    },
+    {
+      "season": 2,
+      "num": 17,
+      "group": "G02",
+      "ep": 7,
+      "s_no": 8,
+      "title": "메타버스 속의 예배",
+      "isbn": "9791124569177",
+      "epub": "메타버스_속의_예배_20260423.epub",
+      "youtube_id": "iJyBK1If43s"
+    },
+    {
+      "season": 2,
+      "num": 18,
+      "group": "G02",
+      "ep": 8,
+      "s_no": 7,
+      "title": "로봇 시대의 인간 존엄",
+      "isbn": "9791124569160",
+      "epub": "로봇_시대의_인간_존엄_20260423.epub",
+      "youtube_id": "GvFUY3HDh6s"
+    },
+    {
+      "season": 2,
+      "num": 19,
+      "group": "G02",
+      "ep": 9,
+      "s_no": 9,
+      "title": "AI 목사가 올 수 있는가",
+      "isbn": "9791124569184",
+      "epub": "AI_목사가_올_수_있는가_20260423.epub",
+      "youtube_id": "KU8hSZEetmE"
+    },
+    {
+      "season": 2,
+      "num": 20,
+      "group": "G02",
+      "ep": 10,
+      "s_no": 10,
+      "title": "디지털 선교의 미래",
+      "isbn": "9791124569191",
+      "epub": "디지털_선교의_미래_20260424.epub",
+      "youtube_id": "6NSB-sBUukk"
+    },
+    {
+      "season": 2,
+      "num": 21,
+      "group": "G03",
+      "ep": 1,
+      "s_no": 1,
+      "title": "의심을 넘어선 확신",
+      "isbn": "9791124569207",
+      "epub": "의심을_넘어선_확신_20260418.epub",
+      "youtube_id": "FxBqyIfzFKw"
+    },
+    {
+      "season": 2,
+      "num": 22,
+      "group": "G03",
+      "ep": 2,
+      "s_no": 2,
+      "title": "시험 속에서 자라는 믿음",
+      "isbn": "9791124569214",
+      "epub": "시험_속에서_자라는_믿음_20260419.epub",
+      "youtube_id": "24BM-T_F05o"
+    },
+    {
+      "season": 2,
+      "num": 23,
+      "group": "G03",
+      "ep": 3,
+      "s_no": 3,
+      "title": "보이지 않는 것을 보는 눈",
+      "isbn": "9791124569221",
+      "epub": "보이지_않는_것을_보는_눈_20260419.epub",
+      "youtube_id": "hNc-MhQrdZs"
+    },
+    {
+      "season": 2,
+      "num": 24,
+      "group": "G03",
+      "ep": 4,
+      "s_no": 4,
+      "title": "기적은 지금도 일어난다",
+      "isbn": "9791124569238",
+      "epub": "기적은_지금도_일어난다_20260419.epub",
+      "youtube_id": "30w9pac351A"
+    },
+    {
+      "season": 2,
+      "num": 25,
+      "group": "G03",
+      "ep": 5,
+      "s_no": 5,
+      "title": "믿음의 선배들",
+      "isbn": "9791124569245",
+      "epub": "믿음의_선배들_20260421.epub",
+      "youtube_id": "57410zjkgx8"
+    },
+    {
+      "season": 2,
+      "num": 26,
+      "group": "G03",
+      "ep": 6,
+      "s_no": 6,
+      "title": "작은 믿음의 큰 힘",
+      "isbn": "9791124569252",
+      "epub": "작은_믿음의_큰_힘_20260422.epub",
+      "youtube_id": "hfZ4leCvFrM"
+    },
+    {
+      "season": 2,
+      "num": 27,
+      "group": "G03",
+      "ep": 7,
+      "s_no": 7,
+      "title": "두려움 없는 믿음",
+      "isbn": "9791124569269",
+      "epub": "두려움_없는_믿음_20260423.epub",
+      "youtube_id": "seYbeCgCx84"
+    },
+    {
+      "season": 2,
+      "num": 28,
+      "group": "G03",
+      "ep": 8,
+      "s_no": 8,
+      "title": "믿음과 행함의 균형",
+      "isbn": "9791124569276",
+      "epub": "믿음과_행함의_균형_20260423.epub",
+      "youtube_id": "Nf5IMUH8XME"
+    },
+    {
+      "season": 2,
+      "num": 29,
+      "group": "G03",
+      "ep": 9,
+      "s_no": 9,
+      "title": "마지막 때의 믿음",
+      "isbn": "9791124569283",
+      "epub": "마지막_때의_믿음_20260423.epub",
+      "youtube_id": "176j1F1m0_A"
+    },
+    {
+      "season": 2,
+      "num": 30,
+      "group": "G03",
+      "ep": 10,
+      "s_no": 10,
+      "title": "흔들리지 않는 닻",
+      "isbn": "9791124569290",
+      "epub": "흔들리지_않는_닻_20260424.epub",
+      "youtube_id": "g0EZgUGpjpY"
+    },
+    {
+      "season": 2,
+      "num": 31,
+      "group": "G04",
+      "ep": 1,
+      "s_no": 1,
+      "title": "다윗의 눈물",
+      "isbn": "9791124569306",
+      "epub": "다윗의_눈물_20260418.epub",
+      "youtube_id": "pKx2dZ0jrL8"
+    },
+    {
+      "season": 2,
+      "num": 32,
+      "group": "G04",
+      "ep": 2,
+      "s_no": 2,
+      "title": "바울의 변화",
+      "isbn": "9791124569313",
+      "epub": "바울의_변화_20260419.epub",
+      "youtube_id": "Ts488ureyEQ"
+    },
+    {
+      "season": 2,
+      "num": 33,
+      "group": "G04",
+      "ep": 3,
+      "s_no": 3,
+      "title": "에스더의 용기",
+      "isbn": "9791124569320",
+      "epub": "에스더의_용기_20260419.epub",
+      "youtube_id": "HxaJi8pis58"
+    },
+    {
+      "season": 2,
+      "num": 34,
+      "group": "G04",
+      "ep": 4,
+      "s_no": 4,
+      "title": "욥의 질문",
+      "isbn": "9791124569337",
+      "epub": "욥의_질문_20260420.epub",
+      "youtube_id": "0sziGXXZB2g"
+    },
+    {
+      "season": 2,
+      "num": 35,
+      "group": "G04",
+      "ep": 5,
+      "s_no": 5,
+      "title": "모세의 광야",
+      "isbn": "9791124569344",
+      "epub": "모세의_광야_20260421.epub",
+      "youtube_id": "KbxIAcSTQhA"
+    },
+    {
+      "season": 2,
+      "num": 36,
+      "group": "G04",
+      "ep": 6,
+      "s_no": 6,
+      "title": "엘리야의 번아웃",
+      "isbn": "9791124569351",
+      "epub": "엘리야의_번아웃_20260422.epub",
+      "youtube_id": "nrX1UgQ9EKU"
+    },
+    {
+      "season": 2,
+      "num": 37,
+      "group": "G04",
+      "ep": 7,
+      "s_no": 7,
+      "title": "룻의 충성",
+      "isbn": "9791124569368",
+      "epub": "룻의_충성_20260423.epub",
+      "youtube_id": "uUKRv2qqH0k"
+    },
+    {
+      "season": 2,
+      "num": 38,
+      "group": "G04",
+      "ep": 8,
+      "s_no": 8,
+      "title": "요나의 도망",
+      "isbn": "9791124569375",
+      "epub": "요나의_도망_20260423.epub",
+      "youtube_id": "9gzhJ_Ngcrk"
+    },
+    {
+      "season": 2,
+      "num": 39,
+      "group": "G04",
+      "ep": 9,
+      "s_no": 9,
+      "title": "막달라 마리아의 사랑",
+      "isbn": "9791124569382",
+      "epub": "막달라_마리아의_사랑_20260423.epub",
+      "youtube_id": "nklHlNjTdIU"
+    },
+    {
+      "season": 2,
+      "num": 40,
+      "group": "G04",
+      "ep": 10,
+      "s_no": 10,
+      "title": "솔로몬의 지혜와 실패",
+      "isbn": "9791124569399",
+      "epub": "솔로몬의_지혜와_실패_20260424.epub",
+      "youtube_id": "dmqH2LZB1G8"
+    },
+    {
+      "season": 2,
+      "num": 41,
+      "group": "G05",
+      "ep": 1,
+      "s_no": 1,
+      "title": "상처받은 영혼의 회복",
+      "isbn": "9791124569405",
+      "epub": "상처받은_영혼의_회복_20260418.epub",
+      "youtube_id": "TpxFXLFWDdM"
+    },
+    {
+      "season": 2,
+      "num": 42,
+      "group": "G05",
+      "ep": 2,
+      "s_no": 2,
+      "title": "트라우마와 은혜",
+      "isbn": "9791124569412",
+      "epub": "트라우마와_은혜_20260419.epub",
+      "youtube_id": "2CHTafMkVK0"
+    },
+    {
+      "season": 2,
+      "num": 43,
+      "group": "G05",
+      "ep": 3,
+      "s_no": 3,
+      "title": "몸의 기억, 영혼의 치유",
+      "isbn": "9791124569429",
+      "epub": "몸의_기억,_영혼의_치유_20260419.epub",
+      "youtube_id": "MhOKnAVjXOU"
+    },
+    {
+      "season": 2,
+      "num": 44,
+      "group": "G05",
+      "ep": 4,
+      "s_no": 4,
+      "title": "감정의 신학",
+      "isbn": "9791124569436",
+      "epub": "감정의_신학_20260420.epub",
+      "youtube_id": "PVS7ljD0K9Q"
+    },
+    {
+      "season": 2,
+      "num": 45,
+      "group": "G05",
+      "ep": 5,
+      "s_no": 5,
+      "title": "분노를 다스리는 법",
+      "isbn": "9791124569443",
+      "epub": "분노를_다스리는_법_20260421.epub",
+      "youtube_id": "uFneXneOTc0"
+    },
+    {
+      "season": 2,
+      "num": 46,
+      "group": "G05",
+      "ep": 6,
+      "s_no": 6,
+      "title": "슬픔도 선물이다",
+      "isbn": "9791124569450",
+      "epub": "슬픔도_선물이다_20260422.epub",
+      "youtube_id": "tFrCXzaLWz8"
+    },
+    {
+      "season": 2,
+      "num": 47,
+      "group": "G05",
+      "ep": 7,
+      "s_no": 7,
+      "title": "번아웃에서 부활로",
+      "isbn": "9791124569467",
+      "epub": "번아웃에서_부활로_20260423.epub",
+      "youtube_id": "j76jGQPvXjo"
+    },
+    {
+      "season": 2,
+      "num": 48,
+      "group": "G05",
+      "ep": 8,
+      "s_no": 8,
+      "title": "내면 아이의 치유",
+      "isbn": "9791124569474",
+      "epub": "내면_아이의_치유_20260423.epub",
+      "youtube_id": "m4NcFkbn0Ss"
+    },
+    {
+      "season": 2,
+      "num": 49,
+      "group": "G05",
+      "ep": 9,
+      "s_no": 9,
+      "title": "용서의 기적",
+      "isbn": "9791124569481",
+      "epub": "용서의_기적_20260423.epub",
+      "youtube_id": "owls-FB_Mkc"
+    },
+    {
+      "season": 2,
+      "num": 50,
+      "group": "G05",
+      "ep": 10,
+      "s_no": 10,
+      "title": "관계의 상처를 넘어서",
+      "isbn": "9791124569498",
+      "epub": "관계의_상처를_넘어서_20260424.epub",
+      "youtube_id": "YUvmWKm6Hf4"
+    },
+    {
+      "season": 2,
+      "num": 51,
+      "youtube_id": "QhXaPjte2MA",
+      "group": "G06",
+      "ep": 1,
+      "title": "진실이 불편한 시대",
+      "isbn": "9791124569504"
+    },
+    {
+      "season": 2,
+      "num": 52,
+      "youtube_id": "uiVkKTLluEE",
+      "group": "G06",
+      "ep": 2,
+      "title": "미디어와 영적 분별",
+      "isbn": "9791124569511"
+    },
+    {
+      "season": 2,
+      "num": 53,
+      "youtube_id": "2Y8CQzTqcQk",
+      "group": "G06",
+      "ep": 3,
+      "title": "포퓰리즘의 유혹",
+      "isbn": "9791124569528"
+    },
+    {
+      "season": 2,
+      "num": 54,
+      "youtube_id": "RKS7h3v-OM8",
+      "group": "G06",
+      "ep": 4,
+      "title": "크리스천 시민의 책임",
+      "isbn": "9791124569535"
+    },
+    {
+      "season": 2,
+      "num": 55,
+      "youtube_id": "1siWX3_nymk",
+      "group": "G06",
+      "ep": 5,
+      "title": "정의란 무엇인가 - 성경적 답",
+      "isbn": "9791124569542"
+    },
+    {
+      "season": 2,
+      "num": 56,
+      "youtube_id": "3N1hpzrXPMw",
+      "group": "G06",
+      "ep": 6,
+      "title": "세상의 기준 vs 하나님의 기준",
+      "isbn": "9791124569559"
+    },
+    {
+      "season": 2,
+      "num": 57,
+      "youtube_id": "NhGU_ItxYY0",
+      "group": "G06",
+      "ep": 7,
+      "title": "영적 용기가 필요한 시대",
+      "isbn": "9791124569566"
+    },
+    {
+      "season": 2,
+      "num": 58,
+      "youtube_id": "Pc6fp3WXhDk",
+      "group": "G06",
+      "ep": 8,
+      "title": "소수의 목소리",
+      "isbn": "9791124569573"
+    },
+    {
+      "season": 2,
+      "num": 59,
+      "youtube_id": "0bqiI_EroeI",
+      "group": "G06",
+      "ep": 9,
+      "title": "예언자적 상상력",
+      "isbn": "9791124569580"
+    },
+    {
+      "season": 2,
+      "num": 60,
+      "youtube_id": "LAC_cmzh1NE",
+      "group": "G06",
+      "ep": 10,
+      "title": "거짓 평화에 속지 마라",
+      "isbn": "9791124569597"
+    },
+    {
+      "season": 2,
+      "num": 61,
+      "youtube_id": "fsdoaxYSn4c",
+      "group": "G07",
+      "ep": 1,
+      "title": "성령님을 알아가는 시간",
+      "isbn": "9791124569603"
+    },
+    {
+      "season": 2,
+      "num": 62,
+      "youtube_id": "CM_bJyCqtyk",
+      "group": "G07",
+      "ep": 2,
+      "title": "방언의 은사",
+      "isbn": "9791124569610"
+    },
+    {
+      "season": 2,
+      "num": 63,
+      "youtube_id": "mDyRuvlB3Xo",
+      "group": "G07",
+      "ep": 3,
+      "title": "예언의 은사",
+      "isbn": "9791124569627"
+    },
+    {
+      "season": 2,
+      "num": 64,
+      "youtube_id": "mV1GukpEhYY",
+      "group": "G07",
+      "ep": 4,
+      "title": "치유의 은사",
+      "isbn": "9791124569634"
+    },
+    {
+      "season": 2,
+      "num": 65,
+      "youtube_id": "hBi0elrEBuE",
+      "group": "G07",
+      "ep": 5,
+      "title": "지혜의 영",
+      "isbn": "9791124569641"
+    },
+    {
+      "season": 2,
+      "num": 66,
+      "youtube_id": "NmoOcNNKiDg",
+      "group": "G07",
+      "ep": 6,
+      "title": "분별의 은사",
+      "isbn": "9791124569658"
+    },
+    {
+      "season": 2,
+      "num": 67,
+      "youtube_id": "mZX1QF3S6Yk",
+      "group": "G07",
+      "ep": 7,
+      "title": "성령충만한 삶",
+      "isbn": "9791124569665"
+    },
+    {
+      "season": 2,
+      "num": 68,
+      "youtube_id": "lMCrpZ6RRvo",
+      "group": "G07",
+      "ep": 8,
+      "title": "오순절의 불",
+      "isbn": "9791124569672"
+    },
+    {
+      "season": 2,
+      "num": 69,
+      "youtube_id": "SosqRssAhxw",
+      "group": "G07",
+      "ep": 9,
+      "title": "성령의 열매",
+      "isbn": "9791124569689"
+    },
+    {
+      "season": 2,
+      "num": 70,
+      "group": "G07",
+      "ep": 10,
+      "title": "마지막 시대의 부흥",
+      "isbn": "9791124569696",
+      "youtube_id": "ZMDjwT-CH2E"
+    },
+    {
+      "season": 2,
+      "num": 71,
+      "youtube_id": "IBVobmmuwyk",
+      "group": "G08",
+      "ep": 1,
+      "title": "기도의 깊이",
+      "isbn": "9791124569702"
+    },
+    {
+      "season": 2,
+      "num": 72,
+      "youtube_id": "Zk8PP0Ad3GI",
+      "group": "G08",
+      "ep": 2,
+      "title": "금식기도의 능력",
+      "isbn": "9791124569719"
+    },
+    {
+      "season": 2,
+      "num": 73,
+      "youtube_id": "T_j_rz2Np9w",
+      "group": "G08",
+      "ep": 3,
+      "title": "관상기도란 무엇인가",
+      "isbn": "9791124569726"
+    },
+    {
+      "season": 2,
+      "num": 74,
+      "youtube_id": "ggsPskds7iY",
+      "group": "G08",
+      "ep": 4,
+      "title": "중보기도의 사명",
+      "isbn": "9791124569733"
+    },
+    {
+      "season": 2,
+      "num": 75,
+      "youtube_id": "kBPMXUHIyK4",
+      "group": "G08",
+      "ep": 5,
+      "title": "응답받는 기도의 비밀",
+      "isbn": "9791124569740"
+    },
+    {
+      "season": 2,
+      "num": 76,
+      "youtube_id": "Vn1X5n3FbN0",
+      "group": "G08",
+      "ep": 6,
+      "title": "기도와 말씀의 동행",
+      "isbn": "9791124569757"
+    },
+    {
+      "season": 2,
+      "num": 77,
+      "youtube_id": "Ohqma-q4Iac",
+      "group": "G08",
+      "ep": 7,
+      "title": "새벽기도의 은혜",
+      "isbn": "9791124569764"
+    },
+    {
+      "season": 2,
+      "num": 78,
+      "youtube_id": "o0P63A9cips",
+      "group": "G08",
+      "ep": 8,
+      "title": "통성기도와 침묵기도",
+      "isbn": "9791124569771"
+    },
+    {
+      "season": 2,
+      "num": 79,
+      "youtube_id": "nloPO6sRW_I",
+      "group": "G08",
+      "ep": 9,
+      "title": "주기도문 깊이 읽기",
+      "isbn": "9791124569788"
+    },
+    {
+      "season": 2,
+      "num": 80,
+      "youtube_id": "gLyvPSXp5sY",
+      "group": "G08",
+      "ep": 10,
+      "title": "기도의 용사들",
+      "isbn": "9791124569795"
+    },
+    {
+      "season": 2,
+      "num": 81,
+      "youtube_id": "l4kyTdjOKj4",
+      "group": "G09",
+      "ep": 1,
+      "title": "결혼의 신학",
+      "isbn": "9791124569801"
+    },
+    {
+      "season": 2,
+      "num": 82,
+      "youtube_id": "uMUY-1uJUOs",
+      "group": "G09",
+      "ep": 2,
+      "title": "부모와 자녀",
+      "isbn": "9791124569818"
+    },
+    {
+      "season": 2,
+      "num": 83,
+      "youtube_id": "jzq9wOrCu-s",
+      "group": "G09",
+      "ep": 3,
+      "title": "교회 공동체의 아름다움",
+      "isbn": "9791124569825"
+    },
+    {
+      "season": 2,
+      "num": 84,
+      "youtube_id": "UdIGbud-53w",
+      "group": "G09",
+      "ep": 4,
+      "title": "용서하는 관계",
+      "isbn": "9791124569832"
+    },
+    {
+      "season": 2,
+      "num": 85,
+      "youtube_id": "I_rgHHt_wvU",
+      "group": "G09",
+      "ep": 5,
+      "title": "우정의 은혜",
+      "isbn": "9791124569849"
+    },
+    {
+      "season": 2,
+      "num": 86,
+      "youtube_id": "CDUK1HYxZlU",
+      "group": "G09",
+      "ep": 6,
+      "title": "갈등 속의 화해",
+      "isbn": "9791124569856"
+    },
+    {
+      "season": 2,
+      "num": 87,
+      "youtube_id": "ZKPmH7lBNcM",
+      "group": "G09",
+      "ep": 7,
+      "title": "홀로 서는 신앙",
+      "isbn": "9791124569863"
+    },
+    {
+      "season": 2,
+      "num": 88,
+      "youtube_id": "xFkhVVtJXR0",
+      "group": "G09",
+      "ep": 8,
+      "title": "세대를 잇는 믿음",
+      "isbn": "9791124569870"
+    },
+    {
+      "season": 2,
+      "num": 89,
+      "youtube_id": "-qePHYkLl7k",
+      "group": "G09",
+      "ep": 9,
+      "title": "이웃을 사랑하는 방법",
+      "isbn": "9791124569887"
+    },
+    {
+      "season": 2,
+      "num": 90,
+      "youtube_id": "30icD4NSHxk",
+      "group": "G09",
+      "ep": 10,
+      "title": "공동체로 사는 삶",
+      "isbn": "9791124569894"
+    },
+    {
+      "season": 2,
+      "num": 91,
+      "youtube_id": "2m2DnIsszDI",
+      "group": "G10",
+      "ep": 1,
+      "title": "하나님 나라의 비전",
+      "isbn": "9791124569900"
+    },
+    {
+      "season": 2,
+      "num": 92,
+      "youtube_id": "urrBe1zvHoI",
+      "group": "G10",
+      "ep": 2,
+      "title": "선교의 심장",
+      "isbn": "9791124569917"
+    },
+    {
+      "season": 2,
+      "num": 93,
+      "youtube_id": "8E3BQI_Dmu4",
+      "group": "G10",
+      "ep": 3,
+      "title": "종말을 사는 자세",
+      "isbn": "9791124569924"
+    },
+    {
+      "season": 2,
+      "num": 94,
+      "youtube_id": "UStufsXjbV0",
+      "group": "G10",
+      "ep": 4,
+      "title": "재림을 기다리며",
+      "isbn": "9791124569931"
+    },
+    {
+      "season": 2,
+      "num": 95,
+      "youtube_id": "Fg4dhYsxjM4",
+      "group": "G10",
+      "ep": 5,
+      "title": "하나님 나라의 경제학",
+      "isbn": "9791124569948"
+    },
+    {
+      "season": 2,
+      "num": 96,
+      "youtube_id": "g16XB9m9yFs",
+      "group": "G10",
+      "ep": 6,
+      "title": "예배가 삶이 될 때",
+      "isbn": "9791124569955"
+    },
+    {
+      "season": 2,
+      "num": 97,
+      "youtube_id": "JuMluTIuja4",
+      "group": "G10",
+      "ep": 7,
+      "title": "복음의 능력",
+      "isbn": "9791124569962"
+    },
+    {
+      "season": 2,
+      "num": 98,
+      "youtube_id": "fvjnSgAffWQ",
+      "group": "G10",
+      "ep": 8,
+      "title": "제자도의 대가",
+      "isbn": "9791124569979"
+    },
+    {
+      "season": 2,
+      "num": 99,
+      "youtube_id": "na4Ww9j9yzs",
+      "group": "G10",
+      "ep": 9,
+      "title": "하나님 나라의 문화",
+      "isbn": "9791124569986"
+    },
+    {
+      "season": 2,
+      "num": 100,
+      "youtube_id": "JzwANBMv6IQ",
+      "group": "G10",
+      "ep": 10,
+      "title": "새 하늘과 새 땅",
+      "isbn": "9791124569993"
+    },
+    {
+      "season": 2,
+      "num": 101,
+      "group": "OMNIBUS",
+      "group_code": "G01",
+      "ep": 1,
+      "title": "영계의 지도",
+      "isbn": "9791176580014",
+      "youtube_id": "YDOteZIkBBY",
+      "subtitle": "성경으로 보는 사후세계의 진실"
+    },
+    {
+      "season": 2,
+      "num": 102,
+      "group": "OMNIBUS",
+      "group_code": "G02",
+      "ep": 2,
+      "title": "AI 시대의 신앙",
+      "isbn": "9791176580021",
+      "youtube_id": "kvKv_vaQ3h0",
+      "subtitle": "알고리즘 사회에서 영성을 찾다"
+    },
+    {
+      "season": 2,
+      "num": 103,
+      "group": "OMNIBUS",
+      "group_code": "G03",
+      "ep": 3,
+      "title": "흔들리지 않는 믿음",
+      "isbn": "9791176580038",
+      "youtube_id": "2v4QKN4TOh4",
+      "subtitle": "의심을 이기고 확신에 이르는 길"
+    },
+    {
+      "season": 2,
+      "num": 104,
+      "group": "OMNIBUS",
+      "group_code": "G04",
+      "ep": 4,
+      "title": "성경이 들려주는 사람들",
+      "isbn": "9791176580045",
+      "youtube_id": "8Nmrp3LMdmI",
+      "subtitle": "하나님과 동행한 열 명의 삶"
+    },
+    {
+      "season": 2,
+      "num": 105,
+      "group": "OMNIBUS",
+      "group_code": "G05",
+      "ep": 5,
+      "title": "치유의 여정",
+      "isbn": "9791176580052",
+      "youtube_id": "wujDbavaZRI",
+      "subtitle": "감정과 영혼을 회복하는 성경의 지혜"
+    },
+    {
+      "season": 2,
+      "num": 106,
+      "group": "OMNIBUS",
+      "group_code": "G06",
+      "ep": 6,
+      "title": "진리 앞에 서다",
+      "isbn": "9791176580069",
+      "youtube_id": "CjMiBXQhbQs",
+      "subtitle": "이 시대를 분별하는 크리스천의 눈"
+    },
+    {
+      "season": 2,
+      "num": 107,
+      "group": "OMNIBUS",
+      "group_code": "G07",
+      "ep": 7,
+      "title": "성령과 함께",
+      "isbn": "9791176580076",
+      "youtube_id": "-JUjTtSoS1c",
+      "subtitle": "은사로 충만한 삶의 원리"
+    },
+    {
+      "season": 2,
+      "num": 108,
+      "group": "OMNIBUS",
+      "group_code": "G08",
+      "ep": 8,
+      "title": "기도의 깊이",
+      "isbn": "9791176580083",
+      "youtube_id": "CMxWr3Wv1ks",
+      "subtitle": "삶을 빚는 영성 훈련"
+    },
+    {
+      "season": 2,
+      "num": 109,
+      "group": "OMNIBUS",
+      "group_code": "G09",
+      "ep": 9,
+      "title": "함께 사는 법",
+      "isbn": "9791176580090",
+      "youtube_id": "zYG5xkPyI04",
+      "subtitle": "성경이 보여주는 관계와 공동체"
+    },
+    {
+      "season": 2,
+      "num": 110,
+      "group": "OMNIBUS",
+      "group_code": "G10",
+      "ep": 10,
+      "title": "하나님 나라의 삶",
+      "isbn": "9791176580106",
+      "youtube_id": "CieCJoPVF2U",
+      "subtitle": "영원한 나라를 향하여"
+    }
   ],
   "playlists": {
-    "S1":  {"season": 1, "title": "AI 시대를 살아가는 영성 (시즌 1 10권)", "id": "(미확정 - 시즌 1 재생목록 ID 확인 필요)"},
-    "G01": {"season": 2, "title": "천국과 영계",          "id": "PLzjKIbpRzBBBWex70AcIecC02srzL4Y1b"},
-    "G02": {"season": 2, "title": "알고리즘 시대의 영성", "id": "PLzjKIbpRzBBAhomYMUoTd37sqxrdPD4u2"},
-    "G03": {"season": 2, "title": "겨자씨에서 산까지",   "id": "PLzjKIbpRzBBDWsJZ1hjQR-fiDGxJA29m1"},
-    "G04": {"season": 2, "title": "발자국과 눈물",       "id": "PLzjKIbpRzBBCNWIygOw7gFuxP1OqTbmlA"},
-    "G05": {"season": 2, "title": "흉터 위의 빛",         "id": "PLzjKIbpRzBBBxT-5mAH8adatzUK7Eb7gn"}
+    "S1": {
+      "season": 1,
+      "title": "AI 시대를 살아가는 영성",
+      "id": "PLzjKIbpRzBBDvZehv1VMyiTep5vl17TY8"
+    },
+    "G01": {
+      "season": 2,
+      "title": "천국과 영계",
+      "id": "PLzjKIbpRzBBBWex70AcIecC02srzL4Y1b"
+    },
+    "G02": {
+      "season": 2,
+      "title": "알고리즘 시대의 영성",
+      "id": "PLzjKIbpRzBBAhomYMUoTd37sqxrdPD4u2"
+    },
+    "G03": {
+      "season": 2,
+      "title": "겨자씨에서 산까지",
+      "id": "PLzjKIbpRzBBDWsJZ1hjQR-fiDGxJA29m1"
+    },
+    "G04": {
+      "season": 2,
+      "title": "발자국과 눈물",
+      "id": "PLzjKIbpRzBBCNWIygOw7gFuxP1OqTbmlA"
+    },
+    "G05": {
+      "season": 2,
+      "title": "흉터 위의 빛",
+      "id": "PLzjKIbpRzBBBxT-5mAH8adatzUK7Eb7gn"
+    },
+    "G06": {
+      "season": 2,
+      "title": "광야의 외침",
+      "id": "PLzjKIbpRzBBA12D77X1j8R4ygZAVvBkmT"
+    },
+    "G08": {
+      "season": 2,
+      "title": "무릎의 자리",
+      "id": "PLzjKIbpRzBBCM2VXEi8u158v2u9N2eMI3"
+    },
+    "G07": {
+      "season": 2,
+      "title": "바람과 불",
+      "id": "PLzjKIbpRzBBBUJXHrZOQCVBL9t1tb32_V"
+    },
+    "G09": {
+      "season": 2,
+      "title": "곁에 두신 분들",
+      "id": "PLzjKIbpRzBBB3p9mMSJ31RQAdl1POj7E9"
+    },
+    "G10": {
+      "season": 2,
+      "title": "이미, 그러나 아직",
+      "id": "PLzjKIbpRzBBD4r2K9rfwHs2GxwpTiNbau"
+    },
+    "OMNIBUS": {
+      "name": "시즌 2 종합책 트레일러",
+      "playlist_id": "PLzjKIbpRzBBBFUFafi2bVsii7--31A641"
+    }
   }
 }
