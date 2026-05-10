@@ -646,6 +646,10 @@
     let ttsAdvancing = false;       // 챕터 자동 진행 중
     let ttsCurrentSpineHref = null;
     let ttsSavedVoiceURI = localStorage.getItem('aisb_reader_tts_voice') || '';
+    // 세대 토큰: 음성 변경·취소 등 "지금까지 진행 중인 모든 fetch/utter 무효" 신호.
+    // 비동기 작업은 시작 시점의 myGen 을 캡처해 콜백/await 후 ttsGen 과 비교.
+    // 다르면 결과를 폐기 (stale 콜백이 큐를 헝클거나 음성을 겹치게 하는 사고 방지).
+    let ttsGen = 0;
 
     // 가상 음성: 서버 /api/tts (edge-tts) 로 합성. OS 음성과 별개.
     // kind: 'azure' = 서버 합성 mp3 / 'browser' = OS Web Speech.
@@ -988,6 +992,10 @@
 
     let ttsCurrentAudio = null;
     let ttsAudioObjectUrl = null;
+    // Azure 합성/재생 single-flight 가드. true 면 새 speakAzure 호출 차단.
+    // 이유: 같은 문장에 대해 여러 speakAzure 가 동시에 돌면 audio 객체가 중복 생성돼
+    // 한 문장이 두 번 들리거나 onended 가 두 번 발생해 ttsIdx 가 두 칸 점프하는 사고가 난다.
+    let ttsAzureInflight = false;
 
     async function ttsFetchAzureBlob(text, voiceName, rateStr) {
         const key = voiceName + '|' + rateStr + '|' + text;
@@ -1017,6 +1025,7 @@
     }
 
     function ttsCancel() {
+        ttsGen++;   // 진행 중인 비동기 작업 일괄 무효화
         try { window.speechSynthesis.cancel(); } catch (e) {}
         ttsCurrentUtter = null;
         ttsStopAzureAudio();
@@ -1028,6 +1037,21 @@
         ttsQueue = splitSentences(text);
         ttsIdx = 0;
     }
+    // 다음 문장 사전 합성: 현재 문장 재생 시작 직후 호출. fire-and-forget 으로
+    // IndexedDB 캐시를 채워둠. 다음 문장 차례가 오면 캐시 hit 으로 즉시 재생.
+    // Azure 음성일 때만 의미 있음 (브라우저 TTS 는 합성 즉시).
+    function ttsMaybePrefetchNext() {
+        if (!ttsKoVoice || ttsKoVoice.kind !== 'azure') return;
+        const nextIdx = ttsIdx + 1;
+        if (nextIdx >= ttsQueue.length) return;
+        const nextText = ttsQueue[nextIdx];
+        if (!nextText) return;
+        const spoken = ttsPreprocess(nextText);
+        const voiceName = ttsKoVoice.azure || 'ko-KR-InJoonNeural';
+        const rateStr = ttsRateToAzureRate(ttsRate);
+        ttsFetchAzureBlob(spoken, voiceName, rateStr).catch(() => {});
+    }
+
     function ttsSpeakNext() {
         if (ttsState !== 'playing') return;
         if (ttsIdx >= ttsQueue.length) {
@@ -1054,29 +1078,36 @@
             });
             return;
         }
-        const text = ttsQueue[ttsIdx++];
-        if (!text) { ttsSpeakNext(); return; }
+        // ttsIdx 는 "지금 재생 중/재생할 문장" 가리킴. 재생 끝나야 전진.
+        const text = ttsQueue[ttsIdx];
+        if (!text) { ttsIdx++; ttsSpeakNext(); return; }
         const spoken = ttsPreprocess(text);
+        const myIdx = ttsIdx;
         ensureKoVoice();
         if (ttsKoVoice && ttsKoVoice.kind === 'azure') {
-            ttsSpeakAzure(spoken);
+            ttsSpeakAzure(spoken, myIdx);
         } else {
-            ttsSpeakBrowser(spoken);
+            ttsSpeakBrowser(spoken, myIdx);
         }
     }
-    function ttsSpeakBrowser(spoken) {
+    function ttsSpeakBrowser(spoken, myIdx) {
+        const myGen = ttsGen;
         const u = new SpeechSynthesisUtterance(spoken);
         u.lang = 'ko-KR';
         if (ttsKoVoice && ttsKoVoice._v) u.voice = ttsKoVoice._v;
         u.rate = ttsRate;
         u.pitch = 1.0;
         u.volume = 1.0;
-        u.onend = () => {
+        const advance = () => {
+            if (myGen !== ttsGen) return;       // 취소/음성변경됐으면 폐기
+            if (myIdx !== ttsIdx) return;       // 인덱스 어긋났으면 폐기
+            ttsIdx++;                           // 재생 끝났으니 전진
             if (ttsState === 'playing') ttsSpeakNext();
         };
+        u.onend = advance;
         u.onerror = (ev) => {
             console.warn('[reader] tts error', ev && ev.error);
-            if (ttsState === 'playing') ttsSpeakNext();
+            advance();
         };
         ttsCurrentUtter = u;
         try { window.speechSynthesis.speak(u); } catch (e) {
@@ -1084,39 +1115,57 @@
             setTtsBtnState('idle');
         }
     }
-    async function ttsSpeakAzure(spoken) {
-        const voiceName = (ttsKoVoice && ttsKoVoice.azure) || 'ko-KR-InJoonNeural';
-        const rateStr = ttsRateToAzureRate(ttsRate);
-        let blob;
+    async function ttsSpeakAzure(spoken, myIdx) {
+        if (ttsAzureInflight) return;   // single-flight: 같은 문장 중복 호출 차단
+        ttsAzureInflight = true;
+        const myGen = ttsGen;
         try {
-            blob = await ttsFetchAzureBlob(spoken, voiceName, rateStr);
-        } catch (e) {
-            console.warn('[reader] azure tts 실패, 다음 문장으로 진행', e && e.message);
-            if (ttsState === 'playing') ttsSpeakNext();
-            return;
-        }
-        // 합성 대기 도중 사용자가 정지/음성 변경했으면 폐기.
-        if (ttsState !== 'playing') return;
-        if (!ttsKoVoice || ttsKoVoice.kind !== 'azure') return;
+            const voiceName = (ttsKoVoice && ttsKoVoice.azure) || 'ko-KR-InJoonNeural';
+            const rateStr = ttsRateToAzureRate(ttsRate);
+            let blob;
+            try {
+                blob = await ttsFetchAzureBlob(spoken, voiceName, rateStr);
+            } catch (e) {
+                console.warn('[reader] azure tts 실패, 다음 문장으로', e && e.message);
+                if (myGen !== ttsGen || myIdx !== ttsIdx) return;
+                ttsIdx++;
+                if (ttsState === 'playing') ttsSpeakNext();
+                return;
+            }
+            // 대기 도중 음성 변경/취소/사용자 점프 → 결과 폐기
+            if (myGen !== ttsGen) return;
+            if (myIdx !== ttsIdx) return;
+            if (ttsState !== 'playing' && ttsState !== 'paused') return;
 
-        ttsStopAzureAudio();
-        ttsAudioObjectUrl = URL.createObjectURL(blob);
-        const audio = new Audio(ttsAudioObjectUrl);
-        ttsCurrentAudio = audio;
-        audio.onended = () => {
-            if (ttsCurrentAudio === audio) ttsStopAzureAudio();
-            if (ttsState === 'playing') ttsSpeakNext();
-        };
-        audio.onerror = () => {
-            if (ttsCurrentAudio === audio) ttsStopAzureAudio();
-            if (ttsState === 'playing') ttsSpeakNext();
-        };
-        try {
-            await audio.play();
-        } catch (e) {
-            console.warn('[reader] audio play 실패', e && e.message);
-            if (ttsCurrentAudio === audio) ttsStopAzureAudio();
-            if (ttsState === 'playing') ttsSpeakNext();
+            ttsStopAzureAudio();
+            ttsAudioObjectUrl = URL.createObjectURL(blob);
+            const audio = new Audio(ttsAudioObjectUrl);
+            ttsCurrentAudio = audio;
+            const advance = () => {
+                if (myGen !== ttsGen) return;
+                if (ttsCurrentAudio !== audio) return;   // 다른 audio 가 활성 → 우리는 무효
+                ttsStopAzureAudio();
+                if (myIdx !== ttsIdx) return;
+                ttsIdx++;
+                if (ttsState === 'playing') ttsSpeakNext();
+            };
+            audio.onended = advance;
+            audio.onerror = advance;
+            // 재생 시작과 동시에 다음 문장 사전 합성. (paused 면 prefetch 만 하고 재생은 보류)
+            audio.addEventListener('playing', () => {
+                if (myGen === ttsGen) ttsMaybePrefetchNext();
+            }, { once: true });
+            // paused 상태에서 fetch 가 늦게 도착하면 audio 객체는 만들어 두되 재생은 안 함.
+            // 다음 ttsToggle resume 호출이 audio.play() 를 트리거.
+            if (ttsState === 'paused') return;
+            try {
+                await audio.play();
+            } catch (e) {
+                console.warn('[reader] audio play 실패', e && e.message);
+                advance();
+            }
+        } finally {
+            ttsAzureInflight = false;
         }
     }
     function getCurrentSpineHref() {
@@ -1140,6 +1189,7 @@
         if (!ttsAvailable()) return;
         const isAzure = ttsKoVoice && ttsKoVoice.kind === 'azure';
         if (ttsState === 'idle') {
+            ttsGen++;
             try { window.speechSynthesis.cancel(); } catch (e) {}
             ttsStopAzureAudio();
             ttsStartFromCurrentChapter();
@@ -1151,12 +1201,21 @@
             }
             setTtsBtnState('paused');
         } else if (ttsState === 'paused') {
+            // 재개. Azure 면 세 가지 케이스:
+            //  (a) 일시정지된 audio 가 있으면 그걸 play
+            //  (b) audio 는 없는데 in-flight fetch 가 진행 중이면 가만히 둠
+            //      → fetch 완료 시 ttsState==='playing' 이라 자동 재생됨
+            //  (c) 둘 다 없으면 같은 인덱스로 ttsSpeakNext 새로 시작
+            setTtsBtnState('playing');
             if (isAzure) {
-                if (ttsCurrentAudio) { try { ttsCurrentAudio.play(); } catch (e) {} }
+                if (ttsCurrentAudio) {
+                    try { ttsCurrentAudio.play(); } catch (e) {}
+                } else if (!ttsAzureInflight) {
+                    ttsSpeakNext();
+                }
             } else {
                 try { window.speechSynthesis.resume(); } catch (e) {}
             }
-            setTtsBtnState('playing');
         }
     }
     function ttsSetRate(newRate) {
@@ -1191,25 +1250,28 @@
         ttsSavedVoiceURI = uri;
         localStorage.setItem('aisb_reader_tts_voice', uri);
         const wasState = ttsState;
-        // 재생 중에 음성 바뀌면 현재 utterance/audio 즉시 끊고 다음 문장부터 새 음성으로.
-        // (브라우저 TTS ↔ Azure 간 전환이라 큐 위치는 유지하면서 발화기만 갈아끼움)
+        // 재생 중에 음성 바뀌면 현재 utterance/audio 즉시 끊고 같은 문장부터 새 음성으로.
+        // ttsGen++ 으로 진행 중인 fetch/utter 콜백 일괄 무효화.
         if (wasState === 'playing' || wasState === 'paused') {
+            ttsGen++;
             try { window.speechSynthesis.cancel(); } catch (e) {}
             ttsCurrentUtter = null;
             ttsStopAzureAudio();
         }
         ttsKoVoice = pickKoreanVoice();
         if (wasState === 'playing') {
-            // 같은 큐의 같은 위치(ttsIdx) 부터 이어 발화. ttsSpeakNext 가 다시 분기.
+            // ttsIdx 는 안 건드림 → 같은 문장을 새 음성으로 다시 시작.
             ttsSpeakNext();
         }
     });
-    // 페이지 떠날 때 발화/오디오 모두 정지
+    // 페이지 떠날 때 발화/오디오 모두 정지 + 진행 중인 fetch 콜백 무효화.
     window.addEventListener('pagehide', () => {
+        ttsGen++;
         try { window.speechSynthesis.cancel(); } catch (e) {}
         ttsStopAzureAudio();
     });
     window.addEventListener('beforeunload', () => {
+        ttsGen++;
         try { window.speechSynthesis.cancel(); } catch (e) {}
         ttsStopAzureAudio();
     });
