@@ -647,28 +647,39 @@
     let ttsCurrentSpineHref = null;
     let ttsSavedVoiceURI = localStorage.getItem('aisb_reader_tts_voice') || '';
 
+    // 가상 음성: 서버 /api/tts (edge-tts) 로 합성. OS 음성과 별개.
+    // kind: 'azure' = 서버 합성 mp3 / 'browser' = OS Web Speech.
+    const AZURE_VOICES = [
+        { kind: 'azure', voiceURI: 'azure:ko-KR-InJoonNeural', name: 'InJoon 남성 (AI)', lang: 'ko-KR', azure: 'ko-KR-InJoonNeural' },
+        { kind: 'azure', voiceURI: 'azure:ko-KR-SunHiNeural',   name: 'SunHi 여성 (AI)',  lang: 'ko-KR', azure: 'ko-KR-SunHiNeural' },
+    ];
+
     function ttsAvailable() {
-        if (!TTS_SUPPORTED) return false;
-        return !!rendition;
+        if (!rendition) return false;
+        // Azure 음성 선택 시는 브라우저 TTS 미지원이어도 OK.
+        if (ttsKoVoice && ttsKoVoice.kind === 'azure') return true;
+        return TTS_SUPPORTED;
     }
     function listKoreanVoices() {
-        if (!TTS_SUPPORTED) return [];
+        // Azure 항목은 항상 맨 위에. 그 뒤로 OS 음성.
+        const out = AZURE_VOICES.slice();
+        if (!TTS_SUPPORTED) return out;
         const voices = window.speechSynthesis.getVoices() || [];
-        // ko-KR 우선, 그다음 ko*, 그다음 이름에 korean/한국 들어간 것
         const score = (v) => {
             if (/^ko-KR/i.test(v.lang)) return 3;
             if (/^ko/i.test(v.lang)) return 2;
             if (/korean|한국/i.test(v.name)) return 1;
             return 0;
         };
-        return voices
+        const browser = voices
             .filter(v => score(v) > 0)
-            .sort((a, b) => score(b) - score(a) || a.name.localeCompare(b.name));
+            .sort((a, b) => score(b) - score(a) || a.name.localeCompare(b.name))
+            .map(v => ({ kind: 'browser', voiceURI: v.voiceURI, name: v.name, lang: v.lang, _v: v }));
+        return out.concat(browser);
     }
     function pickKoreanVoice() {
         const koVoices = listKoreanVoices();
         if (!koVoices.length) return null;
-        // 사용자가 저장한 음성이 있으면 그걸 우선 (voiceURI 매치, fallback name)
         if (ttsSavedVoiceURI) {
             const saved = koVoices.find(v => v.voiceURI === ttsSavedVoiceURI)
                        || koVoices.find(v => v.name === ttsSavedVoiceURI);
@@ -687,34 +698,30 @@
             ttsVoiceSelect.style.display = 'none';
             return;
         }
-        // 음성이 1개뿐이면 선택할 게 없으니 숨김
-        if (koVoices.length < 2) {
-            ttsVoiceSelect.style.display = 'none';
-            return;
-        }
         const currentURI = ttsKoVoice ? ttsKoVoice.voiceURI : '';
         ttsVoiceSelect.innerHTML = '';
         for (const v of koVoices) {
             const opt = document.createElement('option');
             opt.value = v.voiceURI;
-            // 라벨은 짧게: 이름만. 너무 길면 자름.
             let label = v.name || v.voiceURI;
             if (label.length > 28) label = label.slice(0, 27) + '…';
             opt.textContent = label;
-            opt.title = `${v.name} (${v.lang})`;
+            opt.title = v.kind === 'azure'
+                ? `${v.name} — 서버 AI 합성. 처음 들을 때만 잠깐 대기, 그다음부터는 즉시.`
+                : `${v.name} (${v.lang})`;
             if (v.voiceURI === currentURI) opt.selected = true;
             ttsVoiceSelect.appendChild(opt);
         }
         ttsVoiceSelect.style.display = '';
     }
+    // 브라우저 TTS 미지원이어도 Azure 항목 때문에 select 는 노출.
+    ensureKoVoice();
+    populateVoiceSelect();
     if (TTS_SUPPORTED) {
-        // voices 는 비동기 로드되는 경우가 있어 이벤트로도 받음
         window.speechSynthesis.onvoiceschanged = () => {
             ttsKoVoice = pickKoreanVoice();
             populateVoiceSelect();
         };
-        ensureKoVoice();
-        populateVoiceSelect();
     }
 
     function getCurrentChapterText() {
@@ -919,9 +926,100 @@
             ttsBtn.title = '본문 읽어주기';
         }
     }
+    // ─── Azure(서버 edge-tts) 합성 결과 IndexedDB 캐시 ─────────
+    // 같은 (text, voice, rate) 조합은 항상 같은 mp3 → 한 번 받은 건 다음부터 즉시 재생.
+    const TTS_DB_NAME = 'aisb_tts_cache';
+    const TTS_DB_VERSION = 1;
+    const TTS_STORE = 'audio';
+    let _ttsDb = null;
+    let _ttsDbBroken = false;
+
+    function ttsDbOpen() {
+        if (_ttsDb) return Promise.resolve(_ttsDb);
+        if (_ttsDbBroken || typeof indexedDB === 'undefined') {
+            return Promise.resolve(null);
+        }
+        return new Promise((resolve) => {
+            try {
+                const req = indexedDB.open(TTS_DB_NAME, TTS_DB_VERSION);
+                req.onupgradeneeded = (e) => {
+                    const db = e.target.result;
+                    if (!db.objectStoreNames.contains(TTS_STORE)) {
+                        db.createObjectStore(TTS_STORE);
+                    }
+                };
+                req.onsuccess = (e) => { _ttsDb = e.target.result; resolve(_ttsDb); };
+                req.onerror = () => { _ttsDbBroken = true; resolve(null); };
+                req.onblocked = () => { _ttsDbBroken = true; resolve(null); };
+            } catch (e) {
+                _ttsDbBroken = true;
+                resolve(null);
+            }
+        });
+    }
+    async function ttsCacheGet(key) {
+        const db = await ttsDbOpen();
+        if (!db) return null;
+        return new Promise((resolve) => {
+            try {
+                const tx = db.transaction(TTS_STORE, 'readonly');
+                const req = tx.objectStore(TTS_STORE).get(key);
+                req.onsuccess = (e) => resolve(e.target.result || null);
+                req.onerror = () => resolve(null);
+            } catch (e) { resolve(null); }
+        });
+    }
+    async function ttsCachePut(key, blob) {
+        const db = await ttsDbOpen();
+        if (!db) return;
+        try {
+            const tx = db.transaction(TTS_STORE, 'readwrite');
+            tx.objectStore(TTS_STORE).put(blob, key);
+        } catch (e) {
+            // QuotaExceeded 등 — 조용히 무시. 캐시 실패해도 재생은 동작.
+        }
+    }
+
+    // ttsRate(0.5~2.5) → edge-tts rate 문자열 ('-50%' ~ '+150%')
+    function ttsRateToAzureRate(rate) {
+        const pct = Math.round((rate - 1) * 100);
+        return (pct >= 0 ? '+' : '') + pct + '%';
+    }
+
+    let ttsCurrentAudio = null;
+    let ttsAudioObjectUrl = null;
+
+    async function ttsFetchAzureBlob(text, voiceName, rateStr) {
+        const key = voiceName + '|' + rateStr + '|' + text;
+        const cached = await ttsCacheGet(key);
+        if (cached) return cached;
+        const r = await fetch('/api/tts', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ text: text, voice: voiceName, rate: rateStr }),
+        });
+        if (!r.ok) throw new Error('TTS API ' + r.status);
+        const blob = await r.blob();
+        ttsCachePut(key, blob);   // 비동기, 결과 안 기다림
+        return blob;
+    }
+
+    function ttsStopAzureAudio() {
+        if (ttsCurrentAudio) {
+            try { ttsCurrentAudio.pause(); } catch (e) {}
+            try { ttsCurrentAudio.src = ''; } catch (e) {}
+            ttsCurrentAudio = null;
+        }
+        if (ttsAudioObjectUrl) {
+            try { URL.revokeObjectURL(ttsAudioObjectUrl); } catch (e) {}
+            ttsAudioObjectUrl = null;
+        }
+    }
+
     function ttsCancel() {
         try { window.speechSynthesis.cancel(); } catch (e) {}
         ttsCurrentUtter = null;
+        ttsStopAzureAudio();
         ttsQueue = [];
         ttsIdx = 0;
     }
@@ -959,10 +1057,17 @@
         const text = ttsQueue[ttsIdx++];
         if (!text) { ttsSpeakNext(); return; }
         const spoken = ttsPreprocess(text);
+        ensureKoVoice();
+        if (ttsKoVoice && ttsKoVoice.kind === 'azure') {
+            ttsSpeakAzure(spoken);
+        } else {
+            ttsSpeakBrowser(spoken);
+        }
+    }
+    function ttsSpeakBrowser(spoken) {
         const u = new SpeechSynthesisUtterance(spoken);
         u.lang = 'ko-KR';
-        ensureKoVoice();
-        if (ttsKoVoice) u.voice = ttsKoVoice;
+        if (ttsKoVoice && ttsKoVoice._v) u.voice = ttsKoVoice._v;
         u.rate = ttsRate;
         u.pitch = 1.0;
         u.volume = 1.0;
@@ -977,6 +1082,41 @@
         try { window.speechSynthesis.speak(u); } catch (e) {
             console.error('[reader] tts speak 실패', e);
             setTtsBtnState('idle');
+        }
+    }
+    async function ttsSpeakAzure(spoken) {
+        const voiceName = (ttsKoVoice && ttsKoVoice.azure) || 'ko-KR-InJoonNeural';
+        const rateStr = ttsRateToAzureRate(ttsRate);
+        let blob;
+        try {
+            blob = await ttsFetchAzureBlob(spoken, voiceName, rateStr);
+        } catch (e) {
+            console.warn('[reader] azure tts 실패, 다음 문장으로 진행', e && e.message);
+            if (ttsState === 'playing') ttsSpeakNext();
+            return;
+        }
+        // 합성 대기 도중 사용자가 정지/음성 변경했으면 폐기.
+        if (ttsState !== 'playing') return;
+        if (!ttsKoVoice || ttsKoVoice.kind !== 'azure') return;
+
+        ttsStopAzureAudio();
+        ttsAudioObjectUrl = URL.createObjectURL(blob);
+        const audio = new Audio(ttsAudioObjectUrl);
+        ttsCurrentAudio = audio;
+        audio.onended = () => {
+            if (ttsCurrentAudio === audio) ttsStopAzureAudio();
+            if (ttsState === 'playing') ttsSpeakNext();
+        };
+        audio.onerror = () => {
+            if (ttsCurrentAudio === audio) ttsStopAzureAudio();
+            if (ttsState === 'playing') ttsSpeakNext();
+        };
+        try {
+            await audio.play();
+        } catch (e) {
+            console.warn('[reader] audio play 실패', e && e.message);
+            if (ttsCurrentAudio === audio) ttsStopAzureAudio();
+            if (ttsState === 'playing') ttsSpeakNext();
         }
     }
     function getCurrentSpineHref() {
@@ -998,14 +1138,24 @@
     }
     function ttsToggle() {
         if (!ttsAvailable()) return;
+        const isAzure = ttsKoVoice && ttsKoVoice.kind === 'azure';
         if (ttsState === 'idle') {
             try { window.speechSynthesis.cancel(); } catch (e) {}
+            ttsStopAzureAudio();
             ttsStartFromCurrentChapter();
         } else if (ttsState === 'playing') {
-            try { window.speechSynthesis.pause(); } catch (e) {}
+            if (isAzure) {
+                if (ttsCurrentAudio) { try { ttsCurrentAudio.pause(); } catch (e) {} }
+            } else {
+                try { window.speechSynthesis.pause(); } catch (e) {}
+            }
             setTtsBtnState('paused');
         } else if (ttsState === 'paused') {
-            try { window.speechSynthesis.resume(); } catch (e) {}
+            if (isAzure) {
+                if (ttsCurrentAudio) { try { ttsCurrentAudio.play(); } catch (e) {} }
+            } else {
+                try { window.speechSynthesis.resume(); } catch (e) {}
+            }
             setTtsBtnState('playing');
         }
     }
@@ -1030,33 +1180,39 @@
 
     // 초기 버튼 상태
     updateRateButtons();
-    if (!TTS_SUPPORTED) {
-        if (ttsBtn) {
-            ttsBtn.disabled = true;
-            ttsBtn.title = '이 브라우저는 음성 읽기를 지원하지 않습니다';
+    // Azure 음성이 항상 있으니 듣기 버튼은 항상 활성. 브라우저 TTS 미지원이면
+    // 사용자에게는 Azure 만 노출되도록 select 옵션 자동 좁혀짐.
+    if (ttsBtn) ttsBtn.addEventListener('click', ttsToggle);
+    if (ttsRateBtn) ttsRateBtn.addEventListener('click', () => ttsSetRate(1.0));
+    if (ttsRateDownBtn) ttsRateDownBtn.addEventListener('click', () => ttsSetRate(ttsRate - TTS_RATE_STEP));
+    if (ttsRateUpBtn) ttsRateUpBtn.addEventListener('click', () => ttsSetRate(ttsRate + TTS_RATE_STEP));
+    if (ttsVoiceSelect) ttsVoiceSelect.addEventListener('change', () => {
+        const uri = ttsVoiceSelect.value || '';
+        ttsSavedVoiceURI = uri;
+        localStorage.setItem('aisb_reader_tts_voice', uri);
+        const wasState = ttsState;
+        // 재생 중에 음성 바뀌면 현재 utterance/audio 즉시 끊고 다음 문장부터 새 음성으로.
+        // (브라우저 TTS ↔ Azure 간 전환이라 큐 위치는 유지하면서 발화기만 갈아끼움)
+        if (wasState === 'playing' || wasState === 'paused') {
+            try { window.speechSynthesis.cancel(); } catch (e) {}
+            ttsCurrentUtter = null;
+            ttsStopAzureAudio();
         }
-        if (ttsRateBtn) ttsRateBtn.disabled = true;
-        if (ttsRateDownBtn) ttsRateDownBtn.disabled = true;
-        if (ttsRateUpBtn) ttsRateUpBtn.disabled = true;
-        if (ttsVoiceSelect) ttsVoiceSelect.disabled = true;
-    } else {
-        if (ttsBtn) ttsBtn.addEventListener('click', ttsToggle);
-        // 라벨 탭 = 1.0x 리셋
-        if (ttsRateBtn) ttsRateBtn.addEventListener('click', () => ttsSetRate(1.0));
-        if (ttsRateDownBtn) ttsRateDownBtn.addEventListener('click', () => ttsSetRate(ttsRate - TTS_RATE_STEP));
-        if (ttsRateUpBtn) ttsRateUpBtn.addEventListener('click', () => ttsSetRate(ttsRate + TTS_RATE_STEP));
-        if (ttsVoiceSelect) ttsVoiceSelect.addEventListener('change', () => {
-            const uri = ttsVoiceSelect.value || '';
-            ttsSavedVoiceURI = uri;
-            localStorage.setItem('aisb_reader_tts_voice', uri);
-            // 새 음성 즉시 반영. 다음 utterance 부터 새 음성으로 발화.
-            // (현재 발화 중인 utterance 는 끝까지 기존 음성으로 이어진다)
-            ttsKoVoice = pickKoreanVoice();
-        });
-        // 페이지 떠날 때 음성 정지
-        window.addEventListener('pagehide', () => { try { window.speechSynthesis.cancel(); } catch (e) {} });
-        window.addEventListener('beforeunload', () => { try { window.speechSynthesis.cancel(); } catch (e) {} });
-    }
+        ttsKoVoice = pickKoreanVoice();
+        if (wasState === 'playing') {
+            // 같은 큐의 같은 위치(ttsIdx) 부터 이어 발화. ttsSpeakNext 가 다시 분기.
+            ttsSpeakNext();
+        }
+    });
+    // 페이지 떠날 때 발화/오디오 모두 정지
+    window.addEventListener('pagehide', () => {
+        try { window.speechSynthesis.cancel(); } catch (e) {}
+        ttsStopAzureAudio();
+    });
+    window.addEventListener('beforeunload', () => {
+        try { window.speechSynthesis.cancel(); } catch (e) {}
+        ttsStopAzureAudio();
+    });
 
     // ─── 진도 복원 토스트 ─────────────────────────────────
     function showRestoreToast(pct) {
