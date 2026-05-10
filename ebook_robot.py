@@ -70,15 +70,35 @@ def call_claude(prompt: str, log_fn=None, retries: int = 5) -> str:
 
 
 def _strip_code_fence(text: str) -> str:
-    """```html ... ``` 또는 ``` ... ``` 코드블록 마커 제거"""
+    """```html ... ``` 또는 ``` ... ``` 코드블록 마커 제거.
+
+    행 시작 앵커(MULTILINE)로 본문 안에 박힌 펜스도 잡는다. 닫는 ``` 가 줄바꿈
+    없이 다른 태그(예: ```</div>)에 붙어 있는 케이스도 처리.
+    """
     import re
-    # ```html\n...\n``` 형태
-    text = re.sub(r'^```[a-zA-Z]*\s*\n?', '', text)
-    text = re.sub(r'\n?```\s*$', '', text)
-    # 혹시 중간에도 있으면 제거
+    # 1) 시작 펜스: ```html, ```python 처럼 언어 라벨 붙은 줄 (행 시작)
+    text = re.sub(r'(?m)^[ \t]*```[ \t]*[a-zA-Z][a-zA-Z0-9_-]*[ \t]*\r?\n?', '', text)
+    # 2) 닫는 펜스: ``` 만 단독 (행 시작), 뒤에 \n 또는 다른 태그가 바로 붙어도 OK
+    text = re.sub(r'(?m)^[ \t]*```[ \t]*\r?\n?', '', text)
+    # 3) 인라인 잔재 마지막 청소 (어디든 남아 있으면 제거)
     text = re.sub(r'```[a-zA-Z]*', '', text)
     text = re.sub(r'```', '', text)
     return text.strip()
+
+
+def _strip_md_fences_from_xhtml(text: str) -> str:
+    """EPUB 안에 들어가기 직전 xhtml 본문에서 마크다운 펜스만 제거.
+
+    _strip_code_fence 와 달리 끝에서 strip() 하지 않음 — XML 선언 줄바꿈 보존.
+    """
+    import re
+    if '```' not in text:
+        return text
+    text = re.sub(r'(?m)^[ \t]*```[ \t]*[a-zA-Z][a-zA-Z0-9_-]*[ \t]*\r?\n?', '', text)
+    text = re.sub(r'(?m)^[ \t]*```[ \t]*\r?\n?', '', text)
+    text = re.sub(r'```[a-zA-Z]*', '', text)
+    text = re.sub(r'```', '', text)
+    return text
 
 
 def _clean_html_refs(text: str) -> str:
@@ -648,6 +668,10 @@ def build_epub(meta, chapters_data, output_path, log_fn):
 {c['html']}"""
         chapter_files[f"ch{num:02d}.xhtml"] = wrap_xhtml(title, body)
 
+    # 안전망: 챕터 본문 어디든 ``` 펜스가 살아남았으면 EPUB 진입 전 마지막으로 제거.
+    for fname in list(chapter_files.keys()):
+        chapter_files[fname] = _strip_md_fences_from_xhtml(chapter_files[fname])
+
     # EPUB ZIP 생성
     with zipfile.ZipFile(output_path, "w", zipfile.ZIP_DEFLATED) as epub:
         epub.writestr(zipfile.ZipInfo("mimetype"), "application/epub+zip",
@@ -670,7 +694,10 @@ def build_epub(meta, chapters_data, output_path, log_fn):
         epub.writestr("OEBPS/toc.xhtml",          toc_xhtml)
         for fname, content in chapter_files.items():
             epub.writestr(f"OEBPS/{fname}", content)
-        epub.writestr("OEBPS/epilogue.xhtml",     chapters_data[-1].get("epilogue_html", ""))
+        epub.writestr(
+            "OEBPS/epilogue.xhtml",
+            _strip_md_fences_from_xhtml(chapters_data[-1].get("epilogue_html", "")),
+        )
 
     # 표지 이미지를 epub과 같은 폴더에 별도 저장
     import shutil

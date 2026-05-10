@@ -252,6 +252,20 @@
             opacity: 0.4;
             cursor: not-allowed;
         }
+        .reader-tools .tool-tts-voice {
+            background: rgba(212,175,55,0.18);
+            color: white;
+            border: 1px solid rgba(212,175,55,0.5);
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 0.85em;
+            padding: 0.25em 0.4em;
+            max-width: 12em;
+            cursor: pointer;
+        }
+        .reader-tools .tool-tts-voice:hover { background: rgba(212,175,55,0.35); }
+        .reader-tools .tool-tts-voice option { background: var(--primary); color: white; }
+        .reader-tools .tool-tts-voice:disabled { opacity: 0.4; cursor: not-allowed; }
 
         .reader-tools .tool-back {
             background: rgba(212,175,55,0.18);
@@ -559,6 +573,7 @@
         <button id="tool-tts-down" class="tool-tts" title="속도 느리게 (−0.1)" style="min-width:1.8em">−</button>
         <button id="tool-tts-rate" class="tool-tts" title="현재 속도 (탭하면 1.0x 로 리셋)" style="min-width:3.4em">1.0x</button>
         <button id="tool-tts-up" class="tool-tts" title="속도 빠르게 (+0.1)" style="min-width:1.8em">+</button>
+        <select id="tool-tts-voice" class="tool-tts-voice" title="읽기 음성 선택" style="display:none"></select>
         <button id="font-down" title="글자 작게">글자 −</button>
         <button id="font-up" title="글자 크게">글자 +</button>
         <button id="theme-toggle" title="다크 모드">밤</button>

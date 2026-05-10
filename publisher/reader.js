@@ -629,6 +629,7 @@
     const ttsRateBtn = document.getElementById('tool-tts-rate');
     const ttsRateDownBtn = document.getElementById('tool-tts-down');
     const ttsRateUpBtn = document.getElementById('tool-tts-up');
+    const ttsVoiceSelect = document.getElementById('tool-tts-voice');
     const TTS_SUPPORTED = typeof window.speechSynthesis !== 'undefined' &&
                           typeof window.SpeechSynthesisUtterance !== 'undefined';
     const TTS_RATE_MIN = 0.5;
@@ -644,28 +645,76 @@
     let ttsKoVoice = null;
     let ttsAdvancing = false;       // 챕터 자동 진행 중
     let ttsCurrentSpineHref = null;
+    let ttsSavedVoiceURI = localStorage.getItem('aisb_reader_tts_voice') || '';
 
     function ttsAvailable() {
         if (!TTS_SUPPORTED) return false;
         return !!rendition;
     }
-    function pickKoreanVoice() {
-        if (!TTS_SUPPORTED) return null;
+    function listKoreanVoices() {
+        if (!TTS_SUPPORTED) return [];
         const voices = window.speechSynthesis.getVoices() || [];
-        // 우선순위: ko-KR > ko > 한국어 표시
-        return voices.find(v => /^ko-KR/i.test(v.lang))
-            || voices.find(v => /^ko/i.test(v.lang))
-            || voices.find(v => /korean|한국/i.test(v.name))
-            || null;
+        // ko-KR 우선, 그다음 ko*, 그다음 이름에 korean/한국 들어간 것
+        const score = (v) => {
+            if (/^ko-KR/i.test(v.lang)) return 3;
+            if (/^ko/i.test(v.lang)) return 2;
+            if (/korean|한국/i.test(v.name)) return 1;
+            return 0;
+        };
+        return voices
+            .filter(v => score(v) > 0)
+            .sort((a, b) => score(b) - score(a) || a.name.localeCompare(b.name));
+    }
+    function pickKoreanVoice() {
+        const koVoices = listKoreanVoices();
+        if (!koVoices.length) return null;
+        // 사용자가 저장한 음성이 있으면 그걸 우선 (voiceURI 매치, fallback name)
+        if (ttsSavedVoiceURI) {
+            const saved = koVoices.find(v => v.voiceURI === ttsSavedVoiceURI)
+                       || koVoices.find(v => v.name === ttsSavedVoiceURI);
+            if (saved) return saved;
+        }
+        return koVoices[0];
     }
     function ensureKoVoice() {
         if (ttsKoVoice) return;
         ttsKoVoice = pickKoreanVoice();
     }
+    function populateVoiceSelect() {
+        if (!ttsVoiceSelect) return;
+        const koVoices = listKoreanVoices();
+        if (!koVoices.length) {
+            ttsVoiceSelect.style.display = 'none';
+            return;
+        }
+        // 음성이 1개뿐이면 선택할 게 없으니 숨김
+        if (koVoices.length < 2) {
+            ttsVoiceSelect.style.display = 'none';
+            return;
+        }
+        const currentURI = ttsKoVoice ? ttsKoVoice.voiceURI : '';
+        ttsVoiceSelect.innerHTML = '';
+        for (const v of koVoices) {
+            const opt = document.createElement('option');
+            opt.value = v.voiceURI;
+            // 라벨은 짧게: 이름만. 너무 길면 자름.
+            let label = v.name || v.voiceURI;
+            if (label.length > 28) label = label.slice(0, 27) + '…';
+            opt.textContent = label;
+            opt.title = `${v.name} (${v.lang})`;
+            if (v.voiceURI === currentURI) opt.selected = true;
+            ttsVoiceSelect.appendChild(opt);
+        }
+        ttsVoiceSelect.style.display = '';
+    }
     if (TTS_SUPPORTED) {
         // voices 는 비동기 로드되는 경우가 있어 이벤트로도 받음
-        window.speechSynthesis.onvoiceschanged = () => { ttsKoVoice = pickKoreanVoice(); };
+        window.speechSynthesis.onvoiceschanged = () => {
+            ttsKoVoice = pickKoreanVoice();
+            populateVoiceSelect();
+        };
         ensureKoVoice();
+        populateVoiceSelect();
     }
 
     function getCurrentChapterText() {
@@ -789,6 +838,12 @@
         // 1) 줄바꿈 정규화 (탭 → 공백). 단락 경계 \n\n 은 그대로 두고 splitSentences
         //    가 1차 분할 기준으로 사용 → 단락 사이를 별 utterance 로 발화해 자연 쉼.
         let out = text.replace(/\r\n/g, '\n').replace(/\r/g, '\n').replace(/\t+/g, ' ');
+        // 1.5) 장식 기호 제거. OS TTS 가 ▶ 같은 도형을 접근성 이름("오른쪽 방향 삼각형")
+        //      으로 읽어 본문에 3개 있으면 3번 발화하는 군더더기가 생긴다. 본문 EPUB 은
+        //      그대로 두고 발화 직전 텍스트에서만 제거. 단락 경계는 \n\n 으로 이미 자연 쉼이
+        //      들어가므로 시각적 구분 손실은 청각적으로 영향이 없다.
+        //      의미 보존 대상(✓✔✗✘ 체크/엑스, ☑☒ 등)은 일부러 제외.
+        out = out.replace(/[▶▷◀◁▲△▼▽★☆◆◇●○◎■□♥♡♦♣♠※☞☜→←↑↓⇒⇐⇑⇓]+/g, ' ');
         // 2) 성경 인용 한자어 한글 변환
         out = out.replace(BIBLE_BOOK_PAT, (m, book, chap, verse, verseEnd) => {
             const unit = (book === '시편') ? '편' : '장';
@@ -983,12 +1038,21 @@
         if (ttsRateBtn) ttsRateBtn.disabled = true;
         if (ttsRateDownBtn) ttsRateDownBtn.disabled = true;
         if (ttsRateUpBtn) ttsRateUpBtn.disabled = true;
+        if (ttsVoiceSelect) ttsVoiceSelect.disabled = true;
     } else {
         if (ttsBtn) ttsBtn.addEventListener('click', ttsToggle);
         // 라벨 탭 = 1.0x 리셋
         if (ttsRateBtn) ttsRateBtn.addEventListener('click', () => ttsSetRate(1.0));
         if (ttsRateDownBtn) ttsRateDownBtn.addEventListener('click', () => ttsSetRate(ttsRate - TTS_RATE_STEP));
         if (ttsRateUpBtn) ttsRateUpBtn.addEventListener('click', () => ttsSetRate(ttsRate + TTS_RATE_STEP));
+        if (ttsVoiceSelect) ttsVoiceSelect.addEventListener('change', () => {
+            const uri = ttsVoiceSelect.value || '';
+            ttsSavedVoiceURI = uri;
+            localStorage.setItem('aisb_reader_tts_voice', uri);
+            // 새 음성 즉시 반영. 다음 utterance 부터 새 음성으로 발화.
+            // (현재 발화 중인 utterance 는 끝까지 기존 음성으로 이어진다)
+            ttsKoVoice = pickKoreanVoice();
+        });
         // 페이지 떠날 때 음성 정지
         window.addEventListener('pagehide', () => { try { window.speechSynthesis.cancel(); } catch (e) {} });
         window.addEventListener('beforeunload', () => { try { window.speechSynthesis.cancel(); } catch (e) {} });

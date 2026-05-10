@@ -21,12 +21,30 @@ G05 10권 종합책 "흉터 위의 빛" epub 빌더.
 import base64
 import io
 import json
+import re
 import sys
 import zipfile
 from datetime import datetime
 from pathlib import Path
 
 from qr_util import make_qr_png_bytes, catalog_url
+
+# 안전망: 본권 EPUB 본문을 합칠 때 마크다운 펜스(```html ... ```)가
+# 살아 있으면 종합책에 그대로 박힌다. ZIP 쓰기 직전 한 번 더 제거.
+_FENCE_OPEN  = re.compile(r'(?m)^[ \t]*```[ \t]*[a-zA-Z][a-zA-Z0-9_-]*[ \t]*\r?\n?')
+_FENCE_CLOSE = re.compile(r'(?m)^[ \t]*```[ \t]*\r?\n?')
+_FENCE_INLINE = re.compile(r'```[a-zA-Z]*')
+
+
+def _strip_md_fences(text: str) -> str:
+    if '```' not in text:
+        return text
+    text = _FENCE_OPEN.sub('', text)
+    text = _FENCE_CLOSE.sub('', text)
+    text = _FENCE_INLINE.sub('', text)
+    text = text.replace('```', '')
+    return text
+
 
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8")
 
@@ -738,6 +756,31 @@ def main():
 </package>
 """
     files["OEBPS/content.opf"] = opf.encode("utf-8")
+
+    # 안전망: 본권에서 흘러온 마크다운 펜스가 챕터 xhtml 에 살아있으면 제거.
+    fence_removed = 0
+    for path in list(files.keys()):
+        if not (path.endswith(".xhtml") or path.endswith(".html")):
+            continue
+        data = files[path]
+        if isinstance(data, bytes):
+            try:
+                txt = data.decode("utf-8")
+            except UnicodeDecodeError:
+                continue
+            if "```" in txt:
+                new_txt = _strip_md_fences(txt)
+                if new_txt != txt:
+                    files[path] = new_txt.encode("utf-8")
+                    fence_removed += 1
+        else:
+            if "```" in data:
+                new_txt = _strip_md_fences(data)
+                if new_txt != data:
+                    files[path] = new_txt
+                    fence_removed += 1
+    if fence_removed:
+        print(f"  [안전망] 마크다운 펜스 제거: {fence_removed}개 파일")
 
     # zip 생성 (mimetype은 STORED, 나머지는 DEFLATED)
     OUT_DIR.mkdir(parents=True, exist_ok=True)
