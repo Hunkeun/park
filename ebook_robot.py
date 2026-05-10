@@ -3,7 +3,7 @@
 전자책 쓰기 로봇 - 신앙/묵상 전자책 자동 생성기
 실행: python ebook_robot.py
 """
-import os, sys, json, zipfile, threading, subprocess, textwrap, datetime
+import os, sys, json, zipfile, threading, subprocess, textwrap, datetime, base64
 import tkinter as tk
 from tkinter import ttk, scrolledtext, messagebox, filedialog
 from PIL import Image, ImageDraw, ImageFont
@@ -15,6 +15,11 @@ import bible_verify
 DEFAULT_OUTPUT = os.path.join(os.path.expanduser("~"), "Downloads", "전자책")
 TMP_DIR = os.path.join(os.path.dirname(__file__), "tmp_epub")
 CLAUDE_CMD = "claude"   # claude CLI 명령어
+
+# 출판사 책방 사이트 (판권·에필로그·QR 등 EPUB 안에 박히는 표준 URL).
+# 옛 GitHub Pages → 2026-05-09 Vercel 도메인으로 통일 (시즌2 본권 100권은 옛 도메인 잔존,
+# 정식 오픈 시점에 일괄 패치 — project_official_launch_todo.md #8 참조).
+PUBLISHER_URL = "https://ai-spirituality-books.vercel.app/catalog"
 
 GENRE_PROMPTS = {
     "신앙/묵상": "기독교 신앙과 영성을 주제로 한 묵상 전자책",
@@ -572,26 +577,24 @@ def build_epub(meta, chapters_data, output_path, log_fn):
   </ol></nav>
 </body></html>"""
 
-    # 표지 xhtml
-    cover_xhtml = """<?xml version="1.0" encoding="UTF-8"?>
+    # 표지 xhtml — base64 data URI 인라인 (epub.js iframe 호환).
+    # 옛 SVG <image xlink:href="../images/cover.jpg"> 방식은 epub.js 의 blob URL
+    # rewrite 가 SVG 내부 xlink:href 를 따라가지 못해 책방 reader 에서 빈 페이지로 떴음.
+    with open(cover_path, "rb") as _cf:
+        _cover_b64 = base64.b64encode(_cf.read()).decode("ascii")
+    cover_xhtml = f"""<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko">
 <head><meta charset="UTF-8"/><title>표지</title>
 <style>
-  html, body { margin:0; padding:0; width:100%; height:100%; background:#FFFFFF; }
-  .cover-wrap { width:100%; height:100%; display:flex; align-items:center; justify-content:center; }
-  svg { display:block; width:60%; height:60%; }
+  html, body {{ margin:0; padding:0; width:100%; height:100%; background:#FFFFFF; }}
+  .cover-wrap {{ width:100%; height:100%; display:flex; align-items:center; justify-content:center; padding:0; box-sizing:border-box; }}
+  img {{ display:block; max-width:100%; max-height:100vh; width:auto; height:auto; object-fit:contain; }}
 </style>
 </head>
 <body>
 <div class="cover-wrap">
-<svg xmlns="http://www.w3.org/2000/svg"
-     xmlns:xlink="http://www.w3.org/1999/xlink"
-     version="1.1"
-     viewBox="0 0 1400 2100"
-     preserveAspectRatio="xMidYMid meet">
-  <image width="1400" height="2100" xlink:href="../images/cover.jpg"/>
-</svg>
+<img src="data:image/jpeg;base64,{_cover_b64}" alt="표지"/>
 </div>
 </body>
 </html>"""
@@ -609,7 +612,7 @@ def build_epub(meta, chapters_data, output_path, log_fn):
   <p><strong>출판일</strong>　{meta['date']}</p>
   <p><strong>ISBN</strong>　{isbn_str}</p>
   <p><strong>부가기호</strong>　{meta.get('buga', '05230')}</p>
-  <p><strong>홈페이지</strong>　https://hunkeun.github.io/park/publisher/</p>
+  <p><strong>홈페이지</strong>　{PUBLISHER_URL}</p>
   <p><strong>이메일</strong>　godsonphk@gmail.com</p>
   <div style="margin-top:2em;font-size:0.85em;color:#888;border-top:1px solid #C8B99A;padding-top:1em">
     <p>Copyright © {meta['date'][:4]} {meta['author']}. All rights reserved.</p>
@@ -729,7 +732,7 @@ def run_generation(params, log_fn, progress_fn, done_fn):
 <div style="text-align:center;margin-top:3em;padding:1.5em;border-top:1px solid #C8B99A;border-bottom:1px solid #C8B99A;background:#faf8f4;page-break-inside:avoid;break-inside:avoid">
   <p style="font-size:0.78em;color:#B8962E;letter-spacing:2px;margin-bottom:0.8em">PUBLISHER</p>
   <p style="font-weight:700;color:#0F1E3C;font-size:1em">{publisher}</p>
-  <p style="font-size:0.85em;color:#555;margin-top:0.5em">https://hunkeun.github.io/park/publisher/</p>
+  <p style="font-size:0.85em;color:#555;margin-top:0.5em">{PUBLISHER_URL}</p>
   <p style="font-size:0.85em;color:#555;margin-top:0.3em">godsonphk@gmail.com</p>
   <p style="font-size:0.8em;color:#999;letter-spacing:2px;margin-top:0.8em">{publisher} · {datetime.date.today().year}</p>
 </div>"""

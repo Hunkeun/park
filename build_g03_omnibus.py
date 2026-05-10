@@ -18,6 +18,7 @@ G03 10권 종합책 "겨자씨와 산" epub 빌더.
   → part04_intro → [b09_front·b09_ch01~07] × 2권 (4부)
   → epilogue → publisher
 """
+import base64
 import io
 import json
 import sys
@@ -70,21 +71,19 @@ def xhtml_doc(title: str, body_inner: str) -> str:
 </html>"""
 
 
-def build_cover_xhtml(title: str, subtitle: str) -> str:
-    body = """
+def build_cover_xhtml(title: str, subtitle: str, cover_bytes: bytes) -> str:
+    # base64 data URI 인라인 (epub.js iframe 호환).
+    # 옛 SVG <image xlink:href="images/cover.jpg"> 방식은 epub.js 의 blob URL
+    # rewrite 가 SVG 내부 xlink:href 를 따라가지 못해 책방 reader 에서 빈 페이지로 떴음.
+    cover_b64 = base64.b64encode(cover_bytes).decode("ascii")
+    body = f"""
 <style>
-  html, body { margin:0; padding:0; width:100%; height:100%; background:#FFFFFF; }
-  .cover-wrap { width:100%; height:100%; display:flex; align-items:center; justify-content:center; }
-  .cover-wrap svg { display:block; width:60%; height:60%; }
+  html, body {{ margin:0; padding:0; width:100%; height:100%; background:#FFFFFF; }}
+  .cover-wrap {{ width:100%; height:100%; display:flex; align-items:center; justify-content:center; padding:0; box-sizing:border-box; }}
+  img {{ display:block; max-width:100%; max-height:100vh; width:auto; height:auto; object-fit:contain; }}
 </style>
 <div class="cover-wrap">
-<svg xmlns="http://www.w3.org/2000/svg"
-     xmlns:xlink="http://www.w3.org/1999/xlink"
-     version="1.1"
-     viewBox="0 0 1400 2100"
-     preserveAspectRatio="xMidYMid meet">
-  <image width="1400" height="2100" xlink:href="images/cover.jpg"/>
-</svg>
+<img src="data:image/jpeg;base64,{cover_b64}" alt="표지"/>
 </div>
 """
     return xhtml_doc("표지", body)
@@ -635,7 +634,7 @@ def main():
     files["OEBPS/images/qr.png"] = make_qr_png_bytes(catalog_url(), box_size=10, border=2)
 
     # XHTML 페이지들
-    files["OEBPS/cover.xhtml"] = build_cover_xhtml(proj["title"], proj["subtitle"]).encode("utf-8")
+    files["OEBPS/cover.xhtml"] = build_cover_xhtml(proj["title"], proj["subtitle"], files["OEBPS/images/cover.jpg"]).encode("utf-8")
     files["OEBPS/copyright.xhtml"] = build_copyright_xhtml(proj, today_display).encode("utf-8")
     files["OEBPS/preface.xhtml"] = build_preface_xhtml().encode("utf-8")
     files["OEBPS/epilogue.xhtml"] = build_epilogue_xhtml().encode("utf-8")
