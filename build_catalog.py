@@ -2123,7 +2123,9 @@ function openBook(id) {{
 
     $('mPreview').href = `preview/${{id}}.html`;
     const mRead = $('mRead');
-    if (FREE_BETA && status.isPublished) {{
+    // 무료 베타 동안은 발행 전 책(종합책 5/30 등)도 본문 접근 허용 — 표지·본문 검증 + 베타 사용자 노출.
+    // 토스 LIVE 발급 후 free_beta=false 로 토글되면 자동으로 isPublished + 구매 조건으로 회귀.
+    if (FREE_BETA) {{
         mRead.href = `/reader?id=${{id}}`;
         const pct = readProgress(id);
         if (pct > 0) {{
